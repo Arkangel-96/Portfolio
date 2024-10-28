@@ -1,0 +1,296 @@
+
+
+
+
+ @media only screen and (height <  300px ) {
+
+
+     
+   .ra {
+
+    width: 5vh;
+    height: 5vh; 
+   
+}
+
+
+}
+
+@media only screen and (height >=  300px) {
+
+
+   .ra {
+
+    width: 3vh;
+    height: 3vh; 
+}
+
+
+.container{
+    
+    font-size: 3vh;
+
+}
+     
+ }
+
+ @media only screen and (width >  1080px ) {
+
+ 
+   .ra {
+
+    width: 2.5vh;
+    height: 2.5vh;
+   
+}
+    #chk{
+
+        font-size: 2.5vh;
+   
+
+}
+
+}
+      
+
+
+
+
+body {
+  
+        background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6703aada-2649-4453-b1cb-c1dade721c88/dg29l08-f4990e62-db64-48bc-8f95-c04904809ce0.png/v1/fill/w_1600,h_900,q_80,strp/hogwarts_legacy___ever_edition_4k_wallpaper_by_aksensei_dg29l08-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTAwIiwicGF0aCI6IlwvZlwvNjcwM2FhZGEtMjY0OS00NDUzLWIxY2ItYzFkYWRlNzIxYzg4XC9kZzI5bDA4LWY0OTkwZTYyLWRiNjQtNDhiYy04Zjk1LWMwNDkwNDgwOWNlMC5wbmciLCJ3aWR0aCI6Ijw9MTYwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.6LjlLEOD-PgfJ1OsnOrEr-fayntSnFhEcHj8-OIQDns);
+        background-repeat: no-repeat;
+        background-size:cover; 
+        background-position: center;    
+        background-attachment: fixed; /* ESENCIAL */
+    
+        
+}
+    
+.container {
+    
+    margin: 2% auto 0;
+    padding: .5%;
+    width: fit-content;   
+    border-radius: 10px;
+    background: linear-gradient(220deg, rgba(0, 0, 0, 0.5), rgba(188, 61, 242, 0.25) );
+    backdrop-filter: blur(5px) ;
+    font-family: "Julee", cursive;
+    font-size: 4vh;
+  
+        
+} 
+
+
+.title {
+  
+    font-size: 5.5vh;
+    font-family: "Dancing Script", cursive;
+    font-weight: bolder;
+    padding-top: 5%;
+    color:black;
+    display: flex; 
+    flex-direction: row;   
+    justify-content: center;
+    align-content: center;  
+
+    
+}
+  
+
+.text {
+  
+    padding: 10px;
+    outline: none;
+    border: none;
+    font-family:  "Julee", cursive;
+    color: goldenrod;
+    background: transparent;
+    
+    display: flex; 
+    flex-direction: column;   
+    justify-content: center;
+    align-content: center;  
+  
+        
+}
+
+
+  
+.box {
+   
+    height: 4vh;
+    font-size: 4vh;
+    color: black;
+    background: transparent;
+    background-color: rgba(128, 128, 128, 0.25);
+    display: flex; 
+    flex-direction: column;   
+    justify-content: center;
+    align-content: center;  
+ 
+   
+}
+
+
+
+.box::placeholder {
+    font-family: "Julee", cursive;
+    font-size: 3.9vh;  
+    color: black;
+}
+   
+#chk{
+    padding: .5%;
+    
+}
+   
+
+.read {
+    margin-left: 5%;
+    display: flex; 
+    flex-direction: row;   
+    justify-content: start;
+    align-items: center;
+    color:goldenrod;
+    
+    
+
+}
+
+
+
+.check {
+    
+    color: goldenrod;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: start; 
+    align-items: center; 
+    align-content: center;
+    border: 1px solid black;
+}
+
+.main {
+    
+    font-size: 5.5vh;
+    font-family:"Julee", cursive;
+    color:black;
+    display: grid; 
+    grid-column-start: 1;
+    grid-column-end: 3;
+    text-align: center;
+    background-color: rgba(128, 128, 128, 0.25);
+
+
+}
+
+.item{
+
+    border: 1px solid black;
+    
+}
+
+#area {
+
+    margin-left: 1.5%;
+    resize: none;
+    height: 20vh;
+    width: 95%;
+    font-size: 3.5vh;
+    font-family:  "Julee", cursive; 
+    background: transparent;
+    background-color: rgba(160, 60, 255, 0.5);
+    color: black;
+    text-align:center;
+     
+}
+
+ 
+.img {
+    
+    display: flex; 
+    flex-direction: row;   
+    justify-content: space-around; 
+    align-items: center; 
+    align-content: center;
+}
+
+
+.accept{
+    
+    margin: 5%;
+    padding-bottom: 5%;
+
+    display: flex; 
+    flex-direction: row;   
+    justify-content: space-around;
+    align-items: center; 
+    align-content: center;
+ 
+}
+
+#captchaCanvas{
+    
+    background-color:rgba(160, 60, 255, 0.25);
+    margin-top: 2%;
+    width: 45%;
+    height: 30%;
+    font-size: 6vh;
+
+}
+
+#captchaInput{
+    
+    width: 40%;
+    height: 4vh;
+    font-size: 3vh;
+    color: black;
+    background: transparent;
+    
+    display: flex; 
+    flex-direction: column;   
+    justify-content: center;
+    align-content: center;  
+ 
+
+
+}
+
+
+#rs{
+
+margin-left: 25%;
+margin-bottom: 5%;
+
+
+}
+
+.btn {
+    
+    width: 45%;
+    background-color: grey;
+    color: rgb(0, 0, 0);
+    font-family: "Julee", cursive; 
+    font-size: 5vh;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+}
+.btn:hover {
+
+     
+   background-color: black;
+   color: whitesmoke;
+
+}
+  
+  
+
+  
+  

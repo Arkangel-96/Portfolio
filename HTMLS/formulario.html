@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/Img/harry-potter.png">
+    <link rel="stylesheet" href="/Styles/formulario.css">
+
+
+
+    <title>Encuesta</title>
+</head>
+
+<body>
+    <div class="formulario">
+
+            <form action="link" method="post" class="preguntas">
+
+
+                <h3>¿ Qué cualidad valoras mas en un amigo ?</h3>
+                <label for="cualidades"></label>
+                Lealtad<input type="radio" name="radio1" class="pr1" value="1">
+                
+                Inteligencia<input type="radio" name="radio1" class="pr1" value="2">
+                
+                Valentia<input type="radio" name="radio1" class="pr1" value="3">
+                
+                Creatividad<input type="radio" name="radio1" class="pr1 " value="4">
+
+
+
+                <h3>¿ Cuál es tu asignatira favorita ?</h3>
+                <label for="asignatura"></label>
+                Herbologia
+                <input type="radio" name="radio2" class="pr2" value="1">
+                Transformaciones
+                <input type="radio" name="radio2" class="pr2" value="2">
+                Defensa contra las artes
+                oscuras
+                
+                <input type="radio" name="radio2" class="pr2" value="3">
+                Pociones
+                <input type="radio" name="radio2" class="pr2" value="4">
+
+
+
+                <h3>¿ Cómo te describirian tus amigo ?</h3>
+                <label for="descripcion"></label>
+                Amigable y confiable
+                <input type="radio" name="radio3" class="pr3" value="1">
+                
+                Audaz y valiente
+                <input type="radio" name="radio3" class="pr3" value="2">
+                
+                Intelectual y curioso
+                <input type="radio" name="radio3" class="pr3" value="3">
+                
+                Ambicioso y astuto
+                <input type="radio" name="radio3" class="pr3" value="4">
+
+
+
+                <h3>¿ Qué te emociona mas de Hogwarts ?</h3>
+                <label for="emocion"></label>
+                Hacer nuevos amigos
+                <input type="radio" name="radio4" class="pr4" value="1">
+                
+                Participar en aventuras
+                <input type="radio" name="radio4" class="pr4" value="2">
+                
+                Aprender hechizos nuevos
+                <input type="radio" name="radio4" class="pr4" value="3">
+                
+                Explorar los terrenos del
+                castillo
+                <input type="radio" name="radio4" class="pr4" value="4">
+
+
+
+
+                <h3>¿ Qué tipo de criatura mágica te parece más fascinante ?</h3>
+                Elfos domésticos
+                <input type="radio" name="radio5" class="pr5" value="1">
+                
+                Hipogrifos
+                <input type="radio" name="radio5" class="pr5" value="2">
+                
+                Dragones
+                <input type="radio" name="radio5" class="pr5" value="3">
+                Thestrals
+                <input type="radio" name="radio5" class="pr5" value="4">
+
+
+
+                <h3> ¿ Cuál es tu reaccíon ante un desafio ?</h3>
+                <label for="reaccíon"></label>
+                Enfrentarlo con paciencia y
+                determinación
+                <input type="radio" name="radio6" class="pr6" value="1">
+                Enfrentarlo con coraje y
+                decisión
+                <input type="radio" name="radio6" class="pr6" value="2">
+                Analizarlo detenidamente antes
+                de
+                actuar
+                <input type="radio" name="radio6" class="pr6" value="3">
+                Buscar una solución que
+                beneficie
+                mis intereses
+                <input type="radio" name="radio6" class="pr6" value="4">
+
+
+                <h3>¿ Qué cualidad crees que es mas importante para un mago ?</h3>
+                <label for="cualidad"></label>
+                Lealtad hacia los amigos y la
+                familia
+                <input type="radio" name="radio7" class="pr7" value="1">
+                Coraje para enfrentar cualquier
+                desafío
+                <input type="radio" name="radio7" class="pr7" value="2">
+                Inteligencia y sabiduría
+                <input type="radio" name="radio7" class="pr7" value="3">
+                Astucia para lograr tus
+                objetivos
+                <input type="radio" name="radio7" class="pr7" value="4">
+
+
+               
+
+            </form>
+           
+            <div class="accept">  
+
+                
+                <button onclick="validar()"  class="btn">Enviar</button>
+
+
+                </div>
+
+                <button onclick="unchecked()"  class="btn">Borrar</button>
+              </div>
+
+</body>
+<script>
+
+
+    var radioButtons = document.querySelectorAll('input');
+    console.log(radioButtons);
+    console.log(radioButtons.length);
+
+   
+
+        function validar() {
+        let gri = 0;
+        let huff = 0;
+        let rav = 0;
+        let sli = 0 ; 
+
+        for (var i = 0; i < radioButtons.length; i++) {
+            if (radioButtons[i].checked) {
+                
+                if (radioButtons[i].value == 1) {
+                    gri++  }
+                     
+                if (radioButtons[i].value == 2) {
+                    huff++ }
+
+                if (radioButtons[i].value == 3) {
+                    rav++  }  
+                    
+                 if (radioButtons[i].value == 4) {
+                    sli++
+                           } 
+                        
+                                 
+            }
+                
+        }  /**/
+
+
+
+    alert("Afinidad en Gryffindor: " +gri +' puntos  \n '+
+    'Afinidad en Hufflepuff: ' +huff + ' puntos \n'+  
+    'Afinidad en Ravenclaw: ' +rav +' puntos \n'+
+    'Afinidad en Slytherin: ' +sli + " puntos" )
+        
+    }
+ 
+  
+ 
+  
+    
+
+    
+    /*   BORRA TODOS LOS DATOS ;D     */
+    function unchecked () {
+     
+       
+        for (var i = 0; i < radioButtons.length; i++) {
+            if (radioButtons[i].checked) {
+                radioButtons[i].checked = null;
+                
+            }
+    
+    }}
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </script>
+
+</html>

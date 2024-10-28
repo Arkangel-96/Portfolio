@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hogwarts</title>
+
+    <link rel="icon" href="https://img.stablecog.com/insecure/1024w/aHR0cHM6Ly9iLnN0YWJsZWNvZy5jb20vYjAwODI0ZDktZTUxYi00NDc0LWEzMWItYzdjMDUwZTVkNjNjLmpwZWc.webp">
+    <link rel="stylesheet" href="/Styles/new_request.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Julee&display=swap" rel="stylesheet">
+
+   
+
+
+</head>
+<body>
+
+   
+        
+      
+    
+  <div class="container">
+
+    <form action="" id="form">
+     
+    <div class="title">           
+       REGISTRO
+    </div> 
+                  
+    <div class="text">   
+          
+          Correo Electronico:
+          <input class="box" required type="email" id="e" minlength="12" placeholder=" @gmail / @hotmail / @yahoo" >
+          Nombre:
+          <input class="box" required type="text" id="tx" minlength="7" placeholder=" Mínimo 7 caracteres">
+
+          Edad:
+          <input class="box" required type="number" id="edad" min="6" max="110" placeholder="Entre 6 y 110 años">
+    
+    </div>  
+
+    <div class="read">
+      Leiste los libros: 
+
+      <select name='class' id="op" size="1" style="margin-left: 2%; padding-left:1%;" multiple='multiple'>
+        
+        <option value='Si'>Si </option>
+        <option value='No'>No</option>
+      
+      </select>
+
+    </div>
+
+    <br>
+
+    <div class="check">
+
+      <div class="main">" Casa Favorita " </div> 
+      <div class="item">Gryffindor</div>  <div class="item"><input type="radio" id="i1" class="ra" name="radio" value="Gryffindor" checked=""></div>
+      <div class="item">Slytherin</div>   <div class="item"><input type="radio" id="i2" class="ra" name="radio" value="Slytherin" checked=""></div>
+      <div class="item">Ravenclaw</div>   <div class="item"><input type="radio" id="i3" class="ra" name="radio" value="Ravenclaw" checked=""></div>
+      <div class="item">Hufflepuff</div>  <div class="item"><input type="radio" id="i4" class="ra" name="radio" value="Hufflepuff" checked=""></div> 
+    
+    </div>
+    
+    <textarea id="area">"Cuéntenos sus inquietudes"</textarea>
+    
+    <div class="img" >
+ 
+        <canvas id="captchaCanvas"></canvas>
+
+      </div> 
+
+    <div class="accept">  
+
+      <input type="text" id="captchaInput">
+      <button onclick="validar()" id="intro" class="btn">Enviar</button>
+
+    </div>
+ 
+
+    <input type="button" id="rs" class="btn" value="Borrar" onclick="unchecked();" >
+
+  </form>  
+
+  </div>
+         
+<script src="/JS/new_request.js"></script>
+
+</body>
+</html>
