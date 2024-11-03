@@ -5,38 +5,49 @@
 }
 
 body{
-    display: grid;
+    display: flex;
 }
 
-.header { grid-area: header; }
-.menu { grid-area: menu; }
-.main { grid-area: main; }
-.footer { grid-area: footer; }
+
 
 .bodyConteiner{
-    grid-template-areas:
-    'header header  header  header  header'
-    'menu   main    main    main    main'
-    'menu   main    main    main    main'
-    'menu   main    main    main    main'
-    'menu   footer  footer  footer  footer';
-    height: 100vh;
-    gap: 1%;
-    margin: 1%;
-    background-color: rgb(22, 23, 23);
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: black;
 }
+
 
 .header{
     display:flex;
     background-image: url(/Image/fondo-header.jpg);
     align-items: center;
-    justify-content:space-between;
+    justify-content:space-around;
     color: gold;
+    font-size: 5vh;
+    width: 100%;
 }
+
+.boxHeader {
+    margin: 0% 1% 0% 1%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.logo{
+    
+    display: flex;
+    align-items: center;
+    height: 10%;
+    width: 10%;
+}
+
+ 
 .main{
     display: flex;
-    background-image: url(/Image/Hogwarts.jpg);
-    background-size: cover;
     color: goldenrod;
     flex-direction: column;
     text-align: justify;
@@ -45,47 +56,36 @@ body{
 }
 
 .menu{
-    display: grid;
-    background-image: url(/Image/fondo.menu.jpg);
-    background-size: cover;
+    display: flex;
+    background-image: url(/Image/fondo-footer.avif);
+    background: cover;
     color: goldenrod;
-    text-align: center;
-    align-items: center;
+    font-size: 3vh;
+    justify-content: center;
+    align-items:start;
+    width: 100%;
 }
 
 
-.boxHeader {
-    margin: 0% 1% 0% 1%;
-}
 
-.imgLogo{
-    display: flex;
-    justify-content: end;
-}
-
-.logo{
-    display: flex;
-    align-items: end;
-    height: 100%;
-    width: 10%;
-}
 
 .elementosMenu{
-    display: grid;
+    display: flex;
     background-image: url(/Image/Red-Flu.png);
     animation-play-state: paused ;
     border-radius: 10%;
-    margin: 10%;
+    margin: 1%;
     align-items: center;
     border-style: solid;
     border-width: 1px;
     border-color: black;
     transition: height 1s;
+    height: 3em;
 
 }
 
 .elementosMenu:hover{
-    height: 3em;
+   
     background-image: url(/Gif/Red-Flu.gif);
 }
 
@@ -102,6 +102,8 @@ a {
     text-align: left;
     align-items: center;
     color: goldenrod;
+    font-size: 3vh;
+    width: 100%;
 }
 
 .imgRedes{

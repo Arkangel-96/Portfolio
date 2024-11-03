@@ -1,0 +1,13 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/gabryel-96/MyRepo.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[gui]
+	wmstate = normal
+	geometry = 1322x693+228+228 254 315

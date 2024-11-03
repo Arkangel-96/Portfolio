@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image CAPTCHA Validation</title>
+<script>
+
+function generateCaptcha() {
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var length = 6;
+    var captcha = '';
+    for (var i = 0; i < length; i++) {
+        var index = Math.floor(Math.random() * characters.length);
+        captcha += characters[index];
+    }
+
+    // Display the generated CAPTCHA code in the HTML element with id "captcha"
+    document.getElementById('captcha').innerText = captcha;
+
+    // Generate the CAPTCHA image
+    var canvas = document.getElementById('captchaCanvas');
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = '30px Arial';
+    ctx.fillText(captcha, 10, 30);
+}
+
+function validateCaptcha() {
+    var userInput = document.getElementById('captchaInput').value;
+    var captchaCode = document.getElementById('captcha').innerText;
+    
+    if(userInput === captchaCode) {
+        alert('CAPTCHA validation successful!');
+    } else {
+        alert('CAPTCHA validation failed! Please try again.');
+        generateCaptcha(); // Regenerate CAPTCHA on failure
+    }
+}
+</script>
+</head>
+<body>
+<button onclick="generateCaptcha()">Generar CAPTCHA</button>
+<canvas id="captchaCanvas" style="background-color: blue;" width="150vh" height="40vh"></canvas>
+<p id="captcha" style="display: none;"></p>
+<p>Ingrese el CAPTCHA de arriba:</p>
+<input type="text" id="captchaInput">
+<button onclick="validateCaptcha()">Validar</button>
+</body>
+</html>
