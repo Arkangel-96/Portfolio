@@ -47,7 +47,7 @@
 
 
 body{
-    background-image: url(/Img/fondo.jpg);
+    background-image: url(/Image/Leonardo_Phoenix_A_hauntingly_beautiful_dark_fantasy_user_inte_3\(1\).jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size:cover;
@@ -58,7 +58,7 @@ body{
 
 .formulario{
     border-radius: 10px;
-    background: linear-gradient(220deg, rgba(248, 134, 3, 0.75), rgb(218, 165, 32, 0.75) );
+    background: linear-gradient(220deg, rgba(248, 134, 3, 0.3), rgba(255, 183, 0, 0.3) );
     backdrop-filter: blur(5px);
     margin: 2% auto 0;
     padding: .5%;

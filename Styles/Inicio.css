@@ -11,23 +11,25 @@ body{
 
 
 .bodyConteiner{
-
+    
   flex-direction: column;
   justify-content: center;
   align-items: center;
   align-content: center;
-  background-color: black;
+  background-color:rgb(37, 36, 36);
 }
 
 
 .header{
+
     display:flex;
-    background-image: url(/Image/fondo-header.jpg);
+    background-color: gray;
     align-items: center;
     justify-content:space-around;
     color: gold;
+    font-family: "Julee", cursive;
     font-size: 5vh;
-    width: 100%;
+
 }
 
 .boxHeader {
@@ -45,33 +47,31 @@ body{
     width: 10%;
 }
 
- 
-.main{
-    display: flex;
-    color: goldenrod;
-    flex-direction: column;
-    text-align: justify;
-    align-items: center; /*alinea los itemes con el eje Y*/
-    row-gap: 1%; /*genera los espascios entre las columnas*/
-}
-
 .menu{
+    background-color: rgb(211, 127, 25);
+    width: 1800px;
+    height: 200px;
     display: flex;
-    background-image: url(/Image/fondo-footer.avif);
-    background: cover;
-    color: goldenrod;
-    font-size: 3vh;
     justify-content: center;
-    align-items:start;
-    width: 100%;
+    align-items:center;
+    font-family: "Julee", cursive;
+    font-size: 4vh;
+    color: goldenrod;
+    justify-content: center;
+    align-items:center;
+   
+   
 }
 
-
-
+/* .banner{
+    position: absolute;
+}  */
 
 .elementosMenu{
+    
+    position: relative; 
     display: flex;
-    background-image: url(/Image/Red-Flu.png);
+    background-color:gray ;
     animation-play-state: paused ;
     border-radius: 10%;
     margin: 1%;
@@ -79,14 +79,15 @@ body{
     border-style: solid;
     border-width: 1px;
     border-color: black;
-    transition: height 1s;
-    height: 3em;
+    
+   
 
 }
 
 .elementosMenu:hover{
    
-    background-image: url(/Gif/Red-Flu.gif);
+    background-color: rgb(62, 19, 101);
+    transition:  1s;
 }
 
 a {
@@ -94,16 +95,30 @@ a {
     text-decoration: none;
 }
 
+ 
+.main{
+    z-index: 0;
+    display: flex;
+    color: goldenrod;
+    text-align: justify;
+    align-items: center; /*alinea los itemes con el eje Y*/
+    row-gap: 1%; /*genera los espascios entre las columnas*/
+}
+
+
+
+
+
 .footer{
     display:flex;
-    justify-content: space-around;
+    justify-content: center;
     background-image: url(/Image/fondo-footer.avif);
     background-size: cover;
-    text-align: left;
+    text-align: center;
     align-items: center;
     color: goldenrod;
     font-size: 3vh;
-    width: 100%;
+    width: 50%;
 }
 
 .imgRedes{
