@@ -1,0 +1,127 @@
+*{
+    margin: 0%;
+    border: 0%;
+    padding: 0%;
+}
+
+body{
+    display: flex;
+}
+
+
+
+.bodyConteiner{
+    
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color:black
+}
+
+
+.header{
+
+    display:flex;
+    background:url(/Images/acolyte.jpeg);
+   
+    width: 1800px;
+    height: 275px; 
+    align-items: center;
+    justify-content:space-around;
+    color: gold;
+    font-family: "Julee", cursive;
+    font-size: 5vh;
+
+}
+
+.boxHeader {
+    margin: 0% 1% 0% 1%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.logo{
+    
+    display: flex;
+    align-items: center;
+    height: 10%;
+    width: 10%;
+}
+
+.menu{
+    background:url(/Images/naranja.jpeg);
+    width: 1800px;
+    height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    font-family: "Julee", cursive;
+    font-size: 4vh;
+    color: goldenrod;
+    justify-content: center;
+    align-items:center;
+   
+   
+}
+
+
+.elementosMenu{
+    
+    position: relative; 
+    display: flex;
+    background-color:rgb(255, 165, 0, 0.15) ;
+    animation-play-state: paused ;
+    border-radius: 10%;
+    margin: 1%;
+    align-items: center;
+    border-style: solid;
+    border-width: 2.5px;
+    border-color: black;
+    
+   
+
+}
+
+.elementosMenu:hover{
+   
+    background-color: rgb(62, 19, 101);
+    transition:  1s;
+}
+
+a {
+    color: goldenrod;
+    text-decoration: none;
+}
+
+ 
+.main{
+    z-index: 0;
+    display: flex;
+    color: goldenrod;
+    text-align: justify;
+    align-items: center; /*alinea los itemes con el eje Y*/
+    row-gap: 1%; /*genera los espascios entre las columnas*/
+}
+
+
+
+
+
+.footer{
+    display:flex;
+    justify-content: center;
+    background-image: url(/Images/ambar.jpeg);
+    background-size: cover;
+    text-align: center;
+    align-items: center;
+    color: goldenrod;
+    font-size: 3vh;
+    width: 1800px;
+}
+
+.imgRedes{
+    height: 5%;
+    width: 5%;
+}
