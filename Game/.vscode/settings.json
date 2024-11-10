@@ -1,4 +1,6 @@
 {
-    "livePreview.defaultPreviewPath": "/index.html",
-    "liveServer.settings.multiRootWorkspaceName": "Super Midu Bros"
-}
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+  }
