@@ -1,3 +1,5 @@
+import { generateImpComponents } from "../entities/Imp.js";
+import { generatePlayerComponents, setPlayerMovement } from "../entities/player.js";
 import { colorizeBackground, drawTiles, fetchMapData } from "../utils.js";
 
 
@@ -13,7 +15,7 @@ export default async function world(k) {
     const entities = {
 
         player: null,
-        slimes: []
+        imp: []
 
     }
 
@@ -28,16 +30,37 @@ export default async function world(k) {
         }
 
         if (layer.name ==="SpawnPoints"){
+            for (const object of layer.objects){
+                if (object.name === "player"){
+                    entities.player = map.add(
+                        generatePlayerComponents(k,k.vec2(object.x, object.y))
+                    )
+                    
+                }
+        
+                
+                 if (object.name === "imp"){
+                    entities.imp.push(map.add(generateImpComponents(
+                        k,
+                        k.vec2(object.x, object.y)
+                    )))
+                        
+                    
+                }
+            
 
-            //to do
-            continue;
+            } 
+            
         }
 
         drawTiles(k, map, layer, mapData.tileheight, mapData.tilewidth)
     }
 
-       /*  k.camScale(51); */
-}
+        k.camScale(0.5); 
+        k.camPos(entities.player.worldPos()) 
 
+        setPlayerMovement(k, entities.player)
+}
+       
 
 /*  k.add([k.rect(100,100), k.pos(k.center()), k.area(), k.anchor("center")])*/
