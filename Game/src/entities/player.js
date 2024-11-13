@@ -1,3 +1,5 @@
+
+
 export function generatePlayerComponents(k, pos){
 
     return[
@@ -10,38 +12,37 @@ export function generatePlayerComponents(k, pos){
         k.pos(pos),
         k.opacity(),
         {
-            speed: 100,
+            SPEED: 100,
             attackPower: 1,
             direction: "down",
-            isAttacking: false,
+            isAttacking: false
 
         },
         "player"
     ]
 }
 
-export function setPlayerMovement(k, player){
-     
-    k.onKeyDown("left", () => {
-        // .move() is provided by pos() component, move by pixels per second
-        player.move(-100, 0)
-    })
+/* export function setPlayerMovement(k, player){
+  
 
-}
-         
+   onKeyDown("right", () => {
+		player.move(SPEED, 0)})}
+     k.onKeyDown((key) => {
+        console.log(key);
+
+        if(["a"].includes(key)){
+        player.flipX = true;  
+        player.direction = "left"; 
+        player.move(0, -100)}}
     
+    )}*/
+         
+            
 
    
 
   
-     /*      if(["left","a"].includes(key)){
-            player.flipX = true;
-
-            player.move(-player.speed,0);
-            player.direction = "left"; 
- 
-            } */
-
+  
 
 
     

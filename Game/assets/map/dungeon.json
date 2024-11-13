@@ -105,6 +105,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":100,
          "id":6,
+         "locked":true,
          "name":"Capa de patrones 1",
          "opacity":1,
          "type":"tilelayer",
@@ -216,6 +217,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":100,
          "id":7,
+         "locked":true,
          "name":"Capa de patrones 2",
          "opacity":1,
          "type":"tilelayer",
@@ -227,6 +229,7 @@
         {
          "draworder":"topdown",
          "id":9,
+         "locked":true,
          "name":"SpawnPoints",
          "objects":[
                 {
@@ -301,7 +304,7 @@
          "name":"Bondaries",
          "objects":[
                 {
-                 "height":208,
+                 "height":192,
                  "id":1,
                  "name":"",
                  "rotation":0,
@@ -312,7 +315,7 @@
                  "y":160
                 }, 
                 {
-                 "height":208,
+                 "height":192,
                  "id":2,
                  "name":"",
                  "rotation":0,
@@ -329,9 +332,31 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":272,
-                 "x":592,
+                 "width":240,
+                 "x":608,
                  "y":144
+                }, 
+                {
+                 "height":16,
+                 "id":18,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":240,
+                 "x":608,
+                 "y":352
+                }, 
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":816,
+                 "y":400
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -340,7 +365,7 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":18,
+ "nextobjectid":20,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",

@@ -1,22 +1,35 @@
 import k from "./kaboomContext.js";
 import world from "./scenes/world.js";
 
-/* add([
-	// text() component is similar to sprite() but renders text
-	text("Press arrow keys", { width: width() / 2 }),
-	pos(12, 12),
-]) */
+
+kaboom();
 
 k.loadSprite ("assets", "./assets/map/dungeonTiles.png",{
     sliceX: 32,
     sliceY: 32,
     anims: { 
         
-        "player-idle-down": 40,
-        "imp-idle-down": 151
-    }
+        "player-idle-down": {
+            from : 40 ,
+            to: 48,
+            loop: true,
+        },
 
-})
+        "imp-idle-down":  { 
+            from : 151  ,
+            to: 158,
+            loop: true,
+        }  
+    },
+
+
+
+
+
+
+
+
+    })
 
 
 
