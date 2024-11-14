@@ -298,12 +298,16 @@ const map = addLevel([
 	},
 })
 
+
+
 const player = map.spawn([
 	sprite("hero", { anim: "idle" }),
 	area({ shape: new Rect(vec2(0, 6), 12, 12) }),
 	body(),
 	anchor("center"),
 	tile(),
+	health(100),
+
 ], 2, 2)
 
 const sword = player.add([
@@ -312,47 +316,30 @@ const sword = player.add([
 	anchor("bot"),
 	rotate(0),
 	spin(),
+	"sword"
 ])
 
 
 
-const doctor = [sprite("doc", { anim: "idle" }), "Hello"]
-
-map.spawn([
-	doctor[0],
+const doctor = map.spawn([
+	sprite("doc", { anim: "idle" }),
 	anchor("center"),  
 	area({ scale: 1 }),
 	body({ isStatic: true }),
 	tile({ isObstacle: true }),
+	"doc"
 
 ], 5, 4)  
 
-
-map.spawn([
-	sprite("ogre", { anim: "idle" }),
-	anchor("bot"),  
-	area({ scale: 0.5 }),
-	body({ isStatic: true }),
-	tile({ isObstacle: true }),
-], 5, 16)  
-
-
-
-
-
-	/* ACA EMPIEZA LA LÓGICA 
-
-
-		      ;D   */
-
-	function addDialog() {
-		const h = 160
-		const pad = 16
+function addDialog() {
+		const h = 100
+		const pad = 1
 		const bg = add([
-			pos(0, height() - h),
+			pos(0, height() + h ),
 			rect(width(), h),
-			color(0, 0, 0),
+			color(0, 0, 50),
 			z(100),
+		
 		])
 		const txt = add([
 			text("", {
@@ -360,6 +347,7 @@ map.spawn([
 			}),
 			pos(0 + pad, height() - h + pad),
 			z(100),
+			
 		])
 		bg.hidden = true
 		txt.hidden = true
@@ -387,13 +375,27 @@ map.spawn([
 		}
 	}
 
-	const dialog = addDialog()
+const dialog = addDialog()
+
+ player.onCollide("doc", (doc) => {
+	dialog.say("you got no key!")
+	
+})
 
 
-// talk on touch
-player.onCollide("doctor", () => {
-		dialog.say(doctor[1])
-	})
+const ogre = map.spawn([
+	sprite("ogre", { anim: "idle" }),
+	anchor("bot"),  
+	area({ scale: 0.5 }),
+	body({ isStatic: true }),
+	tile({ isObstacle: true }),
+	"ogre",
+	health(100)
+], 5, 16)  
+
+player.onCollide("ogre", (ogre) => {
+	destroy(ogre)
+})
 
 
 
@@ -449,6 +451,11 @@ const dirs = {
 	"up": UP,
 	"down": DOWN,
 }
+
+for (const dir in dirs) {
+		onKeyPress(dir, () => {
+			dialog.dismiss()
+		})}
 
 player.onUpdate(() => {
 	camPos(player.pos)
