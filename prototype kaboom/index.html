@@ -29,10 +29,11 @@
 loadSpriteAtlas("./dungeonTiles.png", {
 	"hero": {
 		"x": 128,
-		"y": 196,
+		"y": 100,
 		"width": 144,
 		"height": 28,
 		"sliceX": 9,
+		
 		"anims": {
 			"idle": {
 				"from": 0,
@@ -49,12 +50,12 @@ loadSpriteAtlas("./dungeonTiles.png", {
 			"hit": 8,
 		},
 	},
-	"doc": {
-		"x": 367,  /* 16,340 */  /* x:370,y:340 doc */
+	   "doc": {
+		"x": 369, 
 		"y": 350,
 		"width": 144,
 		"height": 18,
-		"sliceX": 8,  
+		"sliceX": 9,  
 		"anims": {
 			"idle": {
 				"from": 0,
@@ -90,7 +91,7 @@ loadSpriteAtlas("./dungeonTiles.png", {
 				"loop": true,
 			},
 		},
-	},
+	}, 
 	"floor": {
 		"x": 16,
 		"y": 64,
@@ -175,6 +176,7 @@ loadSpriteAtlas("./dungeonTiles.png", {
 		"height": 16,
 	},
 })
+
 
 // Can also load from external JSON url
 // loadSpriteAtlas("/sprites/dungeon.png", "/sprites/dungeon.json")
@@ -312,22 +314,88 @@ const sword = player.add([
 	spin(),
 ])
 
-// TODO: z
+
+
+const doctor = [sprite("doc", { anim: "idle" }), "Hello"]
+
 map.spawn([
-	sprite("doc"),
-	anchor("center"),  /* bot */
+	doctor[0],
+	anchor("center"),  
 	area({ scale: 1 }),
 	body({ isStatic: true }),
 	tile({ isObstacle: true }),
-], 5, 4)
+
+], 5, 4)  
+
 
 map.spawn([
-	sprite("ogre"),
-	anchor("bot"),  /* bot */
+	sprite("ogre", { anim: "idle" }),
+	anchor("bot"),  
 	area({ scale: 0.5 }),
 	body({ isStatic: true }),
 	tile({ isObstacle: true }),
-], 5, 16)
+], 5, 16)  
+
+
+
+
+
+	/* ACA EMPIEZA LA LÓGICA 
+
+
+		      ;D   */
+
+	function addDialog() {
+		const h = 160
+		const pad = 16
+		const bg = add([
+			pos(0, height() - h),
+			rect(width(), h),
+			color(0, 0, 0),
+			z(100),
+		])
+		const txt = add([
+			text("", {
+				width: width(),
+			}),
+			pos(0 + pad, height() - h + pad),
+			z(100),
+		])
+		bg.hidden = true
+		txt.hidden = true
+		return {
+			say(t) {
+				txt.text = t
+				bg.hidden = false
+				txt.hidden = false
+			},
+			dismiss() {
+				if (!this.active()) {
+					return
+				}
+				txt.text = ""
+				bg.hidden = true
+				txt.hidden = true
+			},
+			active() {
+				return !bg.hidden
+			},
+			destroy() {
+				bg.destroy()
+				txt.destroy()
+			},
+		}
+	}
+
+	const dialog = addDialog()
+
+
+// talk on touch
+player.onCollide("doctor", () => {
+		dialog.say(doctor[1])
+	})
+
+
 
 function spin() {
 	let spinning = false
@@ -369,6 +437,9 @@ function interact() {
 }
 
 onKeyPress("d", interact)
+
+
+
 
 const SPEED = 120
 
