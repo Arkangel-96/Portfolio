@@ -100,6 +100,22 @@ loadSpriteAtlas("./dungeonTiles.png", {
 		"sliceX": 3,
 		"sliceY": 3,
 	},
+	
+	"coin": {
+		"x": 287,
+		"y": 382,
+		"width": 35,
+		"height":10,
+			"sliceX": 4,    
+		"anims": {
+			"flip": {
+				"from": 0,
+				"to": 3,
+				"speed": 20,
+				"loop": true,
+			}}},
+
+
 	"chest": {
 		"x": 304,
 		"y": 416,
@@ -298,6 +314,30 @@ const map = addLevel([
 	},
 })
 
+// a simple score counter
+const score = add([
+    text("Score: 0"),{
+				size: 8, 
+        		width: width(), // it'll wrap to next line when width exceeds this value
+        		font: "sans-serif",},
+	
+    pos(24, -50),
+    { value: 0 },
+])
+
+
+const coin = map.spawn([
+	sprite("coin",    { anim: "flip" }    ),
+	area({ shape: new Rect(vec2(-2, 0), 8, 8) }),
+	body(),
+	anchor("center"),
+	tile(),
+	"coin"
+
+], 2, 8)
+
+
+
 
 
 const player = map.spawn([
@@ -320,7 +360,6 @@ const sword = player.add([
 ])
 
 
-
 const doctor = map.spawn([
 	sprite("doc", { anim: "idle" }),
 	anchor("center"),  
@@ -331,20 +370,49 @@ const doctor = map.spawn([
 
 ], 5, 4)  
 
+const ogre = map.spawn([
+	sprite("ogre", { anim: "idle" }),
+	anchor("bot"),  
+	area({ scale: 0.5 }),
+	body({ isStatic: true }),
+	tile({ isObstacle: true }),
+	"ogre",
+	health(100)
+], 5, 16)  
+
+player.onCollide("ogre", (ogre) => {
+	destroy(ogre)
+})
+
+
+player.onCollide("coin", (coin) => {
+	destroy(coin)
+    score.value += 1
+    score.text = "Score:" + score.value
+})
+
+player.onCollide("doc", (doc) => {
+	dialog.say("Hello stranger, these lands are very dangerous. Bring me some gold if you want to survive.")
+	
+})
 function addDialog() {
-		const h = 100
-		const pad = 1
+		const h = 40
+		const pad = 8
 		const bg = add([
-			pos(0, height() + h ),
-			rect(width(), h),
+			pos(0, height() - h ),
+			rect(width(), 35),  /*  rect(width()-100, height() ), */
 			color(0, 0, 50),
 			z(100),
 		
 		])
 		const txt = add([
 			text("", {
-				width: width(),
-			}),
+				
+				size: 8, // 48 pixels tall
+        		width: width(), // it'll wrap to next line when width exceeds this value
+        		font: "sans-serif", // specify any font you loaded or browser built-in
+		}),
+
 			pos(0 + pad, height() - h + pad),
 			z(100),
 			
@@ -377,25 +445,9 @@ function addDialog() {
 
 const dialog = addDialog()
 
- player.onCollide("doc", (doc) => {
-	dialog.say("you got no key!")
-	
-})
 
 
-const ogre = map.spawn([
-	sprite("ogre", { anim: "idle" }),
-	anchor("bot"),  
-	area({ scale: 0.5 }),
-	body({ isStatic: true }),
-	tile({ isObstacle: true }),
-	"ogre",
-	health(100)
-], 5, 16)  
 
-player.onCollide("ogre", (ogre) => {
-	destroy(ogre)
-})
 
 
 
