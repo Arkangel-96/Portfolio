@@ -314,16 +314,6 @@ const map = addLevel([
 	},
 })
 
-// a simple score counter
-const score = add([
-    text("Score: 0"),{
-				size: 8, 
-        		width: width(), // it'll wrap to next line when width exceeds this value
-        		font: "sans-serif",},
-	
-    pos(24, -50),
-    { value: 0 },
-])
 
 
 const coin = map.spawn([
@@ -346,7 +336,7 @@ const player = map.spawn([
 	body(),
 	anchor("center"),
 	tile(),
-	health(100),
+	health(3),
 
 ], 2, 2)
 
@@ -359,6 +349,40 @@ const sword = player.add([
 	"sword"
 ])
 
+// a simple score counter
+const score = add([
+    text("Score: 0",
+
+	),{
+				size: 5, 
+        		width: 1, // it'll wrap to next line when width exceeds this value
+        		font: "sans-serif",},
+	
+    pos(12,-24),
+    { value: 0 },
+])
+
+player.onCollide("coin", (coin) => {
+	destroy(coin)
+    score.value += 1
+    score.text = "Score:" + score.value
+})
+
+
+
+const life = add([
+    text("Healh:",
+
+	),{
+				size: 5, 
+        		width: 1, // it'll wrap to next line when width exceeds this value
+        		font: "sans-serif",},
+	
+    pos(12,-50),
+    { value: 0},
+])
+
+console.log ()
 
 const doctor = map.spawn([
 	sprite("doc", { anim: "idle" }),
@@ -377,19 +401,18 @@ const ogre = map.spawn([
 	body({ isStatic: true }),
 	tile({ isObstacle: true }),
 	"ogre",
-	health(100)
+	health(3)
 ], 5, 16)  
 
 player.onCollide("ogre", (ogre) => {
-	destroy(ogre)
+	player.hurt(1)
+	destroy(player)
 })
 
+if (player.health =0) {
+	destroy(player)
+}
 
-player.onCollide("coin", (coin) => {
-	destroy(coin)
-    score.value += 1
-    score.text = "Score:" + score.value
-})
 
 player.onCollide("doc", (doc) => {
 	dialog.say("Hello stranger, these lands are very dangerous. Bring me some gold if you want to survive.")
@@ -478,6 +501,7 @@ function interact() {
 			if (c.opened) {
 				c.play("close")
 				c.opened = false
+				
 			} else {
 				c.play("open")
 				c.opened = true
