@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espirales</title>
+    <style>
+
+        canvas{
+
+
+            background-color: wheat;
+            border:solid green 3px;
+        }
+
+
+
+
+    </style>
+    <script>
+    
+    window.onload=function(){
+
+    canvas = document.getElementById("canvas")
+
+    if(canvas && canvas.getContext){
+
+        ctx= canvas.getContext("2d");
+            
+        if(ctx){
+
+            ctx.strokeStyle= "black";
+            ctx.fillStyle = "red";
+            ctx.lineWidth = 10;
+          
+            
+
+            ctx.beginPath();
+            ctx.arc(100, 150, 50, 1.1*Math.PI,  1.9*Math.PI  );
+            ctx.fill()
+            ctx.stroke();
+
+
+            ctx.beginPath();
+            ctx.arc(250, 150, 50, 1.1*Math.PI,  1.9*Math.PI, true  );
+            ctx.fill()
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(400, 150, 50,2, 2*Math.PI  );
+            ctx.fill()
+            ctx.stroke();
+
+
+        }
+
+
+
+        }
+
+
+
+
+
+    }
+
+
+</script> 
+
+
+</head>
+<body>
+
+
+    <canvas id="canvas" width="600" height="400">
+
+
+    </canvas>
+    
+</body>
+
+
+</html>
