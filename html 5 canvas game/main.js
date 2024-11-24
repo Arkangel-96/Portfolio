@@ -7,6 +7,7 @@ console.log("Welcome to Shadow and Steel")
 export const tile_size = 32
 export const cols = 15
 export const rows = 20
+export const half_tile = tile_size /2
 const game_width = tile_size * cols
 const game_height = tile_size * rows
 
@@ -23,26 +24,66 @@ window.addEventListener("load", function(){
             this.world = new World()
             this.hero = new Hero ({
                 game: this,
-                position: {  x:5, y:3  }
+                sprite: {
+                    image:document.getElementById("hero1"),
+                    x:0,
+                    y:11,
+                    width:64,
+                    height:64,
+                    
+                },
+                position: {  x:5 * tile_size, y:3 *tile_size  }
             })
-            this.input = new Input()
+            this.input = new Input(this)
+
+
+            this.eventUpdate = false
+            this.eventTimer  = 0
+            this.eventInterval = 60
+            this.debug = false
         }
-        render(ctx){
-            this.hero.update()
+        toggleDebug (){
+            this.debug = !this.debug
+
+        }
+        render(ctx, deltaTime){
+            this.hero.update(deltaTime)
             this.world.drawBackground(ctx) 
-            this.world.drawGrid(ctx)
+            if (this.debug) this.world.drawGrid(ctx)
             this.hero.draw(ctx)
             this.world.drawForeground(ctx)
+            if (this.debug) this.world.drawCollisionMap(ctx)
+
+            if (this.eventTimer < this.eventInterval){
+                this.eventTimer += deltaTime
+                this.eventUpdate = false
+
+            }
+            else{
+                this.eventTimer = 0
+                this.eventUpdate = true
+            }
+
+
+
         }
 
     }
 
     const game = new Game ()
 
-    function animate (){
+    let lastTime = 0
+
+    function animate (timeStamp){
         requestAnimationFrame(animate) 
         ctx.clearRect(0 , 0, game_width , game_height)
-        game.render(ctx)
+
+        const deltaTime = timeStamp -lastTime
+        lastTime = timeStamp
+
+        console.log(deltaTime)
+
+        game.render(ctx, deltaTime)
         
   
 
