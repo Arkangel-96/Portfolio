@@ -1,12 +1,14 @@
 import { Hero } from "./hero.js"
 import { Input } from "./input.js"
 import { World } from "./world.js"
+import { Camera } from "./camera.js"
 
 console.log("Welcome to Shadow and Steel")
 
 export const tile_size = 32
 export const cols = 15
 export const rows = 20
+
 export const half_tile = tile_size /2
 const game_width = tile_size * cols
 const game_height = tile_size * rows
@@ -22,6 +24,7 @@ window.addEventListener("load", function(){
 
         constructor(){
             this.world = new World()
+            this.camera = new Camera(this.world, game_width, game_height) 
             this.hero = new Hero ({
                 game: this,
                 sprite: {
@@ -47,6 +50,9 @@ window.addEventListener("load", function(){
 
         }
         render(ctx, deltaTime){
+            this.world.image, 
+            this.camera.x,
+            this.camera.y,
             this.hero.update(deltaTime)
             this.world.drawBackground(ctx) 
             if (this.debug) this.world.drawGrid(ctx)

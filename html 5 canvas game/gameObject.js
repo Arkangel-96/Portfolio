@@ -74,6 +74,7 @@ export class GameObject{
         )
 
         ctx.drawImage (             //recortando sprite sheet
+        
 
             this.sprite.image,
             this.sprite.x * this.sprite.width,

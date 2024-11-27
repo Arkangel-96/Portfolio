@@ -8,7 +8,7 @@
 
         body{
 
-            background-color: cadetblue;
+            background-color: black;
         }
 
         canvas{
@@ -20,7 +20,11 @@
             top: 50%;
             left: 50%;
             translate: -50% -50%;
+            max-width: 95%;
+            max-height: 95%; 
         }
+
+
         .assets{
             display: none;
         }
@@ -33,10 +37,11 @@
 <body>
 
     <canvas id="canvas"></canvas>
-    
+
     <div class="assets">
+        
         <img src="./backgroundLevel1.png" id="backgroundLevel1">
-        <img src="./foregroundLevel1.png" id="foregroundLevel1">
+        <img src="./foregroundLevel1.png" id="foregroundLevel1"> 
         <img src="./rogue_sprite.png" id="hero1">
     </div>
  

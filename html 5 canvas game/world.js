@@ -36,7 +36,7 @@ export class World{
 
 
         }
-
+       /*  const image = document.getElementById("backgroundLevel1") */
    
     }
     getTiled(array,row,col) {
@@ -45,7 +45,7 @@ export class World{
     }
     drawBackground(ctx){
 
-        ctx.drawImage(this.level1.backgroundLayer,0,0)
+       ctx.drawImage(this.level1.backgroundLayer,0,0) 
     }
 
     drawForeground(ctx){
