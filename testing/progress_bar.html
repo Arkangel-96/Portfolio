@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+</head>
+
+<style>
+
+
+
+
+
+.barra-progreso {
+  position: relative;
+  width: 400px;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 2px;
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.progreso {
+  height: 100%;
+  background-color: #4CAF50;
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+  position: relative; /* Añade posición relativa */
+}
+
+.texto-progreso {
+  position: absolute; /* Cambia a posición absoluta */
+  z-index: 1;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta posición */
+
+}
+
+</style>
+
+
+<body>
+    
+    
+    <div class="barra-progreso"> 
+      <div class="progreso" id="progreso" style="width: 0%"></div>
+      <div id="texto-progreso" class="texto-progreso">0%</div>
+    </div>
+    <br>
+    <input id="porcentaje" type="number" min="0" max="100">
+    <button id="actualizar">Actualizar</button>
+ 
+    
+</body>
+
+<script>
+
+const inputPorcentaje = document.getElementById('porcentaje');
+const botonActualizar = document.getElementById('actualizar');
+const progreso = document.getElementById('progreso');
+const textoProgreso = document.getElementById('texto-progreso');
+
+botonActualizar.addEventListener('click', () => {
+  const porcentaje = parseInt(inputPorcentaje.value);
+  if (porcentaje >= 0 && porcentaje <= 100) {
+    progreso.style.width = `${porcentaje}%`;
+    textoProgreso.textContent = `${porcentaje}%`;
+  } else {
+    alert('Ingrese un valor entre 0 y 100');
+  }
+});
+
+</script>
+</html>
