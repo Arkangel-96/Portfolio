@@ -13,8 +13,8 @@ export const HALF_SIZE = TILE_SIZE /2
 /* const GAME_WIDTH = TILE_SIZE * COLS
 const GAME_HEIGHT = TILE_SIZE * ROWS */
  
-const GAME_WIDTH = 704 //256 512 704
-const GAME_HEIGHT = 704
+const GAME_WIDTH = 256 //256 512 704
+const GAME_HEIGHT = 256
 
      class Game{
 
