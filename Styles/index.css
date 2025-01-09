@@ -4,14 +4,11 @@
     padding: 0%;
 }
 
-body{
-    display: flex;
-}
 
 
 
 .bodyConteiner{
-    
+    display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -23,10 +20,10 @@ body{
 .header{
 
     display:flex;
-    background:url(/Images/acolyte.jpeg);
+    background:url(/img/acolyte.jpeg);
    
-    width: 1800px;
-    height: 275px; 
+    width: 80%;;  /* 1800px; */
+    height: 175px;
     align-items: center;
     justify-content:space-around;
     color: gold;
@@ -51,8 +48,8 @@ body{
 }
 
 .menu{
-    background:url(/Images/naranja.jpeg);
-    width: 1800px;
+    background:url(/img/naranja.jpeg);
+    width: 80%;
     height: 170px;
     display: flex;
     justify-content: center;
@@ -97,28 +94,35 @@ a {
 
  
 .main{
-    z-index: 0;
+
     display: flex;
+    justify-content: center;
+    gap: 2.5vh;
+    width: 75%;
     color: goldenrod;
-    text-align: justify;
-    align-items: center; /*alinea los itemes con el eje Y*/
-    row-gap: 1%; /*genera los espascios entre las columnas*/
+    font-size: 3vh;
+    align-items: center;
+ 
 }
+
+ 
 
 
 
 
 
 .footer{
+
+    width: 80%;
     display:flex;
     justify-content: center;
-    background-image: url(/Images/ambar.jpeg);
+    background-image: url(/img/ambar.jpeg);
     background-size: cover;
     text-align: center;
     align-items: center;
     color: goldenrod;
     font-size: 3vh;
-    width: 1800px;
+    
 }
 
 .imgRedes{
