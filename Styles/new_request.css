@@ -1,61 +1,6 @@
 
 
 
-
- @media only screen and (height <  300px ) {
-
-
-     
-   .ra {
-
-    width: 5vh;
-    height: 5vh; 
-   
-}
-
-
-}
-
-@media only screen and (height >=  300px) {
-
-
-   .ra {
-
-    width: 3vh;
-    height: 3vh; 
-}
-
-
-.container{
-    
-    font-size: 3vh;
-
-}
-     
- }
-
- @media only screen and (width >  1080px ) {
-
- 
-   .ra {
-
-    width: 2.5vh;
-    height: 2.5vh;
-   
-}
-    #chk{
-
-        font-size: 2.5vh;
-   
-
-}
-
-}
-      
-
-
-
-
 body {
   
         background-image:url("/img/castle.jpg");

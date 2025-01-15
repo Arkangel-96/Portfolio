@@ -4,10 +4,56 @@
     padding: 0%;
 }
 
+@media only screen and (height <  300px ) {
 
+    .a{
+     
+        font-size: 4vh;
+    
+    }
+
+ 
+ 
+ }
+ 
+ @media only screen and (height >=  300px) {
+ 
+ 
+
+ 
+    .a{
+     
+     font-size: 4vh;
+ 
+ }
+      
+  }
+ 
+  @media only screen and (width >  1080px ) {
+ 
+    .a{
+     
+        font-size: 4vh;
+    
+    }
+
+/*     .ra {
+ 
+     width: 2.5vh;
+     height: 2.5vh;
+    
+ } */
+
+ 
+ }
+       
+ 
+ 
+ 
 
 
 .bodyConteiner{
+
     display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,8 +67,7 @@
 
     display:flex;
     background:url(/img/acolyte.jpeg);
-   
-    width: 80%;;  /* 1800px; */
+    width: 100%;  /* 1800px; */
     height: 175px;
     align-items: center;
     justify-content:space-around;
@@ -49,7 +94,7 @@
 
 .menu{
     background:url(/img/naranja.jpeg);
-    width: 80%;
+    width: 100%;
     height: 170px;
     display: flex;
     justify-content: center;
@@ -113,7 +158,7 @@ a {
 
 .footer{
 
-    width: 80%;
+    width: 100%;
     display:flex;
     justify-content: center;
     background-image: url(/img/ambar.jpeg);
