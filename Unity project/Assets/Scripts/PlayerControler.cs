@@ -14,13 +14,21 @@ public class NewBehaviourScript : MonoBehaviour
         rb = GetComponent <Rigidbody2D> ();
         animator = GetComponent <Animator> ();
     }
-    void FixedUpdate(){
+    void FixedUpdate() {
+
         if (input.x !=0 ) input.y = 0;
         rb.velocity = new Vector2(input.x * moveSpeed * Time.deltaTime, input.y * moveSpeed * Time.deltaTime);
+        
         if (rb.velocity != Vector2.zero){
 
             animator.SetFloat("moveX", input.x);
             animator.SetFloat("moveY", input.y);
+            animator.SetBool("moving", true);
+
+        } 
+        else {
+
+            animator.SetBool("moving", false);
 
         }
     }
