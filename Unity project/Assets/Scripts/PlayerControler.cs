@@ -3,16 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
-{   
+{
+
     private Rigidbody2D rb;
     private Animator animator;
     public float moveSpeed = 100;
     public Vector2 input;
+
+    private bool attacking = false; 
+    private GameObject attackArea = default;
+    private float timeToAttack = 0.25f;
+    private float timer = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent <Rigidbody2D> ();
         animator = GetComponent <Animator> ();
+
+        attackArea = transform.GetChild(0).gameObject;
     }
     void FixedUpdate() {
 
@@ -32,11 +41,54 @@ public class NewBehaviourScript : MonoBehaviour
 
         }
     }
+
+    private void Attack()
+    {
+        
+        attacking = true;
+        attackArea.SetActive(attacking);
+        
+
+    }
+
+
+
     // Update is called once per frame
     void Update()
     {
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetKeyDown(KeyCode.Space))
+
+        {
+            animator.SetBool("attacking", true);
+           
+
+        }
+
+        else if (Input.GetMouseButtonDown(0))
+
+        {
+            animator.SetBool("attacking", false);
+            
+        }
+
+
+        if (attacking) {
+
+            timer += Time.deltaTime;
+
+            if (timer >= timeToAttack) {
+
+                timer = 0;
+                attacking = false;
+                attackArea.SetActive(attacking);
+
+            }
+        } 
+
+
     }
 
 }
