@@ -59,20 +59,31 @@ public class NewBehaviourScript : MonoBehaviour
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))  
 
         {
-            animator.SetBool("attacking", true);
-           
+            animator.SetBool("attack_1", true);
+            animator.SetBool("attack_2", false);
+
 
         }
 
-        else if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))  
 
         {
-            animator.SetBool("attacking", false);
-            
+            animator.SetBool("attack_2", true);
+            animator.SetBool("attack_1", false);
+
+
         }
+
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetBool("attack_1", false);
+            animator.SetBool("attack_2", false);
+        }
+
+
 
 
         if (attacking) {
