@@ -25,7 +25,7 @@ public class NewBehaviourScript : MonoBehaviour
     }
     void FixedUpdate() {
 
-        if (input.x !=0 ) input.y = 0;
+        //if (input.x !=0 ) input.y = 0;
         rb.velocity = new Vector2(input.x * moveSpeed * Time.deltaTime, input.y * moveSpeed * Time.deltaTime);
         
         if (rb.velocity != Vector2.zero){
