@@ -5,101 +5,118 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
 
+    public float moveSpeed = 0.5f;
     private Rigidbody2D rb;
-    private Animator animator;
-    public float moveSpeed = 100;
     public Vector2 input;
 
-    private bool attacking = false; 
-    private GameObject attackArea = default;
-    private float timeToAttack = 0.25f;
-    private float timer = 0f;
+    public Animator anim;
+    public Vector2 lastMoveDirection;
+    public Transform Aim;
+    bool isWalking = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent <Rigidbody2D> ();
-        animator = GetComponent <Animator> ();
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
 
-        attackArea = transform.GetChild(0).gameObject;
-    }
-    void FixedUpdate() {
-
-        //if (input.x !=0 ) input.y = 0;
-        rb.velocity = new Vector2(input.x * moveSpeed * Time.deltaTime, input.y * moveSpeed * Time.deltaTime);
-        
-        if (rb.velocity != Vector2.zero){
-
-            animator.SetFloat("moveX", input.x);
-            animator.SetFloat("moveY", input.y);
-            animator.SetBool("moving", true);
-
-        } 
-        else {
-
-            animator.SetBool("moving", false);
-
-        }
-    }
-
-    private void Attack()
-    {
-        
-        attacking = true;
-        attackArea.SetActive(attacking);
-        
 
     }
-
 
 
     // Update is called once per frame
     void Update()
     {
+        ProcessInputs();
+        Animate();
+
+    }
+
+    void FixedUpdate()
+    {
+
+        rb.velocity = input * moveSpeed ;
+
+        if (isWalking)
+        {
+            Vector3 vector3 = Vector3.left * input.x + Vector3.down * input.y;
+            Aim.rotation = Quaternion.LookRotation(Vector3.forward , vector3);
+
+        }
+
+    }
+
+    void ProcessInputs()
+    {
+
+        // Almacena la última dirección, cuando se deja de mover
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        if ((moveX == 0 && moveY == 0) && (input.x != 0 || input.y != 0)) 
+        {
+            isWalking = false;
+            lastMoveDirection = input;
+            Vector3 vector3 = Vector3.left * lastMoveDirection.x + Vector3.down * lastMoveDirection.y;
+            Aim.rotation = Quaternion.LookRotation(Vector3.forward, vector3);
+
+        }
+        else if (moveX != 0 || moveY != 0)
+        {
+
+            isWalking = true;
+        }
+        
+      
+
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetMouseButtonDown(0))  
+        input.Normalize(); //Sin esto los movimientos diagonales serían mas rápidos
+
+    }
+
+    void Animate()
+    {
+
+
+
+        anim.SetFloat("MoveX", input.x);
+        anim.SetFloat("MoveY", input.y);
+        anim.SetFloat("MoveMagnitude", input.magnitude);
+        anim.SetFloat("lastMoveX", lastMoveDirection.x);
+        anim.SetFloat("lastMoveY", lastMoveDirection.y);
+
+
+
+
+        // ATAQUES CON MOUSE !!
+
+        if (Input.GetMouseButtonDown(0))
 
         {
-            animator.SetBool("attack_1", true);
-            animator.SetBool("attack_2", false);
+            anim.SetBool("attack_1", true);
+            anim.SetBool("attack_2", false);
 
 
         }
 
-        if (Input.GetMouseButtonDown(1))  
+        if (Input.GetMouseButtonDown(1))
 
         {
-            animator.SetBool("attack_2", true);
-            animator.SetBool("attack_1", false);
+            anim.SetBool("attack_2", true);
+            anim.SetBool("attack_1", false);
 
 
         }
 
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            animator.SetBool("attack_1", false);
-            animator.SetBool("attack_2", false);
+            anim.SetBool("attack_1", false);
+            anim.SetBool("attack_2", false);
         }
-
-
-
-
-        if (attacking) {
-
-            timer += Time.deltaTime;
-
-            if (timer >= timeToAttack) {
-
-                timer = 0;
-                attacking = false;
-                attackArea.SetActive(attacking);
-
-            }
-        } 
-
-
     }
 
+
+   
 }
