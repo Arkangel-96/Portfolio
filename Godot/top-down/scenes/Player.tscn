@@ -1,9 +1,9 @@
 [gd_scene load_steps=32 format=3 uid="uid://c4kqxardye58q"]
 
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_hh7uk"]
+[ext_resource type="Script" uid="uid://fcupgejctyg8" path="res://scripts/player.gd" id="1_hh7uk"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://components/health_component.tscn" id="3_51e66"]
-[ext_resource type="Script" path="res://components/health_component.gd" id="4_74rpn"]
+[ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://components/health_component.gd" id="4_74rpn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6iful"]
 atlas = ExtResource("1_4kcxx")
@@ -217,6 +217,8 @@ frame_progress = 1.0
 position = Vector2(2, 9)
 shape = SubResource("CapsuleShape2D_ixa2j")
 debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
 

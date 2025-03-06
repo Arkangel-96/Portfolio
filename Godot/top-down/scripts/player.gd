@@ -5,7 +5,7 @@ class_name Player extends CharacterBody2D
 
 signal attack_finished
 
-var move_speed:= 100
+var move_speed:= 300
 var attack_damage:= 50
 var is_attack:= false
 

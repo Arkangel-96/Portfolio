@@ -1,8 +1,9 @@
 extends Node2D
 
 const ENEMY = preload("res://scenes/Enemy.tscn")
-@onready var player: Player = $Player
+
 @onready var timer_spawn_enemy: Timer = $TimerSpawnEnemy
+@onready var player: Player = $Player
 
 func _ready() -> void:
 	timer_spawn_enemy.wait_time = 3
