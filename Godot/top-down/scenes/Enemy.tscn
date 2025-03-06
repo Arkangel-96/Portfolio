@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 [gd_scene load_steps=21 format=3 uid="uid://bxlc8iwg3fpye"]
 
 [ext_resource type="Texture2D" uid="uid://dsfts8nup7vyn" path="res://art/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="1_msjrr"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_o42kc"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://components/health_component.tscn" id="3_bnxig"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="4_mj1fh"]
+=======
+[gd_scene load_steps=17 format=3 uid="uid://bxlc8iwg3fpye"]
+
+[ext_resource type="Texture2D" uid="uid://dsfts8nup7vyn" path="res://art/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="1_msjrr"]
+>>>>>>> 53be36379b6dfe47ef1291cc522357ea9346c58a
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0oa8j"]
 atlas = ExtResource("1_msjrr")
@@ -109,6 +115,7 @@ animations = [{
 "speed": 10.0
 }]
 
+<<<<<<< HEAD
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qipyy"]
 radius = 15.0
 height = 36.0
@@ -122,11 +129,22 @@ script = ExtResource("1_o42kc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -1)
+=======
+[sub_resource type="CircleShape2D" id="CircleShape2D_ndma3"]
+radius = 25.02
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(100, 38)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+>>>>>>> 53be36379b6dfe47ef1291cc522357ea9346c58a
 sprite_frames = SubResource("SpriteFrames_pul1y")
 animation = &"attack"
 autoplay = "run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+<<<<<<< HEAD
 position = Vector2(-1, 8)
 shape = SubResource("CapsuleShape2D_qipyy")
 
@@ -158,3 +176,7 @@ show_percentage = false
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AreaAttack" to="." method="_on_area_attack_body_entered"]
 [connection signal="body_exited" from="AreaAttack" to="." method="_on_area_attack_body_exited"]
+=======
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_ndma3")
+>>>>>>> 53be36379b6dfe47ef1291cc522357ea9346c58a
