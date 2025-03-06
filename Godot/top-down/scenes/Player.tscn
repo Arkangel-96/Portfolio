@@ -1,7 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4kqxardye58q"]
+[gd_scene load_steps=32 format=3 uid="uid://c4kqxardye58q"]
 
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hh7uk"]
+[ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://components/health_component.tscn" id="3_51e66"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="4_74rpn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6iful"]
 atlas = ExtResource("1_4kcxx")
@@ -26,6 +28,30 @@ region = Rect2(768, 576, 192, 192)
 [sub_resource type="AtlasTexture" id="AtlasTexture_bp8o8"]
 atlas = ExtResource("1_4kcxx")
 region = Rect2(960, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kktmi"]
+atlas = ExtResource("1_4kcxx")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3g4la"]
+atlas = ExtResource("1_4kcxx")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5idg"]
+atlas = ExtResource("1_4kcxx")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_temqh"]
+atlas = ExtResource("1_4kcxx")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1kji"]
+atlas = ExtResource("1_4kcxx")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plq2s"]
+atlas = ExtResource("1_4kcxx")
+region = Rect2(960, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3s6ie"]
 atlas = ExtResource("1_4kcxx")
@@ -102,6 +128,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_kktmi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g4la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5idg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_temqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1kji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plq2s")
+}],
+"loop": false,
+"name": &"attack_2",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_3s6ie")
 }, {
 "duration": 1.0,
@@ -147,11 +196,12 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mxtca"]
-radius = 21.0238
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ixa2j"]
+radius = 16.0
+height = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3cqap"]
-size = Vector2(64.5, 75)
+size = Vector2(98.1563, 80.25)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_hh7uk")
@@ -164,15 +214,30 @@ frame = 5
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 14)
-shape = SubResource("CircleShape2D_mxtca")
+position = Vector2(2, 9)
+shape = SubResource("CapsuleShape2D_ixa2j")
+debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(58, -1)
+position = Vector2(40.0781, 2.875)
 shape = SubResource("RectangleShape2D_3cqap")
-debug_color = Color(0.6995, 0.310451, 0.949317, 0.42)
+debug_color = Color(0.0806216, 0.167996, 0.49673, 0.42)
+
+[node name="Components" type="Node" parent="."]
+
+[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("progress_bar") instance=ExtResource("3_51e66")]
+script = ExtResource("4_74rpn")
+progress_bar = NodePath("../../ProgressBar")
+current_health = 80
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -53.0
+offset_top = -88.0
+offset_right = 53.0
+offset_bottom = -61.0
+show_percentage = false
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
