@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bxlc8iwg3fpye"]
+[gd_scene load_steps=23 format=3 uid="uid://bxlc8iwg3fpye"]
 
 [ext_resource type="Texture2D" uid="uid://dsfts8nup7vyn" path="res://art/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="1_msjrr"]
 [ext_resource type="Script" uid="uid://4gmo44k35hrg" path="res://scripts/enemy.gd" id="1_o42kc"]
@@ -116,6 +116,11 @@ height = 36.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bq2bk"]
 size = Vector2(42, 66)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ft8do"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wwv6"]
+bg_color = Color(0.858579, 0, 0.166135, 1)
+
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_o42kc")
 
@@ -148,10 +153,14 @@ progress_bar = NodePath("../../ProgressBar")
 current_health = 100
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -53.0
-offset_top = -88.0
-offset_right = 53.0
-offset_bottom = -61.0
+z_index = 90
+y_sort_enabled = true
+offset_left = -43.0
+offset_top = -62.0
+offset_right = 43.0
+offset_bottom = -51.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ft8do")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5wwv6")
 show_percentage = false
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
