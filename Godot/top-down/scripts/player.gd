@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 			$"Area_U&D".scale.y = -1 if move_direction.y < 0 else 1
 			up = true
 			
-	print(down)		
+		
 	move_and_slide()
 	
 func _input(event: InputEvent) -> void:

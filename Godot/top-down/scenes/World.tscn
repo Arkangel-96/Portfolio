@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scripts/world.gd" id="1_ro7oq"]
-[ext_resource type="PackedScene" uid="uid://bxlc8iwg3fpye" path="res://scenes/Enemy.tscn" id="2_w26cf"]
+[ext_resource type="PackedScene" uid="uid://bxlc8iwg3fpye" path="res://scenes/Goblin.tscn" id="2_w26cf"]
 [ext_resource type="Texture2D" uid="uid://3gdvbr1d53k0" path="res://art/Resources/Trees/Tree.png" id="4_bovj0"]
 [ext_resource type="Texture2D" uid="uid://vwwmgdekpgrc" path="res://art/Terrain/Ground/Tilemap_Elevation.png" id="4_ddnin"]
 [ext_resource type="Texture2D" uid="uid://4f7hr03wouih" path="res://art/Terrain/Ground/Tilemap_Flat.png" id="4_hyhxd"]
@@ -418,9 +418,9 @@ texture = ExtResource("10_h1bdy")
 position = Vector2(2503, 4875)
 texture = ExtResource("11_7c4bj")
 
-[node name="Player" parent="." instance=ExtResource("1_5euw2")]
-position = Vector2(1497, 110)
-
 [node name="CastleBlue" type="Sprite2D" parent="."]
 position = Vector2(2501, 2338)
 texture = ExtResource("12_7c4bj")
+
+[node name="Player" parent="." instance=ExtResource("1_5euw2")]
+position = Vector2(1871, 505)

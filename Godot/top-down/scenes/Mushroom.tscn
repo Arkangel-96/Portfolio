@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1dea52mn4x4n"]
+
+[ext_resource type="Texture2D" uid="uid://clr2337pnk36m" path="res://art/Deco/02.png" id="1_5ugoj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rs2b5"]
+size = Vector2(17, 16.5)
+
+[node name="Mushroom" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5ugoj")
+offset = Vector2(0, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 18)
+shape = SubResource("RectangleShape2D_rs2b5")

@@ -6,6 +6,10 @@ var attack_damage:= 10
 var is_attack:= false
 var in_attack_Player_range := false
 
+const MUSHROOM = preload("res://scenes/Mushroom.tscn")
+
+
+@onready var world: Node2D = $".."
 @onready var player: Player = $"../Player"
 @onready var health_component: HealthComponent = $Components/HealthComponent
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
@@ -42,6 +46,14 @@ func verify_receive_damage():
 
 func on_death():
 	queue_free()
+	drop_item()
+	
+func drop_item():
+	var item = MUSHROOM.instantiate()
+	add_sibling(item)  #world.call_deferred("add_child", MUSHROOM) 
+	item.global_position = position
+	
+	print("holaaaa")
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
 	if body is Player:

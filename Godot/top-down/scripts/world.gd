@@ -1,6 +1,6 @@
 extends Node2D
 
-const ENEMY = preload("res://scenes/Enemy.tscn")
+const GOBLIN = preload("res://scenes/Goblin.tscn")
 
 @onready var timer_spawn_enemy: Timer = $TimerSpawnEnemy
 @onready var player: Player = $Player
@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func spawn_enemy():
-	var enemy = ENEMY.instantiate()
+	var enemy = GOBLIN.instantiate()
 	
 	var random_angle: float = randf() * PI *2
 	var spawn_distance: float = randf_range(270,300)
