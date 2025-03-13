@@ -6,7 +6,7 @@ var attack_damage:= 10
 var is_attack:= false
 var in_attack_Player_range := false
 
-const MUSHROOM = preload("res://scenes/Mushroom.tscn")
+const ITEM = preload("res://scenes/Item.tscn")
 
 
 @onready var world: Node2D = $".."
@@ -49,11 +49,11 @@ func on_death():
 	drop_item()
 	
 func drop_item():
-	var item = MUSHROOM.instantiate()
+	var item = ITEM.instantiate()
+	item.item_type = randi_range(0,4)
 	add_sibling(item)  #world.call_deferred("add_child", MUSHROOM) 
 	item.global_position = position
 	
-	print("holaaaa")
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
 	if body is Player:

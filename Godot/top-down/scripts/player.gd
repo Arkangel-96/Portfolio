@@ -5,15 +5,21 @@ class_name Player extends CharacterBody2D
 
 signal attack_finished
 
-var move_speed = 300
+var move_speed 
 var attack_damage
 var is_attack = false
 var down = false
 var up = false
 
+var gold = 0
+var exp = 0
+
+const START_SPEED = 200
+const BOOST_SPEED = 400
+
 func _ready() -> void:
 	health_component.death.connect(on_death)
-	
+	move_speed = START_SPEED
 
 				
 func _physics_process(delta: float) -> void:
@@ -87,7 +93,8 @@ func attack_2():
 		sprite_animation.play("attack_up_2")
 		is_attack = true
 		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
-
+	print(exp)
+	print(gold)
 
 func on_death():
 	print("GAME OVER")
@@ -114,7 +121,13 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	
 	if sprite_animation.animation == "attack_up_2":
 		sprite_animation.play("idle_up")
+
+func boost():
+	$BoostTimer.start()
+	move_speed = BOOST_SPEED
 	
+func _on_boost_timer_timeout() -> void:
+	move_speed = START_SPEED	
 
 
 func _on_area_lr_body_entered(body: Node2D) -> void:
