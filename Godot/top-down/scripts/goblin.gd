@@ -7,9 +7,11 @@ var is_attack:= false
 var in_attack_Player_range := false
 
 const ITEM = preload("res://scenes/Item.tscn")
+const EXPLOSION = preload("res://scenes/Explosion.tscn")
 
-
-@onready var world: Node2D = $".."
+@onready var world = get_node("/root/World")
+@onready var HP_label = get_node("/root/World/HUD/HP_Label")
+@onready var EXP_label = get_node("/root/World/HUD/EXP_Label")
 @onready var player: Player = $"../Player"
 @onready var health_component: HealthComponent = $Components/HealthComponent
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
@@ -44,16 +46,29 @@ func verify_receive_damage():
 		health_component.receive_damage(player.attack_damage)
 		
 
-func on_death():
-	queue_free()
-	drop_item()
+
 	
 func drop_item():
 	var item = ITEM.instantiate()
 	item.item_type = randi_range(0,4)
-	add_sibling(item)  #world.call_deferred("add_child", MUSHROOM) 
-	item.global_position = position
+	add_sibling(item) 	 #world.call_deferred("add_child", MUSHROOM)
+	item.global_position = position 
 	
+	
+
+func on_death():
+	## drop exp ;D ##
+	world.exp += 20
+	print(world.exp)
+	EXP_label.text = "EXP: " +str(world.exp)
+	player.level_up()
+	
+	var effect = EXPLOSION.instantiate()
+	effect.global_position = position # primero posiciono el efecto, porque si no se va al 0,0 del world
+	add_sibling(effect)
+	effect.process_mode = Node.PROCESS_MODE_ALWAYS
+	drop_item()
+	queue_free()
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -71,7 +86,12 @@ func _on_area_attack_body_exited(body: Node2D) -> void:
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite_animation.animation == "attack":
-		player.health_component.receive_damage(attack_damage)
-		if is_attack:
+		world.hp -= attack_damage
+		print(world.hp)
+		HP_label.text = "HP: " +str(world.hp)
+		if world.hp <= 0:
+			player.on_death()	
+		#player.health_component.receive_damage(attack_damage)
+		elif is_attack:
 			attack()
 			

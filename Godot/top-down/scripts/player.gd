@@ -2,6 +2,9 @@ class_name Player extends CharacterBody2D
 
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_component: HealthComponent = $Components/HealthComponent
+@onready var world = get_node("/root/World")
+@onready var Level_label = get_node("/root/World/HUD/Level_Label")
+@onready var EXP_label = get_node("/root/World/HUD/EXP_Label")
 
 signal attack_finished
 
@@ -18,7 +21,7 @@ const START_SPEED = 200
 const BOOST_SPEED = 400
 
 func _ready() -> void:
-	health_component.death.connect(on_death)
+	#health_component.death.connect(on_death)
 	move_speed = START_SPEED
 
 				
@@ -62,7 +65,7 @@ func _input(event: InputEvent) -> void:
 				attack_2()		
 		
 func attack_1():
-	attack_damage = 50
+	attack_damage = 100
 	sprite_animation.play("attack_1")
 	is_attack = true
 	velocity = velocity.move_toward(Vector2.ZERO, move_speed)	
@@ -93,8 +96,15 @@ func attack_2():
 		sprite_animation.play("attack_up_2")
 		is_attack = true
 		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
-	print(exp)
-	print(gold)
+
+func level_up():
+	if world.exp >= 100:
+		world.exp = 0
+		EXP_label.text = "EXP: " +str(world.exp)
+		world.level += 1
+		Level_label.text = "Level: " +str(world.level)
+		
+	
 
 func on_death():
 	print("GAME OVER")

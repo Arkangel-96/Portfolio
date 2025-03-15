@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpyutp7s05mx2"]
+
+[ext_resource type="Texture2D" uid="uid://c2mk7abve4gru" path="res://art/UI/Ribbons/Ribbon_Red_Connection_Left.png" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://duuojw554nq6j" path="res://art/UI/Ribbons/Ribbon_Yellow_Connection_Right.png" id="2_uo2fv"]
+[ext_resource type="Texture2D" uid="uid://c7fbwyr12tqx7" path="res://art/Resources/Resources/G_Idle.png" id="3_6fi6k"]
+[ext_resource type="Texture2D" uid="uid://dlgepk5gjfpjh" path="res://art/UI/Banners/Banner_Vertical.png" id="3_uo2fv"]
+[ext_resource type="Texture2D" uid="uid://bsldrxbasu680" path="res://art/Resources/Resources/W_Idle.png" id="4_uo2fv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toqtt"]
+bg_color = Color(0.623529, 0.701961, 0.443137, 0.792157)
+border_width_top = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="HUD" type="CanvasLayer"]
+offset = Vector2(0, 670)
+transform = Transform2D(1, 0, 0, 1, 0, 670)
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1277.0
+offset_bottom = 48.0
+scale = Vector2(1.00238, 1.04227)
+theme_override_styles/panel = SubResource("StyleBoxFlat_toqtt")
+
+[node name="Level" type="Sprite2D" parent="."]
+position = Vector2(46.0833, 32)
+scale = Vector2(1.09635, 0.953125)
+texture = ExtResource("2_uo2fv")
+
+[node name="Level_Label" type="Label" parent="."]
+offset_left = 96.1667
+offset_top = 4.5
+offset_right = 161.167
+offset_bottom = 49.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EXP" type="Sprite2D" parent="."]
+position = Vector2(296, 26)
+scale = Vector2(0.314453, 0.338542)
+texture = ExtResource("3_uo2fv")
+
+[node name="EXP_Label" type="Label" parent="."]
+offset_left = 348.333
+offset_top = 4.5
+offset_right = 471.333
+offset_bottom = 49.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HP" type="Sprite2D" parent="."]
+position = Vector2(542, 32)
+scale = Vector2(0.953, 0.953)
+texture = ExtResource("1_ahhtf")
+
+[node name="HP_Label" type="Label" parent="."]
+offset_left = 582.0
+offset_top = 5.0
+offset_right = 682.0
+offset_bottom = 47.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="gold" type="Sprite2D" parent="."]
+position = Vector2(763, 17)
+scale = Vector2(0.886719, 0.865235)
+texture = ExtResource("3_6fi6k")
+
+[node name="gold_Label" type="Label" parent="."]
+offset_left = 806.0
+offset_top = 3.0
+offset_right = 929.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="wood" type="Sprite2D" parent="."]
+position = Vector2(1012, 6)
+scale = Vector2(1.09635, 0.953125)
+texture = ExtResource("4_uo2fv")
+
+[node name="wood_Label" type="Label" parent="."]
+offset_left = 1062.0
+offset_top = 2.0
+offset_right = 1185.0
+offset_bottom = 47.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1

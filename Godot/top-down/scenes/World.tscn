@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=20 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scripts/world.gd" id="1_ro7oq"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cue1vg6ch0b1s" path="res://art/Factions/Goblins/Buildings/Wood_House/Goblin_House_Destroyed.png" id="10_h1bdy"]
 [ext_resource type="Texture2D" uid="uid://crm0k50pabruy" path="res://art/Factions/Goblins/Buildings/Wood_Tower/Wood_Tower_Destroyed.png" id="11_7c4bj"]
 [ext_resource type="Texture2D" uid="uid://bmj882c7jguu1" path="res://art/Factions/Knights/Buildings/Castle/Castle_Blue.png" id="12_7c4bj"]
+[ext_resource type="PackedScene" uid="uid://cpyutp7s05mx2" path="res://scenes/hud.tscn" id="13_nrtoj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8th0u"]
 texture = ExtResource("4_bovj0")
@@ -423,4 +424,6 @@ position = Vector2(2501, 2338)
 texture = ExtResource("12_7c4bj")
 
 [node name="Player" parent="." instance=ExtResource("1_5euw2")]
-position = Vector2(1871, 505)
+position = Vector2(1844, 451)
+
+[node name="HUD" parent="." instance=ExtResource("13_nrtoj")]
