@@ -6,6 +6,9 @@ class_name Player extends CharacterBody2D
 @onready var Level_label = get_node("/root/World/HUD/Level_Label")
 @onready var EXP_label = get_node("/root/World/HUD/EXP_Label")
 
+
+@export var inv : Inv
+
 signal attack_finished
 
 var move_speed 
