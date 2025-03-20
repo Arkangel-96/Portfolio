@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://bxlc8iwg3fpye"]
+[gd_scene load_steps=24 format=3 uid="uid://bxlc8iwg3fpye"]
 
 [ext_resource type="Script" uid="uid://4gmo44k35hrg" path="res://scripts/goblin.gd" id="1_gsl6h"]
+[ext_resource type="Resource" uid="uid://bdmpbmfv3cf3o" path="res://inventory/items/item.tres" id="2_5qxdi"]
 [ext_resource type="Texture2D" uid="uid://dsfts8nup7vyn" path="res://art/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="2_hc4ni"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://components/health_component.tscn" id="3_5qxdi"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://components/health_component.gd" id="4_cxxf0"]
@@ -123,6 +124,7 @@ bg_color = Color(0.858579, 0, 0.166135, 1)
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_gsl6h")
+item = ExtResource("2_5qxdi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -1)

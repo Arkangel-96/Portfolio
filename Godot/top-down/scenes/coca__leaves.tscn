@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4jcqcnikg68j"]
+
+[ext_resource type="Script" uid="uid://cibqfgq6ma5bw" path="res://scripts/pick_up.gd" id="1_54w2y"]
+[ext_resource type="Texture2D" uid="uid://duelivnmpwyfo" path="res://art/Deco/10.png" id="2_k11xn"]
+[ext_resource type="Resource" uid="uid://cne25q0fw1pvs" path="res://inventory/items/coca_leaves.tres" id="2_oa5d8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oa5d8"]
+radius = 14.0357
+
+[node name="coca _leaves" type="StaticBody2D"]
+script = ExtResource("1_54w2y")
+item = ExtResource("2_oa5d8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_k11xn")
+
+[node name="interactable_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactable_area"]
+shape = SubResource("CircleShape2D_oa5d8")
+
+[connection signal="body_entered" from="interactable_area" to="." method="_on_interactable_area_body_entered"]

@@ -6,8 +6,13 @@ var attack_damage:= 10
 var is_attack:= false
 var in_attack_Player_range := false
 
+const MUSHROOM = preload("res://scenes/mushroom.tscn")
+const COCA_LEAVES = preload("res://scenes/coca__leaves.tscn")
 const ITEM = preload("res://scenes/Item.tscn")
 const EXPLOSION = preload("res://scenes/Explosion.tscn")
+
+var random = [MUSHROOM,COCA_LEAVES]
+var item_type = randi_range(0,1)
 
 @onready var world = get_node("/root/World")
 @onready var HP_label = get_node("/root/World/HUD/HP_Label")
@@ -15,6 +20,8 @@ const EXPLOSION = preload("res://scenes/Explosion.tscn")
 @onready var player: Player = $"../Player"
 @onready var health_component: HealthComponent = $Components/HealthComponent
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
+
+@export var item: InvItem
 
 func _ready() -> void:
 	health_component.death.connect(on_death)
@@ -48,11 +55,15 @@ func verify_receive_damage():
 
 
 	
-func drop_item():
-	var item = ITEM.instantiate()
-	item.item_type = randi_range(0,4)
+func drop_item(): 
+	var item = random[item_type].instantiate()
 	add_sibling(item) 	 #world.call_deferred("add_child", MUSHROOM)
 	item.global_position = position 
+	
+	#var item = ITEM.instantiate()
+	#item.item_type = randi_range(0,4)
+	#add_sibling(item) 	 #world.call_deferred("add_child", MUSHROOM)
+	#item.global_position = position 
 	
 	
 
@@ -62,6 +73,7 @@ func on_death():
 	print(world.exp)
 	EXP_label.text = "EXP: " +str(world.exp)
 	player.level_up()
+	
 	
 	var effect = EXPLOSION.instantiate()
 	effect.global_position = position # primero posiciono el efecto, porque si no se va al 0,0 del world

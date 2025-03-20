@@ -100,6 +100,11 @@ func attack_2():
 		is_attack = true
 		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 
+func collect(item):
+	inv.insert(item)
+
+
+
 func level_up():
 	if world.exp >= 100:
 		world.exp = 0
@@ -107,7 +112,7 @@ func level_up():
 		world.level += 1
 		Level_label.text = "Level: " +str(world.level)
 		
-	
+
 
 func on_death():
 	print("GAME OVER")
@@ -141,6 +146,8 @@ func boost():
 	
 func _on_boost_timer_timeout() -> void:
 	move_speed = START_SPEED	
+	
+	
 
 
 func _on_area_lr_body_entered(body: Node2D) -> void:
