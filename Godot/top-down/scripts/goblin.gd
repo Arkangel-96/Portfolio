@@ -6,13 +6,17 @@ var attack_damage:= 10
 var is_attack:= false
 var in_attack_Player_range := false
 
-const MUSHROOM = preload("res://scenes/mushroom.tscn")
-const COCA_LEAVES = preload("res://scenes/coca__leaves.tscn")
-const ITEM = preload("res://scenes/Item.tscn")
-const EXPLOSION = preload("res://scenes/Explosion.tscn")
+var ITEM_1_GEM = preload("res://inventory/items/scenes/Item-1-GEM.tscn")
+var ITEM_2_MUSH = preload("res://inventory/items/scenes/Item-2-MUSH.tscn")
+var ITEM_3_PUMP = preload("res://inventory/items/scenes/Item-3-PUMP.tscn")
+var ITEM_4_LEAVES = preload("res://inventory/items/scenes/Item-4-LEAVES.tscn")
+var ITEM_5_GOLD = preload("res://inventory/items/scenes/Item-5-GOLD.tscn")
+var ITEM_6_WOOD = preload("res://inventory/items/scenes/Item-6-WOOD.tscn")
+var ITEM = preload("res://scenes/Item.tscn")
+var EXPLOSION = preload("res://scenes/Explosion.tscn")
 
-var random = [MUSHROOM,COCA_LEAVES]
-var item_type = randi_range(0,1)
+var drop = [ITEM_1_GEM,ITEM_2_MUSH,ITEM_3_PUMP,ITEM_4_LEAVES,ITEM_5_GOLD,ITEM_6_WOOD]
+var item_type = randi_range(0,5)
 
 @onready var world = get_node("/root/World")
 @onready var HP_label = get_node("/root/World/HUD/HP_Label")
@@ -56,7 +60,7 @@ func verify_receive_damage():
 
 	
 func drop_item(): 
-	var item = random[item_type].instantiate()
+	var item = drop[item_type].instantiate()
 	add_sibling(item) 	 #world.call_deferred("add_child", MUSHROOM)
 	item.global_position = position 
 	

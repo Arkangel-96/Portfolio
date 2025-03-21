@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://rm7qc3tplp07" path="res://scripts/item.gd" id="1_bx46p"]
 [ext_resource type="Texture2D" uid="uid://clr2337pnk36m" path="res://art/Deco/02.png" id="1_j3wwg"]
-[ext_resource type="Resource" uid="uid://cne25q0fw1pvs" path="res://inventory/items/coca_leaves.tres" id="2_h0yph"]
+[ext_resource type="Resource" uid="uid://cne25q0fw1pvs" path="res://inventory/items/resources/Item-4-LEAVES.tres" id="2_h0yph"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rs2b5"]
 size = Vector2(24.875, 25.125)

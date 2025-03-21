@@ -1,18 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://c4jcqcnikg68j"]
 
-[ext_resource type="Script" uid="uid://cibqfgq6ma5bw" path="res://scripts/pick_up.gd" id="1_54w2y"]
-[ext_resource type="Texture2D" uid="uid://duelivnmpwyfo" path="res://art/Deco/10.png" id="2_k11xn"]
-[ext_resource type="Resource" uid="uid://cne25q0fw1pvs" path="res://inventory/items/coca_leaves.tres" id="2_oa5d8"]
+[ext_resource type="Script" uid="uid://cibqfgq6ma5bw" path="res://scripts/pick_up.gd" id="1_pno7d"]
+[ext_resource type="Resource" uid="uid://cne25q0fw1pvs" path="res://inventory/items/resources/Item-4-LEAVES.tres" id="2_y6ogh"]
+[ext_resource type="Texture2D" uid="uid://duelivnmpwyfo" path="res://art/Deco/10.png" id="3_0s0wu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oa5d8"]
-radius = 14.0357
+radius = 13.6015
 
 [node name="coca _leaves" type="StaticBody2D"]
-script = ExtResource("1_54w2y")
-item = ExtResource("2_oa5d8")
+script = ExtResource("1_pno7d")
+item = ExtResource("2_y6ogh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_k11xn")
+texture = ExtResource("3_0s0wu")
 
 [node name="interactable_area" type="Area2D" parent="."]
 
