@@ -377,7 +377,10 @@ metadata/__load_path__ = "res://inventory/items/item.tres"
 y_sort_enabled = true
 script = ExtResource("1_ro7oq")
 
-[node name="TimerSpawnEnemy" type="Timer" parent="."]
+[node name="Seconds" type="Timer" parent="."]
+autostart = true
+
+[node name="EnemySpawner" type="Timer" parent="."]
 
 [node name="Trees" type="TileMapLayer" parent="."]
 y_sort_enabled = true
@@ -449,3 +452,5 @@ position = Vector2(2293, 376)
 
 [node name="mushroom" parent="." instance=ExtResource("16_o1tcx")]
 position = Vector2(2146, 524)
+
+[connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
