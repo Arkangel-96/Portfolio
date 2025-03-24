@@ -29,8 +29,10 @@ func _ready() -> void:
 
 				
 func _physics_process(delta: float) -> void:
-	var move_direction := Input.get_vector("ui_left","ui_right","ui_up","ui_down")	
+	movement()
 	
+func movement():	
+	var move_direction := Input.get_vector("ui_left","ui_right","ui_up","ui_down")	
 	if !is_attack:
 		if move_direction:
 			down = false
@@ -53,9 +55,7 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 			sprite_animation.play("idle_up")
 			$"Area_U&D".scale.y = -1 if move_direction.y < 0 else 1
-			up = true
-			
-		
+			up = true	
 	move_and_slide()
 	
 func _input(event: InputEvent) -> void:
@@ -66,7 +66,8 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:
 				attack_2()		
-		
+				
+			
 func attack_1():
 	attack_damage = 100
 	sprite_animation.play("attack_1")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvsosrjwegtyh"]
+
+[ext_resource type="Texture2D" uid="uid://bmj882c7jguu1" path="res://art/Factions/Knights/Buildings/Castle/Castle_Blue.png" id="1_ngr70"]
+[ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://components/health_component.tscn" id="2_hwvuk"]
+[ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://components/health_component.gd" id="3_ws4va"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngr70"]
+radius = 59.0
+height = 336.0
+
+[node name="Castle" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_ngr70")
+offset = Vector2(0, -25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 47)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ngr70")
+
+[node name="Components" type="Node" parent="."]
+
+[node name="HealthComponent" parent="Components" instance=ExtResource("2_hwvuk")]
+position = Vector2(2, -59)
+script = ExtResource("3_ws4va")
+current_health = 100

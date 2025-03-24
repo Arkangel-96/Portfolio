@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://2of38ecv8u70"]
+
+[ext_resource type="Texture2D" uid="uid://g57x32yehlxb" path="res://art/Factions/Knights/Buildings/Tower/Tower_Blue.png" id="1_02lgm"]
+[ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://components/health_component.tscn" id="2_6dv47"]
+[ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://components/health_component.gd" id="3_6pmem"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngr70"]
+radius = 36.0
+height = 100.0
+
+[node name="Tower" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_02lgm")
+offset = Vector2(0, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 36)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ngr70")
+
+[node name="Components" type="Node" parent="."]
+
+[node name="HealthComponent" parent="Components" instance=ExtResource("2_6dv47")]
+position = Vector2(2, -59)
+script = ExtResource("3_6pmem")
+current_health = 100

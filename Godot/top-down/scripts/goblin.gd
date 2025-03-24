@@ -1,8 +1,8 @@
 
 class_name Enemy extends CharacterBody2D
 
-var move_speed:= 20
-var attack_damage:= 10
+var move_speed:= 50
+var attack_damage:= 1
 var is_attack:= false
 var in_attack_Player_range := false
 
@@ -15,6 +15,7 @@ var ITEM_6_WOOD = preload("res://inventory/items/scenes/Item-6-WOOD.tscn")
 var ITEM = preload("res://scenes/Item.tscn")
 var EXPLOSION = preload("res://scenes/Explosion.tscn")
 
+
 var drop = [ITEM_1_GEM,ITEM_2_MUSH,ITEM_3_PUMP,ITEM_4_LEAVES,ITEM_5_GOLD,ITEM_6_WOOD]
 var item_type = randi_range(0,5)
 
@@ -22,22 +23,35 @@ var item_type = randi_range(0,5)
 @onready var HP_label = get_node("/root/World/HUD/HP_Label")
 @onready var EXP_label = get_node("/root/World/HUD/EXP_Label")
 @onready var player: Player = $"../Player"
-@onready var health_component: HealthComponent = $Components/HealthComponent
+@onready var castle: StaticBody2D = $"../Castle"	
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
+@onready var health_component: HealthComponent = $Components/HealthComponent
 
 @export var item: InvItem
+
+var target = [castle, player]
+var x
+ 
+
 
 func _ready() -> void:
 	health_component.death.connect(on_death)
 	if player:
 		player.attack_finished.connect(verify_receive_damage)
 	
+func _on_vision_body_entered(body: Node2D) -> void:
+	x=0
+
+
+func _on_vision_body_exited(body: Node2D) -> void:
+	x=1
+
 	
 func _physics_process(delta: float) -> void: 
 	if !is_attack and player:
 		sprite_animation.play("run")
 	
-	var move_direction = (player.position - position).normalized()
+	var move_direction = (castle.position - position).normalized()
 	if move_direction:
 		velocity = move_direction * move_speed
 		if move_direction.x !=0:
@@ -87,12 +101,15 @@ func on_death():
 	queue_free()
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
-	if body is Player:
+	if (body is StaticBody2D) or (body is Player) :
+		move_speed =0
 		attack()
+		
 
 
 func _on_area_attack_body_exited(body: Node2D) -> void:
-	if body is Player:
+	if (body is StaticBody2D) or (body is Player) :
+		move_speed = 50
 		is_attack = false
 		
 		
@@ -107,7 +124,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		HP_label.text = "HP: " +str(world.hp)
 		if world.hp <= 0:
 			player.on_death()	
-		#player.health_component.receive_damage(attack_damage)
 		elif is_attack:
 			attack()
-			
+			#castle.health_component.receive_damage(attack_damage)

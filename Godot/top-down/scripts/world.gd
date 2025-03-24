@@ -17,9 +17,9 @@ var enemies : int
 @onready var player: Player = $Player
 
 func _ready() -> void:
-	EnemySpawner.wait_time = 3
-	EnemySpawner.start()
-	EnemySpawner.timeout.connect(spawn_enemy)
+	#EnemySpawner.wait_time = 3
+	#EnemySpawner.start()
+	#EnemySpawner.timeout.connect(spawn_enemy)
 	hp = 100
 	level = 1
 	exp = 0
