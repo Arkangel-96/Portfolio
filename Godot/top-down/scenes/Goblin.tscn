@@ -125,7 +125,7 @@ bg_color = Color(0.858579, 0, 0.166135, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_hc4ni"]
 radius = 192.01
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Goblin" type="CharacterBody2D"]
 script = ExtResource("1_gsl6h")
 item = ExtResource("2_5qxdi")
 
@@ -177,5 +177,3 @@ shape = SubResource("CircleShape2D_hc4ni")
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AreaAttack" to="." method="_on_area_attack_body_entered"]
 [connection signal="body_exited" from="AreaAttack" to="." method="_on_area_attack_body_exited"]
-[connection signal="body_entered" from="Vision" to="." method="_on_vision_body_entered"]
-[connection signal="body_exited" from="Vision" to="." method="_on_vision_body_exited"]

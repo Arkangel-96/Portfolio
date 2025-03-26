@@ -10,16 +10,16 @@ var gold : int
 var wood : int
 var sec : int
 var min : int
-var enemies : int
+
+var max_enemies: int
 
 @onready var Seconds: Timer = $Seconds
-@onready var EnemySpawner: Timer = $EnemySpawner
+@onready var enemy_spawner_timer: Timer = $EnemySpawnerTimer
 @onready var player: Player = $Player
 
 func _ready() -> void:
-	#EnemySpawner.wait_time = 3
-	#EnemySpawner.start()
-	#EnemySpawner.timeout.connect(spawn_enemy)
+	max_enemies = 50
+
 	hp = 100
 	level = 1
 	exp = 0
@@ -35,24 +35,6 @@ func _ready() -> void:
 	$HUD/Minutes.text = "Min:" + str(min)
 	$HUD/Seconds.text = "Sec:" + str(sec)
 	
-
-
-func spawn_enemy():
-
-	var enemy = GOBLIN.instantiate()
-	var random_angle: float = randf() * PI *2
-	var spawn_distance: float = randf_range(270,300)
-	var spawn_offset: Vector2 = Vector2(cos(random_angle),sin(random_angle)) * spawn_distance
-	
-	enemy.position =spawn_offset + player.position
-	
-	add_child(enemy)
-	
-	enemies +=1
-	print(enemies)
-	
-		
-
 func _on_seconds_timeout() -> void:
 	sec += 1
 	if sec >= 60:
@@ -61,3 +43,21 @@ func _on_seconds_timeout() -> void:
 	print("Min:" + str(min)," ", "Sec:" + str(sec))
 	$HUD/Minutes.text = "Min:" + str(min)
 	$HUD/Seconds.text = "Sec:" + str(sec)
+	#print(player.position)
+
+
+## SE SPAWNEAN EN UN CIRCULO ALREDEDOR DEL PLAYER##
+#EnemySpawner.wait_time = 3
+#EnemySpawner.start()
+#EnemySpawner.timeout.connect(spawn_enemy)
+#func spawn_enemy():
+#
+	#var enemy = GOBLIN.instantiate()
+	#var random_angle: float = randf() * PI *2
+	#var spawn_distance: float = randf_range(270,300)
+	#var spawn_offset: Vector2 = Vector2(cos(random_angle),sin(random_angle)) * spawn_distance
+	#
+	#enemy.position =spawn_offset + player.position
+	#
+	#add_child(enemy)
+	

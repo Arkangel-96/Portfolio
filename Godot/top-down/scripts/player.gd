@@ -8,8 +8,9 @@ class_name Player extends CharacterBody2D
 
 
 @export var inv : Inv
-
+signal shoot
 signal attack_finished
+
 
 var move_speed 
 var attack_damage
@@ -67,6 +68,8 @@ func _input(event: InputEvent) -> void:
 			if event.pressed:
 				attack_2()		
 				
+				#var dir = get_global_mouse_position() - position
+				#shoot.emit(position,dir)
 			
 func attack_1():
 	attack_damage = 100
@@ -152,6 +155,7 @@ func _on_boost_timer_timeout() -> void:
 
 
 func _on_area_lr_body_entered(body: Node2D) -> void:
+	
 	if body is Enemy:
 		body.in_attack_Player_range = true
 
@@ -162,6 +166,7 @@ func _on_area_lr_body_exited(body: Node2D) -> void:
 
 
 func _on_area_ud_body_entered(body: Node2D) -> void:
+	
 	if body is Enemy:
 		body.in_attack_Player_range = true
 		
