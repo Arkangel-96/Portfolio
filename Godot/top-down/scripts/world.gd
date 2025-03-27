@@ -14,7 +14,7 @@ var min : int
 var max_enemies: int
 
 @onready var Seconds: Timer = $Seconds
-@onready var enemy_spawner_timer: Timer = $EnemySpawnerTimer
+@onready var EnemySpawner: Timer = $EnemySpawnerTimer
 @onready var player: Player = $Player
 
 func _ready() -> void:
@@ -47,9 +47,16 @@ func _on_seconds_timeout() -> void:
 
 
 ## SE SPAWNEAN EN UN CIRCULO ALREDEDOR DEL PLAYER##
-#EnemySpawner.wait_time = 3
-#EnemySpawner.start()
-#EnemySpawner.timeout.connect(spawn_enemy)
+
+
+
+
+
+#func _on_enemy_spawner_timer_timeout() -> void:
+	#EnemySpawner.wait_time = 3
+	#EnemySpawner.start()
+	#EnemySpawner.timeout.connect(spawn_enemy)
+#
 #func spawn_enemy():
 #
 	#var enemy = GOBLIN.instantiate()
@@ -60,4 +67,4 @@ func _on_seconds_timeout() -> void:
 	#enemy.position =spawn_offset + player.position
 	#
 	#add_child(enemy)
-	
+	#enemy.add_to_group("enemies")

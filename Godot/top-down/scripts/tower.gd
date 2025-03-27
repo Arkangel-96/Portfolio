@@ -13,8 +13,10 @@ var pathName
 
 
 
+
 func _on_tower_body_entered(body: Node2D) -> void:
-	
+	var radar = get_tree().get_nodes_in_group("enemies")
+	print(radar)
 	if "Goblin" in body.name:
 		var tempArray = []
 		targets = get_node("Tower").get_overlapping_bodies()

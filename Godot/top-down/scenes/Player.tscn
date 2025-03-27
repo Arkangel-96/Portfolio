@@ -465,6 +465,7 @@ debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
+zoom = Vector2(0.25, 0.25)
 
 [node name="Area_L&R" type="Area2D" parent="."]
 

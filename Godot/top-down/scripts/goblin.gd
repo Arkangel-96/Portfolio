@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	if !is_attack and player:
 		sprite_animation.play("run")
 	
-	var move_direction = (tower.position - position).normalized()
+	var move_direction = (castle.position - position).normalized()
 	if move_direction:
 		velocity = move_direction * move_speed
 		if move_direction.x !=0:
@@ -65,7 +65,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		#print(world.hp)
 		#HP_label.text = "HP: " +str(world.hp)
 		
-		tower.health_component.receive_damage(attack_damage)
+		castle.health_component.receive_damage(attack_damage)
 		if world.hp <= 0:
 			player.on_death()	
 		elif is_attack:
