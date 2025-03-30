@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dvsosrjwegtyh"]
 
 [ext_resource type="Texture2D" uid="uid://bmj882c7jguu1" path="res://art/Factions/Knights/Buildings/Castle/Castle_Blue.png" id="1_ngr70"]
-[ext_resource type="Script" uid="uid://bkfd3kgfelknf" path="res://scripts/tower.gd" id="2_3rlxh"]
+[ext_resource type="Script" uid="uid://bpjobbup6vb51" path="res://scenes/castle.gd" id="1_ws4va"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://components/health_component.tscn" id="2_hwvuk"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://components/health_component.gd" id="3_ws4va"]
 
@@ -14,8 +14,8 @@ height = 336.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4dm5y"]
 bg_color = Color(0.858579, 0, 0.166135, 1)
 
-[node name="Castle" type="StaticBody2D"]
-script = ExtResource("2_3rlxh")
+[node name="Castle" type="CharacterBody2D"]
+script = ExtResource("1_ws4va")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.25, 1.25)

@@ -1,15 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://bu21b3qjrpn65"]
+[gd_scene load_steps=6 format=3 uid="uid://bu21b3qjrpn65"]
 
 [ext_resource type="Script" uid="uid://cibqfgq6ma5bw" path="res://scripts/pick_up.gd" id="1_wabws"]
-[ext_resource type="Resource" uid="uid://cwtjs8c40h485" path="res://inventory/items/resources/Item-2-MUSH.tres" id="2_lpr0r"]
+[ext_resource type="Script" uid="uid://crpeh2fvjkgks" path="res://inventory/data/DATA_ITEM.gd" id="2_wabws"]
 [ext_resource type="Texture2D" uid="uid://clr2337pnk36m" path="res://art/Deco/02.png" id="3_ut1x2"]
+
+[sub_resource type="Resource" id="Resource_f0j0q"]
+script = ExtResource("2_wabws")
+name = "mushroom"
+texture = ExtResource("3_ut1x2")
+metadata/_custom_type_script = "uid://crpeh2fvjkgks"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oa5d8"]
 radius = 13.0
 
 [node name="mushroom" type="StaticBody2D"]
 script = ExtResource("1_wabws")
-item = ExtResource("2_lpr0r")
+item = SubResource("Resource_f0j0q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_ut1x2")

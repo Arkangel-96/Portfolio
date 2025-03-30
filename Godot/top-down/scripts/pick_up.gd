@@ -1,20 +1,12 @@
 extends StaticBody2D
 
 
-@onready var world = get_node("/root/World")
-@onready var HP_label = get_node("/root/World/HUD/HP_Label")
-@onready var Level_label = get_node("/root/World/HUD/Level_Label")
-@onready var EXP_label = get_node("/root/World/HUD/EXP_Label")
-@onready var gold_label = get_node("/root/World/HUD/gold_Label")
-@onready var wood_label = get_node("/root/World/HUD/wood_Label")
-
-@export var item :InvItem
-@onready var player: Player = $"../Player"
-
 
 func _on_interactable_area_body_entered(body):
-		player.collect(item)
-		queue_free()
+		#player.collect(item)
+		if body is Player:
+			queue_free()
+		pass
 
 #
 #const cocaLeaves = preload("res://art/Deco/10.png")

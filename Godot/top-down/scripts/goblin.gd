@@ -1,7 +1,7 @@
 
 class_name Enemy extends CharacterBody2D
 
-var move_speed:= 100
+var move_speed:= 200
 var attack_damage:= 1
 var is_attack:= false
 var in_attack_Player_range := false
@@ -22,17 +22,22 @@ var item_type = randi_range(0,5)
 @onready var world = get_node("/root/World")
 @onready var HP_label = get_node("/root/World/HUD/HP_Label")
 @onready var EXP_label = get_node("/root/World/HUD/EXP_Label")
-@onready var player: Player = $"../Player"
-@onready var castle: StaticBody2D = $"../Castle"
-@onready var tower: StaticBody2D = $"../Tower"
+@onready var Level_label = get_node("/root/World/HUD/Level_Label")
+
 
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_component: HealthComponent = $Components/HealthComponent
 
+
+@onready var castle = get_node("/root/World/Castle")
+@onready var player = get_node("/root/World/Player")
+
 @export var item: InvItem
+@export var target : Vector2
 
 
- 
+var	move_direction
+var move
 
 
 func _ready() -> void:
@@ -41,12 +46,17 @@ func _ready() -> void:
 		player.attack_finished.connect(verify_receive_damage)
 	
 
+func _process(delta: float) -> void:
+	get_parent().set_progress(get_parent().get_progress()+ move_speed*delta)
+	
+
+
 	
 func _physics_process(delta: float) -> void: 
 	if !is_attack and player:
 		sprite_animation.play("run")
 	
-	var move_direction = (castle.position - position).normalized()
+	#var move_direction = path_follow_2d.progress     #(player.position - position).normalized()
 	if move_direction:
 		velocity = move_direction * move_speed
 		if move_direction.x !=0:
@@ -61,11 +71,10 @@ func attack():
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite_animation.animation == "attack":
-		#world.hp -= attack_damage
-		#print(world.hp)
-		#HP_label.text = "HP: " +str(world.hp)
-		
-		castle.health_component.receive_damage(attack_damage)
+		world.hp -= attack_damage
+		print(world.hp)
+		HP_label.text = "HP: " +str(world.hp)
+		castle.health_component.receive_damage(attack_damage) 
 		if world.hp <= 0:
 			player.on_death()	
 		elif is_attack:
@@ -79,10 +88,7 @@ func verify_receive_damage():
 
 
 	
-func drop_item(): 
-	var item = drop[item_type].instantiate()
-	add_sibling(item) 	 #world.call_deferred("add_child", MUSHROOM)
-	item.global_position = position 
+
 	
 	#var item = ITEM.instantiate()
 	#item.item_type = randi_range(0,4)
@@ -92,33 +98,44 @@ func drop_item():
 	
 
 func on_death():
-	## drop exp ;D ##
-	world.exp += 20
-	print(world.exp)
-	EXP_label.text = "EXP: " +str(world.exp)
-	player.level_up()
-	
-	
 	var effect = EXPLOSION.instantiate()
 	effect.global_position = position # primero posiciono el efecto, porque si no se va al 0,0 del world
 	add_sibling(effect)
 	effect.process_mode = Node.PROCESS_MODE_ALWAYS
 	drop_item()
 	queue_free()
+	
+func drop_item(): 
+	var item = drop[item_type].instantiate()
+	var random_angle: float = randf() * PI * 2
+	var spawn_distance: float = randf_range(0,90)
+	var spawn_offset: Vector2 = Vector2(cos(random_angle),sin(random_angle)) * spawn_distance
+	item.global_position = position + spawn_offset
+	add_sibling(item) 	 #world.call_deferred("add_child", MUSHROOM)
+	## drop exp ;D ##
+	world.exp += 20
+	print(world.exp)
+	EXP_label.text = "EXP: " +str(world.exp)
+	if world.exp >= 100:
+		world.exp = 0
+		EXP_label.text = "EXP: " +str(world.exp)
+		world.level += 1
+		Level_label.text = "Level: " +str(world.level)
+	#get_parent().get_parent().queue_free()
+	
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
-	if body is Player:	
-		move_speed =0 
+	if body is Player :	
+		move_speed =5
 		attack()
-		
+	
 		
 
 
 func _on_area_attack_body_exited(body: Node2D) -> void:
-	if body is  Player:
+	if body is  Player :
 		move_speed = 200
 		is_attack = false
-		
-		
+
 		
 		

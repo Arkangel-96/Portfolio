@@ -1,28 +1,18 @@
-[gd_scene load_steps=32 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=20 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scripts/world.gd" id="1_ro7oq"]
 [ext_resource type="Texture2D" uid="uid://3gdvbr1d53k0" path="res://art/Resources/Trees/Tree.png" id="4_bovj0"]
 [ext_resource type="Texture2D" uid="uid://vwwmgdekpgrc" path="res://art/Terrain/Ground/Tilemap_Elevation.png" id="4_ddnin"]
 [ext_resource type="Texture2D" uid="uid://4f7hr03wouih" path="res://art/Terrain/Ground/Tilemap_Flat.png" id="4_hyhxd"]
-[ext_resource type="Script" uid="uid://dcmg4jautpp6a" path="res://scripts/hero.gd" id="7_i4b1j"]
-[ext_resource type="Resource" uid="uid://bmgljhqwu2j14" path="res://inventory/player/player_Inv.tres" id="8_30fn3"]
 [ext_resource type="Script" uid="uid://c0al4yk1nsw35" path="res://scripts/path_spawner.gd" id="12_7c4bj"]
 [ext_resource type="PackedScene" uid="uid://tjtf1rx4w8sd" path="res://Menu.tscn" id="12_c0d7e"]
 [ext_resource type="PackedScene" uid="uid://c80vpfokabawi" path="res://scenes/PathSpawner.tscn" id="13_c0d7e"]
 [ext_resource type="PackedScene" uid="uid://dvsosrjwegtyh" path="res://scenes/Castle.tscn" id="13_i4b1j"]
 [ext_resource type="PackedScene" uid="uid://cpyutp7s05mx2" path="res://scenes/hud.tscn" id="13_nrtoj"]
 [ext_resource type="Script" uid="uid://1qaau3pog44s" path="res://scripts/arrow_manager.gd" id="14_rpuxp"]
-[ext_resource type="PackedScene" uid="uid://6wcinelx81q0" path="res://inventory/items/scenes/Item-1-GEM.tscn" id="15_dwmkc"]
 [ext_resource type="PackedScene" uid="uid://b3yq1bsqorpq" path="res://scenes/Arrow.tscn" id="15_nthub"]
-[ext_resource type="PackedScene" uid="uid://bu21b3qjrpn65" path="res://inventory/items/scenes/Item-2-MUSH.tscn" id="16_30fn3"]
 [ext_resource type="PackedScene" uid="uid://2of38ecv8u70" path="res://scenes/Tower.tscn" id="16_o1tcx"]
-[ext_resource type="PackedScene" uid="uid://m6oaqmqpxodx" path="res://inventory/items/scenes/Item-3-PUMP.tscn" id="17_dgldv"]
-[ext_resource type="Script" uid="uid://cb4e6ql63kccn" path="res://scripts/path_spawner_2.gd" id="17_rm3lh"]
-[ext_resource type="PackedScene" uid="uid://c4jcqcnikg68j" path="res://inventory/items/scenes/Item-4-LEAVES.tscn" id="18_rm3lh"]
-[ext_resource type="PackedScene" uid="uid://cjdac0liiglj6" path="res://inventory/items/scenes/Item-5-GOLD.tscn" id="19_yncth"]
-[ext_resource type="PackedScene" uid="uid://bakdhttl8seec" path="res://inventory/items/scenes/Item-6-WOOD.tscn" id="20_jgbtq"]
-[ext_resource type="Script" uid="uid://crpeh2fvjkgks" path="res://inventory/data/DATA_ITEM.gd" id="22_rm3lh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8th0u"]
 texture = ExtResource("4_bovj0")
@@ -377,17 +367,6 @@ terrain_set_0/terrain_1/name = "arena"
 terrain_set_0/terrain_1/color = Color(0.054902, 0.439216, 0.25098, 1)
 sources/0 = SubResource("TileSetAtlasSource_yugop")
 
-[sub_resource type="Resource" id="Resource_dgldv"]
-script = ExtResource("22_rm3lh")
-name = ""
-metadata/_custom_type_script = "uid://crpeh2fvjkgks"
-
-[sub_resource type="Curve2D" id="Curve2D_rm3lh"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 152, 2548, 0, 0, 0, 0, 393, 2479, 0, 0, 0, 0, 593, 2497, 0, 0, 0, 0, 825, 2431, 0, 0, 0, 0, 997, 2397, 0, 0, 0, 0, 1132, 2352, 0, 0, 0, 0, 1205, 2324, 0, 0, 0, 0, 1363, 2286, 0, 0, 0, 0, 1388, 2362, 0, 0, 0, 0, 1622, 2245, 0, 0, 0, 0, 1733, 2445, 0, 0, 0, 0, 1878, 2476, 0, 0, 0, 0, 2071, 2514, 0, 0, 0, 0, 2213, 2542, 0, 0, 0, 0, 2285, 2517, 0, 0, 0, 0, 2320, 2452, 0, 0, 0, 0, 2385, 2403, 0, 0, 0, 0, 2510, 2365)
-}
-point_count = 18
-
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ro7oq")
@@ -416,13 +395,10 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAA
 tile_set = SubResource("TileSet_h08up")
 
 [node name="Castle" parent="." instance=ExtResource("13_i4b1j")]
-position = Vector2(2491, 2374)
+position = Vector2(2500, 2500)
 
 [node name="Player" parent="." instance=ExtResource("1_5euw2")]
-position = Vector2(2494, 2819)
-script = ExtResource("7_i4b1j")
-inv = ExtResource("8_30fn3")
-item = SubResource("Resource_dgldv")
+position = Vector2(351, 2118)
 
 [node name="ArrowManager" type="Node2D" parent="."]
 position = Vector2(820, 308)
@@ -453,37 +429,7 @@ autostart = true
 
 [node name="Path2D" parent="PathSpawner" instance=ExtResource("13_c0d7e")]
 
-[node name="PathSpawner2" type="Node2D" parent="."]
-position = Vector2(4990, 0)
-scale = Vector2(-1, 1)
-script = ExtResource("17_rm3lh")
-
-[node name="Timer" type="Timer" parent="PathSpawner2"]
-autostart = true
-
-[node name="Path2D" parent="PathSpawner2" instance=ExtResource("13_c0d7e")]
-curve = SubResource("Curve2D_rm3lh")
-
-[node name="gem" parent="." instance=ExtResource("15_dwmkc")]
-position = Vector2(539, 483)
-
-[node name="mushroom" parent="." instance=ExtResource("16_30fn3")]
-position = Vector2(484, 405)
-
-[node name="pumpkin" parent="." instance=ExtResource("17_dgldv")]
-position = Vector2(545, 404)
-
-[node name="coca _leaves" parent="." instance=ExtResource("18_rm3lh")]
-position = Vector2(440, 477)
-
-[node name="gold" parent="." instance=ExtResource("19_yncth")]
-position = Vector2(478, 575)
-
-[node name="wood" parent="." instance=ExtResource("20_jgbtq")]
-position = Vector2(558, 565)
-
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="EnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]
 [connection signal="shoot" from="Player" to="ArrowManager" method="_on_player_shoot"]
 [connection signal="timeout" from="PathSpawner/Timer" to="PathSpawner" method="_on_timer_timeout"]
-[connection signal="timeout" from="PathSpawner2/Timer" to="PathSpawner2" method="_on_timer_timeout"]
