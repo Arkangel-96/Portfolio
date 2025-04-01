@@ -1,7 +1,9 @@
 extends Player
 
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
+@onready var player: CharacterBody2D = $"."
 
+@export var inv : Inv
 
 
 
@@ -24,7 +26,7 @@ const BOOST_SPEED = 400
 func _ready() -> void:
 	#health_component.death.connect(on_death)
 	move_speed = START_SPEED
-
+	print(inv)
 				
 func _physics_process(delta: float) -> void:
 	movement()
@@ -67,7 +69,10 @@ func _input(event: InputEvent) -> void:
 				
 				#var dir = get_global_mouse_position() - position
 				#shoot.emit(position,dir)
-			
+func collect(item):
+	inv.insert(item)
+	
+		
 func attack_1():
 	attack_damage = 100
 	sprite_animation.play("attack_1")
@@ -101,7 +106,7 @@ func attack_2():
 		is_attack = true
 		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 
-
+ 
 
 
 

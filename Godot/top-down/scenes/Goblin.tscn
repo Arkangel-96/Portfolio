@@ -151,7 +151,6 @@ progress_bar = NodePath("../../ProgressBar")
 current_health = 100
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-visible = false
 z_index = 90
 y_sort_enabled = true
 offset_left = -24.0

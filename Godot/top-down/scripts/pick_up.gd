@@ -1,13 +1,16 @@
 extends StaticBody2D
 
+@onready var player = get_node("/root/World/Player")
+@export var item:InvItem
 
 
 func _on_interactable_area_body_entered(body):
-		#player.collect(item)
 		if body is Player:
+			player.collect(item)
 			queue_free()
-		pass
+		
 
+	
 #
 #const cocaLeaves = preload("res://art/Deco/10.png")
 #const mushroom = preload("res://art/Deco/02.png")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=62 format=3 uid="uid://c4kqxardye58q"]
+[gd_scene load_steps=63 format=3 uid="uid://c4kqxardye58q"]
 
+[ext_resource type="Script" uid="uid://dcmg4jautpp6a" path="res://scripts/hero.gd" id="1_3li8b"]
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
-[ext_resource type="Script" uid="uid://fcupgejctyg8" path="res://scripts/player.gd" id="1_hh7uk"]
+[ext_resource type="Resource" uid="uid://bmgljhqwu2j14" path="res://inventory/player/player_Inv.tres" id="2_mdl7e"]
 [ext_resource type="PackedScene" uid="uid://cw0svke5vyjkt" path="res://inventory/Inv_UI.tscn" id="4_mdl7e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6iful"]
@@ -446,7 +447,8 @@ size = Vector2(98.0782, 76.125)
 size = Vector2(90, 93)
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_hh7uk")
+script = ExtResource("1_3li8b")
+inv = ExtResource("2_mdl7e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)

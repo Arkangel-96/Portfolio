@@ -36,7 +36,7 @@ var item_type = randi_range(0,5)
 @export var target : Vector2
 
 
-var	move_direction
+var	move_direction	
 var move
 
 
@@ -102,6 +102,15 @@ func on_death():
 	effect.global_position = position # primero posiciono el efecto, porque si no se va al 0,0 del world
 	add_sibling(effect)
 	effect.process_mode = Node.PROCESS_MODE_ALWAYS
+		## drop exp ;D ##
+	world.exp += 20
+	print(world.exp)
+	EXP_label.text = "EXP: " +str(world.exp)
+	if world.exp >= 100:
+		world.exp = 0
+		EXP_label.text = "EXP: " +str(world.exp)
+		world.level += 1
+		Level_label.text = "Level: " +str(world.level)
 	drop_item()
 	queue_free()
 	
@@ -111,16 +120,12 @@ func drop_item():
 	var spawn_distance: float = randf_range(0,90)
 	var spawn_offset: Vector2 = Vector2(cos(random_angle),sin(random_angle)) * spawn_distance
 	item.global_position = position + spawn_offset
-	add_sibling(item) 	 #world.call_deferred("add_child", MUSHROOM)
-	## drop exp ;D ##
-	world.exp += 20
-	print(world.exp)
-	EXP_label.text = "EXP: " +str(world.exp)
-	if world.exp >= 100:
-		world.exp = 0
-		EXP_label.text = "EXP: " +str(world.exp)
-		world.level += 1
-		Level_label.text = "Level: " +str(world.level)
+	
+	#await get_tree().create_timer(3).timeout
+	add_sibling(item)  #world.call_deferred("add_child", MUSHROOM)
+		
+	
+
 	#get_parent().get_parent().queue_free()
 	
 
