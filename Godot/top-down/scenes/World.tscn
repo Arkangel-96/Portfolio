@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=24 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scripts/world.gd" id="1_ro7oq"]
@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bu21b3qjrpn65" path="res://inventory/items/scenes/Item-2-MUSH.tscn" id="16_30fn3"]
 [ext_resource type="PackedScene" uid="uid://2of38ecv8u70" path="res://scenes/Tower.tscn" id="16_o1tcx"]
 [ext_resource type="PackedScene" uid="uid://m6oaqmqpxodx" path="res://inventory/items/scenes/Item-3-PUMP.tscn" id="17_dgldv"]
-[ext_resource type="Script" uid="uid://cb4e6ql63kccn" path="res://scripts/path_spawner_2.gd" id="17_rm3lh"]
+[ext_resource type="PackedScene" uid="uid://bflrrr4ouvpaa" path="res://game_over.tscn" id="17_rpuxp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8th0u"]
 texture = ExtResource("4_bovj0")
@@ -371,12 +371,6 @@ terrain_set_0/terrain_1/name = "arena"
 terrain_set_0/terrain_1/color = Color(0.054902, 0.439216, 0.25098, 1)
 sources/0 = SubResource("TileSetAtlasSource_yugop")
 
-[sub_resource type="Curve2D" id="Curve2D_rm3lh"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 152, 2548, 0, 0, 0, 0, 393, 2479, 0, 0, 0, 0, 593, 2497, 0, 0, 0, 0, 825, 2431, 0, 0, 0, 0, 997, 2397, 0, 0, 0, 0, 1132, 2352, 0, 0, 0, 0, 1205, 2324, 0, 0, 0, 0, 1363, 2286, 0, 0, 0, 0, 1388, 2362, 0, 0, 0, 0, 1622, 2245, 0, 0, 0, 0, 1733, 2445, 0, 0, 0, 0, 1878, 2476, 0, 0, 0, 0, 2071, 2514, 0, 0, 0, 0, 2213, 2542, 0, 0, 0, 0, 2285, 2517, 0, 0, 0, 0, 2320, 2452, 0, 0, 0, 0, 2385, 2403, 0, 0, 0, 0, 2510, 2365)
-}
-point_count = 18
-
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ro7oq")
@@ -426,9 +420,6 @@ position = Vector2(1998, 2005)
 [node name="Tower2" parent="." instance=ExtResource("16_o1tcx")]
 position = Vector2(1252, 2514)
 
-[node name="Tower3" parent="." instance=ExtResource("16_o1tcx")]
-position = Vector2(3736, 2184)
-
 [node name="PathSpawner" type="Node2D" parent="."]
 script = ExtResource("12_7c4bj")
 
@@ -436,17 +427,6 @@ script = ExtResource("12_7c4bj")
 autostart = true
 
 [node name="Path2D" parent="PathSpawner" instance=ExtResource("13_c0d7e")]
-
-[node name="PathSpawner2" type="Node2D" parent="."]
-position = Vector2(4990, 0)
-scale = Vector2(-1, 1)
-script = ExtResource("17_rm3lh")
-
-[node name="Timer" type="Timer" parent="PathSpawner2"]
-autostart = true
-
-[node name="Path2D" parent="PathSpawner2" instance=ExtResource("13_c0d7e")]
-curve = SubResource("Curve2D_rm3lh")
 
 [node name="gem2" parent="." instance=ExtResource("15_dwmkc")]
 position = Vector2(2793, 2763)
@@ -457,8 +437,10 @@ position = Vector2(2740, 2857)
 [node name="pumpkin2" parent="." instance=ExtResource("17_dgldv")]
 position = Vector2(2694, 2777)
 
+[node name="GameOver" parent="." instance=ExtResource("17_rpuxp")]
+process_mode = 2
+
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="EnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]
 [connection signal="shoot" from="Player" to="ArrowManager" method="_on_player_shoot"]
 [connection signal="timeout" from="PathSpawner/Timer" to="PathSpawner" method="_on_timer_timeout"]
-[connection signal="timeout" from="PathSpawner2/Timer" to="PathSpawner2" method="_on_timer_timeout"]

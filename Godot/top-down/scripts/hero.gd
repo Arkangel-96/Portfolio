@@ -4,8 +4,7 @@ extends Player
 @onready var player: CharacterBody2D = $"."
 
 @export var inv : Inv
-
-
+@onready var game_over: CanvasLayer = $"../GameOver"
 
 signal shoot
 signal attack_finished
@@ -23,11 +22,18 @@ var exp = 0
 const START_SPEED = 200
 const BOOST_SPEED = 400
 
+var screen_size
+
 func _ready() -> void:
 	#health_component.death.connect(on_death)
+	screen_size = get_viewport_rect().size
+	reset()
+
+func reset():
+	position = screen_size * 2
 	move_speed = START_SPEED
 	print(inv)
-				
+			
 func _physics_process(delta: float) -> void:
 	movement()
 	
@@ -118,6 +124,8 @@ func attack_2():
 func on_death():
 	print("GAME OVER")
 	get_tree().paused = true
+	game_over.show()
+	
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	is_attack = false 

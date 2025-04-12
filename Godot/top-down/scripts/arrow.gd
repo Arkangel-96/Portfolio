@@ -10,7 +10,7 @@ extends CharacterBody2D
 var target : Vector2
 var speed = 1000
 var pathName = ""
-var arrowDamage = 50
+var arrowDamage = 10
 var enemy
 
 func _physics_process(delta):
@@ -39,7 +39,7 @@ func _physics_process(delta):
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	print(body.name)
+	#print(body.name)
 	if "Goblin" in body.name:
 		body.health_component.receive_damage(arrowDamage)
 		queue_free()

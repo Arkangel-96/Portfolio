@@ -2,7 +2,7 @@
 class_name Enemy extends CharacterBody2D
 
 var move_speed:= 200
-var attack_damage:= 1
+var attack_damage:= 2
 var is_attack:= false
 var in_attack_Player_range := false
 
@@ -41,6 +41,8 @@ var move
 
 
 func _ready() -> void:
+
+	self.add_to_group("enemies")
 	health_component.death.connect(on_death)
 	if player:
 		player.attack_finished.connect(verify_receive_damage)
@@ -122,6 +124,7 @@ func drop_item():
 	item.global_position = position + spawn_offset
 	
 	#await get_tree().create_timer(3).timeout
+	item.add_to_group("items")
 	add_sibling(item)  #world.call_deferred("add_child", MUSHROOM)
 		
 	

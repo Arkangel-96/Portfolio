@@ -2,6 +2,7 @@ extends Node2D
 
 const GOBLIN = preload("res://scenes/Goblin.tscn")
 
+
 ## variables del jugador ##
 var hp : int
 var level : int
@@ -18,8 +19,11 @@ var max_enemies: int
 @onready var player: Player = $Player
 
 func _ready() -> void:
-	max_enemies = 50
+	new_game()
+	$GameOver/Button.pressed.connect(new_game)
 
+func new_game():	
+	max_enemies = 9
 	hp = 100
 	level = 1
 	exp = 0
@@ -27,6 +31,9 @@ func _ready() -> void:
 	wood = 0
 	sec = 0
 	min = 0
+	player.reset()
+	get_tree().call_group("enemies", "queue_free")
+	get_tree().call_group("items", "queue_free")
 	$HUD/HP_Label.text = "HP: " + str(hp)
 	$HUD/Level_Label.text = "Level: " + str(level)
 	$HUD/EXP_Label.text = "EXP: " + str(exp)
@@ -34,6 +41,8 @@ func _ready() -> void:
 	$HUD/wood_Label.text = "wood: " + str(wood)
 	$HUD/Minutes.text = "Min:" + str(min)
 	$HUD/Seconds.text = "Sec:" + str(sec)
+	$GameOver.hide()	
+	get_tree().paused = false
 	
 func _on_seconds_timeout() -> void:
 	sec += 1
