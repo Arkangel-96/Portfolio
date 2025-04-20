@@ -3,6 +3,7 @@ extends Node2D
 const GOBLIN = preload("res://scenes/Goblin.tscn")
 
 
+
 ## variables del jugador ##
 var hp : int
 var level : int
@@ -14,6 +15,7 @@ var min : int
 
 var max_enemies: int
 
+@onready var castle: CharacterBody2D = $Castle
 @onready var Seconds: Timer = $Seconds
 @onready var EnemySpawner: Timer = $EnemySpawnerTimer
 @onready var player: Player = $Player
@@ -23,12 +25,13 @@ func _ready() -> void:
 	$GameOver/Button.pressed.connect(new_game)
 
 func new_game():	
-	max_enemies = 9
+	castle.health_component.apply_health(100)
 	hp = 100
 	level = 1
 	exp = 0
 	gold = 0
 	wood = 0
+	max_enemies = 9
 	sec = 0
 	min = 0
 	player.reset()
@@ -37,8 +40,8 @@ func new_game():
 	$HUD/HP_Label.text = "HP: " + str(hp)
 	$HUD/Level_Label.text = "Level: " + str(level)
 	$HUD/EXP_Label.text = "EXP: " + str(exp)
-	$HUD/gold_Label.text = "gold: " + str(gold)
-	$HUD/wood_Label.text = "wood: " + str(wood)
+	$HUD/gold_Label.text = "Gold: " + str(gold)
+	$HUD/wood_Label.text = "Wood: " + str(wood)
 	$HUD/Minutes.text = "Min:" + str(min)
 	$HUD/Seconds.text = "Sec:" + str(sec)
 	$GameOver.hide()	

@@ -2,7 +2,7 @@
 class_name Enemy extends CharacterBody2D
 
 var move_speed:= 200
-var attack_damage:= 2
+var attack_damage:= 0
 var is_attack:= false
 var in_attack_Player_range := false
 
@@ -134,7 +134,7 @@ func drop_item():
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
 	if body is Player :	
-		move_speed =5
+		move_speed =0
 		attack()
 	
 		

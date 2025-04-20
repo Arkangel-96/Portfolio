@@ -5,35 +5,35 @@
 [ext_resource type="PackedScene" uid="uid://cgpwvnqn3cu1h" path="res://inventory/Inv_UI_slot.tscn" id="3_c0iq0"]
 
 [node name="Inv_UI" type="Control"]
-z_index = 100
 custom_minimum_size = Vector2(72, 55)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 126.0
-offset_bottom = 82.0
+offset_top = -2.0
+offset_right = 98.0
+offset_bottom = 61.0
 scale = Vector2(2, 2)
 script = ExtResource("1_q0yqk")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_right = 132.0
-offset_bottom = 85.0
+offset_right = 85.0
+offset_bottom = 55.0
 texture = ExtResource("2_c0iq0")
 
 [node name="GridContainer" type="GridContainer" parent="NinePatchRect"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.458
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -39.0
-offset_right = 48.0
-offset_bottom = 35.0
+anchor_bottom = 0.458
+offset_left = -40.5
+offset_top = -22.19
+offset_right = 46.5
+offset_bottom = 25.81
 grow_horizontal = 2
 grow_vertical = 2
-columns = 4
+columns = 3
 
 [node name="Inv_UI_slot1" parent="NinePatchRect/GridContainer" instance=ExtResource("3_c0iq0")]
 layout_mode = 2
@@ -51,22 +51,4 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Inv_UI_slot6" parent="NinePatchRect/GridContainer" instance=ExtResource("3_c0iq0")]
-layout_mode = 2
-
-[node name="Inv_UI_slot7" parent="NinePatchRect/GridContainer" instance=ExtResource("3_c0iq0")]
-layout_mode = 2
-
-[node name="Inv_UI_slot8" parent="NinePatchRect/GridContainer" instance=ExtResource("3_c0iq0")]
-layout_mode = 2
-
-[node name="Inv_UI_slot9" parent="NinePatchRect/GridContainer" instance=ExtResource("3_c0iq0")]
-layout_mode = 2
-
-[node name="Inv_UI_slot10" parent="NinePatchRect/GridContainer" instance=ExtResource("3_c0iq0")]
-layout_mode = 2
-
-[node name="Inv_UI_slot11" parent="NinePatchRect/GridContainer" instance=ExtResource("3_c0iq0")]
-layout_mode = 2
-
-[node name="Inv_UI_slot12" parent="NinePatchRect/GridContainer" instance=ExtResource("3_c0iq0")]
 layout_mode = 2
