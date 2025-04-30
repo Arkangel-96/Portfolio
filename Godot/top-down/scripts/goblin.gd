@@ -41,7 +41,6 @@ var move
 
 
 func _ready() -> void:
-
 	self.add_to_group("enemies")
 	health_component.death.connect(on_death)
 	if player:
@@ -74,7 +73,7 @@ func attack():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite_animation.animation == "attack":
 		world.hp -= attack_damage
-		print(world.hp)
+		#print(world.hp)
 		HP_label.text = "HP: " +str(world.hp)
 		castle.health_component.receive_damage(attack_damage) 
 		if world.hp <= 0:
@@ -106,7 +105,7 @@ func on_death():
 	effect.process_mode = Node.PROCESS_MODE_ALWAYS
 		## drop exp ;D ##
 	world.exp += 20
-	print(world.exp)
+	#print(world.exp)
 	EXP_label.text = "EXP: " +str(world.exp)
 	if world.exp >= 100:
 		world.exp = 0

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://duuojw554nq6j" path="res://art/UI/Ribbons/Ribbon_Yellow_Connection_Right.png" id="2_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://c7fbwyr12tqx7" path="res://art/Resources/Resources/G_Idle.png" id="3_6fi6k"]
 [ext_resource type="Texture2D" uid="uid://dlgepk5gjfpjh" path="res://art/UI/Banners/Banner_Vertical.png" id="3_uo2fv"]
-[ext_resource type="Texture2D" uid="uid://bsldrxbasu680" path="res://art/Resources/Resources/W_Idle.png" id="4_uo2fv"]
+[ext_resource type="Texture2D" uid="uid://cdtijrhorcvi" path="res://art/Deco/14.png" id="4_5pdws"]
 [ext_resource type="Texture2D" uid="uid://ko8oxfh44xsj" path="res://art/Deco/16.png" id="6_047uy"]
 [ext_resource type="PackedScene" uid="uid://cw0svke5vyjkt" path="res://inventory/Inv_UI.tscn" id="7_5pdws"]
 
@@ -45,18 +45,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EXP" type="Sprite2D" parent="."]
-position = Vector2(562, 18)
+position = Vector2(538, 18)
 scale = Vector2(0.314453, 0.338542)
 texture = ExtResource("3_uo2fv")
 
 [node name="EXP_Label" type="Label" parent="."]
-offset_left = 595.0
-offset_top = -6.0
-offset_right = 682.0
-offset_bottom = 39.0
+offset_left = 568.0
+offset_top = -3.0
+offset_right = 655.0
+offset_bottom = 42.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-text = "EXP:0"
+text = "EXP: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -98,35 +98,35 @@ text = "Seg: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="gold" type="Sprite2D" parent="."]
-position = Vector2(929, -12)
-scale = Vector2(0.493328, 0.534668)
-texture = ExtResource("3_6fi6k")
+[node name="deaths" type="Sprite2D" parent="."]
+position = Vector2(930, -6.00001)
+scale = Vector2(0.668538, 0.595459)
+texture = ExtResource("4_5pdws")
 
-[node name="gold_Label" type="Label" parent="."]
-offset_left = 950.0
+[node name="deaths_Label" type="Label" parent="."]
+offset_left = 949.0
 offset_top = -31.0
 offset_right = 1050.0
 offset_bottom = 14.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-text = "Gold: 0"
+text = "Deaths: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="wood" type="Sprite2D" parent="."]
-position = Vector2(932, 15)
-scale = Vector2(0.562501, 0.532715)
-texture = ExtResource("4_uo2fv")
+[node name="gold" type="Sprite2D" parent="."]
+position = Vector2(926, 21)
+scale = Vector2(0.441406, 0.477112)
+texture = ExtResource("3_6fi6k")
 
-[node name="wood_Label" type="Label" parent="."]
-offset_left = 952.0
-offset_top = 2.00003
-offset_right = 1069.0
-offset_bottom = 47.0
+[node name="gold_Label" type="Label" parent="."]
+offset_left = 941.0
+offset_top = 4.00003
+offset_right = 1058.0
+offset_bottom = 49.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-text = "Wood: 0"
+text = "Gold: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 

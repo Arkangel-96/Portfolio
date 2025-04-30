@@ -9,11 +9,13 @@ var hp : int
 var level : int
 var exp : int
 var gold : int
-var wood : int
+var wave : int
 var sec : int
 var min : int
-
 var max_enemies: int
+var deaths : int
+
+
 
 @onready var castle: CharacterBody2D = $Castle
 @onready var Seconds: Timer = $Seconds
@@ -30,18 +32,23 @@ func new_game():
 	level = 1
 	exp = 0
 	gold = 0
-	wood = 0
-	max_enemies = 9
+	wave = 1
+	max_enemies = 1
+	deaths = 0
 	sec = 0
 	min = 0
+	reset()
+	
+func reset():
 	player.reset()
 	get_tree().call_group("enemies", "queue_free")
 	get_tree().call_group("items", "queue_free")
 	$HUD/HP_Label.text = "HP: " + str(hp)
 	$HUD/Level_Label.text = "Level: " + str(level)
 	$HUD/EXP_Label.text = "EXP: " + str(exp)
+	$HUD/wave_Label.text = "Wave: " + str(wave)
+	$HUD/deaths_Label.text = "Deaths: " + str(deaths)
 	$HUD/gold_Label.text = "Gold: " + str(gold)
-	$HUD/wood_Label.text = "Wood: " + str(wood)
 	$HUD/Minutes.text = "Min:" + str(min)
 	$HUD/Seconds.text = "Sec:" + str(sec)
 	$GameOver.hide()	
@@ -52,17 +59,44 @@ func _on_seconds_timeout() -> void:
 	if sec >= 60:
 		sec = 0
 		min += 1
-	print("Min:" + str(min)," ", "Sec:" + str(sec))
+	#print("Min:" + str(min)," ", "Sec:" + str(sec))
 	$HUD/Minutes.text = "Min:" + str(min)
 	$HUD/Seconds.text = "Sec:" + str(sec)
 	#print(player.position)
+	
+func _process(delta: float) -> void:
+	if is_wave_completed():
+		wave += 1
+		get_tree().paused = true
+		$WaveOverTimer.start()
+		
+func _on_wave_over_timer_timeout() -> void:
+	reset()
+
+func is_wave_completed():
+	var all_dead : bool
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	print(all_dead)
+	if enemies.size() == max_enemies:
+		if enemies == []:
+			all_dead = true
+		else:
+			all_dead= false	
+	return all_dead
+
+		#for e in enemies:
+			#print(e.health_component.alive)
+			#if e.alive == false:
+				#deaths += 1
+
+
+
+
+
+
 
 
 ## SE SPAWNEAN EN UN CIRCULO ALREDEDOR DEL PLAYER##
-
-
-
-
 
 #func _on_enemy_spawner_timer_timeout() -> void:
 	#EnemySpawner.wait_time = 3
