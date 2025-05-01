@@ -123,6 +123,7 @@ radius = 16.0
 height = 56.0
 
 [node name="Goblin" type="CharacterBody2D"]
+process_mode = 3
 script = ExtResource("1_gsl6h")
 item = ExtResource("2_5qxdi")
 

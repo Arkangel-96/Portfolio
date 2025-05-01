@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=23 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scripts/world.gd" id="1_ro7oq"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://4f7hr03wouih" path="res://art/Terrain/Ground/Tilemap_Flat.png" id="4_hyhxd"]
 [ext_resource type="Script" uid="uid://c0al4yk1nsw35" path="res://scripts/path_spawner.gd" id="12_7c4bj"]
 [ext_resource type="PackedScene" uid="uid://tjtf1rx4w8sd" path="res://Menu.tscn" id="12_c0d7e"]
-[ext_resource type="PackedScene" uid="uid://c80vpfokabawi" path="res://scenes/PathSpawner.tscn" id="13_c0d7e"]
 [ext_resource type="PackedScene" uid="uid://dvsosrjwegtyh" path="res://scenes/Castle.tscn" id="13_i4b1j"]
 [ext_resource type="PackedScene" uid="uid://cpyutp7s05mx2" path="res://scenes/hud.tscn" id="13_nrtoj"]
 [ext_resource type="Script" uid="uid://1qaau3pog44s" path="res://scripts/arrow_manager.gd" id="14_rpuxp"]
@@ -425,8 +424,6 @@ script = ExtResource("12_7c4bj")
 
 [node name="Timer" type="Timer" parent="PathSpawner"]
 autostart = true
-
-[node name="Path2D" parent="PathSpawner" instance=ExtResource("13_c0d7e")]
 
 [node name="gem2" parent="." instance=ExtResource("15_dwmkc")]
 position = Vector2(2793, 2763)

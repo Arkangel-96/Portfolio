@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://duuojw554nq6j" path="res://art/UI/Ribbons/Ribbon_Yellow_Connection_Right.png" id="2_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://c7fbwyr12tqx7" path="res://art/Resources/Resources/G_Idle.png" id="3_6fi6k"]
 [ext_resource type="Texture2D" uid="uid://dlgepk5gjfpjh" path="res://art/UI/Banners/Banner_Vertical.png" id="3_uo2fv"]
-[ext_resource type="Texture2D" uid="uid://cdtijrhorcvi" path="res://art/Deco/14.png" id="4_5pdws"]
+[ext_resource type="Texture2D" uid="uid://bjus81st5h7pk" path="res://art/Deco/18.png" id="4_5pdws"]
 [ext_resource type="Texture2D" uid="uid://ko8oxfh44xsj" path="res://art/Deco/16.png" id="6_047uy"]
 [ext_resource type="PackedScene" uid="uid://cw0svke5vyjkt" path="res://inventory/Inv_UI.tscn" id="7_5pdws"]
 
@@ -23,7 +23,7 @@ transform = Transform2D(1, 0, 0, 1, 0, 670)
 [node name="Panel" type="Panel" parent="."]
 offset_left = 250.0
 offset_top = -64.0
-offset_right = 1379.0
+offset_right = 1407.0
 offset_bottom = 50.0
 scale = Vector2(0.76238, 1.04227)
 theme_override_styles/panel = SubResource("StyleBoxFlat_toqtt")
@@ -98,24 +98,24 @@ text = "Seg: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="deaths" type="Sprite2D" parent="."]
-position = Vector2(930, -6.00001)
-scale = Vector2(0.668538, 0.595459)
+[node name="enemies" type="Sprite2D" parent="."]
+position = Vector2(932, -8.99999)
+scale = Vector2(0.308227, 0.282104)
 texture = ExtResource("4_5pdws")
 
-[node name="deaths_Label" type="Label" parent="."]
+[node name="enemies_Label" type="Label" parent="."]
 offset_left = 949.0
 offset_top = -31.0
 offset_right = 1050.0
 offset_bottom = 14.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-text = "Deaths: 0"
+text = "Enemies: 10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="gold" type="Sprite2D" parent="."]
-position = Vector2(926, 21)
+position = Vector2(931, 22)
 scale = Vector2(0.441406, 0.477112)
 texture = ExtResource("3_6fi6k")
 
@@ -131,8 +131,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="wave" type="Sprite2D" parent="."]
-position = Vector2(930, -36.78)
-scale = Vector2(0.5, 0.418437)
+position = Vector2(930, -38.28)
+scale = Vector2(0.5, 0.395)
 texture = ExtResource("6_047uy")
 
 [node name="wave_Label" type="Label" parent="."]
@@ -147,7 +147,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Inv_UI" parent="." instance=ExtResource("7_5pdws")]
-offset_left = 727.0
-offset_top = -63.0
-offset_right = 812.0
-offset_bottom = -7.99997
+offset_left = 720.0
+offset_top = -60.0
+offset_right = 805.0
+offset_bottom = -4.99997

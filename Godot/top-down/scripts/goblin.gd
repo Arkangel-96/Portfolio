@@ -38,10 +38,10 @@ var item_type = randi_range(0,5)
 
 var	move_direction	
 var move
-
+var alive : bool
 
 func _ready() -> void:
-	self.add_to_group("enemies")
+	alive = true
 	health_component.death.connect(on_death)
 	if player:
 		player.attack_finished.connect(verify_receive_damage)
@@ -49,8 +49,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	get_parent().set_progress(get_parent().get_progress()+ move_speed*delta)
-	
-
+	if health_component.current_health <= 0:
+		alive = false
+	else:
+		alive = true
 
 	
 func _physics_process(delta: float) -> void: 

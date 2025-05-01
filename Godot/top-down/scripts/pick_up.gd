@@ -2,7 +2,7 @@ extends StaticBody2D
 
 @onready var player = get_node("/root/World/Player")
 @export var item:InvItem
-
+var alive = false
 
 func _on_interactable_area_body_entered(body):
 		if body is Player:
