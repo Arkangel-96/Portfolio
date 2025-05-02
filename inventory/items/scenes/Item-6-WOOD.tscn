@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bakdhttl8seec"]
+
+[ext_resource type="Script" uid="uid://cibqfgq6ma5bw" path="res://scripts/pick_up.gd" id="1_mfrkn"]
+[ext_resource type="Resource" uid="uid://crr86tkewknk0" path="res://inventory/items/resources/Item-6-WOOD.tres" id="2_qbvte"]
+[ext_resource type="Texture2D" uid="uid://bsldrxbasu680" path="res://art/Resources/Resources/W_Idle.png" id="3_gkvto"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oa5d8"]
+radius = 19.0263
+
+[node name="wood" type="StaticBody2D"]
+script = ExtResource("1_mfrkn")
+item = ExtResource("2_qbvte")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -21)
+texture = ExtResource("3_gkvto")
+
+[node name="interactable_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactable_area"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_oa5d8")
+
+[connection signal="body_entered" from="interactable_area" to="." method="_on_interactable_area_body_entered"]
