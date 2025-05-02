@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgpwvnqn3cu1h"]
+
+[ext_resource type="Script" uid="uid://b475nw0o4la7" path="res://inventory/Inv_UI_slot.gd" id="1_qmjnm"]
+[ext_resource type="Texture2D" uid="uid://dlthmhnv0gl7a" path="res://art/UI/Buttons/Button_Disable_9Slides.png" id="1_v1sy0"]
+
+[node name="Inv_UI_slot" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(24, 22)
+offset_right = 24.0
+offset_bottom = 22.0
+script = ExtResource("1_qmjnm")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(0, 2.38419e-07)
+scale = Vector2(0.130208, 0.119792)
+texture = ExtResource("1_v1sy0")
+centered = false
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(24, 22)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 30.0
+offset_bottom = 27.0
+scale = Vector2(0.5, 0.5)
