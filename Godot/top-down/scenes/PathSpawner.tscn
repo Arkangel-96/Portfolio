@@ -4,17 +4,15 @@
 
 [sub_resource type="Curve2D" id="Curve2D_sqppf"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 152, 2548, 0, 0, 0, 0, 393, 2479, 0, 0, 0, 0, 593, 2497, 0, 0, 0, 0, 825, 2431, 0, 0, 0, 0, 997, 2397, 0, 0, 0, 0, 1132, 2352, 0, 0, 0, 0, 1205, 2324, 0, 0, 0, 0, 1363, 2286, 0, 0, 0, 0, 1388, 2362, 0, 0, 0, 0, 1622, 2245, 0, 0, 0, 0, 1733, 2445, 0, 0, 0, 0, 1878, 2476, 0, 0, 0, 0, 2071, 2514, 0, 0, 0, 0, 2213, 2542, 0, 0, 0, 0, 2285, 2517, 0, 0, 0, 0, 2320, 2452, 0, 0, 0, 0, 2385, 2403, 0, 0, 0, 0, 2510, 2365)
+"points": PackedVector2Array(0, 0, 0, 0, 51, 2485, 0, 0, 0, 0, 393, 2479, 0, 0, 0, 0, 593, 2497, 0, 0, 0, 0, 825, 2431, 0, 0, 0, 0, 1132, 2352, 0, 0, 0, 0, 1180, 2081, 0, 0, 0, 0, 1198, 1936, 0, 0, 0, 0, 1300, 1762, 0, 0, 0, 0, 1476, 1519, 0, 0, 0, 0, 1570, 1426, 0, 0, 0, 0, 1648, 1285, 0, 0, 0, 0, 1787, 1238, 0, 0, 0, 0, 2061, 1111, 0, 0, 0, 0, 2130, 974, 0, 0, 0, 0, 2327, 858, 0, 0, 0, 0, 2499, 855)
 }
-point_count = 18
+point_count = 16
 
 [node name="Path2D" type="Path2D"]
-y_sort_enabled = true
 curve = SubResource("Curve2D_sqppf")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(152, 2548)
+position = Vector2(266, 2609)
 rotates = false
-cubic_interp = false
 
 [node name="Goblin" parent="PathFollow2D" instance=ExtResource("1_1dods")]

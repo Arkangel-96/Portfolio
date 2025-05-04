@@ -6,6 +6,8 @@ class_name tower extends Player
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var arrow_manager: Node = $arrowManager
 
+@onready var atk = $AudioStreamPlayerATK
+
 var ARROW = preload("res://scenes/Arrow.tscn")
 
 var targets = []
@@ -49,7 +51,7 @@ func _on_tower_body_entered(body: Node2D) -> void:
 		#tempArrow.arrowDamage = arrowDamage
 		get_node("arrowManager").add_child(tempArrow)
 		tempArrow.global_position = $Aim.global_position
-	
+		atk.play()
 		
 		#tempArrow.target = tempArray[0].position
 	

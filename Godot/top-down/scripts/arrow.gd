@@ -10,7 +10,7 @@ extends CharacterBody2D
 var target : Vector2
 var speed = 1000
 var pathName = ""
-var arrowDamage = 10
+var arrowDamage = 20
 var enemy
 
 func _physics_process(delta):

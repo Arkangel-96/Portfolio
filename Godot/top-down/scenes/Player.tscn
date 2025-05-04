@@ -1,8 +1,11 @@
-[gd_scene load_steps=62 format=3 uid="uid://c4kqxardye58q"]
+[gd_scene load_steps=65 format=3 uid="uid://c4kqxardye58q"]
 
 [ext_resource type="Script" uid="uid://dcmg4jautpp6a" path="res://scripts/hero.gd" id="1_3li8b"]
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
 [ext_resource type="Resource" uid="uid://bmgljhqwu2j14" path="res://inventory/player/player_Inv.tres" id="2_mdl7e"]
+[ext_resource type="AudioStream" uid="uid://io4tvoxefi7r" path="res://Minifantasy_Dungeon_SFX/07_human_atk_sword_1.wav" id="4_qu4a1"]
+[ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://Minifantasy_Dungeon_SFX/07_human_atk_sword_2.wav" id="5_70d11"]
+[ext_resource type="AudioStream" uid="uid://bd8n2dr2xsrg5" path="res://Minifantasy_Dungeon_SFX/02_chest_close_3.wav" id="6_70d11"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6iful"]
 atlas = ExtResource("1_4kcxx")
@@ -465,6 +468,7 @@ debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
+zoom = Vector2(0.33, 0.33)
 
 [node name="Area_L&R" type="Area2D" parent="."]
 
@@ -483,6 +487,18 @@ debug_color = Color(0.946605, 0.174212, 0.39312, 0.42)
 [node name="BoostTimer" type="Timer" parent="."]
 wait_time = 6.0
 one_shot = true
+
+[node name="AudioStreamPlayerATK-1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_qu4a1")
+volume_db = -4.0
+
+[node name="AudioStreamPlayerATK-2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_70d11")
+volume_db = -4.0
+
+[node name="AudioStreamPlayerPickUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_70d11")
+volume_db = -4.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area_L&R" to="." method="_on_area_lr_body_entered"]

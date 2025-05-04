@@ -1,10 +1,14 @@
-extends Player
+class_name Hero extends Player
 
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
 @onready var player: CharacterBody2D = $"."
 
 @export var inv : Inv
 @onready var game_over: CanvasLayer = $"../GameOver"
+
+@onready var atk_1 = $"AudioStreamPlayerATK-1"
+@onready var atk_2 = $"AudioStreamPlayerATK-2"
+@onready var pick_up = $"AudioStreamPlayerPickUp"
 
 signal shoot
 signal attack_finished
@@ -30,7 +34,7 @@ func _ready() -> void:
 	reset()
 
 func reset():
-	position = screen_size * 2.5
+	position = screen_size * 2
 	move_speed = START_SPEED
 	print(inv)
 			
@@ -69,6 +73,7 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				attack_1()
+				
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:
 				attack_2()		
@@ -77,7 +82,7 @@ func _input(event: InputEvent) -> void:
 				#shoot.emit(position,dir)
 func collect(item):
 	inv.insert(item)
-	
+	pick_up.play()
 		
 func attack_1():
 	attack_damage = 100
@@ -133,22 +138,23 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	
 	if sprite_animation.animation == "attack_1":
 		sprite_animation.play("idle_L&R")
-	
+		atk_1.play()
 	if sprite_animation.animation == "attack_down_1":
 		sprite_animation.play("idle_down")
-	
+		atk_1.play()
 	if sprite_animation.animation == "attack_up_1":
 		sprite_animation.play("idle_up")
-	
+		atk_1.play()
 	if sprite_animation.animation == "attack_2":
 		sprite_animation.play("idle_L&R")
-		
+		atk_2.play()
 	if sprite_animation.animation == "attack_down_2":
 		sprite_animation.play("idle_down")
-	
+		atk_2.play()
 	if sprite_animation.animation == "attack_up_2":
 		sprite_animation.play("idle_up")
-
+		atk_2.play()
+		
 func boost():
 	$BoostTimer.start()
 	move_speed = BOOST_SPEED

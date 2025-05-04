@@ -1,7 +1,7 @@
 
 class_name Enemy extends CharacterBody2D
 
-var move_speed:= 200
+var move_speed= randi_range(200,250)
 var attack_damage:= 0
 var is_attack:= false
 var in_attack_Player_range := false
@@ -34,11 +34,13 @@ var item_type = randi_range(0,5)
 
 @export var item: InvItem
 @export var target : Vector2
+@onready var atk = $AudioStreamPlayerATK
 
 
 var	move_direction	
 var move
 var alive : bool
+var	incoming = true
 
 func _ready() -> void:
 	alive = true
@@ -74,6 +76,7 @@ func attack():
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite_animation.animation == "attack":
+		atk.play()
 		world.hp -= attack_damage
 		#print(world.hp)
 		HP_label.text = "HP: " +str(world.hp)
@@ -118,6 +121,7 @@ func on_death():
 	queue_free()
 	
 func drop_item(): 
+	
 	var item = drop[item_type].instantiate()
 	var random_angle: float = randf() * PI * 2
 	var spawn_distance: float = randf_range(0,90)
@@ -134,15 +138,18 @@ func drop_item():
 	
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
-	if body is Player :	
+	if body is Castle:	
 		move_speed =0
 		attack()
-	
+		incoming = false
+	elif body is Hero:
+		move_speed =0
+		attack()
 		
 
 
 func _on_area_attack_body_exited(body: Node2D) -> void:
-	if body is  Player :
+	if (body is Hero) and incoming :
 		move_speed = 200
 		is_attack = false
 
