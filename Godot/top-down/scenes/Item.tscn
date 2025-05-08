@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b1dea52mn4x4n"]
 
-[ext_resource type="Script" uid="uid://rm7qc3tplp07" path="res://scripts/item.gd" id="1_bx46p"]
+[ext_resource type="Script" uid="uid://rm7qc3tplp07" path="res://scripts/elemento.gd" id="1_bx46p"]
 [ext_resource type="Texture2D" uid="uid://clr2337pnk36m" path="res://art/Deco/02.png" id="1_j3wwg"]
 [ext_resource type="Resource" uid="uid://cne25q0fw1pvs" path="res://inventory/items/resources/Item-4-LEAVES.tres" id="2_h0yph"]
 

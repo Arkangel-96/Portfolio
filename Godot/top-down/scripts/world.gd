@@ -59,10 +59,10 @@ func is_wave_completed():
 	if enemies.size() == max_enemies:
 		for e in enemies:
 			if e.get_child(0).get_child(0):
-				print(e.get_child(0).get_child(0))
+				#wprint(e.get_child(0).get_child(0))
 				all_dead = false		
-			elif e.get_child(0).get_child(0):
-				print(e.get_child(0).get_child(0))
+			#elif e.get_child(0).get_child(0):
+				#print(e.get_child(0).get_child(0))
 			elif e == null:
 				all_dead = true
 				

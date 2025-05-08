@@ -1,11 +1,13 @@
-[gd_scene load_steps=65 format=3 uid="uid://c4kqxardye58q"]
+[gd_scene load_steps=67 format=3 uid="uid://c4kqxardye58q"]
 
 [ext_resource type="Script" uid="uid://dcmg4jautpp6a" path="res://scripts/hero.gd" id="1_3li8b"]
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
 [ext_resource type="Resource" uid="uid://bmgljhqwu2j14" path="res://inventory/player/player_Inv.tres" id="2_mdl7e"]
-[ext_resource type="AudioStream" uid="uid://io4tvoxefi7r" path="res://Minifantasy_Dungeon_SFX/07_human_atk_sword_1.wav" id="4_qu4a1"]
-[ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://Minifantasy_Dungeon_SFX/07_human_atk_sword_2.wav" id="5_70d11"]
-[ext_resource type="AudioStream" uid="uid://bd8n2dr2xsrg5" path="res://Minifantasy_Dungeon_SFX/02_chest_close_3.wav" id="6_70d11"]
+[ext_resource type="Script" uid="uid://cdbicm6s5jqyb" path="res://Items/inventory.gd" id="4_cw2d6"]
+[ext_resource type="AudioStream" uid="uid://io4tvoxefi7r" path="res://sound/SFX/07_human_atk_sword_1.wav" id="4_qu4a1"]
+[ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://sound/SFX/07_human_atk_sword_2.wav" id="5_70d11"]
+[ext_resource type="AudioStream" uid="uid://bd8n2dr2xsrg5" path="res://sound/SFX/02_chest_close_3.wav" id="6_70d11"]
+[ext_resource type="Script" uid="uid://1kc3agbiw7da" path="res://Items/inventory_ui.gd" id="8_bruh7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6iful"]
 atlas = ExtResource("1_4kcxx")
@@ -446,7 +448,7 @@ height = 32.0
 size = Vector2(98.0782, 76.125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mdl7e"]
-size = Vector2(90, 93)
+size = Vector2(90, 53.5)
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -468,11 +470,11 @@ debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
-zoom = Vector2(0.33, 0.33)
 
-[node name="Area_L&R" type="Area2D" parent="."]
+[node name="INV_L&R" type="Area2D" parent="."]
+script = ExtResource("4_cw2d6")
 
-[node name="CollisionLeft&Right" type="CollisionShape2D" parent="Area_L&R"]
+[node name="CollisionLeft&Right" type="CollisionShape2D" parent="INV_L&R"]
 position = Vector2(50, 0)
 shape = SubResource("RectangleShape2D_3cqap")
 debug_color = Color(0.0806216, 0.167996, 0.49673, 0.42)
@@ -480,7 +482,7 @@ debug_color = Color(0.0806216, 0.167996, 0.49673, 0.42)
 [node name="Area_U&D" type="Area2D" parent="."]
 
 [node name="CollisionUp&Down" type="CollisionShape2D" parent="Area_U&D"]
-position = Vector2(0, -47)
+position = Vector2(0, -66.75)
 shape = SubResource("RectangleShape2D_mdl7e")
 debug_color = Color(0.946605, 0.174212, 0.39312, 0.42)
 
@@ -500,9 +502,29 @@ volume_db = -4.0
 stream = ExtResource("6_70d11")
 volume_db = -4.0
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InventoryUI" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_top = -50.0
+offset_right = 79.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("8_bruh7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryUI"]
+layout_mode = 2
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="body_entered" from="Area_L&R" to="." method="_on_area_lr_body_entered"]
-[connection signal="body_exited" from="Area_L&R" to="." method="_on_area_lr_body_exited"]
+[connection signal="area_entered" from="INV_L&R" to="INV_L&R" method="_on_area_entered"]
+[connection signal="body_entered" from="INV_L&R" to="." method="_on_inv_lr_body_entered"]
+[connection signal="body_exited" from="INV_L&R" to="." method="_on_inv_lr_body_exited"]
+[connection signal="item_added" from="INV_L&R" to="CanvasLayer/InventoryUI" method="_on_inv_lr_item_added"]
 [connection signal="body_entered" from="Area_U&D" to="." method="_on_area_ud_body_entered"]
 [connection signal="body_exited" from="Area_U&D" to="." method="_on_area_ud_body_exited"]
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]

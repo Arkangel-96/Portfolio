@@ -51,7 +51,7 @@ func movement():
 			sprite_animation.play("run")
 			if move_direction.x != 0 :
 				sprite_animation.flip_h = move_direction.x < 0
-				$"Area_L&R".scale.x = -1 if move_direction.x < 0 else 1
+				$"INV_L&R".scale.x = -1 if move_direction.x < 0 else 1
 		elif !down and !up and (Input.is_action_just_released("ui_left") or Input.is_action_just_released("ui_right")): 
 			velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 			sprite_animation.play("idle_L&R")
@@ -165,13 +165,12 @@ func _on_boost_timer_timeout() -> void:
 	
 
 
-func _on_area_lr_body_entered(body: Node2D) -> void:
-	
+func _on_inv_lr_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = true
-
-
-func _on_area_lr_body_exited(body: Node2D) -> void:
+	
+	
+func _on_inv_lr_body_exited(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = false
 
