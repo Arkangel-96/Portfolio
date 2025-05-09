@@ -448,7 +448,7 @@ height = 32.0
 size = Vector2(98.0782, 76.125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mdl7e"]
-size = Vector2(90, 53.5)
+size = Vector2(101, 93.5)
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -482,7 +482,7 @@ debug_color = Color(0.0806216, 0.167996, 0.49673, 0.42)
 [node name="Area_U&D" type="Area2D" parent="."]
 
 [node name="CollisionUp&Down" type="CollisionShape2D" parent="Area_U&D"]
-position = Vector2(0, -66.75)
+position = Vector2(0.5, -46.75)
 shape = SubResource("RectangleShape2D_mdl7e")
 debug_color = Color(0.946605, 0.174212, 0.39312, 0.42)
 
@@ -525,6 +525,8 @@ layout_mode = 2
 [connection signal="body_entered" from="INV_L&R" to="." method="_on_inv_lr_body_entered"]
 [connection signal="body_exited" from="INV_L&R" to="." method="_on_inv_lr_body_exited"]
 [connection signal="item_added" from="INV_L&R" to="CanvasLayer/InventoryUI" method="_on_inv_lr_item_added"]
+[connection signal="item_consumed" from="INV_L&R" to="CanvasLayer/InventoryUI" method="_on_inv_lr_item_consumed"]
 [connection signal="body_entered" from="Area_U&D" to="." method="_on_area_ud_body_entered"]
 [connection signal="body_exited" from="Area_U&D" to="." method="_on_area_ud_body_exited"]
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]
+[connection signal="inventory_item_ui_selected" from="CanvasLayer/InventoryUI" to="INV_L&R" method="_on_inventory_ui_inventory_item_ui_selected"]
