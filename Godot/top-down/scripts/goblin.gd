@@ -2,22 +2,25 @@
 class_name Enemy extends CharacterBody2D
 
 var move_speed= randi_range(200,250)
-var attack_damage:= 5
+var attack_damage:= 0
 var is_attack:= false
 var in_attack_Player_range := false
 
-var ITEM_1_GEM = preload("res://inventory/items/scenes/Item-1-GEM.tscn")
-var ITEM_2_MUSH = preload("res://inventory/items/scenes/Item-2-MUSH.tscn")
-var ITEM_3_PUMP = preload("res://inventory/items/scenes/Item-3-PUMP.tscn")
-var ITEM_4_LEAVES = preload("res://inventory/items/scenes/Item-4-LEAVES.tscn")
-var ITEM_5_GOLD = preload("res://inventory/items/scenes/Item-5-GOLD.tscn")
-var ITEM_6_WOOD = preload("res://inventory/items/scenes/Item-6-WOOD.tscn")
-var ITEM = preload("res://scenes/Item.tscn")
+var GEM = preload("res://Items/scenes/Item-1-GEM.tscn")
+var MUSH = preload("res://Items/scenes/Item-2-MUSH.tscn")
+var PUMP = preload("res://Items/scenes/Item-3-PUMP.tscn")
+var LEAVES = preload("res://Items/scenes/Item-4-LEAVES.tscn")
+var GOLD = preload("res://Items/scenes/Item-5-GOLD.tscn")
+var WOOD = preload("res://Items/scenes/Item-6-WOOD.tscn")
+
+var drop = [GEM,MUSH,PUMP,LEAVES,GOLD,WOOD]
+var item_type = randi_range(0,5)
+
 var EXPLOSION = preload("res://scenes/Explosion.tscn")
 
+var ITEM = preload("res://Items/Item.tscn")
 
-var drop = [ITEM_1_GEM,ITEM_2_MUSH,ITEM_3_PUMP,ITEM_4_LEAVES,ITEM_5_GOLD,ITEM_6_WOOD]
-var item_type = randi_range(0,5)
+
 
 @onready var world = get_node("/root/World")
 @onready var HP_label = get_node("/root/World/HUD/HP_Label")

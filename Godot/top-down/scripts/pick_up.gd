@@ -4,11 +4,11 @@ extends StaticBody2D
 @export var item:InvItem
 var alive = false
 
-func _on_interactable_area_body_entered(body):
-		if body is Player:
-			player.collect(item)
-			queue_free()
-		
+#func _on_interactable_area_body_entered(body):
+		#if body is Player:
+			#player.collect(item)
+			#queue_free()
+		#
 
 	
 #

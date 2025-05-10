@@ -18,12 +18,14 @@ func add_item_to_inventory(item: Item):
 		inventory[item.type] = inventory[item.type] + 1
 	item_added.emit(item, inventory[item.type])
 	prints("Has recogido el objeto de tipo", Item.ItemType.keys()[item.type], "ahora tienes:", inventory[item.type])
-
+	print(inventory)
+	
 func consume_item_from_inventory(item_type:Item.ItemType):
 	if inventory.has(item_type):
 		inventory[item_type] = inventory[item_type] - 1
 		item_consumed.emit(item_type, inventory[item_type])
 		prints("Has consumido el objeto de tipo", Item.ItemType.keys()[item_type], "ahora tienes:", inventory[item_type])
+		print(inventory)
 		if inventory[item_type] <=0: inventory.erase(item_type)
 
 

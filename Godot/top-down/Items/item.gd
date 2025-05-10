@@ -1,17 +1,15 @@
 @tool
 class_name Item extends Area2D
 
-@export var texture:CompressedTexture2D:
-	set(value):
-		texture = value
-		$Sprite2D.texture = value
-
-
-enum ItemType {MUSHROOM, GEM, COCA, PUMPKIN, GOLD, WOOD}
+#d
 
 @export var type: ItemType
 
 		
+
+enum ItemType {MUSHROOM, GEM, COCA, PUMPKIN, GOLD, WOOD}
+
+
 func collect_item():
 	queue_free()
 

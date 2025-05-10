@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjdac0liiglj6"]
+
+[ext_resource type="Script" uid="uid://d2q4b6dc3dker" path="res://Items/item.gd" id="1_jp2ym"]
+[ext_resource type="Texture2D" uid="uid://c7fbwyr12tqx7" path="res://art/Resources/Resources/G_Idle.png" id="3_2syit"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oa5d8"]
+radius = 13.6015
+
+[node name="gold" type="Area2D"]
+script = ExtResource("1_jp2ym")
+type = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3, -17)
+texture = ExtResource("3_2syit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_oa5d8")

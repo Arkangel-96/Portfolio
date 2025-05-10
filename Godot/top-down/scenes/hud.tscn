@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpyutp7s05mx2"]
+[gd_scene load_steps=8 format=3 uid="uid://cpyutp7s05mx2"]
 
 [ext_resource type="Texture2D" uid="uid://c2mk7abve4gru" path="res://art/UI/Ribbons/Ribbon_Red_Connection_Left.png" id="1_ahhtf"]
 [ext_resource type="Texture2D" uid="uid://duuojw554nq6j" path="res://art/UI/Ribbons/Ribbon_Yellow_Connection_Right.png" id="2_uo2fv"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://dlgepk5gjfpjh" path="res://art/UI/Banners/Banner_Vertical.png" id="3_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://bjus81st5h7pk" path="res://art/Deco/18.png" id="4_5pdws"]
 [ext_resource type="Texture2D" uid="uid://ko8oxfh44xsj" path="res://art/Deco/16.png" id="6_047uy"]
-[ext_resource type="PackedScene" uid="uid://cw0svke5vyjkt" path="res://inventory/Inv_UI.tscn" id="7_5pdws"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toqtt"]
 bg_color = Color(0.623529, 0.701961, 0.443137, 0.980392)
@@ -145,9 +144,3 @@ theme_override_font_sizes/font_size = 30
 text = "Wave : 10"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Inv_UI" parent="." instance=ExtResource("7_5pdws")]
-offset_left = 720.0
-offset_top = -60.0
-offset_right = 805.0
-offset_bottom = -4.99997

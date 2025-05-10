@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://c4kqxardye58q"]
+[gd_scene load_steps=69 format=3 uid="uid://c4kqxardye58q"]
 
 [ext_resource type="Script" uid="uid://dcmg4jautpp6a" path="res://scripts/hero.gd" id="1_3li8b"]
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://sound/SFX/07_human_atk_sword_2.wav" id="5_70d11"]
 [ext_resource type="AudioStream" uid="uid://bd8n2dr2xsrg5" path="res://sound/SFX/02_chest_close_3.wav" id="6_70d11"]
 [ext_resource type="Script" uid="uid://1kc3agbiw7da" path="res://Items/inventory_ui.gd" id="8_bruh7"]
+[ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="9_bruh7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6iful"]
 atlas = ExtResource("1_4kcxx")
@@ -444,8 +445,11 @@ animations = [{
 radius = 16.0
 height = 32.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_khinc"]
+radius = 16.0312
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3cqap"]
-size = Vector2(98.0782, 76.125)
+size = Vector2(94.0391, 76.125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mdl7e"]
 size = Vector2(101, 93.5)
@@ -464,18 +468,23 @@ frame = 5
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 9)
+position = Vector2(3, 9)
 shape = SubResource("CapsuleShape2D_ixa2j")
 debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 
-[node name="INV_L&R" type="Area2D" parent="."]
+[node name="INV" type="Area2D" parent="."]
 script = ExtResource("4_cw2d6")
 
-[node name="CollisionLeft&Right" type="CollisionShape2D" parent="INV_L&R"]
-position = Vector2(50, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="INV"]
+position = Vector2(3, 9)
+shape = SubResource("CircleShape2D_khinc")
+
+[node name="Area_L&R" type="Area2D" parent="."]
+
+[node name="CollisionLeft&Right" type="CollisionShape2D" parent="Area_L&R"]
+position = Vector2(46.9804, 0)
 shape = SubResource("RectangleShape2D_3cqap")
 debug_color = Color(0.0806216, 0.167996, 0.49673, 0.42)
 
@@ -505,28 +514,38 @@ volume_db = -4.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="InventoryUI" type="PanelContainer" parent="CanvasLayer"]
-anchors_preset = 7
-anchor_left = 0.5
+custom_minimum_size = Vector2(72, 55)
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -79.0
-offset_top = -50.0
-offset_right = 79.0
-grow_horizontal = 2
+offset_left = 708.0
+offset_top = -111.0
+offset_right = 808.0
+offset_bottom = -56.0
 grow_vertical = 0
+scale = Vector2(1.754, 2)
 script = ExtResource("8_bruh7")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryUI"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/InventoryUI"]
 layout_mode = 2
+texture = ExtResource("9_bruh7")
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/InventoryUI/NinePatchRect"]
+layout_mode = 0
+offset_left = 10.2623
+offset_top = 2.0
+offset_right = 50.2623
+offset_bottom = 42.0
+scale = Vector2(0.5, 0.5)
+columns = 3
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="area_entered" from="INV_L&R" to="INV_L&R" method="_on_area_entered"]
-[connection signal="body_entered" from="INV_L&R" to="." method="_on_inv_lr_body_entered"]
-[connection signal="body_exited" from="INV_L&R" to="." method="_on_inv_lr_body_exited"]
-[connection signal="item_added" from="INV_L&R" to="CanvasLayer/InventoryUI" method="_on_inv_lr_item_added"]
-[connection signal="item_consumed" from="INV_L&R" to="CanvasLayer/InventoryUI" method="_on_inv_lr_item_consumed"]
+[connection signal="area_entered" from="INV" to="INV" method="_on_area_entered"]
+[connection signal="item_added" from="INV" to="CanvasLayer/InventoryUI" method="_on_inv_item_added"]
+[connection signal="item_consumed" from="INV" to="CanvasLayer/InventoryUI" method="_on_inv_item_consumed"]
+[connection signal="body_entered" from="Area_L&R" to="." method="_on_area_lr_body_entered"]
+[connection signal="body_exited" from="Area_L&R" to="." method="_on_area_lr_body_exited"]
 [connection signal="body_entered" from="Area_U&D" to="." method="_on_area_ud_body_entered"]
 [connection signal="body_exited" from="Area_U&D" to="." method="_on_area_ud_body_exited"]
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]
-[connection signal="inventory_item_ui_selected" from="CanvasLayer/InventoryUI" to="INV_L&R" method="_on_inventory_ui_inventory_item_ui_selected"]
+[connection signal="inventory_item_ui_selected" from="CanvasLayer/InventoryUI" to="INV" method="_on_inventory_ui_inventory_item_ui_selected"]
