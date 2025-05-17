@@ -407,7 +407,6 @@ visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_nthub")
-autoplay = true
 
 [node name="Trees" type="TileMapLayer" parent="."]
 y_sort_enabled = true

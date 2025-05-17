@@ -40,7 +40,7 @@ func _on_tower_body_entered(body: Node2D) -> void:
 				target = i.get_node("../")	
 				#print(target)
 			else:
-				if i.get_parent().get_progress() < target.get_progress():
+				if i.get_parent().get_progress() > target.get_progress():
 					target = i.get_node("../")
 					#print(target)
 		

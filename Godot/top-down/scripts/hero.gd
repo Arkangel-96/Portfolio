@@ -8,7 +8,7 @@ class_name Hero extends Player
 
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
 @onready var atk_2 = $"AudioStreamPlayerATK-2"
-@onready var pick_up = $"AudioStreamPlayerPickUp"
+
 
 signal shoot
 signal attack_finished
@@ -74,15 +74,14 @@ func _input(event: InputEvent) -> void:
 			if event.pressed:
 				attack_1()
 				
-		if event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.button_index == MOUSE_BUTTON_RIGHT: 
 			if event.pressed:
 				attack_2()		
 				
 				#var dir = get_global_mouse_position() - position
 				#shoot.emit(position,dir)
-func collect(item):
-	inv.insert(item)
-	pick_up.play()
+
+	
 		
 func attack_1():
 	attack_damage = 100

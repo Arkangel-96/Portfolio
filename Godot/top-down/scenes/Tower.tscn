@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bkfd3kgfelknf" path="res://scripts/tower.gd" id="1_6dv47"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://components/health_component.tscn" id="2_6dv47"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://components/health_component.gd" id="3_6pmem"]
-[ext_resource type="AudioStream" uid="uid://1cwvtpdyahd" path="res://Minifantasy_Dungeon_SFX/15_human_dash_2.wav" id="5_6pmem"]
+[ext_resource type="AudioStream" uid="uid://1cwvtpdyahd" path="res://sound/SFX/15_human_dash_2.wav" id="5_6pmem"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngr70"]
 radius = 36.0

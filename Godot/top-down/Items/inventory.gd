@@ -1,8 +1,10 @@
 extends Area2D
 
+@onready var pick_up: AudioStreamPlayer = $"../AudioStreamPlayerPickUp"
+@onready var use: AudioStreamPlayer = $"../AudioStreamPlayerUse"
+
 signal item_added(item:Item, quantity:int)
 signal item_consumed(item_type:Item.ItemType, quantity_left:int)
-
 var inventory = {} ## ESENCIAL ##
 
 func _on_area_entered(area: Area2D) -> void:
@@ -12,6 +14,7 @@ func _on_area_entered(area: Area2D) -> void:
 		area.collect_item()	
 
 func add_item_to_inventory(item: Item):
+	pick_up.play()
 	if not inventory.has(item.type):
 		inventory[item.type] = 1
 	else:
@@ -21,6 +24,7 @@ func add_item_to_inventory(item: Item):
 	print(inventory)
 	
 func consume_item_from_inventory(item_type:Item.ItemType):
+	use.play()
 	if inventory.has(item_type):
 		inventory[item_type] = inventory[item_type] - 1
 		item_consumed.emit(item_type, inventory[item_type])
