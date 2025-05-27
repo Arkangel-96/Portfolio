@@ -4,6 +4,7 @@ signal inventory_item_ui_selected(item_type:Item.ItemType)
 
 #@onready var h_box_container: HBoxContainer = $HBoxContainer
 @onready var grid_container: GridContainer = $NinePatchRect/GridContainer
+@onready var world = get_node("/root/World")
 
 const INVENTORY_ITEM_UI = preload("res://Items/Inventory_Item_UI.tscn")
 
@@ -35,3 +36,4 @@ func _on_inv_item_consumed(item_type: Item.ItemType, quantity_left: int) -> void
 			existing_node.set_quantity(quantity_left)
 		else:
 			existing_node.queue_free()	
+		world.gold += 10

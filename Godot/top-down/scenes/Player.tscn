@@ -1,8 +1,7 @@
-[gd_scene load_steps=70 format=3 uid="uid://c4kqxardye58q"]
+[gd_scene load_steps=69 format=3 uid="uid://c4kqxardye58q"]
 
 [ext_resource type="Script" uid="uid://dcmg4jautpp6a" path="res://scripts/hero.gd" id="1_3li8b"]
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
-[ext_resource type="Resource" uid="uid://bmgljhqwu2j14" path="res://inventory/player/player_Inv.tres" id="2_mdl7e"]
 [ext_resource type="Script" uid="uid://cdbicm6s5jqyb" path="res://Items/inventory.gd" id="4_cw2d6"]
 [ext_resource type="AudioStream" uid="uid://io4tvoxefi7r" path="res://sound/SFX/07_human_atk_sword_1.wav" id="4_qu4a1"]
 [ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://sound/SFX/07_human_atk_sword_2.wav" id="5_70d11"]
@@ -458,15 +457,13 @@ size = Vector2(101, 93.5)
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_3li8b")
-inv = ExtResource("2_mdl7e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_gp031")
-animation = &"attack_down_1"
+animation = &"idle_L&R"
 autoplay = "idle_L&R"
-frame = 5
-frame_progress = 1.0
+frame_progress = 0.0386027
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 9)
@@ -474,7 +471,6 @@ shape = SubResource("CapsuleShape2D_ixa2j")
 debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.33, 0.33)
 
 [node name="INV" type="Area2D" parent="."]
 script = ExtResource("4_cw2d6")

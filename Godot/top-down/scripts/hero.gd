@@ -3,7 +3,7 @@ class_name Hero extends Player
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
 @onready var player: CharacterBody2D = $"."
 
-@export var inv : Inv
+
 @onready var game_over: CanvasLayer = $"../GameOver"
 
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
@@ -36,7 +36,7 @@ func _ready() -> void:
 func reset():
 	position = screen_size * 2
 	move_speed = START_SPEED
-	print(inv)
+	
 			
 func _physics_process(delta: float) -> void:
 	movement()

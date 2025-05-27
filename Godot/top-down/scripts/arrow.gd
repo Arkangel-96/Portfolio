@@ -10,7 +10,7 @@ extends CharacterBody2D
 var target : Vector2
 var speed = 1000
 var pathName = ""
-var arrowDamage = 20
+var arrowDamage = 30
 var enemy
 
 func _physics_process(delta):
@@ -20,13 +20,16 @@ func _physics_process(delta):
 	for i in pathSpawnerNode.get_child_count():
 		if pathSpawnerNode.get_child(i).name == pathName:
 			enemy = pathSpawnerNode.get_child(i).get_child(0).get_child(0)
-			#print(enemy)
+			print(enemy)
 			if enemy != null:
 				target = enemy.global_position	
 				velocity = global_position.direction_to(target) * speed  
 				look_at(target)
 				move_and_slide()
-			elif enemy == null:
+				if enemy is Area2D:
+					queue_free()
+					
+			elif enemy == null:  #
 				queue_free()
 			#for x in get_node("arrowManager").get_child_count():
 				#get_node("arrowManager").get_child(x).queue_free()

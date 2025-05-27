@@ -12,7 +12,7 @@ point_count = 16
 curve = SubResource("Curve2D_sqppf")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(266, 2609)
+position = Vector2(51, 2485)
 rotates = false
 
 [node name="Goblin" parent="PathFollow2D" instance=ExtResource("1_1dods")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=35 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scripts/world.gd" id="1_ro7oq"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://c4jcqcnikg68j" path="res://Items/scenes/Item-4-LEAVES.tscn" id="25_aqlsr"]
 [ext_resource type="PackedScene" uid="uid://cjdac0liiglj6" path="res://Items/scenes/Item-5-GOLD.tscn" id="26_n2fr6"]
 [ext_resource type="PackedScene" uid="uid://bakdhttl8seec" path="res://Items/scenes/Item-6-WOOD.tscn" id="27_128ka"]
+[ext_resource type="PackedScene" uid="uid://0yh2nx8jlj8f" path="res://scenes/Pawn.tscn" id="28_uni40"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8th0u"]
 texture = ExtResource("4_bovj0")
@@ -427,14 +428,14 @@ tile_set = SubResource("TileSet_h08up")
 position = Vector2(2500, 800)
 
 [node name="Tower" parent="." instance=ExtResource("16_o1tcx")]
-position = Vector2(1744, 1611)
+position = Vector2(1754, 1110)
 scale = Vector2(1.00566, 1)
 
 [node name="Tower2" parent="." instance=ExtResource("16_o1tcx")]
-position = Vector2(1892, 920)
+position = Vector2(1970, 1345)
 
 [node name="Tower3" parent="." instance=ExtResource("16_o1tcx")]
-position = Vector2(1467, 2296)
+position = Vector2(1496, 1344)
 
 [node name="Player" parent="." instance=ExtResource("1_5euw2")]
 position = Vector2(2469, 1444)
@@ -507,8 +508,16 @@ position = Vector2(2783, 1520)
 [node name="gold" parent="." instance=ExtResource("26_n2fr6")]
 position = Vector2(2860, 1430)
 
+[node name="Pawn" parent="." instance=ExtResource("28_uni40")]
+position = Vector2(2662, 1234)
+
+[node name="Pawn2" parent="." instance=ExtResource("28_uni40")]
+position = Vector2(2047, 717)
+
+[node name="Pawn3" parent="." instance=ExtResource("28_uni40")]
+position = Vector2(763, 290)
+
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="EnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]
 [connection signal="timeout" from="WaveOverTimer" to="." method="_on_wave_over_timer_timeout"]
-[connection signal="shoot" from="Player" to="ArrowManager" method="_on_player_shoot"]
 [connection signal="timeout" from="PathSpawner/Timer" to="PathSpawner" method="_on_timer_timeout"]

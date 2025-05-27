@@ -72,7 +72,9 @@ func is_wave_completed():
 		return false
 	
 
-func _process(delta: float):			
+func _process(delta: float):
+	
+	$HUD/gold_Label.text = "Gold: " + str(gold)			
 	if is_wave_completed():
 		wave += 1
 		difficulty *= DIFF_MULTIPLIER

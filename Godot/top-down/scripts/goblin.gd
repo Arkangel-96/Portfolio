@@ -35,7 +35,7 @@ var ITEM = preload("res://Items/Item.tscn")
 @onready var castle = get_node("/root/World/Castle")
 @onready var player = get_node("/root/World/Player")
 
-@export var item: InvItem
+
 @export var target : Vector2
 @onready var atk = $AudioStreamPlayerATK
 
