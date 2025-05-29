@@ -127,7 +127,7 @@ func drop_item():
 	
 	var item = drop[item_type].instantiate()
 	var random_angle: float = randf() * PI * 2
-	var spawn_distance: float = randf_range(0,90)
+	var spawn_distance: float = randf_range(0,45)
 	var spawn_offset: Vector2 = Vector2(cos(random_angle),sin(random_angle)) * spawn_distance
 	item.global_position = position + spawn_offset
 	

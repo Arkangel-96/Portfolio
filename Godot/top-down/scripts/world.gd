@@ -9,6 +9,7 @@ var hp : int
 var level : int
 var exp : int
 var gold : int
+var wood: int
 var wave : int
 var sec : int
 var min : int
@@ -44,8 +45,9 @@ func new_game():
 	level = 1
 	exp = 0
 	gold = 0
+	wood = 0
 	wave = 1
-	difficulty = 5.0
+	difficulty = 10.0
 	#$EnemySpawnerTimer/Timer.wait_time = 1.0
 	min = 0
 	sec = 0
@@ -74,7 +76,10 @@ func is_wave_completed():
 
 func _process(delta: float):
 	
-	$HUD/gold_Label.text = "Gold: " + str(gold)			
+	$HUD/HP_Label.text = "HP: " + str(hp)
+	$HUD/EXP_Label.text = "EXP: " + str(exp)
+	$HUD/gold_Label.text = "Gold: " + str(gold)
+	$HUD/wood_Label.text = "Wood: " + str(wood)
 	if is_wave_completed():
 		wave += 1
 		difficulty *= DIFF_MULTIPLIER
@@ -97,6 +102,7 @@ func reset():
 	$HUD/wave_Label.text = "Wave: " + str(wave)
 	$HUD/enemies_Label.text = "Enemies: " + str(max_enemies)
 	$HUD/gold_Label.text = "Gold: " + str(gold)
+	$HUD/wood_Label.text = "Wood: " + str(wood)
 	$HUD/Minutes.text = "Min:" + str(min)
 	$HUD/Seconds.text = "Sec:" + str(sec)
 	$GameOver.hide()	

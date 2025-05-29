@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="1_73r8c"]
 [ext_resource type="Script" uid="uid://qxq1wjt7s84o" path="res://Items/inventory_item_ui.gd" id="1_twlid"]
-[ext_resource type="Texture2D" uid="uid://clr2337pnk36m" path="res://art/Deco/02.png" id="2_twlid"]
+[ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="3_twlid"]
 
 [node name="InventoryItemUI" type="Panel"]
 custom_minimum_size = Vector2(50, 50)
@@ -25,12 +25,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -64.0
-offset_right = 32.0
+offset_left = -33.0
+offset_top = -67.0
+offset_right = 31.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("2_twlid")
+scale = Vector2(0.95, 0.95)
+texture = ExtResource("3_twlid")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -39,9 +41,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
+offset_left = -16.0
+offset_top = -22.0
+offset_right = 24.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)

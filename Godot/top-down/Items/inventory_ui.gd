@@ -5,6 +5,7 @@ signal inventory_item_ui_selected(item_type:Item.ItemType)
 #@onready var h_box_container: HBoxContainer = $HBoxContainer
 @onready var grid_container: GridContainer = $NinePatchRect/GridContainer
 @onready var world = get_node("/root/World")
+@onready var player = get_node("/root/World/Player")
 
 const INVENTORY_ITEM_UI = preload("res://Items/Inventory_Item_UI.tscn")
 
@@ -36,4 +37,16 @@ func _on_inv_item_consumed(item_type: Item.ItemType, quantity_left: int) -> void
 			existing_node.set_quantity(quantity_left)
 		else:
 			existing_node.queue_free()	
-		world.gold += 10
+		if item_type == Item.ItemType.MUSHROOM:
+			world.hp += 30
+		elif item_type == Item.ItemType.GEM:
+			world.exp += 10
+		elif item_type == Item.ItemType.COCA:
+			world.hp += 10
+			player.boost()
+		elif item_type == Item.ItemType.PUMPKIN:
+			world.hp += 60
+		elif item_type == Item.ItemType.GOLD:
+			world.gold += 100
+		elif item_type == Item.ItemType.WOOD:
+			world.wood += 100	
