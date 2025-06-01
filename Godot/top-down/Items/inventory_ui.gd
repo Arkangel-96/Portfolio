@@ -38,15 +38,29 @@ func _on_inv_item_consumed(item_type: Item.ItemType, quantity_left: int) -> void
 		else:
 			existing_node.queue_free()	
 		if item_type == Item.ItemType.MUSHROOM:
-			world.hp += 30
+			world.gold += 25
 		elif item_type == Item.ItemType.GEM:
-			world.exp += 10
+			world.gold += 25
 		elif item_type == Item.ItemType.COCA:
-			world.hp += 10
-			player.boost()
+			world.gold += 50
 		elif item_type == Item.ItemType.PUMPKIN:
-			world.hp += 60
+			world.gold += 50
 		elif item_type == Item.ItemType.GOLD:
 			world.gold += 100
 		elif item_type == Item.ItemType.WOOD:
 			world.wood += 100	
+		
+		## PARA USAR DESDE EL INVENTARIO ##
+		#if item_type == Item.ItemType.MUSHROOM:
+			#world.hp += 30
+		#elif item_type == Item.ItemType.GEM:
+			#world.exp += 10
+		#elif item_type == Item.ItemType.COCA:
+			#world.hp += 10
+			#player.boost()
+		#elif item_type == Item.ItemType.PUMPKIN:
+			#world.hp += 60
+		#elif item_type == Item.ItemType.GOLD:
+			#world.gold += 100
+		#elif item_type == Item.ItemType.WOOD:
+			#world.wood += 100	

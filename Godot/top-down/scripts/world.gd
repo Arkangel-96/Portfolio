@@ -17,8 +17,8 @@ var max_enemies: int
 var deaths : int
 var difficulty : float
 const DIFF_MULTIPLIER: float = 1.2
-var enemy
 
+var shop: bool = false
 
 @onready var castle: CharacterBody2D = $Castle
 @onready var Seconds: Timer = $Seconds
@@ -78,8 +78,6 @@ func _process(delta: float):
 	
 	$HUD/HP_Label.text = "HP: " + str(hp)
 	$HUD/EXP_Label.text = "EXP: " + str(exp)
-	$HUD/gold_Label.text = "Gold: " + str(gold)
-	$HUD/wood_Label.text = "Wood: " + str(wood)
 	if is_wave_completed():
 		wave += 1
 		difficulty *= DIFF_MULTIPLIER
@@ -101,8 +99,6 @@ func reset():
 	$HUD/EXP_Label.text = "EXP: " + str(exp)
 	$HUD/wave_Label.text = "Wave: " + str(wave)
 	$HUD/enemies_Label.text = "Enemies: " + str(max_enemies)
-	$HUD/gold_Label.text = "Gold: " + str(gold)
-	$HUD/wood_Label.text = "Wood: " + str(wood)
 	$HUD/Minutes.text = "Min:" + str(min)
 	$HUD/Seconds.text = "Sec:" + str(sec)
 	$GameOver.hide()	

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cnati1ra15p6u" path="res://art/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="2_rc8kl"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://components/health_component.tscn" id="4_dbdpb"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://components/health_component.gd" id="5_mh04m"]
-[ext_resource type="AudioStream" uid="uid://bllhs2k4007ao" path="res://sound/SFX/13_human_jump_land_1.wav" id="5_rc8kl"]
+[ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://sound/SFX/06_door_close_1.mp3" id="5_rc8kl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iq8qx"]
 atlas = ExtResource("2_rc8kl")

@@ -20,7 +20,7 @@ func _physics_process(delta):
 	for i in pathSpawnerNode.get_child_count():
 		if pathSpawnerNode.get_child(i).name == pathName:
 			enemy = pathSpawnerNode.get_child(i).get_child(0).get_child(0)
-			print(enemy)
+			#print(enemy)
 			if enemy != null:
 				target = enemy.global_position	
 				velocity = global_position.direction_to(target) * speed  

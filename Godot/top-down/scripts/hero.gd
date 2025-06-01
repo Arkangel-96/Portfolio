@@ -13,7 +13,7 @@ class_name Hero extends Player
 signal shoot
 signal attack_finished
 
-
+var disable_mouse:bool = false
 var move_speed 
 var attack_damage
 var is_attack = false
@@ -69,7 +69,7 @@ func movement():
 	move_and_slide()
 	
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton :
+	if event is InputEventMouseButton and !disable_mouse:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				attack_1()
@@ -166,13 +166,12 @@ func _on_boost_timer_timeout() -> void:
 func _on_area_lr_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = true
-	
+
 
 
 func _on_area_lr_body_exited(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = false
-
 
 
 func _on_area_ud_body_entered(body: Node2D) -> void:

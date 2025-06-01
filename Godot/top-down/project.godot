@@ -22,6 +22,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
+[gui]
+
+theme/custom_font="uid://bgm85tuf12r7e"
+
 [input]
 
 ui_left={

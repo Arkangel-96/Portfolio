@@ -2,13 +2,13 @@ extends Area2D
 
 @onready var pick_up: AudioStreamPlayer = $"../AudioStreamPlayerPickUp"
 @onready var use: AudioStreamPlayer = $"../AudioStreamPlayerUse"
+@onready var world = get_node("/root/World")
 
 signal item_added(item:Item, quantity:int)
 signal item_consumed(item_type:Item.ItemType, quantity_left:int)
 var inventory = {} ## ESENCIAL ##
 
 func _on_area_entered(area: Area2D) -> void:
-	print(area.name)
 	if area is Item:
 		add_item_to_inventory(area)
 		area.collect_item()	

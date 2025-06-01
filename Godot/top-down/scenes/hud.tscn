@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpyutp7s05mx2"]
+[gd_scene load_steps=7 format=3 uid="uid://cpyutp7s05mx2"]
 
 [ext_resource type="Texture2D" uid="uid://c2mk7abve4gru" path="res://art/UI/Ribbons/Ribbon_Red_Connection_Left.png" id="1_ahhtf"]
 [ext_resource type="Texture2D" uid="uid://duuojw554nq6j" path="res://art/UI/Ribbons/Ribbon_Yellow_Connection_Right.png" id="2_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://dlgepk5gjfpjh" path="res://art/UI/Banners/Banner_Vertical.png" id="3_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://bjus81st5h7pk" path="res://art/Deco/18.png" id="4_5pdws"]
-[ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="5_5pdws"]
 [ext_resource type="Texture2D" uid="uid://ko8oxfh44xsj" path="res://art/Deco/16.png" id="6_047uy"]
-[ext_resource type="Texture2D" uid="uid://parjab6ss210" path="res://art/Deco/W_Idle 64 X 64.png" id="6_hd3ao"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toqtt"]
 bg_color = Color(0.623529, 0.701961, 0.443137, 0.980392)
@@ -23,7 +21,7 @@ transform = Transform2D(1, 0, 0, 1, 0, 670)
 [node name="Panel" type="Panel" parent="."]
 offset_left = 250.0
 offset_top = -64.0
-offset_right = 1407.0
+offset_right = 1454.0
 offset_bottom = 50.0
 scale = Vector2(0.76238, 1.04227)
 theme_override_styles/panel = SubResource("StyleBoxFlat_toqtt")
@@ -98,66 +96,34 @@ text = "Seg: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="enemies" type="Sprite2D" parent="."]
-position = Vector2(945, -30)
-scale = Vector2(0.34375, 0.354167)
-texture = ExtResource("4_5pdws")
-
-[node name="enemies_Label" type="Label" parent="."]
-offset_left = 963.0
-offset_top = -41.0
-offset_right = 1107.0
-offset_bottom = 4.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 27
-text = "Enemies: 10"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="gold" type="Sprite2D" parent="."]
-position = Vector2(960, 9.00003)
-scale = Vector2(0.5625, 0.546876)
-texture = ExtResource("5_5pdws")
-
-[node name="gold_Label" type="Label" parent="."]
-offset_left = 976.0
-offset_top = -10.0
-offset_right = 1088.0
-offset_bottom = 25.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 27
-text = "Gold: 100"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="wood" type="Sprite2D" parent="."]
-position = Vector2(960, 35)
-scale = Vector2(0.562501, 0.536202)
-texture = ExtResource("6_hd3ao")
-
-[node name="wood_Label" type="Label" parent="."]
-offset_left = 979.0
-offset_top = 17.0
-offset_right = 1077.0
-offset_bottom = 53.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 27
-text = "Wood: 0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="wave" type="Sprite2D" parent="."]
-position = Vector2(972, -49)
-scale = Vector2(0.594726, 0.429756)
+position = Vector2(922, -25)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_047uy")
 
 [node name="wave_Label" type="Label" parent="."]
-offset_left = 982.0
-offset_top = -68.0
-offset_right = 1119.0
-offset_bottom = -23.0
+offset_left = 942.0
+offset_top = -62.0
+offset_right = 1102.0
+offset_bottom = 16.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 27
+theme_override_font_sizes/font_size = 40
 text = "Wave : 10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enemies" type="Sprite2D" parent="."]
+position = Vector2(919, 15)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_5pdws")
+
+[node name="enemies_Label" type="Label" parent="."]
+offset_left = 942.0
+offset_top = -15.0
+offset_right = 1149.0
+offset_bottom = 63.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Enemies: 10"
 horizontal_alignment = 1
 vertical_alignment = 1
