@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1dea52mn4x4n"]
+
+[ext_resource type="Script" uid="uid://rm7qc3tplp07" path="res://inventory/OLD/WARNING/elemento.gd" id="1_wkml3"]
+[ext_resource type="Resource" uid="uid://cne25q0fw1pvs" path="res://inventory/resources/Item-4-LEAVES.tres" id="2_x3yye"]
+[ext_resource type="Texture2D" uid="uid://clr2337pnk36m" path="res://art/Deco/02.png" id="3_oynyg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rs2b5"]
+size = Vector2(24.875, 25.125)
+
+[node name="Item" type="Area2D"]
+script = ExtResource("1_wkml3")
+item = ExtResource("2_x3yye")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_oynyg")
+offset = Vector2(0, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_rs2b5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

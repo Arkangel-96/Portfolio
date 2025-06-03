@@ -1,19 +1,37 @@
-extends Resource
+extends Area2D
 
-class_name Inv
+@onready var pick_up: AudioStreamPlayer = $"../AudioStreamPlayerPickUp"
+@onready var use: AudioStreamPlayer = $"../AudioStreamPlayerUse"
+@onready var world = get_node("/root/World")
 
-signal update
+signal item_added(item:Item, quantity:int)
+signal item_consumed(item_type:Item.ItemType, quantity_left:int)
+var inventory = {} ## ESENCIAL ##
 
-@export var slots: Array[InvSlot]
+func _on_area_entered(area: Area2D) -> void:
+	if area is Item:
+		add_item_to_inventory(area)
+		area.collect_item()	
 
-func insert(item: InvItem):
-	var itemslots = slots.filter(func(slot): return slot.item == item)
-	if !itemslots.is_empty():
-		itemslots[0].amount +=1
+func add_item_to_inventory(item: Item):
+	pick_up.play()
+	if not inventory.has(item.type):
+		inventory[item.type] = 1
 	else:
-		var emptyslots = slots.filter(func(slot): return slot.item == null)
-		if !emptyslots.is_empty():
-			emptyslots[0].item = item
-			emptyslots[0].amount = 1
-	update.emit()		
+		inventory[item.type] = inventory[item.type] + 1
+	item_added.emit(item, inventory[item.type])
+	prints("Has recogido el objeto de tipo", Item.ItemType.keys()[item.type], "ahora tienes:", inventory[item.type])
+	print(inventory)
 	
+func consume_item_from_inventory(item_type:Item.ItemType):
+	use.play()
+	if inventory.has(item_type):
+		inventory[item_type] = inventory[item_type] - 1
+		item_consumed.emit(item_type, inventory[item_type])
+		prints("Has consumido el objeto de tipo", Item.ItemType.keys()[item_type], "ahora tienes:", inventory[item_type])
+		print(inventory)
+		if inventory[item_type] <=0: inventory.erase(item_type)
+
+
+func _on_inventory_ui_inventory_item_ui_selected(item_type: Item.ItemType) -> void:
+	consume_item_from_inventory(item_type)
