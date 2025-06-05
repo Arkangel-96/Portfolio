@@ -168,6 +168,17 @@ autowrap_mode = 2
 clip_text = true
 text_overrun_behavior = 3
 
+[node name="ItemPrice" type="Label" parent="Control/TextureRect/Details/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 99.0
+offset_top = 13.0
+offset_right = 132.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "78"
+clip_text = true
+
 [node name="PriceLabel" type="Label" parent="Control/TextureRect/Details/Control"]
 layout_mode = 0
 offset_left = 131.0
@@ -179,17 +190,6 @@ text = "Purchase Price"
 autowrap_mode = 2
 clip_text = true
 text_overrun_behavior = 3
-
-[node name="ItemPrice" type="Label" parent="Control/TextureRect/Details/Control"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 99.0
-offset_top = 13.0
-offset_right = 132.0
-offset_bottom = 42.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "78"
-clip_text = true
 
 [node name="ItemHeldCount" type="Label" parent="Control/TextureRect/Details/Control"]
 unique_name_in_owner = true
@@ -271,7 +271,5 @@ offset_bottom = 53.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 text = "Close"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="Control/CLOSE" to="." method="_on_close_pressed"]

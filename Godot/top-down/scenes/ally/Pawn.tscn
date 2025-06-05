@@ -1,10 +1,17 @@
-[gd_scene load_steps=23 format=3 uid="uid://0yh2nx8jlj8f"]
+[gd_scene load_steps=30 format=3 uid="uid://0yh2nx8jlj8f"]
 
-[ext_resource type="Script" uid="uid://bocj5po6gs4ew" path="res://scenes/pawn.gd" id="1_rc8kl"]
+[ext_resource type="Script" uid="uid://bocj5po6gs4ew" path="res://scenes/ally/pawn.gd" id="1_rc8kl"]
+[ext_resource type="Script" uid="uid://crpeh2fvjkgks" path="res://inventory/resources/data/DATA_ITEM.gd" id="2_d2e20"]
 [ext_resource type="Texture2D" uid="uid://cnati1ra15p6u" path="res://art/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="2_rc8kl"]
+[ext_resource type="Resource" uid="uid://dwmi50o310a3r" path="res://inventory/resources/Item-1-GEM.tres" id="3_m1wad"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="4_dbdpb"]
+[ext_resource type="Resource" uid="uid://cwtjs8c40h485" path="res://inventory/resources/Item-2-MUSH.tres" id="4_jghiq"]
+[ext_resource type="Resource" uid="uid://dq7ug14qby5dc" path="res://inventory/resources/Item-3-PUMP.tres" id="5_4svii"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="5_mh04m"]
 [ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://sound/SFX/06_door_close_1.mp3" id="5_rc8kl"]
+[ext_resource type="Resource" uid="uid://cne25q0fw1pvs" path="res://inventory/resources/Item-4-LEAVES.tres" id="6_oe860"]
+[ext_resource type="Resource" uid="uid://dhuqq4ojg537a" path="res://inventory/resources/Item-5-GOLD.tres" id="7_tvfso"]
+[ext_resource type="Resource" uid="uid://crr86tkewknk0" path="res://inventory/resources/Item-6-WOOD.tres" id="8_pgwwr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iq8qx"]
 atlas = ExtResource("2_rc8kl")
@@ -118,6 +125,7 @@ height = 56.0
 [node name="Pawn" type="CharacterBody2D"]
 process_mode = 3
 script = ExtResource("1_rc8kl")
+shop_inventory = Array[ExtResource("2_d2e20")]([ExtResource("3_m1wad"), ExtResource("4_jghiq"), ExtResource("5_4svii"), ExtResource("6_oe860"), ExtResource("7_tvfso"), ExtResource("8_pgwwr")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true

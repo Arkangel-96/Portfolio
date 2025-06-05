@@ -107,6 +107,7 @@ animations = [{
 
 [node name="Dialog" type="CanvasLayer"]
 process_mode = 3
+visible = false
 script = ExtResource("1_gxqm6")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]

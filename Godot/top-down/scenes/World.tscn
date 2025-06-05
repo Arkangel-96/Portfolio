@@ -404,7 +404,6 @@ one_shot = true
 process_mode = 2
 
 [node name="Dialog" parent="." instance=ExtResource("2_n2fr6")]
-visible = false
 
 [node name="ShopMenu" parent="." instance=ExtResource("2_aqlsr")]
 visible = false
@@ -447,12 +446,6 @@ position = Vector2(1404, 1353)
 
 [node name="Pawn" parent="." instance=ExtResource("28_uni40")]
 position = Vector2(2662, 1234)
-
-[node name="Pawn2" parent="." instance=ExtResource("28_uni40")]
-position = Vector2(2047, 717)
-
-[node name="Pawn3" parent="." instance=ExtResource("28_uni40")]
-position = Vector2(763, 290)
 
 [node name="Player" parent="." instance=ExtResource("1_5euw2")]
 position = Vector2(2613, 1584)
