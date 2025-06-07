@@ -20,14 +20,14 @@ var WOOD = preload("res://inventory/scenes/Item-6-WOOD.tscn")
 var drop = [GEM,MUSH,PUMP,LEAVES,GOLD,WOOD]
 var item_type = randi_range(0,5)
 
-var SHOP_ITEM_BUTTON = preload("res://UI/Shop_Item_Button.tscn")
+
 
 
 
 func drop_item(): 
 	
-	var item = drop[SHOP_ITEM_BUTTON.ID].instantiate()
-	print(item_type)
+	var item = drop[item_type].instantiate()
+	#print(item_type)
 	var random_angle: float = randf() * PI * 2
 	var spawn_distance: float = randf_range(45,90)
 	var spawn_offset: Vector2 = Vector2(cos(random_angle),sin(random_angle)) * spawn_distance

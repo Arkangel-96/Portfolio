@@ -9,11 +9,12 @@ extends CanvasLayer
 
 @onready var dialog: CanvasLayer = $"../Dialog"
 @onready var price: Label = %Price
-@onready var shop_item_container: VBoxContainer = %ShopItemContainer
 
 
 @onready var world = get_node("/root/World")
 @onready var pawn = get_node("/root/World/Pawn")
+@onready var shop = get_node("%ShopItemContainer")
+
 @onready var audio_stream: AudioStreamPlayer = $AudioStreamPlayer
 
 const SHOP_ITEM_BUTTON = preload("res://UI/Shop_Item_Button.tscn")
@@ -22,30 +23,34 @@ const SHOP_ITEM_BUTTON = preload("res://UI/Shop_Item_Button.tscn")
 func _ready() -> void:
 	clear_item_list()
 	show_menu(pawn.shop_inventory)
-
+	
 func _process(delta: float) -> void:
-	#print(pawn.shop_inventory)
 	%Gold.text = "Gold: " + str(world.gold)
 	%Wood.text = "Wood: " + str(world.wood)
+	
+	for e in shop.get_children():
+		print(e)
+		
+
 
 func _on_close_pressed() -> void:
 	hide()
 
 	
 func clear_item_list():
-	for c in shop_item_container.get_children():
+	for c in shop.get_children():
 		c.queue_free()
 
 func show_menu(items: Array[InvItem]):
 	populate_item_list(items)
-	shop_item_container.get_child(0).grab_focus()
+	shop.get_child(0).grab_focus()
 
 		
 func populate_item_list( items :Array [InvItem]):
 	for item in items:
 		var shop_item : ShopItemButton = SHOP_ITEM_BUTTON.instantiate()
 		shop_item.setup_item(item)
-		shop_item_container.add_child(shop_item)
+		shop.add_child(shop_item)
 		shop_item.focus_entered.connect(update_item_details.bind(item))
 		#shop_item.pressed.connect(purchase_item.bind(item))
 	

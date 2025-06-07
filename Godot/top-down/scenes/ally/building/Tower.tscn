@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://2of38ecv8u70"]
 
 [ext_resource type="Texture2D" uid="uid://g57x32yehlxb" path="res://art/Factions/Knights/Buildings/Tower/Tower_Blue.png" id="1_02lgm"]
-[ext_resource type="Script" uid="uid://bkfd3kgfelknf" path="res://scenes/buildings/tower.gd" id="1_6dv47"]
+[ext_resource type="Script" uid="uid://bkfd3kgfelknf" path="res://scenes/ally/building/tower.gd" id="1_6dv47"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="2_6dv47"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="3_6pmem"]
 [ext_resource type="AudioStream" uid="uid://1cwvtpdyahd" path="res://sound/SFX/15_human_dash_2.wav" id="5_6pmem"]
