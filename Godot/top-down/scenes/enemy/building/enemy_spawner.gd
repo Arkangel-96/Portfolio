@@ -1,8 +1,9 @@
 extends Node2D
 
-const GOBLIN = preload("res://scenes/Goblin.tscn")
-var spawn_points = []
 
+
+const GOBLIN = preload("res://scenes/enemy/Goblin.tscn")
+var spawn_points = []
 @onready var world = get_node("/root/World")
 
 
@@ -16,9 +17,11 @@ func _ready() -> void:
 
 func _on_timer_timeout() -> void:
 	var enemies = get_tree().get_nodes_in_group("enemies")
-	if enemies.size() < get_parent().max_enemies:
+	print(enemies)
+	if enemies.size() < get_parent().max_enemies: 
 		var spawn = spawn_points[randi() % spawn_points.size()]
 		var goblin = GOBLIN.instantiate()
 		goblin.position = spawn.position
-		world.add_child(goblin)
 		goblin.add_to_group("enemies")
+		world.add_child(goblin)
+		

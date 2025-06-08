@@ -34,7 +34,7 @@ func _ready() -> void:
 	reset()
 
 func reset():
-	position = screen_size 
+	position = screen_size * 2.5
 	move_speed = START_SPEED
 	
 			

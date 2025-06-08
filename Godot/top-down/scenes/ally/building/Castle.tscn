@@ -5,9 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="2_hwvuk"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="3_ws4va"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngr70"]
-radius = 59.0
-height = 336.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xd15"]
+size = Vector2(185, 311)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ws4va"]
 
@@ -23,9 +22,9 @@ texture = ExtResource("1_ngr70")
 offset = Vector2(0, -25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 47)
+position = Vector2(-1.4999, 0.499969)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_ngr70")
+shape = SubResource("RectangleShape2D_3xd15")
 
 [node name="Components" type="Node" parent="."]
 
@@ -38,11 +37,10 @@ current_health = 100
 [node name="ProgressBar" type="ProgressBar" parent="."]
 z_index = 90
 y_sort_enabled = true
-offset_left = -120.0
-offset_top = -189.0
-offset_right = 49.0
-offset_bottom = -141.0
-scale = Vector2(1.37649, 0.543279)
+offset_left = -134.0
+offset_top = -226.0
+offset_right = 135.0
+offset_bottom = -203.0
 theme_override_styles/background = SubResource("StyleBoxFlat_ws4va")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4dm5y")
 show_percentage = false

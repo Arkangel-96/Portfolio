@@ -46,12 +46,12 @@ func _on_tower_body_entered(body: Node2D) -> void:
 		
 		pathName = target.get_parent().name
 		
-		var tempArrow = ARROW.instantiate()
-		tempArrow.pathName = pathName
-		#tempArrow.arrowDamage = arrowDamage
-		get_node("arrowManager").add_child(tempArrow)
-		tempArrow.global_position = $Aim.global_position
-		atk.play()
+		#var tempArrow = ARROW.instantiate()
+		#tempArrow.pathName = pathName
+		##tempArrow.arrowDamage = arrowDamage
+		#get_node("arrowManager").add_child(tempArrow)
+		#tempArrow.global_position = $Aim.global_position
+		#atk.play()
 		
 		#tempArrow.target = tempArray[0].position
 	

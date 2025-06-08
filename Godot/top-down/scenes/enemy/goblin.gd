@@ -34,7 +34,7 @@ var ITEM = preload("res://inventory/Item.tscn")
 @onready var player = get_node("/root/World/Player")
 
 
-@export var target : Vector2
+
 @onready var atk = $AudioStreamPlayerATK
 
 
@@ -48,10 +48,11 @@ func _ready() -> void:
 	health_component.death.connect(on_death)
 	if player:
 		player.attack_finished.connect(verify_receive_damage)
-	
+		
+	move_direction = (castle.position - position).normalized()
 
 func _process(delta: float) -> void:
-	get_parent().set_progress(get_parent().get_progress()+ move_speed*delta)
+	#get_parent().set_progress(get_parent().get_progress()+ move_speed*delta)
 	if health_component.current_health <= 0:
 		alive = false
 	else:
@@ -59,17 +60,19 @@ func _process(delta: float) -> void:
 
 	
 func _physics_process(delta: float) -> void: 
-	if !is_attack and player:
-		sprite_animation.play("run")
-	
-	#var move_direction = path_follow_2d.progress     #(player.position - position).normalized()
-	if move_direction:
-		velocity = move_direction * move_speed
-		if move_direction.x !=0:
-			sprite_animation.flip_h = move_direction.x < 0
-			$AreaAttack.scale.x = 1 if move_direction.x < 0 else -1
+	if alive:
+		if !is_attack and player:
+			sprite_animation.play("run")
 		
+		if move_direction:
+			velocity = move_direction * move_speed
+			if move_direction.x !=0:
+				sprite_animation.flip_h = move_direction.x < 0
+				$AreaAttack.scale.x = 1 if move_direction.x < 0 else -1
+			
 		move_and_slide()	
+	else:
+		pass
 		
 func attack():
 	sprite_animation.play("attack")
@@ -105,10 +108,16 @@ func verify_receive_damage():
 	
 
 func on_death():
+	alive = false
+	$ProgressBar.hide()
+	$AnimatedSprite2D.animation = "dead"
+	$CollisionShape2D.set_deferred("disabled", true)
+	$AreaAttack/CollisionShape2D.set_deferred("disabled", true)
 	var effect = EXPLOSION.instantiate()
 	effect.global_position = position # primero posiciono el efecto, porque si no se va al 0,0 del world
 	add_sibling(effect)
 	effect.process_mode = Node.PROCESS_MODE_ALWAYS
+	
 		## drop exp ;D ##
 	world.exp += 20
 	#print(world.exp)
@@ -119,7 +128,7 @@ func on_death():
 		world.level += 1
 		Level_label.text = "Level: " +str(world.level)
 	drop_item()
-	queue_free()
+	
 	
 func drop_item(): 
 	
@@ -139,20 +148,27 @@ func drop_item():
 	
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
-	if body is Castle:	
-		move_speed =0
-		attack()
-		incoming = false
-	elif body is Player:
-		move_speed =0
-		attack()
-		
+	if alive:
+		if body is Castle:	
+			move_speed =0
+			attack()
+			incoming = false
+	
+		elif body is Player:
+			move_speed =0
+			attack()
+		#elif (body is Enemy) and incoming:
+			#await get_tree().create_timer(15).timeout
+			#queue_free()
+	else:
+		pass
 
 
 func _on_area_attack_body_exited(body: Node2D) -> void:
 	if (body is Player) and incoming :
 		move_speed = 200
 		is_attack = false
+
 
 		
 		

@@ -9,6 +9,6 @@ script = ExtResource("1_2vbf6")
 autostart = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(100, 1000)
+position = Vector2(634, 349)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

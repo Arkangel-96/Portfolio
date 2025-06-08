@@ -47,7 +47,7 @@ func new_game():
 	gold = 0
 	wood = 0
 	wave = 1
-	difficulty = 10.0
+	difficulty = 20.0
 	#$EnemySpawnerTimer/Timer.wait_time = 1.0
 	min = 0
 	sec = 0
@@ -60,8 +60,7 @@ func is_wave_completed():
 	
 	if enemies.size() == max_enemies:
 		for e in enemies:
-			if e.get_child(0).get_child(0):
-				#wprint(e.get_child(0).get_child(0))
+			if e.alive:
 				all_dead = false		
 			#elif e.get_child(0).get_child(0):
 				#print(e.get_child(0).get_child(0))
