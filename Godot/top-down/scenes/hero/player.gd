@@ -1,4 +1,4 @@
-class_name Player extends Info
+class_name Player extends Info 
 
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
 
@@ -10,21 +10,6 @@ class_name Player extends Info
 @onready var atk_2 = $"AudioStreamPlayerATK-2"
 
 
-signal shoot
-signal attack_finished
-
-var disable_mouse:bool = false
-var move_speed 
-var attack_damage
-var is_attack = false
-var down = false
-var up = false
-
-var gold = 0
-var exp = 0
-
-const START_SPEED = 200
-const BOOST_SPEED = 400
 
 var screen_size
 
@@ -32,7 +17,8 @@ func _ready() -> void:
 	#health_component.death.connect(on_death)
 	screen_size = get_viewport_rect().size
 	reset()
-
+	#get_global_mouse_position()
+	
 func reset():
 	position = screen_size * 2.5
 	move_speed = START_SPEED

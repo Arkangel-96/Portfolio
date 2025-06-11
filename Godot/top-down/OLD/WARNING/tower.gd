@@ -1,4 +1,4 @@
-extends Info
+class_name Tower extends Info
 
 @onready var timer: Timer = $Timer
 

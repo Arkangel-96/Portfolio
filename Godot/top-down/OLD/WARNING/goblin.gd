@@ -1,4 +1,6 @@
-class_name Enemy extends CharacterBody2D
+
+#class_name Enemy 
+extends CharacterBody2D
 
 var move_speed= randi_range(200,250)
 var attack_damage:= 0
@@ -25,16 +27,12 @@ var ITEM = preload("res://inventory/Item.tscn")
 @onready var Level_label = get_node("/root/World/HUD/Level_Label")
 
 
-@onready var nav: NavigationAgent2D = $NavigationAgent2D
-@onready var recalc_timer: Timer = $RecalcTimer
-
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_component: HealthComponent = $Components/HealthComponent
 
 
 @onready var castle = get_node("/root/World/Castle")
 @onready var player = get_node("/root/World/Player")
-@onready var archer = get_node("/root/World/Archer")
 
 
 
@@ -51,25 +49,8 @@ func _ready() -> void:
 	health_component.death.connect(on_death)
 	if player:
 		player.attack_finished.connect(verify_receive_damage)
-	if archer:
-		archer.attack_finished.connect(verify_receive_damage)
-	#call_deferred("actor_setup")
-	#recalc_timer.timeout.connect(_on_recalc_timer_timeout)	
-	#nav.path_desired_distance = 4.0
-	#nav.target_desired_distance = 4.0
-	
-	
-#func actor_setup():
-	#await get_tree().physics_frame
-	#set_target_position(castle.position)
-	#_on_recalc_timer_timeout(castle.position)
-	#
-#func set_target_position(target_position: Vector2):
-	#nav.target_position = target_position
-	#
-#func _on_recalc_timer_timeout(target_position: Vector2) -> void:
-	#set_target_position(target_position)
-	#
+		
+	move_direction = (castle.position - position).normalized()
 
 func _process(delta: float) -> void:
 	#get_parent().set_progress(get_parent().get_progress()+ move_speed*delta)
@@ -83,24 +64,14 @@ func _physics_process(delta: float) -> void:
 	if alive:
 		if !is_attack and player:
 			sprite_animation.play("run")
-		#if nav.is_navigation_finished():
-			#return
-			
-		## NAVIGATOR AGENT 2D##
-		#var next_path_pos =	nav.get_next_path_position()
-		#var cur_agent_pos = global_position
-		##move_direction= cur_agent_pos.direction_to(next_path_pos)
-		#
-		#move_direction = next_path_pos - cur_agent_pos
-		#move_direction = move_direction.normalized()
-		move_direction = (castle.position - global_position).normalized()
+		
 		if move_direction:
 			velocity = move_direction * move_speed
 			if move_direction.x !=0:
 				sprite_animation.flip_h = move_direction.x < 0
 				$AreaAttack.scale.x = 1 if move_direction.x < 0 else -1
 			
-				move_and_slide()	
+		move_and_slide()	
 	else:
 		pass
 		
@@ -189,7 +160,7 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 			attack()
 		#elif (body is Enemy) and incoming:
 			#await get_tree().create_timer(15).timeout
-		#
+			#queue_free()
 	else:
 		pass
 

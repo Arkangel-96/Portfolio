@@ -1,7 +1,7 @@
 extends Node2D
 
 
-
+const TECHIE = preload("res://scenes/enemy/Techie.tscn")
 const GOBLIN = preload("res://scenes/enemy/Goblin.tscn")
 var spawn_points = []
 @onready var world = get_node("/root/World")
@@ -21,7 +21,10 @@ func _on_timer_timeout() -> void:
 	if enemies.size() < get_parent().max_enemies: 
 		var spawn = spawn_points[randi() % spawn_points.size()]
 		var goblin = GOBLIN.instantiate()
-		goblin.position = spawn.position
+		var techie = TECHIE.instantiate()
+		goblin.position = spawn.position + Vector2 (20,20)
+		techie.position = spawn.position 
 		goblin.add_to_group("enemies")
+		techie.add_to_group("enemies")
 		world.add_child(goblin)
-		
+		world.add_child(techie)

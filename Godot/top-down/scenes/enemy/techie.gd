@@ -1,64 +1,24 @@
-class_name Enemy extends CharacterBody2D
-
-var move_speed= randi_range(200,250)
-var attack_damage:= 0
-var is_attack:= false
-var in_attack_Player_range := false
-
-var GEM = preload("res://inventory/scenes/Item-1-GEM.tscn")
-var MUSH = preload("res://inventory/scenes/Item-2-MUSH.tscn")
-var PUMP = preload("res://inventory/scenes/Item-3-PUMP.tscn")
-var LEAVES = preload("res://inventory/scenes/Item-4-LEAVES.tscn")
-var GOLD = preload("res://inventory/scenes/Item-5-GOLD.tscn")
-var WOOD = preload("res://inventory/scenes/Item-6-WOOD.tscn")
-
-var drop = [GEM,MUSH,PUMP,LEAVES,GOLD,WOOD]
-var item_type = randi_range(0,5)
-var EXPLOSION = preload("res://scenes/FX/Explosion.tscn")
-var ITEM = preload("res://inventory/Item.tscn")
+class_name Techie extends Enemy
 
 
-
-@onready var world = get_node("/root/World")
-@onready var HP_label = get_node("/root/World/HUD/HP_Label")
-@onready var EXP_label = get_node("/root/World/HUD/EXP_Label")
-@onready var Level_label = get_node("/root/World/HUD/Level_Label")
-
-
-@onready var nav: NavigationAgent2D = $NavigationAgent2D
-@onready var recalc_timer: Timer = $RecalcTimer
-
-@onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
-@onready var health_component: HealthComponent = $Components/HealthComponent
-
-
-@onready var castle = get_node("/root/World/Castle")
-@onready var player = get_node("/root/World/Player")
-@onready var archer = get_node("/root/World/Archer")
-
-
-
-@onready var atk = $AudioStreamPlayerATK
-
-
-var	move_direction	
-var move
-var alive : bool
-var	incoming = true
 
 func _ready() -> void:
+	attack_damage= 0
+	is_attack= false
+	in_attack_Player_range = false
+	move_speed = randi_range(200,250)
+	incoming = true
 	alive = true
 	health_component.death.connect(on_death)
 	if player:
 		player.attack_finished.connect(verify_receive_damage)
-	if archer:
-		archer.attack_finished.connect(verify_receive_damage)
+	
 	#call_deferred("actor_setup")
 	#recalc_timer.timeout.connect(_on_recalc_timer_timeout)	
 	#nav.path_desired_distance = 4.0
 	#nav.target_desired_distance = 4.0
-	
-	
+	#
+	#
 #func actor_setup():
 	#await get_tree().physics_frame
 	#set_target_position(castle.position)
@@ -85,7 +45,7 @@ func _physics_process(delta: float) -> void:
 			sprite_animation.play("run")
 		#if nav.is_navigation_finished():
 			#return
-			
+			#
 		## NAVIGATOR AGENT 2D##
 		#var next_path_pos =	nav.get_next_path_position()
 		#var cur_agent_pos = global_position
