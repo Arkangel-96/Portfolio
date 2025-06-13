@@ -137,7 +137,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 5.0
+"speed": 7.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -223,18 +223,12 @@ height = 40.0
 process_mode = 3
 script = ExtResource("1_maxnv")
 
-[node name="RecalcTimer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_pul1y")
 animation = &"attack"
 autoplay = "run"
-frame = 6
-frame_progress = 1.0
 offset = Vector2(0, -10)
 
 [node name="AreaAttack" type="Area2D" parent="."]
@@ -274,7 +268,6 @@ shape = SubResource("CapsuleShape2D_u7t47")
 [node name="AudioStreamPlayerATK" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_rugve")
 
-[connection signal="timeout" from="RecalcTimer" to="." method="_on_recalc_timer_timeout"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AreaAttack" to="." method="_on_area_attack_body_entered"]
 [connection signal="body_exited" from="AreaAttack" to="." method="_on_area_attack_body_exited"]

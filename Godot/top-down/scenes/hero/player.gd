@@ -9,6 +9,9 @@ class_name Player extends Info
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
 @onready var atk_2 = $"AudioStreamPlayerATK-2"
 
+const TNT = preload("res://prototypes/basic/TNT.tscn")
+
+@onready var shooting_point: Node2D = %shooting_point
 
 
 var screen_size
@@ -61,15 +64,27 @@ func _input(event: InputEvent) -> void:
 			if event.pressed:
 				attack_1()
 				
-		if event.button_index == MOUSE_BUTTON_RIGHT: 
+				
+		if event.button_index == MOUSE_BUTTON_RIGHT and can_shoot: 
 			if event.pressed:
 				attack_2()		
-				
-
-				#var dir = get_global_mouse_position() - position
-				#shoot.emit(position,dir)
+				#shooting_point.look_at(get_global_mouse_position())
+				#fire()
+		
+		
+func fire():	
+	var tnt = TNT.instantiate()
+	tnt.dir= %shooting_point.rotation
+	tnt.pos= %shooting_point.global_position
+	tnt.rota= global_rotation
+	get_parent().add_child(tnt)
 
 	
+func _on_attack_timer_timeout() -> void:
+	can_shoot = true			
+
+	
+				
 		
 func attack_1():
 	attack_damage = 100

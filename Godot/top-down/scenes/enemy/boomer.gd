@@ -1,13 +1,12 @@
-class_name Techie extends Enemy
+class_name Boomer extends Enemy
 
-const TNT = preload("res://prototypes/basic/TNT.tscn")
-var targets
+
 
 func _ready() -> void:
-	attack_damage= 0
+	attack_damage= 5
 	is_attack= false
 	in_attack_Player_range = false
-	move_speed = randi_range(200,250)
+	move_speed = randi_range(100,150)
 	incoming = true
 	alive = true
 	health_component.death.connect(on_death)
@@ -68,12 +67,8 @@ func _physics_process(delta: float) -> void:
 func attack():
 	sprite_animation.play("attack")
 	is_attack = true 
-	var tnt = TNT.instantiate()
-	tnt.dir= $shooting_point.rotation
-	tnt.pos=$shooting_point.global_position
-	tnt.rota= global_rotation
-	get_parent().add_child(tnt)
-	
+
+
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite_animation.animation == "attack":
@@ -86,7 +81,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			player.on_death()	
 		elif is_attack:
 			attack()
-			
+		queue_free()	
 
 func verify_receive_damage():
 	if in_attack_Player_range:
@@ -146,7 +141,6 @@ func drop_item():
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
 	if alive:
-		
 		if body is Castle:	
 			move_speed =0
 			attack()

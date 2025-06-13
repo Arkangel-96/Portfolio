@@ -472,6 +472,10 @@ debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="shooting_point" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(34, -1)
+
 [node name="INV" type="Area2D" parent="."]
 script = ExtResource("4_cw2d6")
 
@@ -496,6 +500,8 @@ debug_color = Color(0.946605, 0.174212, 0.39312, 0.42)
 [node name="BoostTimer" type="Timer" parent="."]
 wait_time = 6.0
 one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="."]
 
 [node name="AudioStreamPlayerATK-1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_qu4a1")
@@ -550,4 +556,5 @@ columns = 3
 [connection signal="body_entered" from="Area_U&D" to="." method="_on_area_ud_body_entered"]
 [connection signal="body_exited" from="Area_U&D" to="." method="_on_area_ud_body_exited"]
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="inventory_item_ui_selected" from="CanvasLayer/InventoryUI" to="INV" method="_on_inventory_ui_inventory_item_ui_selected"]

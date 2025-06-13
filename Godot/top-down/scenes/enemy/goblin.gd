@@ -51,12 +51,12 @@ func _ready() -> void:
 	health_component.death.connect(on_death)
 	if player:
 		player.attack_finished.connect(verify_receive_damage)
-	if archer:
-		archer.attack_finished.connect(verify_receive_damage)
+	#if archer:
+		#archer.attack_finished.connect(verify_receive_damage)
 	#call_deferred("actor_setup")
 	#recalc_timer.timeout.connect(_on_recalc_timer_timeout)	
 	#nav.path_desired_distance = 4.0
-	#nav.target_desired_distance = 4.0
+	#nav.target_desired_distance = 4.a0
 	
 	
 #func actor_setup():

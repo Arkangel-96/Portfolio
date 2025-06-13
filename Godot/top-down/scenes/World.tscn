@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=40 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/hero/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scenes/world.gd" id="1_ro7oq"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://1qaau3pog44s" path="res://scenes/FX/arrow_manager.gd" id="14_rpuxp"]
 [ext_resource type="PackedScene" uid="uid://b3yq1bsqorpq" path="res://scenes/FX/Fire.tscn" id="15_nthub"]
 [ext_resource type="PackedScene" uid="uid://2of38ecv8u70" path="res://scenes/ally/building/Tower.tscn" id="16_o1tcx"]
+[ext_resource type="PackedScene" uid="uid://be2et3h4rnd1o" path="res://scenes/FX/Arrow.tscn" id="20_128ka"]
 [ext_resource type="PackedScene" uid="uid://6wcinelx81q0" path="res://inventory/scenes/Item-1-GEM.tscn" id="22_dgldv"]
 [ext_resource type="PackedScene" uid="uid://bu21b3qjrpn65" path="res://inventory/scenes/Item-2-MUSH.tscn" id="23_lawxi"]
 [ext_resource type="PackedScene" uid="uid://m6oaqmqpxodx" path="res://inventory/scenes/Item-3-PUMP.tscn" id="24_uni40"]
@@ -30,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://ccb2123hd3qwr" path="res://scenes/ally/Archer.tscn" id="30_128ka"]
 [ext_resource type="PackedScene" uid="uid://cjiih725muew4" path="res://scenes/FX/Dynamite.tscn" id="30_n2fr6"]
 [ext_resource type="PackedScene" uid="uid://bjxbt27r7wn6f" path="res://scenes/enemy/building/Spawner.tscn" id="31_128ka"]
+[ext_resource type="PackedScene" uid="uid://bs62xse7qg3xh" path="res://prototypes/basic/Arquero.tscn" id="32_ngql4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_aqlsr"]
 vertices = PackedVector2Array(4980.97, 4976, 14, 4976, 13, 12.9922, 4966.03, 10)
@@ -499,13 +501,13 @@ position = Vector2(4431, 402)
 [node name="WoodTower2" parent="Decoration" instance=ExtResource("28_n2fr6")]
 position = Vector2(1986, 1780)
 
+[node name="ArrowManager" type="Node2D" parent="."]
+position = Vector2(1236, 631)
+script = ExtResource("14_rpuxp")
+arrow_scene = ExtResource("20_128ka")
+
 [node name="Player" parent="." instance=ExtResource("1_5euw2")]
 position = Vector2(1236, 631)
-
-[node name="ArrowManager" type="Node2D" parent="."]
-position = Vector2(885, 256)
-script = ExtResource("14_rpuxp")
-arrow_scene = ExtResource("15_nthub")
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -587,5 +589,9 @@ position = Vector2(4467, 1421)
 [node name="Spawner16" parent="." instance=ExtResource("31_128ka")]
 position = Vector2(3528, 844)
 
+[node name="Arquero" parent="." instance=ExtResource("32_ngql4")]
+position = Vector2(3286, 1614)
+
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="WaveOverTimer" to="." method="_on_wave_over_timer_timeout"]
+[connection signal="shoot" from="Player" to="ArrowManager" method="_on_player_shoot"]
