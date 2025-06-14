@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=38 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/hero/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scenes/world.gd" id="1_ro7oq"]
@@ -28,10 +28,8 @@
 [ext_resource type="PackedScene" uid="uid://bw2ni0mqgj8i3" path="res://scenes/enemy/building/WoodTower.tscn" id="28_n2fr6"]
 [ext_resource type="PackedScene" uid="uid://0yh2nx8jlj8f" path="res://scenes/ally/Pawn.tscn" id="28_uni40"]
 [ext_resource type="PackedScene" uid="uid://bgykuvxkvl2q0" path="res://scenes/FX/Kaboom.tscn" id="29_aqlsr"]
-[ext_resource type="PackedScene" uid="uid://ccb2123hd3qwr" path="res://scenes/ally/Archer.tscn" id="30_128ka"]
-[ext_resource type="PackedScene" uid="uid://cjiih725muew4" path="res://scenes/FX/Dynamite.tscn" id="30_n2fr6"]
 [ext_resource type="PackedScene" uid="uid://bjxbt27r7wn6f" path="res://scenes/enemy/building/Spawner.tscn" id="31_128ka"]
-[ext_resource type="PackedScene" uid="uid://bs62xse7qg3xh" path="res://prototypes/basic/Arquero.tscn" id="32_ngql4"]
+[ext_resource type="PackedScene" uid="uid://bs62xse7qg3xh" path="res://prototypes/1/Bombita.tscn" id="32_ngql4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_aqlsr"]
 vertices = PackedVector2Array(4980.97, 4976, 14, 4976, 13, 12.9922, 4966.03, 10)
@@ -507,7 +505,7 @@ script = ExtResource("14_rpuxp")
 arrow_scene = ExtResource("20_128ka")
 
 [node name="Player" parent="." instance=ExtResource("1_5euw2")]
-position = Vector2(1236, 631)
+position = Vector2(2061, 2640)
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -534,12 +532,6 @@ position = Vector2(1356, 213)
 
 [node name="Kaboom" parent="." instance=ExtResource("29_aqlsr")]
 position = Vector2(1509, 296)
-
-[node name="Dynamite" parent="." instance=ExtResource("30_n2fr6")]
-position = Vector2(1247, 435)
-
-[node name="Archer" parent="." instance=ExtResource("30_128ka")]
-position = Vector2(2197, 2684)
 
 [node name="Spawner" parent="." instance=ExtResource("31_128ka")]
 position = Vector2(550, 885)

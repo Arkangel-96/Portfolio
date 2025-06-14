@@ -1,6 +1,6 @@
 class_name Techie extends Enemy
 
-const TNT = preload("res://prototypes/basic/TNT.tscn")
+const TNT = preload("res://prototypes/1/TNT.tscn")
 var targets
 
 func _ready() -> void:

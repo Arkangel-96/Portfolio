@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const TNT = preload("res://prototypes/basic/TNT.tscn")
+const TNT = preload("res://prototypes/1/TNT.tscn")
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var shooting_point: Node2D = $shooting_point
 

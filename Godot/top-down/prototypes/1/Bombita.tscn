@@ -1,6 +1,6 @@
 [gd_scene load_steps=32 format=3 uid="uid://bs62xse7qg3xh"]
 
-[ext_resource type="Script" uid="uid://box88526kxojk" path="res://prototypes/basic/arquero.gd" id="1_cawwn"]
+[ext_resource type="Script" uid="uid://box88526kxojk" path="res://prototypes/1/bombita.gd" id="1_cawwn"]
 [ext_resource type="Texture2D" uid="uid://bof0o7p3nyh1f" path="res://art/Factions/Goblins/Troops/TNT/Red/TNT_Red.png" id="2_f24rg"]
 [ext_resource type="Texture2D" uid="uid://dcmplr5ieeroi" path="res://art/Factions/Knights/Troops/Dead/Dead.png" id="3_ovgi3"]
 

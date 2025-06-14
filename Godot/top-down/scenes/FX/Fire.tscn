@@ -60,6 +60,7 @@ animations = [{
 }]
 
 [node name="Fire" type="AnimatedSprite2D"]
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_qv8w6")
 autoplay = "default"
-frame_progress = 0.780575
+frame_progress = 0.77188

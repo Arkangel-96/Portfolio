@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvsosrjwegtyh"]
+[gd_scene load_steps=9 format=3 uid="uid://dvsosrjwegtyh"]
 
 [ext_resource type="Texture2D" uid="uid://bmj882c7jguu1" path="res://art/Factions/Knights/Buildings/Castle/Castle_Blue.png" id="1_ngr70"]
 [ext_resource type="Script" uid="uid://bpjobbup6vb51" path="res://scenes/ally/building/castle.gd" id="1_ws4va"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="2_hwvuk"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="3_ws4va"]
+[ext_resource type="PackedScene" uid="uid://b3yq1bsqorpq" path="res://scenes/FX/Fire.tscn" id="5_35tp3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xd15"]
 size = Vector2(185, 311)
@@ -44,3 +45,71 @@ offset_bottom = -203.0
 theme_override_styles/background = SubResource("StyleBoxFlat_ws4va")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4dm5y")
 show_percentage = false
+
+[node name="Flames" type="Node2D" parent="."]
+position = Vector2(-115, -99)
+
+[node name="Fire" parent="Flames" instance=ExtResource("5_35tp3")]
+process_mode = 4
+visible = false
+
+[node name="Fire2" parent="Flames" instance=ExtResource("5_35tp3")]
+process_mode = 4
+visible = false
+position = Vector2(175, 76)
+frame = 6
+frame_progress = 0.0
+
+[node name="Fire3" parent="Flames" instance=ExtResource("5_35tp3")]
+process_mode = 4
+visible = false
+position = Vector2(-15, 158)
+frame = 2
+frame_progress = 0.0
+
+[node name="Fire4" parent="Flames" instance=ExtResource("5_35tp3")]
+process_mode = 4
+visible = false
+position = Vector2(199, 167)
+frame = 3
+frame_progress = 0.0
+
+[node name="Fire5" parent="Flames" instance=ExtResource("5_35tp3")]
+process_mode = 4
+visible = false
+position = Vector2(220, 0)
+frame = 4
+frame_progress = 0.0
+
+[node name="Fire6" parent="Flames" instance=ExtResource("5_35tp3")]
+process_mode = 4
+visible = false
+position = Vector2(246, 142)
+frame_progress = 0.887472
+
+[node name="Fire7" parent="Flames" instance=ExtResource("5_35tp3")]
+process_mode = 4
+visible = false
+position = Vector2(63, 26)
+frame = 3
+frame_progress = 0.0
+
+[node name="Fire8" parent="Flames" instance=ExtResource("5_35tp3")]
+process_mode = 4
+visible = false
+position = Vector2(128, -16)
+frame_progress = 0.838543
+
+[node name="Fire9" parent="Flames" instance=ExtResource("5_35tp3")]
+process_mode = 4
+visible = false
+position = Vector2(49, 166)
+frame = 6
+frame_progress = 0.0
+
+[node name="Fire10" parent="Flames" instance=ExtResource("5_35tp3")]
+process_mode = 4
+visible = false
+position = Vector2(133, 146)
+frame = 6
+frame_progress = 0.0

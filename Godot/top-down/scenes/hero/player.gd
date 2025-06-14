@@ -9,7 +9,7 @@ class_name Player extends Info
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
 @onready var atk_2 = $"AudioStreamPlayerATK-2"
 
-const TNT = preload("res://prototypes/basic/TNT.tscn")
+const TNT = preload("res://prototypes/1/TNT.tscn")
 
 @onready var shooting_point: Node2D = %shooting_point
 
@@ -23,7 +23,7 @@ func _ready() -> void:
 	#get_global_mouse_position()
 	
 func reset():
-	position = screen_size * 2.5
+	#position = screen_size * 2.5
 	move_speed = START_SPEED
 	
 			

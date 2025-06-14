@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://5661u4kogfhe"]
 
-[ext_resource type="Script" uid="uid://jdhcl56pammp" path="res://prototypes/basic/tnt.gd" id="1_tf7tb"]
+[ext_resource type="Script" uid="uid://jdhcl56pammp" path="res://prototypes/1/tnt.gd" id="1_tf7tb"]
 [ext_resource type="Texture2D" uid="uid://creesiop4alpf" path="res://art/Effects/Explosion/Explosions.png" id="2_125sd"]
 [ext_resource type="Texture2D" uid="uid://duelqs5gtjdcw" path="res://art/Factions/Goblins/Troops/TNT/Dynamite/Dynamite.png" id="2_lg8kl"]
 

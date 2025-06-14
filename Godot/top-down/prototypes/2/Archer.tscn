@@ -1,6 +1,6 @@
 [gd_scene load_steps=63 format=3 uid="uid://ccb2123hd3qwr"]
 
-[ext_resource type="Script" uid="uid://4d2xfyoajc7n" path="res://scenes/ally/archer.gd" id="1_7oll1"]
+[ext_resource type="Script" uid="uid://4d2xfyoajc7n" path="res://prototypes/2/archer.gd" id="1_7oll1"]
 [ext_resource type="Texture2D" uid="uid://2j1noy0rchh8" path="res://art/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="1_c1xqg"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="10_ef6ah"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="11_vphah"]
