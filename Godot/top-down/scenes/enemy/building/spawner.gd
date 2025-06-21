@@ -11,7 +11,7 @@ var spawn_points = []
 
 var spawn = [GOBLIN, TECHIE,BOOMER]
 var type = randi_range(0,2)
-
+var datos
 
 func _on_timer_timeout() -> void:
 	var enemies = get_tree().get_nodes_in_group("enemies")
@@ -21,4 +21,7 @@ func _on_timer_timeout() -> void:
 		enemy.position = marker_2d.global_position
 		enemy.add_to_group("enemies")
 		world.add_child(enemy)
+		#datos = world.get_child(enemy)
+		#print(datos)
+		#nombre.set_name("Goblin")
 		

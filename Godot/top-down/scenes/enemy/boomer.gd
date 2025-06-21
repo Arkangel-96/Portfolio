@@ -81,7 +81,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			player.on_death()	
 		elif is_attack:
 			attack()
-		queue_free()	
+		on_death()
+		#queue_free()	
 
 func verify_receive_damage():
 	if in_attack_Player_range:

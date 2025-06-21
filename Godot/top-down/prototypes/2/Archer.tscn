@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://ccb2123hd3qwr"]
+[gd_scene load_steps=65 format=3 uid="uid://ccb2123hd3qwr"]
 
 [ext_resource type="Script" uid="uid://4d2xfyoajc7n" path="res://prototypes/2/archer.gd" id="1_7oll1"]
 [ext_resource type="Texture2D" uid="uid://2j1noy0rchh8" path="res://art/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="1_c1xqg"]
@@ -408,8 +408,14 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53oiu"]
+size = Vector2(6.16768, 32.6985)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtaxn"]
+size = Vector2(603.612, 879.791)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_c1xqg"]
-radius = 459.657
+radius = 793.051
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ft8do"]
 
@@ -428,15 +434,49 @@ script = ExtResource("1_7oll1")
 y_sort_enabled = true
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_pul1y")
-animation = &"attack_-45º"
+animation = &"attack_-90º"
 autoplay = "idle"
-frame = 7
-frame_progress = 1.0
 offset = Vector2(0, -10)
+
+[node name="Top" type="Area2D" parent="."]
+position = Vector2(-6, 2)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+position = Vector2(-206.762, 516)
+rotation = 1.5708
+scale = Vector2(81.4567, 31.1475)
+shape = SubResource("RectangleShape2D_53oiu")
+one_way_collision_margin = 0.0
+debug_color = Color(0, 0.650295, 0.95028, 0.42)
+
+[node name="Mid" type="Area2D" parent="."]
+position = Vector2(-6, 2)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mid"]
+position = Vector2(-381.467, 7.50001)
+rotation = 1.5708
+scale = Vector2(0.839944, 0.860507)
+shape = SubResource("RectangleShape2D_mtaxn")
+one_way_collision_margin = 0.0
+debug_color = Color(0, 0.650295, 0.95028, 0.42)
+
+[node name="Bot" type="Area2D" parent="."]
+position = Vector2(-6, 2)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bot"]
+position = Vector2(-6, 510)
+rotation = 1.5708
+scale = Vector2(81.4567, 31.1475)
+shape = SubResource("RectangleShape2D_53oiu")
+one_way_collision_margin = 0.0
+debug_color = Color(0, 0.650295, 0.95028, 0.42)
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(-6, 2)
-scale = Vector2(-1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
 position = Vector2(-5, -2)
@@ -472,6 +512,16 @@ shape = SubResource("CapsuleShape2D_qipyy")
 [node name="AudioStreamPlayerREP" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_8env6")
 
+[node name="arrowManager" type="Node" parent="."]
+
+[node name="Aim" type="Marker2D" parent="."]
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Top" to="." method="_on_top_body_entered"]
+[connection signal="body_exited" from="Top" to="." method="_on_top_body_exited"]
+[connection signal="body_entered" from="Mid" to="." method="_on_mid_body_entered"]
+[connection signal="body_exited" from="Mid" to="." method="_on_mid_body_exited"]
+[connection signal="body_entered" from="Bot" to="." method="_on_bot_body_entered"]
+[connection signal="body_exited" from="Bot" to="." method="_on_bot_body_exited"]
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]

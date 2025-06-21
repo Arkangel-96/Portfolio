@@ -13,7 +13,7 @@ var ARROW = preload("res://scenes/FX/Arrow.tscn")
 var targets = []
 var current
 var pathName
-
+var arrowDamage
 
 func _process(delta: float) -> void:
 	pass

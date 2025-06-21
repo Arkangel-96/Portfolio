@@ -29,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://0yh2nx8jlj8f" path="res://scenes/ally/Pawn.tscn" id="28_uni40"]
 [ext_resource type="PackedScene" uid="uid://bgykuvxkvl2q0" path="res://scenes/FX/Kaboom.tscn" id="29_aqlsr"]
 [ext_resource type="PackedScene" uid="uid://bjxbt27r7wn6f" path="res://scenes/enemy/building/Spawner.tscn" id="31_128ka"]
-[ext_resource type="PackedScene" uid="uid://bs62xse7qg3xh" path="res://prototypes/1/Bombita.tscn" id="32_ngql4"]
+[ext_resource type="PackedScene" uid="uid://ccb2123hd3qwr" path="res://prototypes/2/Archer.tscn" id="31_ngql4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_aqlsr"]
 vertices = PackedVector2Array(4980.97, 4976, 14, 4976, 13, 12.9922, 4966.03, 10)
@@ -548,9 +548,6 @@ position = Vector2(2883, 576)
 [node name="Spawner5" parent="." instance=ExtResource("31_128ka")]
 position = Vector2(480, 2044)
 
-[node name="Spawner6" parent="." instance=ExtResource("31_128ka")]
-position = Vector2(455, 3033)
-
 [node name="Spawner7" parent="." instance=ExtResource("31_128ka")]
 position = Vector2(417, 4045)
 
@@ -581,8 +578,11 @@ position = Vector2(4467, 1421)
 [node name="Spawner16" parent="." instance=ExtResource("31_128ka")]
 position = Vector2(3528, 844)
 
-[node name="Arquero" parent="." instance=ExtResource("32_ngql4")]
-position = Vector2(3286, 1614)
+[node name="Archer" parent="." instance=ExtResource("31_ngql4")]
+position = Vector2(1761, 2750)
+
+[node name="Archer2" parent="." instance=ExtResource("31_ngql4")]
+position = Vector2(2459, 1626)
 
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="WaveOverTimer" to="." method="_on_wave_over_timer_timeout"]
