@@ -36,8 +36,8 @@ func _process(delta: float) -> void:
 	#get_parent().set_progress(get_parent().get_progress()+ move_speed*delta)
 	if health_component.current_health <= 0:
 		alive = false
-	else:
-		alive = true
+	#else:
+		#alive = true
 
 	
 func _physics_process(delta: float) -> void: 
@@ -83,7 +83,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		HP_label.text = "HP: " +str(world.hp)
 		castle.health_component.receive_damage(attack_damage) 
 		if world.hp <= 0:
-			player.on_death()	
+			world.on_death()	
 		elif is_attack:
 			attack()
 			

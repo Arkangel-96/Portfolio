@@ -35,8 +35,8 @@ func _process(delta: float) -> void:
 	#get_parent().set_progress(get_parent().get_progress()+ move_speed*delta)
 	if health_component.current_health <= 0:
 		alive = false
-	else:
-		alive = true
+	#else:
+		#alive = true
 
 	
 func _physics_process(delta: float) -> void: 
@@ -78,7 +78,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		HP_label.text = "HP: " +str(world.hp)
 		castle.health_component.receive_damage(attack_damage) 
 		if world.hp <= 0:
-			player.on_death()	
+			world.on_death()	
 		elif is_attack:
 			attack()
 		on_death()
@@ -101,11 +101,13 @@ func verify_receive_damage():
 	
 
 func on_death():
+	health_component.current_health = 0
 	alive = false
 	$ProgressBar.hide()
 	$AnimatedSprite2D.animation = "dead"
 	$CollisionShape2D.set_deferred("disabled", true)
 	$AreaAttack/CollisionShape2D.set_deferred("disabled", true)
+	drop_item()
 	var effect = EXPLOSION.instantiate()
 	effect.global_position = position # primero posiciono el efecto, porque si no se va al 0,0 del world
 	add_sibling(effect)
@@ -120,7 +122,7 @@ func on_death():
 		EXP_label.text = "EXP: " +str(world.exp)
 		world.level += 1
 		Level_label.text = "Level: " +str(world.level)
-	drop_item()
+	
 	
 	
 func drop_item(): 

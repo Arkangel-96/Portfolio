@@ -30,7 +30,6 @@ offset_right = 762.0
 offset_bottom = 342.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-text = "___ YOU DIED ___"
 
 [node name="Waves" type="Label" parent="."]
 offset_left = 555.0
@@ -39,7 +38,6 @@ offset_right = 720.0
 offset_bottom = 380.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
-text = "WAVES SURVIVE: 0"
 
 [node name="Button" type="TextureButton" parent="."]
 anchors_preset = 8

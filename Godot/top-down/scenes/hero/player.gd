@@ -4,7 +4,7 @@ class_name Player extends Info
 
 @onready var player: Player = $"."
 
-@onready var game_score: CanvasLayer = $"../GameScore"
+
 
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
 @onready var atk_2 = $"AudioStreamPlayerATK-2"
@@ -130,12 +130,6 @@ func attack_2():
 
 
 
-func on_death():
-	print("GAME OVER")
-	get_tree().paused = true
-	game_score.show()
-	#$GameScore/Title.text = "hola"
-	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	is_attack = false 
 	attack_finished.emit()

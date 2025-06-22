@@ -17,7 +17,7 @@ func _physics_process(delta):
 	if enemy != null:
 		target = enemy.global_position	
 		velocity = global_position.direction_to(target) * speed   #
-		look_at(target)
+		look_at(target)		
 		move_and_slide()
 		if !enemy.alive:
 			queue_free()
@@ -25,8 +25,8 @@ func _physics_process(delta):
 					###await get_tree().create_timer(1).timeout
 					##
 					###
-	#elif enemy == null:  #
-		#queue_free()
+	elif enemy == null:  #
+		queue_free()
 	#var pathSpawnerNode = get_tree().get_root().get_node("World/PathSpawner")
 	#
 	#for i in pathSpawnerNode.get_child_count():

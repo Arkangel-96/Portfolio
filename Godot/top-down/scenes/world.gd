@@ -3,6 +3,7 @@ extends Node2D
 
 const GOBLIN = preload("res://scenes/enemy/Goblin.tscn")
 
+@onready var game_score: CanvasLayer = $"../GameScore"
 
 ## variables del jugador ##
 var hp : int
@@ -49,7 +50,7 @@ func new_game():
 	gold = 0
 	wood = 0
 	wave = 1
-	difficulty = 6.0
+	difficulty = 10.0
 	#$EnemySpawnerTimer/Timer.wait_time = 1.0
 	min = 0
 	sec = 0
@@ -86,6 +87,8 @@ func _physics_process(delta: float) -> void:
 		#if $EnemySpawnerTimer/Timer.wait_time > 0.25:
 			#$EnemySpawnerTimer/Timer.wait_time -= 0.05
 		reset()
+	if wave == 5:
+		victory()
 		#get_tree().paused = true
 		#$WaveOverTimer.start()
 		#
@@ -109,8 +112,20 @@ func reset():
 	
 
 
-
-
+func on_death():
+	print("GAME OVER")
+	get_tree().paused = true
+	$GameScore/Title.text = "___ YOU DIED ___ " 
+	$GameScore/Waves.text = "WAVES SURVIVE: " + str(wave-1)
+	$GameScore.show()
+	
+	
+func victory():
+	print("YOU WON")
+	get_tree().paused = true
+	$GameScore/Title.text = "___ YOU WON ___ " 
+	$GameScore/Waves.text = "WAVES SURVIVE: " + str(wave-1)
+	$GameScore.show()
 
 
 
