@@ -496,9 +496,6 @@ position = Vector2(4665, 339)
 [node name="GoldMine2" parent="Decoration" instance=ExtResource("28_aqlsr")]
 position = Vector2(4431, 402)
 
-[node name="WoodTower2" parent="Decoration" instance=ExtResource("28_n2fr6")]
-position = Vector2(1986, 1780)
-
 [node name="ArrowManager" type="Node2D" parent="."]
 position = Vector2(1236, 631)
 script = ExtResource("14_rpuxp")
@@ -546,7 +543,7 @@ position = Vector2(1875, 562)
 position = Vector2(2883, 576)
 
 [node name="Spawner5" parent="." instance=ExtResource("31_128ka")]
-position = Vector2(480, 2044)
+position = Vector2(252, 2472)
 
 [node name="Spawner7" parent="." instance=ExtResource("31_128ka")]
 position = Vector2(417, 4045)
@@ -579,10 +576,10 @@ position = Vector2(4467, 1421)
 position = Vector2(3528, 844)
 
 [node name="Archer" parent="." instance=ExtResource("31_ngql4")]
-position = Vector2(1761, 2750)
+position = Vector2(1732, 2490)
 
 [node name="Archer2" parent="." instance=ExtResource("31_ngql4")]
-position = Vector2(2459, 1626)
+position = Vector2(2996, 2528)
 
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="WaveOverTimer" to="." method="_on_wave_over_timer_timeout"]
