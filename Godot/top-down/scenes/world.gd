@@ -25,8 +25,10 @@ var shop: bool = false
 @onready var Seconds: Timer = $Seconds
 @onready var EnemySpawner: Timer = $EnemySpawnerTimer
 @onready var player: Player = $Player
-@onready var archer: CharacterBody2D = $Archer
-@onready var archer_2: CharacterBody2D = $Archer2
+@onready var torre: CharacterBody2D = $Torre
+@onready var torre_2: CharacterBody2D = $Torre2
+
+
 
 func _on_seconds_timeout() -> void:
 	sec += 1
@@ -55,8 +57,11 @@ func new_game():
 	min = 0
 	sec = 0
 	player.reset()
-	archer.reset()
-	archer_2.reset()
+	torre.reset()
+	torre_2.reset()
+
+
+	
 	reset()
 
 func is_wave_completed():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=37 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/hero/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scenes/world.gd" id="1_ro7oq"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cpyutp7s05mx2" path="res://UI/HUD.tscn" id="13_nrtoj"]
 [ext_resource type="Script" uid="uid://1qaau3pog44s" path="res://scenes/FX/arrow_manager.gd" id="14_rpuxp"]
 [ext_resource type="PackedScene" uid="uid://b3yq1bsqorpq" path="res://scenes/FX/Fire.tscn" id="15_nthub"]
-[ext_resource type="PackedScene" uid="uid://2of38ecv8u70" path="res://scenes/ally/building/Tower.tscn" id="16_o1tcx"]
 [ext_resource type="PackedScene" uid="uid://be2et3h4rnd1o" path="res://scenes/FX/Arrow.tscn" id="20_128ka"]
 [ext_resource type="PackedScene" uid="uid://6wcinelx81q0" path="res://inventory/scenes/Item-1-GEM.tscn" id="22_dgldv"]
 [ext_resource type="PackedScene" uid="uid://bu21b3qjrpn65" path="res://inventory/scenes/Item-2-MUSH.tscn" id="23_lawxi"]
@@ -28,8 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://bw2ni0mqgj8i3" path="res://scenes/enemy/building/WoodTower.tscn" id="28_n2fr6"]
 [ext_resource type="PackedScene" uid="uid://0yh2nx8jlj8f" path="res://scenes/ally/Pawn.tscn" id="28_uni40"]
 [ext_resource type="PackedScene" uid="uid://bgykuvxkvl2q0" path="res://scenes/FX/Kaboom.tscn" id="29_aqlsr"]
+[ext_resource type="PackedScene" uid="uid://fongksgbbt7v" path="res://prototypes/3/Torre.tscn" id="30_n2fr6"]
 [ext_resource type="PackedScene" uid="uid://bjxbt27r7wn6f" path="res://scenes/enemy/building/Spawner.tscn" id="31_128ka"]
-[ext_resource type="PackedScene" uid="uid://ccb2123hd3qwr" path="res://prototypes/2/Archer.tscn" id="31_ngql4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_aqlsr"]
 vertices = PackedVector2Array(4980.97, 4976, 14, 4976, 13, 12.9922, 4966.03, 10)
@@ -441,19 +440,6 @@ tile_set = SubResource("TileSet_h08up")
 [node name="Castle" parent="." instance=ExtResource("13_i4b1j")]
 position = Vector2(2500, 2500)
 
-[node name="Tower" parent="." instance=ExtResource("16_o1tcx")]
-position = Vector2(2067, 2133)
-scale = Vector2(1.00566, 1)
-
-[node name="Tower2" parent="." instance=ExtResource("16_o1tcx")]
-position = Vector2(2938, 2191)
-
-[node name="Tower3" parent="." instance=ExtResource("16_o1tcx")]
-position = Vector2(2043, 2961)
-
-[node name="Tower4" parent="." instance=ExtResource("16_o1tcx")]
-position = Vector2(2904, 3028)
-
 [node name="Pawn" parent="." instance=ExtResource("28_uni40")]
 position = Vector2(845, 484)
 
@@ -575,11 +561,11 @@ position = Vector2(4467, 1421)
 [node name="Spawner16" parent="." instance=ExtResource("31_128ka")]
 position = Vector2(3528, 844)
 
-[node name="Archer" parent="." instance=ExtResource("31_ngql4")]
-position = Vector2(1732, 2490)
+[node name="Torre" parent="." instance=ExtResource("30_n2fr6")]
+position = Vector2(1900, 2622)
 
-[node name="Archer2" parent="." instance=ExtResource("31_ngql4")]
-position = Vector2(2996, 2528)
+[node name="Torre2" parent="." instance=ExtResource("30_n2fr6")]
+position = Vector2(3113, 2624)
 
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="WaveOverTimer" to="." method="_on_wave_over_timer_timeout"]
