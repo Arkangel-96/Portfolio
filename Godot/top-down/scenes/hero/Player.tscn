@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://c4kqxardye58q"]
+[gd_scene load_steps=70 format=3 uid="uid://c4kqxardye58q"]
 
 [ext_resource type="Script" uid="uid://dcmg4jautpp6a" path="res://scenes/hero/player.gd" id="1_3li8b"]
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dogkvyqf0s34a" path="res://sound/SFX/04_sack_open_2.wav" id="8_6eyey"]
 [ext_resource type="Script" uid="uid://1kc3agbiw7da" path="res://inventory/inventory_ui.gd" id="8_bruh7"]
 [ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="9_bruh7"]
+[ext_resource type="PackedScene" uid="uid://ck4li4ft6koi1" path="res://final_inventory/InventoryUI.tscn" id="10_6uc1w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6iful"]
 atlas = ExtResource("1_4kcxx")
@@ -541,12 +542,14 @@ texture = ExtResource("9_bruh7")
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/InventoryUI/NinePatchRect"]
 layout_mode = 0
-offset_left = 10.2623
-offset_top = 2.0
-offset_right = 50.2623
-offset_bottom = 42.0
+offset_left = 6.27139
+offset_top = 3.0
+offset_right = 46.2714
+offset_bottom = 43.0
 scale = Vector2(0.5, 0.5)
 columns = 3
+
+[node name="InventoryUi" parent="." instance=ExtResource("10_6uc1w")]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="INV" to="INV" method="_on_area_entered"]

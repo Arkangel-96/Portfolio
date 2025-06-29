@@ -136,34 +136,34 @@ func _on_area_body_exited(body: Node2D) -> void:
 	
 	
 	
-
-
-func _on_top_body_entered(body: Node2D) -> void:
-	
-		animated_sprite.play("attack_90º")
-
-
-func _on_top_corner_body_entered(body: Node2D) -> void:
-
-		animated_sprite.play("attack_45º")
-
-
-func _on_mid_body_entered(body: Node2D) -> void:
-
-		animated_sprite.play("attack_0º")
-
-
-func _on_bot_corner_body_entered(body: Node2D) -> void:
-
-		animated_sprite.play("attack_-45º")
-
-
-func _on_bot_body_entered(body: Node2D) -> void:
-
-		animated_sprite.play("attack_-90º")
-
-
-
+#
+#
+#func _on_top_body_entered(body: Node2D) -> void:
+	#
+		#animated_sprite.play("attack_90º")
+#
+#
+#func _on_top_corner_body_entered(body: Node2D) -> void:
+#
+		#animated_sprite.play("attack_45º")
+#
+#
+#func _on_mid_body_entered(body: Node2D) -> void:
+#
+		#animated_sprite.play("attack_0º")
+#
+#
+#func _on_bot_corner_body_entered(body: Node2D) -> void:
+#
+		#animated_sprite.play("attack_-45º")
+#
+#
+#func _on_bot_body_entered(body: Node2D) -> void:
+#
+		#animated_sprite.play("attack_-90º")
+#
+#
+#
 
 
 

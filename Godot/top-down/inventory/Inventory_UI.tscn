@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://fx12spg2iyck"]
 
-[ext_resource type="Script" uid="uid://1kc3agbiw7da" path="res://Items/inventory_ui.gd" id="1_no84j"]
+[ext_resource type="Script" uid="uid://1kc3agbiw7da" path="res://inventory/inventory_ui.gd" id="1_no84j"]
 [ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="2_wfy3x"]
 
 [node name="InventoryUI" type="PanelContainer"]
