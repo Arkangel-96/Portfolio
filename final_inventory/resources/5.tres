@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://crjmyhcnajelx"]
+
+[ext_resource type="Script" uid="uid://dk2vqwbdm11cs" path="res://final_inventory/resources/scripts/item_data.gd" id="1_wvd8r"]
+[ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="2_yh8jf"]
+
+[resource]
+script = ExtResource("1_wvd8r")
+name = ""
+description = ""
+texture = ExtResource("2_yh8jf")
+metadata/_custom_type_script = "uid://dk2vqwbdm11cs"

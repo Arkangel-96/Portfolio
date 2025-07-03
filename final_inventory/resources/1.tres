@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dqnrskebinkw2"]
+
+[ext_resource type="Script" uid="uid://dk2vqwbdm11cs" path="res://final_inventory/resources/scripts/item_data.gd" id="1_a6vfc"]
+[ext_resource type="Texture2D" uid="uid://chisrm0hrmtu0" path="res://art/Deco/05.png" id="2_26tja"]
+
+[resource]
+script = ExtResource("1_a6vfc")
+name = ""
+description = ""
+texture = ExtResource("2_26tja")
+metadata/_custom_type_script = "uid://dk2vqwbdm11cs"
