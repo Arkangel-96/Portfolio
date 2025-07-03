@@ -17,7 +17,7 @@ extends CanvasLayer
 
 @onready var audio_stream: AudioStreamPlayer = $AudioStreamPlayer
 
-const SHOP_ITEM_BUTTON = preload("res://UI/Shop_Item_Button.tscn")
+#const SHOP_ITEM_BUTTON = preload("res://UI/Shop_Item_Button.tscn")
 
 
 func _ready() -> void:
@@ -42,18 +42,18 @@ func clear_item_list():
 		c.queue_free()
 
 func show_menu(items: Array[InvItem]):
-	populate_item_list(items)
+	#populate_item_list(items)
 	shop.get_child(0).grab_focus()
 
 		
-func populate_item_list( items :Array [InvItem]):
-	for item in items:
-		var shop_item : ShopItemButton = SHOP_ITEM_BUTTON.instantiate()
-		shop_item.setup_item(item)
-		shop.add_child(shop_item)
-		shop_item.focus_entered.connect(update_item_details.bind(item))
-		#shop_item.pressed.connect(purchase_item.bind(item))
-	
+#func populate_item_list( items :Array [InvItem]):
+	#for item in items:
+		#var shop_item : ShopItemButton = SHOP_ITEM_BUTTON.instantiate()
+		#shop_item.setup_item(item)
+		#shop.add_child(shop_item)
+		#shop_item.focus_entered.connect(update_item_details.bind(item))
+		##shop_item.pressed.connect(purchase_item.bind(item))
+	#
 func focused_item_changed(item : InvItem):
 	if item:
 		update_item_details(item)

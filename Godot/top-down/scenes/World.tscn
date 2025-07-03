@@ -1,10 +1,8 @@
-[gd_scene load_steps=37 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=35 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/hero/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scenes/world.gd" id="1_ro7oq"]
 [ext_resource type="PackedScene" uid="uid://bflrrr4ouvpaa" path="res://UI/GameScore.tscn" id="2_128ka"]
-[ext_resource type="PackedScene" uid="uid://bd0hv10crsk8d" path="res://UI/shop_menu.tscn" id="2_aqlsr"]
-[ext_resource type="PackedScene" uid="uid://dgd1drxf3khs5" path="res://UI/Dialog.tscn" id="2_n2fr6"]
 [ext_resource type="Texture2D" uid="uid://3gdvbr1d53k0" path="res://art/Resources/Trees/Tree.png" id="4_bovj0"]
 [ext_resource type="Texture2D" uid="uid://vwwmgdekpgrc" path="res://art/Terrain/Ground/Tilemap_Elevation.png" id="4_ddnin"]
 [ext_resource type="Texture2D" uid="uid://4f7hr03wouih" path="res://art/Terrain/Ground/Tilemap_Flat.png" id="4_hyhxd"]
@@ -405,11 +403,6 @@ one_shot = true
 process_mode = 2
 visible = false
 
-[node name="Dialog" parent="." instance=ExtResource("2_n2fr6")]
-
-[node name="ShopMenu" parent="." instance=ExtResource("2_aqlsr")]
-visible = false
-
 [node name="Pause" parent="." instance=ExtResource("12_c0d7e")]
 
 [node name="HUD" parent="." instance=ExtResource("13_nrtoj")]
@@ -439,9 +432,6 @@ tile_set = SubResource("TileSet_h08up")
 
 [node name="Castle" parent="." instance=ExtResource("13_i4b1j")]
 position = Vector2(2500, 2500)
-
-[node name="Pawn" parent="." instance=ExtResource("28_uni40")]
-position = Vector2(845, 484)
 
 [node name="Decoration" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -487,28 +477,34 @@ position = Vector2(1236, 631)
 script = ExtResource("14_rpuxp")
 arrow_scene = ExtResource("20_128ka")
 
+[node name="Pawn" parent="." instance=ExtResource("28_uni40")]
+position = Vector2(2398, 3003)
+
+[node name="Pawn2" parent="." instance=ExtResource("28_uni40")]
+position = Vector2(2266, 3003)
+
 [node name="Player" parent="." instance=ExtResource("1_5euw2")]
 position = Vector2(2061, 2640)
 
 [node name="Items" type="Node2D" parent="."]
 
 [node name="wood" parent="Items" instance=ExtResource("27_128ka")]
-position = Vector2(2782, 1363)
+position = Vector2(2484, 2719)
 
 [node name="gem" parent="Items" instance=ExtResource("22_dgldv")]
-position = Vector2(2781, 1461)
+position = Vector2(2483, 2817)
 
 [node name="mushroom" parent="Items" instance=ExtResource("23_lawxi")]
-position = Vector2(2867, 1505)
+position = Vector2(2569, 2861)
 
 [node name="pumpkin" parent="Items" instance=ExtResource("24_uni40")]
-position = Vector2(2695, 1461)
+position = Vector2(2397, 2817)
 
 [node name="coca _leaves" parent="Items" instance=ExtResource("25_aqlsr")]
-position = Vector2(2783, 1520)
+position = Vector2(2485, 2876)
 
 [node name="gold" parent="Items" instance=ExtResource("26_n2fr6")]
-position = Vector2(2860, 1430)
+position = Vector2(2562, 2786)
 
 [node name="Fire" parent="." instance=ExtResource("15_nthub")]
 position = Vector2(1356, 213)
@@ -562,10 +558,10 @@ position = Vector2(4467, 1421)
 position = Vector2(3528, 844)
 
 [node name="Torre" parent="." instance=ExtResource("30_n2fr6")]
-position = Vector2(1900, 2622)
+position = Vector2(1771, 2570)
 
 [node name="Torre2" parent="." instance=ExtResource("30_n2fr6")]
-position = Vector2(3113, 2624)
+position = Vector2(3362, 2728)
 
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="WaveOverTimer" to="." method="_on_wave_over_timer_timeout"]

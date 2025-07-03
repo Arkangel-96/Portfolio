@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://clr2337pnk36m" path="res://art/Deco/02.png" id="1_aubet"]
 [ext_resource type="Texture2D" uid="uid://cmquwyuqjxrds" path="res://art/UI/Buttons/Button_Disable.png" id="1_jj7sy"]
-[ext_resource type="Script" uid="uid://bm4h27pnkj0if" path="res://final_inventory/inventory_slot_ui.gd" id="2_jj7sy"]
+[ext_resource type="Script" uid="uid://bm4h27pnkj0if" path="res://OLD/_Inv/inventory_slot_ui.gd" id="2_jj7sy"]
 
 [node name="InventorySlot" type="Button"]
 anchors_preset = 15

@@ -1,12 +1,20 @@
 class_name Castle extends Info 
 
+const PAWN = preload("res://scenes/ally/Pawn.tscn")
 const FIRE = preload("res://scenes/FX/Fire.tscn")
+
 var flames
 @onready var nodo: Node2D = $Flames
+@onready var obrero: Node2D = $Pawn
+@onready var audio: AudioStreamPlayer = $AudioStreamPlayer
+
+
+
 
 func _physics_process(delta: float) -> void:
 	flames = [get_node("Flames").get_children()]
 	in_flames()
+	repair()
 		
 func in_flames():
 	for x in get_node("Flames").get_child_count():
@@ -21,14 +29,18 @@ func in_flames():
 			get_node("Flames").get_child(x).visible= true
 			#print(get_node("Flames").get_child(x))
 		
-		
-			
-	#var fire = FIRE.instantiate()
-	#var random_angle: float = randf() * PI * 2
-	#var spawn_distance: float = randf_range(0,30)
-	#var spawn_offset: Vector2 = Vector2(cos(random_angle),sin(random_angle)) * spawn_distance
-	#fire.global_position = position + spawn_offset
-	#
+func repair():			
+	if world.hp == 0 or world.hp >=75 :			
+		obrero.visible= false
+		get_node("Pawn").visible= false
+		get_node("Pawn").process_mode = Node.PROCESS_MODE_DISABLED
+	if world.hp <=50:	
+		obrero.visible= true
+		get_node("Pawn").visible= true
+		get_node("Pawn").process_mode = Node.PROCESS_MODE_INHERIT	
+	if world.hp <=30:		
+		world.hp +=  70
+		health_component.current_health +=70
+		audio.play()
 ##await get_tree().create_timer(3).timeout
-	#fire.add_to_group("items")
-	#add_sibling(fire)  #world.call_deferred("add_child", MUSHROOM)
+ #world.call_deferred("add_child", MUSHROOM)

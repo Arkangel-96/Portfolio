@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ca1a183620qj5"]
 
 [ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="1_e54wq"]
-[ext_resource type="Script" uid="uid://b631dlgajk4de" path="res://UI/shop_item_button.gd" id="1_ilygq"]
+[ext_resource type="Script" uid="uid://b631dlgajk4de" path="res://OLD/Shop/shop_item_button.gd" id="1_ilygq"]
 [ext_resource type="AudioStream" uid="uid://y1008731pbr4" path="res://sound/SFX/05_door_open_1.mp3" id="3_7icon"]
 
 [node name="ShopItemButton" type="Button"]
