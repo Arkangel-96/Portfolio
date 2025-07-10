@@ -221,6 +221,8 @@ height = 40.0
 
 [node name="Techie" type="CharacterBody2D"]
 process_mode = 3
+collision_layer = 2
+collision_mask = 25
 script = ExtResource("1_5w24h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

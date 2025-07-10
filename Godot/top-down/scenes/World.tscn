@@ -478,10 +478,10 @@ script = ExtResource("14_rpuxp")
 arrow_scene = ExtResource("20_128ka")
 
 [node name="Pawn" parent="." instance=ExtResource("28_uni40")]
-position = Vector2(2398, 3003)
+position = Vector2(1200, 2855)
 
 [node name="Pawn2" parent="." instance=ExtResource("28_uni40")]
-position = Vector2(2266, 3003)
+position = Vector2(1194, 2985)
 
 [node name="Player" parent="." instance=ExtResource("1_5euw2")]
 position = Vector2(2061, 2640)
@@ -558,10 +558,10 @@ position = Vector2(4467, 1421)
 position = Vector2(3528, 844)
 
 [node name="Torre" parent="." instance=ExtResource("30_n2fr6")]
-position = Vector2(1771, 2570)
+position = Vector2(2505, 2009)
 
 [node name="Torre2" parent="." instance=ExtResource("30_n2fr6")]
-position = Vector2(3362, 2728)
+position = Vector2(2446, 3019)
 
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="WaveOverTimer" to="." method="_on_wave_over_timer_timeout"]

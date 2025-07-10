@@ -1,3 +1,6 @@
+
+## REVISAR POR SI TIENEN ARMADURA DIVINA ##
+
 class_name Boomer extends Enemy
 
 
@@ -5,7 +8,7 @@ class_name Boomer extends Enemy
 func _ready() -> void:
 	attack_damage= 5
 	is_attack= false
-	in_attack_Player_range = false
+	#in_attack_Player_range = false
 	move_speed = randi_range(100,150)
 	incoming = true
 	alive = true
@@ -31,15 +34,16 @@ func _ready() -> void:
 	#set_target_position(target_position)
 	#
 
-func _process(delta: float) -> void:
+#func _process(delta: float) -> void:
 	#get_parent().set_progress(get_parent().get_progress()+ move_speed*delta)
-	if health_component.current_health <= 0:
-		alive = false
+	
 	#else:
 		#alive = true
 
 	
 func _physics_process(delta: float) -> void: 
+	if health_component.current_health <= 0:
+		alive = false
 	if alive:
 		if !is_attack and player:
 			sprite_animation.play("run")

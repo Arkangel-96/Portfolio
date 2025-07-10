@@ -456,6 +456,7 @@ size = Vector2(101, 93.5)
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
+collision_mask = 15
 script = ExtResource("1_3li8b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -471,6 +472,7 @@ shape = SubResource("CapsuleShape2D_ixa2j")
 debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
 
 [node name="shooting_point" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -484,6 +486,7 @@ position = Vector2(3, 9)
 shape = SubResource("CircleShape2D_khinc")
 
 [node name="Area_L&R" type="Area2D" parent="."]
+collision_mask = 14
 
 [node name="CollisionLeft&Right" type="CollisionShape2D" parent="Area_L&R"]
 position = Vector2(46.9804, 0)
@@ -491,6 +494,7 @@ shape = SubResource("RectangleShape2D_3cqap")
 debug_color = Color(0.0806216, 0.167996, 0.49673, 0.42)
 
 [node name="Area_U&D" type="Area2D" parent="."]
+collision_mask = 14
 
 [node name="CollisionUp&Down" type="CollisionShape2D" parent="Area_U&D"]
 position = Vector2(0.5, -46.75)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=54 format=3 uid="uid://8h46glelvtss"]
 
-[ext_resource type="Script" uid="uid://dl6sfq77iyd2q" path="res://scenes/enemy/boomer.gd" id="1_3ndp6"]
+[ext_resource type="Script" uid="uid://4gmo44k35hrg" path="res://scenes/enemy/goblin.gd" id="1_3ndp6"]
 [ext_resource type="Texture2D" uid="uid://ddsyqbukh32dh" path="res://art/Factions/Goblins/Troops/Barrel/Red/Barrel_Red.png" id="2_3ndp6"]
 [ext_resource type="Texture2D" uid="uid://dcmplr5ieeroi" path="res://art/Factions/Knights/Troops/Dead/Dead.png" id="3_pje61"]
 [ext_resource type="Texture2D" uid="uid://creesiop4alpf" path="res://art/Effects/Explosion/Explosions.png" id="3_q8lot"]
@@ -327,6 +327,8 @@ height = 40.0
 
 [node name="Boomer" type="CharacterBody2D"]
 process_mode = 3
+collision_layer = 2
+collision_mask = 25
 script = ExtResource("1_3ndp6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -364,9 +366,8 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_5wwv6")
 show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -10)
 shape = SubResource("CapsuleShape2D_u7t47")
-debug_color = Color(0.688938, 0.498715, 0, 0.42)
+debug_color = Color(0.740857, 0.542835, 0.113842, 0.42)
 
 [node name="AudioStreamPlayerATK" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_6m2q0")

@@ -46,6 +46,7 @@ func _ready() -> void:
 
 func new_game():	
 	castle.health_component.apply_health(100)
+	get_tree().call_group("items", "queue_free") 
 	hp = 100
 	level = 1
 	exp = 0
@@ -59,9 +60,6 @@ func new_game():
 	player.reset()
 	torre.reset()
 	torre_2.reset()
-
-
-	
 	reset()
 
 func is_wave_completed():
@@ -89,6 +87,8 @@ func _physics_process(delta: float) -> void:
 	if is_wave_completed():
 		wave += 1
 		difficulty *= DIFF_MULTIPLIER
+		torre.reset()
+		torre_2.reset()
 		#if $EnemySpawnerTimer/Timer.wait_time > 0.25:
 			#$EnemySpawnerTimer/Timer.wait_time -= 0.05
 		reset()
@@ -103,7 +103,7 @@ func _physics_process(delta: float) -> void:
 func reset():
 	max_enemies = int(difficulty)
 	get_tree().call_group("enemies", "queue_free")
-	#get_tree().call_group("items", "queue_free")  ## ESTAN DENTRO DE ENEMIES ##
+	 
 	$HUD/HP_Label.text = "HP: " + str(hp)
 	$HUD/Level_Label.text = "Level: " + str(level)
 	$HUD/EXP_Label.text = "EXP: " + str(exp)

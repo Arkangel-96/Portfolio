@@ -423,6 +423,8 @@ height = 112.0
 
 [node name="Torre" type="CharacterBody2D"]
 process_mode = 3
+collision_layer = 8
+collision_mask = 3
 script = ExtResource("1_wo4wp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -441,12 +443,16 @@ offset = Vector2(0, -10)
 [node name="Top" type="Area2D" parent="."]
 position = Vector2(0, -90)
 rotation = 3.14159
+collision_layer = 8
+collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Top"]
 polygon = PackedVector2Array(-5.24521e-06, 2, 299.998, 722.001, -0.00195086, 797, -294.002, 720.999)
 
 [node name="TopCorner" type="Area2D" parent="."]
 position = Vector2(0, -90)
+collision_layer = 8
+collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TopCorner"]
 rotation = 3.92699
@@ -455,6 +461,8 @@ polygon = PackedVector2Array(-5.24521e-06, 2, 296.278, 720.542, 9.19238, 782.767
 [node name="Mid" type="Area2D" parent="."]
 position = Vector2(0, -90)
 rotation = 3.14159
+collision_layer = 8
+collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mid"]
 rotation = 1.5708
@@ -462,6 +470,8 @@ polygon = PackedVector2Array(-5.24521e-06, 2, 291.998, 724.001, -0.00197998, 781
 
 [node name="BotCorner" type="Area2D" parent="."]
 position = Vector2(0, -90)
+collision_layer = 8
+collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BotCorner"]
 rotation = -0.785398
@@ -471,12 +481,16 @@ polygon = PackedVector2Array(-5.24521e-06, 2, 306.884, 726.906, -1, 802, -283, 7
 position = Vector2(0, -90)
 rotation = 3.14159
 scale = Vector2(1, -1)
+collision_layer = 8
+collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bot"]
 polygon = PackedVector2Array(-5.24521e-06, 2, 305.002, 731.999, 1.00202, 797, -319.998, 725.001)
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(0, -90)
+collision_layer = 8
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
 position = Vector2(2, 10)

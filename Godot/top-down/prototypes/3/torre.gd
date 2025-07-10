@@ -53,17 +53,17 @@ func _on_area_body_entered(body: Node2D) -> void:
 			await get_tree().create_timer(1).timeout
 				##                  ###
 			get_node("arrowManager").add_child(tempArrow)
-			if move_direction.x !=0:
-				animated_sprite.flip_h = move_direction.x < 0
-				$Top.scale.x = -1 if move_direction.x < 0 else 1
-				
-				$TopCorner.scale.x = -1 if move_direction.x < 0 else 1
-				
-				$Mid.scale.x = -1 if move_direction.x < 0 else 1	
-				
-				$BotCorner.scale.x = -1 if move_direction.x < 0 else 1
-					
-				$Bot.scale.x = -1 if move_direction.x < 0 else 1	
+			#if move_direction.x !=0:
+				#animated_sprite.flip_h = move_direction.x < 0
+				#$Top.scale.x = -1 if move_direction.x < 0 else 1
+				#
+				#$TopCorner.scale.x = -1 if move_direction.x < 0 else 1
+				#
+				#$Mid.scale.x = -1 if move_direction.x < 0 else 1	
+				#
+				#$BotCorner.scale.x = -1 if move_direction.x < 0 else 1
+					#
+				#$Bot.scale.x = -1 if move_direction.x < 0 else 1	
 				
 				
 			if tempArray == []:

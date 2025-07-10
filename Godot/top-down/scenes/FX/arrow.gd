@@ -2,21 +2,25 @@
 extends CharacterBody2D
 
 
-var target : Vector2
-var speed = 1000
+
+var speed = 750
 var pathName = ""
 var arrowDamage = 20
 var enemy 
-var direction: Vector2
+
+var pos : Vector2
+var target : Vector2
 
 func _ready() -> void:
 	enemy = null
+	global_position=pos
 	
 func _physics_process(delta):
 	
 	if enemy != null:
 		target = enemy.global_position	
 		velocity = global_position.direction_to(target) * speed   #
+		
 		look_at(target)		
 		move_and_slide()
 		if !enemy.alive:

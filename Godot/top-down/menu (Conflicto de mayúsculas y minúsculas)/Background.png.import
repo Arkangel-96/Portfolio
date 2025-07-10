@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://brdfm8hrhy1v0"
-path="res://.godot/imported/Background.png-377c6214049f0dc3dd8cd47acd22a128.ctex"
+path="res://.godot/imported/Background.png-a18dfcc2da103d262b0d230a39c14a7f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Menu/Background.png"
-dest_files=["res://.godot/imported/Background.png-377c6214049f0dc3dd8cd47acd22a128.ctex"]
+source_file="res://menu (Conflicto de mayúsculas y minúsculas)/Background.png"
+dest_files=["res://.godot/imported/Background.png-a18dfcc2da103d262b0d230a39c14a7f.ctex"]
 
 [params]
 
