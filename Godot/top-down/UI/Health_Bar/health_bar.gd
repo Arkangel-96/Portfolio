@@ -20,7 +20,6 @@ func receive_damage(amount: int):
 	current_health = clamp(current_health - amount, 0, max_health)
 	update_health_bar()
 	if current_health<=0:
-
 		on_death()
 	
 func apply_health(amount: int):

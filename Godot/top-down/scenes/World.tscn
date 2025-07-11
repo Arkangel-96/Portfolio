@@ -1,8 +1,10 @@
-[gd_scene load_steps=35 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=37 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/hero/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scenes/world.gd" id="1_ro7oq"]
 [ext_resource type="PackedScene" uid="uid://bflrrr4ouvpaa" path="res://UI/GameScore.tscn" id="2_128ka"]
+[ext_resource type="PackedScene" uid="uid://dgd1drxf3khs5" path="res://Shop/Dialog.tscn" id="2_uni40"]
+[ext_resource type="PackedScene" uid="uid://bd0hv10crsk8d" path="res://Shop/shop_menu.tscn" id="3_aqlsr"]
 [ext_resource type="Texture2D" uid="uid://3gdvbr1d53k0" path="res://art/Resources/Trees/Tree.png" id="4_bovj0"]
 [ext_resource type="Texture2D" uid="uid://vwwmgdekpgrc" path="res://art/Terrain/Ground/Tilemap_Elevation.png" id="4_ddnin"]
 [ext_resource type="Texture2D" uid="uid://4f7hr03wouih" path="res://art/Terrain/Ground/Tilemap_Flat.png" id="4_hyhxd"]
@@ -395,6 +397,12 @@ autostart = true
 one_shot = true
 autostart = true
 
+[node name="Dialog" parent="." instance=ExtResource("2_uni40")]
+visible = false
+
+[node name="ShopMenu" parent="." instance=ExtResource("3_aqlsr")]
+visible = false
+
 [node name="WaveOverTimer" type="Timer" parent="."]
 process_mode = 2
 one_shot = true
@@ -478,10 +486,7 @@ script = ExtResource("14_rpuxp")
 arrow_scene = ExtResource("20_128ka")
 
 [node name="Pawn" parent="." instance=ExtResource("28_uni40")]
-position = Vector2(1200, 2855)
-
-[node name="Pawn2" parent="." instance=ExtResource("28_uni40")]
-position = Vector2(1194, 2985)
+position = Vector2(1599, 2912)
 
 [node name="Player" parent="." instance=ExtResource("1_5euw2")]
 position = Vector2(2061, 2640)

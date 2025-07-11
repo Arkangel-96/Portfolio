@@ -43,56 +43,34 @@ var ITEM = preload("res://inventory/Item.tscn")
 
 var	move_direction	
 var move
-var alive : bool
+var alive = true
 var	incoming = true
 
 func _ready() -> void:
-	alive = true
+	
 	health_component.death.connect(on_death)
 	if player:
 		player.attack_finished.connect(verify_receive_damage)
-	#if archer:
-		#archer.attack_finished.connect(verify_receive_damage)
-	#call_deferred("actor_setup")
-	#recalc_timer.timeout.connect(_on_recalc_timer_timeout)	
-	#nav.path_desired_distance = 4.0
-	#nav.target_desired_distance = 4.a0
 	
-	
-#func actor_setup():
-	#await get_tree().physics_frame
-	#set_target_position(castle.position)
-	#_on_recalc_timer_timeout(castle.position)
-	#
-#func set_target_position(target_position: Vector2):
-	#nav.target_position = target_position
-	#
-#func _on_recalc_timer_timeout(target_position: Vector2) -> void:
-	#set_target_position(target_position)
-	#
 
-func _process(delta: float) -> void:
-	#get_parent().set_progress(get_parent().get_progress()+ move_speed*delta)
-	if health_component.current_health <= 0:
-		alive = false
+#func _process(delta: float) -> void:
+	#
+	
+		
+		#on_death()
 	#else:
 		#alive = true
 
 	
 func _physics_process(delta: float) -> void: 
+	
+	if health_component.current_health <= 0:
+		alive = false
+		
 	if alive:
 		if !is_attack and player:
 			sprite_animation.play("run")
-		#if nav.is_navigation_finished():
-			#return
-			
-		## NAVIGATOR AGENT 2D##
-		#var next_path_pos =	nav.get_next_path_position()
-		#var cur_agent_pos = global_position
-		##move_direction= cur_agent_pos.direction_to(next_path_pos)
-		#
-		#move_direction = next_path_pos - cur_agent_pos
-		#move_direction = move_direction.normalized()
+
 		move_direction = (castle.position - global_position).normalized()
 		if move_direction:
 			velocity = move_direction * move_speed
@@ -111,10 +89,11 @@ func attack():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite_animation.animation == "attack":
 		#atk.play()
+		castle.health_component.receive_damage(attack_damage) 
 		world.hp -= attack_damage
 		#print(world.hp)
 		HP_label.text = "HP: " +str(world.hp)
-		castle.health_component.receive_damage(attack_damage) 
+		
 		if world.hp <= 0:
 			world.on_death()	
 		elif is_attack:
@@ -124,22 +103,12 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func verify_receive_damage():
 	if in_attack_Player_range:
 		health_component.receive_damage(player.attack_damage)
-		
-
-
-	
-
-	
-	#var item = ITEM.instantiate()
-	#item.item_type = randi_range(0,4)
-	#add_sibling(item) 	 #world.call_deferred("add_child", MUSHROOM)
-	#item.global_position = position 
-	
 	
 
 func on_death():
 	alive = false
 	$ProgressBar.hide()
+	$AnimatedSprite2D.process_mode = Node.PROCESS_MODE_ALWAYS
 	$AnimatedSprite2D.animation = "dead"
 	$CollisionShape2D.set_deferred("disabled", true)
 	$AreaAttack/CollisionShape2D.set_deferred("disabled", true)
@@ -147,6 +116,7 @@ func on_death():
 	effect.global_position = position # primero posiciono el efecto, porque si no se va al 0,0 del world
 	add_sibling(effect)
 	effect.process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	
 		## drop exp ;D ##
 	world.exp += 20
@@ -174,13 +144,10 @@ func drop_item():
 		
 	
 
-	#get_parent().get_parent().queue_free()
-	
-
 func _on_area_attack_body_entered(body: Node2D) -> void:
 	if alive:
 		if body is Castle:	
-			move_speed =0
+			move_speed = 0
 			attack()
 			incoming = false
 	

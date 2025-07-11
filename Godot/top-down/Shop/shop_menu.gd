@@ -22,7 +22,7 @@ extends CanvasLayer
 
 func _ready() -> void:
 	clear_item_list()
-	show_menu(pawn.shop_inventory)
+	#show_menu(pawn.shop_inventory)
 	
 func _process(delta: float) -> void:
 	%Gold.text = "Gold: " + str(world.gold)
