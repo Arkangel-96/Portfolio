@@ -472,7 +472,6 @@ shape = SubResource("CapsuleShape2D_ixa2j")
 debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
 
 [node name="shooting_point" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -527,15 +526,18 @@ volume_db = -4.0
 
 [node name="InventoryUI" type="PanelContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(72, 55)
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 708.0
-offset_top = -111.0
-offset_right = 808.0
-offset_bottom = -56.0
+offset_left = -141.0
+offset_top = -226.0
+offset_right = -41.0
+offset_bottom = -171.0
+grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(1.754, 2)
+scale = Vector2(2, 2)
 script = ExtResource("8_bruh7")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/InventoryUI"]

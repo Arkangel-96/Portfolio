@@ -1,0 +1,109 @@
+[gd_scene load_steps=7 format=3 uid="uid://bd0hv10crsk8d"]
+
+[ext_resource type="Script" uid="uid://c1o4ijtg0reys" path="res://shop/shop_menu.gd" id="1_ftc3e"]
+[ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="2_dl1a4"]
+[ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="2_trc7g"]
+[ext_resource type="Texture2D" uid="uid://nhuspb4j46tc" path="res://art/UI/Buttons/Button_Blue_3Slides.png" id="5_6j77p"]
+[ext_resource type="Texture2D" uid="uid://parjab6ss210" path="res://art/Deco/W_Idle 64 X 64.png" id="5_qyr4j"]
+[ext_resource type="Texture2D" uid="uid://dgii26q667qtf" path="res://art/UI/Buttons/Button_Blue_3Slides_Pressed.png" id="6_lnn3d"]
+
+[node name="ShopMenu" type="CanvasLayer"]
+script = ExtResource("1_ftc3e")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 289.0
+offset_top = 46.0
+offset_right = 289.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 130.0
+offset_top = -330.0
+offset_right = -576.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("2_trc7g")
+
+[node name="NPC" type="Label" parent="Control/TextureRect2"]
+layout_mode = 0
+offset_left = 115.294
+offset_top = -14.1177
+offset_right = 397.294
+offset_bottom = 102.882
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Peasant"
+
+[node name="G_ICON" type="TextureRect" parent="Control/TextureRect2"]
+layout_mode = 2
+offset_left = 359.294
+offset_top = 25.8823
+offset_right = 423.294
+offset_bottom = 89.8823
+texture = ExtResource("2_dl1a4")
+
+[node name="Gold" type="Label" parent="Control/TextureRect2"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 431.294
+offset_top = 33.8823
+offset_right = 511.294
+offset_bottom = 92.8823
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "58743"
+horizontal_alignment = 2
+
+[node name="W_ICON" type="TextureRect" parent="Control/TextureRect2"]
+layout_mode = 2
+offset_left = 362.294
+offset_top = 77.8823
+offset_right = 426.294
+offset_bottom = 141.882
+texture = ExtResource("5_qyr4j")
+
+[node name="Wood" type="Label" parent="Control/TextureRect2"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 429.294
+offset_top = 81.8823
+offset_right = 509.294
+offset_bottom = 140.882
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "58743"
+horizontal_alignment = 2
+
+[node name="CLOSE" type="TextureButton" parent="Control/TextureRect2"]
+layout_mode = 0
+offset_left = 348.294
+offset_top = 145.882
+offset_right = 548.294
+offset_bottom = 217.882
+texture_normal = ExtResource("5_6j77p")
+texture_pressed = ExtResource("6_lnn3d")
+
+[node name="Label" type="Label" parent="Control/TextureRect2/CLOSE"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 3.0
+offset_right = 138.0
+offset_bottom = 53.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Close"
+
+[connection signal="pressed" from="Control/TextureRect2/CLOSE" to="." method="_on_close_pressed"]

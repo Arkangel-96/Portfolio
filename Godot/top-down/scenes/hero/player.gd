@@ -4,6 +4,8 @@ class_name Player extends Info
 
 @onready var player: Player = $"."
 
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var inventory_ui: PanelContainer = $CanvasLayer/InventoryUI
 
 
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
@@ -22,6 +24,8 @@ func _ready() -> void:
 	reset()
 	#get_global_mouse_position()
 	
+	#canvas_layer.hide()
+	
 func reset():
 	#position = screen_size * 2.5
 	move_speed = START_SPEED
@@ -34,6 +38,7 @@ func movement():
 	var move_direction := Input.get_vector("ui_left","ui_right","ui_up","ui_down")	
 	if !is_attack:
 		if move_direction:
+			inventory_ui.hide()	
 			down = false
 			up = false
 			velocity = move_direction * move_speed
@@ -59,6 +64,10 @@ func movement():
 	
 func _input(event: InputEvent) -> void:
 	
+	if Input.is_action_just_released("v"):
+		inventory_ui.show()
+		
+			
 	if event is InputEventMouseButton and !disable_mouse:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
@@ -67,11 +76,14 @@ func _input(event: InputEvent) -> void:
 				
 		if event.button_index == MOUSE_BUTTON_RIGHT and can_shoot: 
 			if event.pressed:
-				attack_2()		
+				attack_2()	
+				
 				#shooting_point.look_at(get_global_mouse_position())
 				#fire()
 		
-		
+		#else:	
+			#canvas_layer.hide()
+		#
 func fire():	
 	var tnt = TNT.instantiate()
 	tnt.dir= %shooting_point.rotation

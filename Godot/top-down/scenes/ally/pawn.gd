@@ -5,6 +5,7 @@ class_name Pawn extends Info
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
 @onready var atk = $AudioStreamPlayerREP
 @onready var dialog: CanvasLayer = $"../Dialog"
+@onready var shop_menu: CanvasLayer = $"../ShopMenu"
 
 
 
@@ -21,3 +22,4 @@ func _on_area_body_exited(body: Node2D) -> void:
 	if body is Castle or Player:
 		sprite_animation.play("idle")	
 		dialog.hide()
+		shop_menu.hide()

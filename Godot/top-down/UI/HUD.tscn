@@ -19,23 +19,26 @@ offset = Vector2(0, 670)
 transform = Transform2D(1, 0, 0, 1, 0, 670)
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 250.0
+offset_left = 299.0
 offset_top = -64.0
-offset_right = 1454.0
+offset_right = 1503.0
 offset_bottom = 50.0
-scale = Vector2(0.76238, 1.04227)
+scale = Vector2(0.642381, 1.04227)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_toqtt")
 
 [node name="Level" type="Sprite2D" parent="."]
-position = Vector2(330.083, 25.5)
+position = Vector2(379.083, 25.5)
 scale = Vector2(1.09635, 0.953125)
 texture = ExtResource("2_uo2fv")
 
 [node name="Level_Label" type="Label" parent="."]
-offset_left = 368.083
+offset_left = 417.083
 offset_top = -2.5
-offset_right = 484.083
-offset_bottom = 42.5
+offset_right = 533.083
+offset_bottom = 56.5
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Level : 1"
@@ -43,15 +46,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EXP" type="Sprite2D" parent="."]
-position = Vector2(538, 18)
+position = Vector2(587, 18)
 scale = Vector2(0.314453, 0.338542)
 texture = ExtResource("3_uo2fv")
 
 [node name="EXP_Label" type="Label" parent="."]
-offset_left = 568.0
+offset_left = 617.0
 offset_top = -3.0
-offset_right = 655.0
-offset_bottom = 42.0
+offset_right = 704.0
+offset_bottom = 56.0
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "EXP: 0"
@@ -59,15 +63,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HP" type="Sprite2D" parent="."]
-position = Vector2(327.496, -26.504)
+position = Vector2(376.496, -26.504)
 scale = Vector2(0.953, 0.953)
 texture = ExtResource("1_ahhtf")
 
 [node name="HP_Label" type="Label" parent="."]
-offset_left = 367.496
+offset_left = 416.496
 offset_top = -53.504
-offset_right = 475.496
-offset_bottom = -11.504
+offset_right = 524.496
+offset_bottom = 5.496
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "HP: 100"
@@ -75,10 +80,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Minutes" type="Label" parent="."]
-offset_left = 505.0
+offset_left = 554.0
 offset_top = -58.0
-offset_right = 593.0
-offset_bottom = -13.0
+offset_right = 643.0
+offset_bottom = 1.0
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Min: 0"
@@ -86,10 +92,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Seconds" type="Label" parent="."]
-offset_left = 609.0
+offset_left = 658.0
 offset_top = -59.0
-offset_right = 693.0
-offset_bottom = -13.0
+offset_right = 742.0
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Seg: 0"
@@ -97,15 +103,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="wave" type="Sprite2D" parent="."]
-position = Vector2(922, -25)
+position = Vector2(788.4, -25)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_047uy")
 
 [node name="wave_Label" type="Label" parent="."]
-offset_left = 942.0
+offset_left = 808.4
 offset_top = -62.0
-offset_right = 1102.0
+offset_right = 968.4
 offset_bottom = 16.0
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "Wave : 10"
@@ -113,15 +120,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="enemies" type="Sprite2D" parent="."]
-position = Vector2(919, 15)
+position = Vector2(785.4, 15)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_5pdws")
 
 [node name="enemies_Label" type="Label" parent="."]
-offset_left = 942.0
+offset_left = 808.4
 offset_top = -15.0
-offset_right = 1149.0
+offset_right = 1015.4
 offset_bottom = 63.0
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "Enemies: 10"
