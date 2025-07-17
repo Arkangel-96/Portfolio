@@ -45,7 +45,6 @@ func _ready() -> void:
 	$GameScore/Button.pressed.connect(new_game)
 
 func new_game():	
-	castle.health_component.apply_health(100)
 	get_tree().call_group("items", "queue_free") 
 	hp = 100
 	level = 1

@@ -6,6 +6,11 @@ class_name Player extends Info
 
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var inventory_ui: PanelContainer = $CanvasLayer/InventoryUI
+@onready var dialog: CanvasLayer = $"../Dialog"
+@onready var shop_menu: CanvasLayer = $"../ShopMenu"
+
+@onready var pawn = get_node("/root/World/Pawn")
+#@onready var pawn: Pawn = $"../Pawn"
 
 
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
@@ -95,8 +100,21 @@ func fire():
 func _on_attack_timer_timeout() -> void:
 	can_shoot = true			
 
-	
-				
+
+
+
+
+		
+		
+
+
+#func _on_area_body_exited(body: Node2D) -> void:
+	#if body is Castle or Player:
+		#sprite_animation.play("idle")	
+		#dialog.hide()
+		#shop_menu.hide()
+		##player.inventory_ui.hide()	
+				#
 		
 func attack_1():
 	attack_damage = 100
@@ -175,15 +193,22 @@ func _on_boost_timer_timeout() -> void:
 	
 
 func _on_area_lr_body_entered(body: Node2D) -> void:
+	print(body.name)
 	if body is Enemy:
 		body.in_attack_Player_range = true
-
+		print("olaaa")
+		dialog.show()
+	if body is Pawn:
+	
+		queue_free()
+		
 
 
 func _on_area_lr_body_exited(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = false
-
+	elif body is Pawn:
+		dialog.hide()
 
 func _on_area_ud_body_entered(body: Node2D) -> void:
 	

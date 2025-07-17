@@ -25,6 +25,7 @@ extends CanvasLayer
 	
 func _process(delta: float) -> void:
 	
+
 	%Gold.text = "Gold: " + str(world.gold)
 	%Wood.text = "Wood: " + str(world.wood)
 	
@@ -34,7 +35,7 @@ func _process(delta: float) -> void:
 
 
 func _on_close_pressed() -> void:
-
+	
 	hide()
 	
 	

@@ -5,6 +5,7 @@ var item: InvItem
 signal identifier
 
 @onready var world = get_node("/root/World")
+
 @onready var pawn = get_node("/root/World/Pawn")
 @onready var audio_stream: AudioStreamPlayer = $AudioStreamPlayer
 

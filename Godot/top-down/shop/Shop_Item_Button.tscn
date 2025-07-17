@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://y1008731pbr4" path="res://sound/SFX/05_door_open_1.mp3" id="3_7icon"]
 
 [node name="ShopItemButton" type="Button"]
+visible = false
 custom_minimum_size = Vector2(300, 50)
 offset_right = 300.0
 offset_bottom = 50.0

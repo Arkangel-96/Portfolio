@@ -33,5 +33,5 @@ func consume_item_from_inventory(item_type:Item.ItemType):
 		if inventory[item_type] <=0: inventory.erase(item_type)
 
 
-func _on_inventory_ui_inventory_item_ui_selected(item_type: Item.ItemType) -> void:
+func _on_inventory_ui_inventory_item_ui_selected(item_type: Item.ItemType):
 	consume_item_from_inventory(item_type)
