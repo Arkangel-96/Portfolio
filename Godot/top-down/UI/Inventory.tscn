@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c75hdclwaw0pl"]
 
-[ext_resource type="Script" uid="uid://1kc3agbiw7da" path="res://inventory/inventory_ui.gd" id="1_ki15f"]
-[ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="2_nwt7c"]
+[ext_resource type="Script" uid="uid://1kc3agbiw7da" path="res://inventory/inventory_ui.gd" id="1_efu02"]
+[ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="2_2tckp"]
 
 [node name="Inventory" type="CanvasLayer"]
 
@@ -19,11 +19,11 @@ offset_bottom = -171.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(2, 2)
-script = ExtResource("1_ki15f")
+script = ExtResource("1_efu02")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="InventoryUI"]
 layout_mode = 2
-texture = ExtResource("2_nwt7c")
+texture = ExtResource("2_2tckp")
 
 [node name="GridContainer" type="GridContainer" parent="InventoryUI/NinePatchRect"]
 layout_mode = 0

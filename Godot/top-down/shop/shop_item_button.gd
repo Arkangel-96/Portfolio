@@ -1,4 +1,4 @@
-class_name ShopItemButton extends Button
+class_name ShopItemButto extends Button
 
 var item: InvItem
 

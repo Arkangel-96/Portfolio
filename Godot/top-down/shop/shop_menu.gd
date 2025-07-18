@@ -46,7 +46,7 @@ func _on_close_pressed() -> void:
 func show_menu(items: Array[InvItem]):
 	#populate_item_list(items)
 	shop.get_child(0).grab_focus()
-
+	
 		
 #func populate_item_list( items :Array [InvItem]):
 	#for item in items:

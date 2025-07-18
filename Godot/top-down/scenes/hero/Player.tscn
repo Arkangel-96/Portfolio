@@ -525,6 +525,7 @@ volume_db = -4.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="InventoryUI" type="PanelContainer" parent="CanvasLayer"]
+visible = false
 custom_minimum_size = Vector2(72, 55)
 anchors_preset = 7
 anchor_left = 0.5

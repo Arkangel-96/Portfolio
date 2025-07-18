@@ -18,7 +18,6 @@ var max_enemies: int
 var deaths : int
 var difficulty : float
 const DIFF_MULTIPLIER: float = 1.2
-
 var shop: bool = false
 
 @onready var castle: CharacterBody2D = $Castle

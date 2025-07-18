@@ -9,6 +9,9 @@ signal inventory_item_ui_selected(item_type:Item.ItemType)
 
 const INVENTORY_ITEM_UI = preload("res://inventory/Inventory_Item_UI.tscn")
 
+func _on_inv_item_added(item: Item, quantity: int) -> void:
+	add_item(item.type, item.get_texture(), quantity)
+
 func add_item(type:Item.ItemType, texture:CompressedTexture2D, quantity:int):
 	var node_name= "inventory_item_" + str(type)
 	if not grid_container.has_node(node_name):
@@ -25,8 +28,6 @@ func _on_inventory_item_used(item_type: Item.ItemType):
 	inventory_item_ui_selected.emit(item_type)
 	
 		
-func _on_inv_item_added(item: Item, quantity: int) -> void:
-	add_item(item.type, item.get_texture(), quantity)
 
 
 func _on_inv_item_consumed(item_type: Item.ItemType, quantity_left: int) -> void:

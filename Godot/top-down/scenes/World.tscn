@@ -1,9 +1,8 @@
-[gd_scene load_steps=37 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=36 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/hero/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scenes/world.gd" id="1_ro7oq"]
 [ext_resource type="PackedScene" uid="uid://bflrrr4ouvpaa" path="res://UI/GameScore.tscn" id="2_128ka"]
-[ext_resource type="PackedScene" uid="uid://dgd1drxf3khs5" path="res://UI/Dialog.tscn" id="2_uni40"]
 [ext_resource type="PackedScene" uid="uid://bd0hv10crsk8d" path="res://shop/shop_menu.tscn" id="3_aqlsr"]
 [ext_resource type="Texture2D" uid="uid://3gdvbr1d53k0" path="res://art/Resources/Trees/Tree.png" id="4_bovj0"]
 [ext_resource type="Texture2D" uid="uid://vwwmgdekpgrc" path="res://art/Terrain/Ground/Tilemap_Elevation.png" id="4_ddnin"]
@@ -25,9 +24,9 @@
 [ext_resource type="PackedScene" uid="uid://6bjk6r2tlqjf" path="res://scenes/enemy/building/GoblinHouse.tscn" id="27_lawxi"]
 [ext_resource type="PackedScene" uid="uid://dwmgxjtiwsgd5" path="res://scenes/ally/building/GoldMine.tscn" id="28_aqlsr"]
 [ext_resource type="PackedScene" uid="uid://bw2ni0mqgj8i3" path="res://scenes/enemy/building/WoodTower.tscn" id="28_n2fr6"]
-[ext_resource type="PackedScene" uid="uid://0yh2nx8jlj8f" path="res://scenes/ally/Pawn.tscn" id="28_uni40"]
 [ext_resource type="PackedScene" uid="uid://bgykuvxkvl2q0" path="res://scenes/FX/Kaboom.tscn" id="29_aqlsr"]
-[ext_resource type="PackedScene" uid="uid://fongksgbbt7v" path="res://prototypes/3/Torre.tscn" id="30_n2fr6"]
+[ext_resource type="PackedScene" uid="uid://dbwxade3be1tu" path="res://scenes/ally/Worker.tscn" id="30_128ka"]
+[ext_resource type="PackedScene" uid="uid://fongksgbbt7v" path="res://scenes/ally/Torre.tscn" id="30_n2fr6"]
 [ext_resource type="PackedScene" uid="uid://bjxbt27r7wn6f" path="res://scenes/enemy/building/Spawner.tscn" id="31_128ka"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_aqlsr"]
@@ -397,9 +396,6 @@ autostart = true
 one_shot = true
 autostart = true
 
-[node name="Dialog" parent="." instance=ExtResource("2_uni40")]
-visible = false
-
 [node name="ShopMenu" parent="." instance=ExtResource("3_aqlsr")]
 visible = false
 
@@ -488,9 +484,6 @@ arrow_scene = ExtResource("20_128ka")
 [node name="Player" parent="." instance=ExtResource("1_5euw2")]
 position = Vector2(2061, 2640)
 
-[node name="Pawn" parent="." instance=ExtResource("28_uni40")]
-position = Vector2(1505, 2906)
-
 [node name="Items" type="Node2D" parent="."]
 
 [node name="wood" parent="Items" instance=ExtResource("27_128ka")]
@@ -567,6 +560,9 @@ position = Vector2(2505, 2009)
 
 [node name="Torre2" parent="." instance=ExtResource("30_n2fr6")]
 position = Vector2(2446, 3019)
+
+[node name="Worker" parent="." instance=ExtResource("30_128ka")]
+position = Vector2(1847, 2625)
 
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="WaveOverTimer" to="." method="_on_wave_over_timer_timeout"]

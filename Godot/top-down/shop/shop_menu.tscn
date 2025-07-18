@@ -29,39 +29,45 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 130.0
-offset_top = -330.0
+offset_top = -340.0
 offset_right = -576.0
-offset_bottom = -104.0
+offset_bottom = -114.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.85, 0.85)
 texture = ExtResource("2_trc7g")
 
-[node name="NPC" type="Label" parent="Control/TextureRect2"]
-layout_mode = 0
-offset_left = 115.294
-offset_top = -14.1177
-offset_right = 397.294
-offset_bottom = 102.882
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "Peasant"
+[node name="Texto" type="Label" parent="Control/TextureRect2"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 46.0
+offset_top = -213.0
+offset_right = -112.0
+offset_bottom = 218.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 28
+text = "Hello Sir, How can I help you??"
 
 [node name="G_ICON" type="TextureRect" parent="Control/TextureRect2"]
 layout_mode = 2
-offset_left = 359.294
-offset_top = 25.8823
-offset_right = 423.294
-offset_bottom = 89.8823
+offset_left = 357.588
+offset_top = 47.0588
+offset_right = 421.588
+offset_bottom = 111.059
 texture = ExtResource("2_dl1a4")
 
 [node name="Gold" type="Label" parent="Control/TextureRect2"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 431.294
-offset_top = 33.8823
-offset_right = 511.294
-offset_bottom = 92.8823
+offset_left = 430.177
+offset_top = 51.7647
+offset_right = 510.177
+offset_bottom = 110.765
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "58743"
@@ -69,19 +75,19 @@ horizontal_alignment = 2
 
 [node name="W_ICON" type="TextureRect" parent="Control/TextureRect2"]
 layout_mode = 2
-offset_left = 362.294
-offset_top = 77.8823
-offset_right = 426.294
-offset_bottom = 141.882
+offset_left = 361.118
+offset_top = 97.6471
+offset_right = 425.118
+offset_bottom = 161.647
 texture = ExtResource("5_qyr4j")
 
 [node name="Wood" type="Label" parent="Control/TextureRect2"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 429.294
-offset_top = 81.8823
-offset_right = 509.294
-offset_bottom = 140.882
+offset_left = 428.177
+offset_top = 99.7647
+offset_right = 508.177
+offset_bottom = 158.764
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "58743"
@@ -89,10 +95,10 @@ horizontal_alignment = 2
 
 [node name="CLOSE" type="TextureButton" parent="Control/TextureRect2"]
 layout_mode = 0
-offset_left = 348.294
-offset_top = 145.882
-offset_right = 548.294
-offset_bottom = 217.882
+offset_left = 348.235
+offset_top = 151.764
+offset_right = 548.235
+offset_bottom = 223.764
 texture_normal = ExtResource("5_6j77p")
 texture_pressed = ExtResource("6_lnn3d")
 

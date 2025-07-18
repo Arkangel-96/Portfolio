@@ -6,8 +6,10 @@ class_name Player extends Info
 
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var inventory_ui: PanelContainer = $CanvasLayer/InventoryUI
-@onready var dialog: CanvasLayer = $"../Dialog"
+
+
 @onready var shop_menu: CanvasLayer = $"../ShopMenu"
+
 
 @onready var pawn = get_node("/root/World/Pawn")
 #@onready var pawn: Pawn = $"../Pawn"
@@ -43,7 +45,7 @@ func movement():
 	var move_direction := Input.get_vector("ui_left","ui_right","ui_up","ui_down")	
 	if !is_attack:
 		if move_direction:
-			inventory_ui.hide()	
+			
 			down = false
 			up = false
 			velocity = move_direction * move_speed
@@ -69,17 +71,16 @@ func movement():
 	
 func _input(event: InputEvent) -> void:
 	
-	if Input.is_action_just_released("v"):
+	if Input.is_action_just_released("E"):
 		inventory_ui.show()
-		
-			
-	if event is InputEventMouseButton and !disable_mouse:
-		if event.button_index == MOUSE_BUTTON_LEFT:
+	if Input.is_action_just_released("V"):
+		inventory_ui.hide()
+	
+	if event is InputEventMouseButton and !world.shop:
+		if event.button_index == MOUSE_BUTTON_LEFT and !world.shop:
 			if event.pressed:
-				attack_1()
-				
-				
-		if event.button_index == MOUSE_BUTTON_RIGHT and can_shoot: 
+				attack_1()							
+		elif event.button_index == MOUSE_BUTTON_RIGHT and !world.shop:
 			if event.pressed:
 				attack_2()	
 				
@@ -196,20 +197,22 @@ func _on_area_lr_body_entered(body: Node2D) -> void:
 	print(body.name)
 	if body is Enemy:
 		body.in_attack_Player_range = true
-		print("olaaa")
-		dialog.show()
-	if body is Pawn:
-	
-		queue_free()
-		
 
+	elif body is Build:
+		print("olaaa")	
+		shop_menu.show()
+		inventory_ui.show()
+		world.shop = true
+		
 
 func _on_area_lr_body_exited(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = false
-	elif body is Pawn:
-		dialog.hide()
-
+	elif body is Build:
+		shop_menu.hide()
+		inventory_ui.hide()
+		world.shop = false
+		
 func _on_area_ud_body_entered(body: Node2D) -> void:
 	
 	if body is Enemy:

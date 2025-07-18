@@ -1,6 +1,6 @@
 [gd_scene load_steps=64 format=3 uid="uid://fongksgbbt7v"]
 
-[ext_resource type="Script" uid="uid://dfxojasrhix7j" path="res://prototypes/3/torre.gd" id="1_wo4wp"]
+[ext_resource type="Script" uid="uid://dfxojasrhix7j" path="res://scenes/ally/torre.gd" id="1_wo4wp"]
 [ext_resource type="Texture2D" uid="uid://2j1noy0rchh8" path="res://art/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="2_7jfkx"]
 [ext_resource type="Texture2D" uid="uid://g57x32yehlxb" path="res://art/Factions/Knights/Buildings/Tower/Tower_Blue.png" id="2_laqq7"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="3_laqq7"]

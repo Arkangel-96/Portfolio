@@ -1,12 +1,13 @@
 class_name Castle extends Info 
 
-const PAWN = preload("res://scenes/ally/Pawn.tscn")
+
 const FIRE = preload("res://scenes/FX/Fire.tscn")
+const WORKER = preload("res://scenes/ally/Worker.tscn")
 
 var flames
 @onready var nodo: Node2D = $Flames
-@onready var obrero: Node2D = $Pawn
 @onready var audio: AudioStreamPlayer = $AudioStreamPlayer
+@onready var obrero: Node2D = $Worker
 
 
 
@@ -32,12 +33,12 @@ func in_flames():
 func repair():			
 	if world.hp == 0 or world.hp >=75 :			
 		obrero.visible= false
-		get_node("Pawn").visible= false
-		get_node("Pawn").process_mode = Node.PROCESS_MODE_DISABLED
+		get_node("Worker").visible= false
+		get_node("Worker").process_mode = Node.PROCESS_MODE_DISABLED
 	if world.hp <=50:	
 		obrero.visible= true
-		get_node("Pawn").visible= true
-		get_node("Pawn").process_mode = Node.PROCESS_MODE_INHERIT	
+		get_node("Worker").visible= true
+		get_node("Worker").process_mode = Node.PROCESS_MODE_INHERIT	
 	if world.hp <=30:		
 		world.hp +=  70
 		health_component.current_health +=70
