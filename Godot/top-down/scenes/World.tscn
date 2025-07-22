@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=37 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/hero/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scenes/world.gd" id="1_ro7oq"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dwmgxjtiwsgd5" path="res://scenes/ally/building/GoldMine.tscn" id="28_aqlsr"]
 [ext_resource type="PackedScene" uid="uid://bw2ni0mqgj8i3" path="res://scenes/enemy/building/WoodTower.tscn" id="28_n2fr6"]
 [ext_resource type="PackedScene" uid="uid://bgykuvxkvl2q0" path="res://scenes/FX/Kaboom.tscn" id="29_aqlsr"]
+[ext_resource type="PackedScene" uid="uid://dqpdhafbr5w10" path="res://scenes/ally/Fortress.tscn" id="29_n2fr6"]
 [ext_resource type="PackedScene" uid="uid://dbwxade3be1tu" path="res://scenes/ally/Worker.tscn" id="30_128ka"]
 [ext_resource type="PackedScene" uid="uid://fongksgbbt7v" path="res://scenes/ally/Torre.tscn" id="30_n2fr6"]
 [ext_resource type="PackedScene" uid="uid://bjxbt27r7wn6f" path="res://scenes/enemy/building/Spawner.tscn" id="31_128ka"]
@@ -563,6 +564,9 @@ position = Vector2(2446, 3019)
 
 [node name="Worker" parent="." instance=ExtResource("30_128ka")]
 position = Vector2(1847, 2625)
+
+[node name="Fortress" parent="." instance=ExtResource("29_n2fr6")]
+position = Vector2(1482, 2911)
 
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="WaveOverTimer" to="." method="_on_wave_over_timer_timeout"]

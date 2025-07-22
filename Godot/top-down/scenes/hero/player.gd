@@ -197,7 +197,7 @@ func _on_area_lr_body_entered(body: Node2D) -> void:
 	print(body.name)
 	if body is Enemy:
 		body.in_attack_Player_range = true
-
+	
 	elif body is Build:
 		print("olaaa")	
 		shop_menu.show()

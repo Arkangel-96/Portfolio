@@ -1,4 +1,4 @@
-class_name Castle extends Build
+class_name Fortress extends Build
 
 
 const FIRE = preload("res://scenes/FX/Fire.tscn")
@@ -9,8 +9,9 @@ var flames
 @onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 @onready var obrero: Node2D = $Worker
 @onready var health_component: HealthComponent = $Components/HealthComponent
-
-
+@onready var progress_bar: ProgressBar = $ProgressBar
+#@onready var world = get_node("/root/World/")
+#@onready var player = get_node("/root/World/Player")
 
 
 func _physics_process(delta: float) -> void:
@@ -44,5 +45,5 @@ func repair():
 		world.hp +=  70
 		health_component.current_health +=70
 		audio.play()
-##await get_tree().create_timer(3).timeout
- #world.call_deferred("add_child", MUSHROOM)
+###await get_tree().create_timer(3).timeout
+ ##world.call_deferred("add_child", MUSHROOM)

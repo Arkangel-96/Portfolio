@@ -35,6 +35,7 @@ var ITEM = preload("res://inventory/Item.tscn")
 @onready var castle = get_node("/root/World/Castle")
 @onready var player = get_node("/root/World/Player")
 @onready var archer = get_node("/root/World/Archer")
+@onready var fortress = get_node("/root/World/Fortress")
 
 
 

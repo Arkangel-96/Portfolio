@@ -21,7 +21,7 @@ func attack():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite_animation.animation == "attack":
 		#atk.play()d
-		castle.health_component.receive_damage(attack_damage) 
+		fortress.health_component.receive_damage(attack_damage) 
 		world.hp -= attack_damage
 		#print(world.hp)
 		HP_label.text = "HP: " +str(world.hp)

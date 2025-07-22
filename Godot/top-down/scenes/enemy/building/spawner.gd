@@ -10,7 +10,7 @@ var spawn_points = []
 @onready var marker_2d: Marker2D = $Marker2D
 
 var spawn = [GOBLIN, TECHIE,BOOMER]
-var type = randi_range(1,1)
+var type = randi_range(0,2)
 var datos
 
 func _on_timer_timeout() -> void:

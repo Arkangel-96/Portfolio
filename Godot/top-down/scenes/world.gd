@@ -29,6 +29,7 @@ var shop: bool = false
 
 
 
+
 func _on_seconds_timeout() -> void:
 	sec += 1
 	if sec >= 60:
