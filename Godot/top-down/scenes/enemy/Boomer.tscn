@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://8h46glelvtss"]
+[gd_scene load_steps=42 format=3 uid="uid://8h46glelvtss"]
 
 [ext_resource type="Script" uid="uid://dl6sfq77iyd2q" path="res://scenes/enemy/boomer.gd" id="1_3ndp6"]
 [ext_resource type="Texture2D" uid="uid://ddsyqbukh32dh" path="res://art/Factions/Goblins/Troops/Barrel/Red/Barrel_Red.png" id="2_3ndp6"]
@@ -80,57 +80,9 @@ region = Rect2(1344, 0, 192, 192)
 atlas = ExtResource("3_q8lot")
 region = Rect2(1536, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m8wjt"]
-atlas = ExtResource("3_pje61")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pdolx"]
-atlas = ExtResource("3_pje61")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6vd2p"]
-atlas = ExtResource("3_pje61")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2dp1r"]
-atlas = ExtResource("3_pje61")
-region = Rect2(512, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l3d4h"]
-atlas = ExtResource("3_pje61")
-region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_doirc"]
-atlas = ExtResource("3_pje61")
-region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3igij"]
-atlas = ExtResource("3_pje61")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ck0o4"]
-atlas = ExtResource("3_pje61")
-region = Rect2(128, 128, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ebkr"]
 atlas = ExtResource("3_pje61")
 region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2dlnn"]
-atlas = ExtResource("3_pje61")
-region = Rect2(384, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y4dtv"]
-atlas = ExtResource("3_pje61")
-region = Rect2(512, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_foddm"]
-atlas = ExtResource("3_pje61")
-region = Rect2(640, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_shmh3"]
-atlas = ExtResource("3_pje61")
-region = Rect2(768, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vqboi"]
 atlas = ExtResource("2_3ndp6")
@@ -235,43 +187,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m8wjt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pdolx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6vd2p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2dp1r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l3d4h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_doirc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3igij")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ck0o4")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_5ebkr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2dlnn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y4dtv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_foddm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_shmh3")
 }],
 "loop": false,
 "name": &"dead",
@@ -326,15 +242,15 @@ radius = 15.0
 height = 40.0
 
 [node name="Boomer" type="CharacterBody2D"]
-process_mode = 3
 collision_layer = 2
 collision_mask = 25
 script = ExtResource("1_3ndp6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+process_mode = 3
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_pul1y")
-animation = &"run"
+animation = &"dead"
 autoplay = "run"
 offset = Vector2(0, -10)
 

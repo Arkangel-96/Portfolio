@@ -72,7 +72,7 @@ func _physics_process(delta: float) -> void:
 		if !is_attack and player:
 			sprite_animation.play("run")
 
-		move_direction = (castle.position - global_position).normalized()
+		move_direction = (fortress.position - global_position).normalized()
 		if move_direction:
 			velocity = move_direction * move_speed
 			if move_direction.x !=0:
@@ -90,7 +90,7 @@ func attack():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite_animation.animation == "attack":
 		#atk.play()
-		castle.health_component.receive_damage(attack_damage) 
+		fortress.health_component.receive_damage(attack_damage) 
 		world.hp -= attack_damage
 		#print(world.hp)
 		HP_label.text = "HP: " +str(world.hp)
@@ -147,7 +147,7 @@ func drop_item():
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
 	if alive:
-		if body is Castle:	
+		if body is Fortress:	
 			move_speed = 0
 			attack()
 			incoming = false

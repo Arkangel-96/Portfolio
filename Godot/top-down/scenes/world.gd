@@ -5,6 +5,7 @@ const GOBLIN = preload("res://scenes/enemy/Goblin.tscn")
 
 @onready var game_score: CanvasLayer = $"../GameScore"
 
+
 ## variables del jugador ##
 var hp : int
 var level : int
@@ -23,9 +24,11 @@ var shop: bool = false
 @onready var castle: CharacterBody2D = $Castle
 @onready var Seconds: Timer = $Seconds
 @onready var EnemySpawner: Timer = $EnemySpawnerTimer
-@onready var player: Player = $Player
+@onready var player = get_node("/root/World/Player")
+@onready var fortress = get_node("/root/World/Fortress")
 @onready var torre: CharacterBody2D = $Torre
 @onready var torre_2: CharacterBody2D = $Torre2
+
 
 
 
@@ -52,7 +55,7 @@ func new_game():
 	gold = 0
 	wood = 0
 	wave = 1
-	difficulty = 10.0
+	difficulty = 5.0
 	#$EnemySpawnerTimer/Timer.wait_time = 1.0
 	min = 0
 	sec = 0

@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpyutp7s05mx2"]
+[gd_scene load_steps=12 format=3 uid="uid://cpyutp7s05mx2"]
 
 [ext_resource type="Texture2D" uid="uid://c2mk7abve4gru" path="res://art/UI/Ribbons/Ribbon_Red_Connection_Left.png" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://eyakmw30gmhj" path="res://UI/hud.gd" id="1_md4fy"]
 [ext_resource type="Texture2D" uid="uid://duuojw554nq6j" path="res://art/UI/Ribbons/Ribbon_Yellow_Connection_Right.png" id="2_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://dlgepk5gjfpjh" path="res://art/UI/Banners/Banner_Vertical.png" id="3_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://bjus81st5h7pk" path="res://art/Deco/18.png" id="4_5pdws"]
+[ext_resource type="Texture2D" uid="uid://ca5luf4ctodsi" path="res://art/UI/Buttons/Button_Hover_3Slides.png" id="6_2ptjp"]
 [ext_resource type="Texture2D" uid="uid://ko8oxfh44xsj" path="res://art/Deco/16.png" id="6_047uy"]
+[ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="7_am7sw"]
+[ext_resource type="Texture2D" uid="uid://cpmni5sum80ks" path="res://art/UI/Buttons/Button_Disable_3Slides.png" id="7_md4fy"]
+[ext_resource type="Texture2D" uid="uid://parjab6ss210" path="res://art/Deco/W_Idle 64 X 64.png" id="8_ixkb2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toqtt"]
 bg_color = Color(0.623529, 0.701961, 0.443137, 0.980392)
@@ -17,6 +22,7 @@ border_color = Color(0, 0, 0, 1)
 [node name="HUD" type="CanvasLayer"]
 offset = Vector2(0, 670)
 transform = Transform2D(1, 0, 0, 1, 0, 670)
+script = ExtResource("1_md4fy")
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 299.0
@@ -103,35 +109,90 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="wave" type="Sprite2D" parent="."]
-position = Vector2(788.4, -25)
+position = Vector2(769, -25)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_047uy")
 
 [node name="wave_Label" type="Label" parent="."]
-offset_left = 808.4
-offset_top = -62.0
-offset_right = 968.4
-offset_bottom = 16.0
+offset_left = 771.0
+offset_top = -58.0
+offset_right = 931.0
+offset_bottom = 20.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 30
 text = "Wave : 10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="enemies" type="Sprite2D" parent="."]
-position = Vector2(785.4, 15)
+position = Vector2(733, 15)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_5pdws")
 
 [node name="enemies_Label" type="Label" parent="."]
-offset_left = 808.4
-offset_top = -15.0
-offset_right = 1015.4
-offset_bottom = 63.0
+offset_left = 731.0
+offset_top = -10.0
+offset_right = 938.0
+offset_bottom = 68.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 30
 text = "Enemies: 10"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="G_ICON" type="TextureRect" parent="."]
+offset_left = 907.0
+offset_top = -54.0
+offset_right = 971.0
+offset_bottom = 10.0002
+texture = ExtResource("7_am7sw")
+
+[node name="Gold" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 979.589
+offset_top = -49.2941
+offset_right = 1059.59
+offset_bottom = 9.70622
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "58743"
+horizontal_alignment = 2
+
+[node name="W_ICON" type="TextureRect" parent="."]
+offset_left = 910.53
+offset_top = -3.41167
+offset_right = 974.53
+offset_bottom = 60.5882
+texture = ExtResource("8_ixkb2")
+
+[node name="Wood" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 977.589
+offset_top = -1.29408
+offset_right = 1057.59
+offset_bottom = 57.7059
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "58743"
+horizontal_alignment = 2
+
+[node name="REPAIR" type="TextureButton" parent="."]
+offset_left = 888.0
+offset_top = -102.0
+offset_right = 1088.0
+offset_bottom = -30.0
+texture_normal = ExtResource("6_2ptjp")
+texture_pressed = ExtResource("7_md4fy")
+
+[node name="Label" type="Label" parent="REPAIR"]
+layout_mode = 0
+offset_left = 52.0
+offset_right = 137.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "REPAIR"
+
+[connection signal="pressed" from="REPAIR" to="." method="_on_repair_pressed"]

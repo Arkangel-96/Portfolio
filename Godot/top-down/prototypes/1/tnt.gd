@@ -8,7 +8,7 @@ var target
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-@onready var castle = get_node("/root/World/Castle")
+@onready var fortress = get_node("/root/World/Fortress")
 @onready var player = get_node("/root/World/Player")
 
 func _ready() -> void:
@@ -18,7 +18,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	#velocity=Vector2(speed,0).rotated(dir)
 	#move_and_slide()
-	target = castle.global_position
+	target = fortress.global_position
 	velocity = global_position.direction_to(target) * speed  
 	look_at(target)
 	move_and_slide()

@@ -170,4 +170,3 @@ one_way_collision_margin = 0.0
 debug_color = Color(0.718702, 0.59397, 0.273698, 0.42)
 
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
-[connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]

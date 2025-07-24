@@ -27,5 +27,5 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		HP_label.text = "HP: " +str(world.hp)
 		on_death()
 		if world.hp <= 0:
-			world.on_death()	
+			world.on_death()
 	

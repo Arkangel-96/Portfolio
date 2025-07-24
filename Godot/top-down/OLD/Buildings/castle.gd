@@ -8,7 +8,7 @@ var flames
 @onready var nodo: Node2D = $Flames
 @onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 @onready var obrero: Node2D = $Worker
-@onready var health_component: HealthComponent = $Components/HealthComponent
+#@onready var health_component: HealthComponent = $Components/HealthComponent
 
 
 

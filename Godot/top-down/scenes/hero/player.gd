@@ -1,4 +1,4 @@
-class_name Player extends Info 
+class_name Player extends Info
 
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
 
@@ -11,7 +11,7 @@ class_name Player extends Info
 @onready var shop_menu: CanvasLayer = $"../ShopMenu"
 
 
-@onready var pawn = get_node("/root/World/Pawn")
+@onready var worker = get_node("/root/World/Worker")
 #@onready var pawn: Pawn = $"../Pawn"
 
 
@@ -198,7 +198,7 @@ func _on_area_lr_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = true
 	
-	elif body is Build:
+	elif body is Worker:
 		print("olaaa")	
 		shop_menu.show()
 		inventory_ui.show()
@@ -208,7 +208,7 @@ func _on_area_lr_body_entered(body: Node2D) -> void:
 func _on_area_lr_body_exited(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = false
-	elif body is Build:
+	elif body is Worker:
 		shop_menu.hide()
 		inventory_ui.hide()
 		world.shop = false
