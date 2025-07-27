@@ -1,4 +1,4 @@
-class_name Castle extends Build
+class_name Castle extends Info
 
 
 const FIRE = preload("res://scenes/FX/Fire.tscn")

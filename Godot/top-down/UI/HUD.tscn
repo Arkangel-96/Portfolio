@@ -26,7 +26,7 @@ script = ExtResource("1_md4fy")
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 299.0
-offset_top = -64.0
+offset_top = -75.0
 offset_right = 1503.0
 offset_bottom = 50.0
 scale = Vector2(0.642381, 1.04227)
@@ -34,16 +34,33 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_toqtt")
 
+[node name="HP" type="Sprite2D" parent="."]
+position = Vector2(356.496, -35.504)
+scale = Vector2(0.953, 0.953)
+texture = ExtResource("1_ahhtf")
+
+[node name="HP_Label" type="Label" parent="."]
+offset_left = 396.496
+offset_top = -62.504
+offset_right = 504.496
+offset_bottom = -3.504
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "HP: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Level" type="Sprite2D" parent="."]
-position = Vector2(379.083, 25.5)
+position = Vector2(359.083, 16.5)
 scale = Vector2(1.09635, 0.953125)
 texture = ExtResource("2_uo2fv")
 
 [node name="Level_Label" type="Label" parent="."]
-offset_left = 417.083
-offset_top = -2.5
-offset_right = 533.083
-offset_bottom = 56.5
+offset_left = 397.083
+offset_top = -11.5
+offset_right = 513.083
+offset_bottom = 47.5
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
@@ -52,15 +69,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EXP" type="Sprite2D" parent="."]
-position = Vector2(587, 18)
+position = Vector2(554, 14)
 scale = Vector2(0.314453, 0.338542)
 texture = ExtResource("3_uo2fv")
 
 [node name="EXP_Label" type="Label" parent="."]
-offset_left = 617.0
-offset_top = -3.0
-offset_right = 704.0
-offset_bottom = 56.0
+offset_left = 584.0
+offset_top = -7.0
+offset_right = 671.0
+offset_bottom = 52.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
@@ -68,28 +85,11 @@ text = "EXP: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HP" type="Sprite2D" parent="."]
-position = Vector2(376.496, -26.504)
-scale = Vector2(0.953, 0.953)
-texture = ExtResource("1_ahhtf")
-
-[node name="HP_Label" type="Label" parent="."]
-offset_left = 416.496
-offset_top = -53.504
-offset_right = 524.496
-offset_bottom = 5.496
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "HP: 100"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Minutes" type="Label" parent="."]
-offset_left = 554.0
-offset_top = -58.0
-offset_right = 643.0
-offset_bottom = 1.0
+offset_left = 521.0
+offset_top = -62.0
+offset_right = 610.0
+offset_bottom = -3.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
@@ -98,9 +98,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Seconds" type="Label" parent="."]
-offset_left = 658.0
-offset_top = -59.0
-offset_right = 742.0
+offset_left = 625.0
+offset_top = -63.0
+offset_right = 709.0
+offset_bottom = -4.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
@@ -109,15 +110,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="wave" type="Sprite2D" parent="."]
-position = Vector2(769, -25)
+position = Vector2(747.4, -17)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_047uy")
 
 [node name="wave_Label" type="Label" parent="."]
-offset_left = 771.0
-offset_top = -58.0
-offset_right = 931.0
-offset_bottom = 20.0
+offset_left = 749.4
+offset_top = -51.0
+offset_right = 909.4
+offset_bottom = 27.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
@@ -126,15 +127,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="enemies" type="Sprite2D" parent="."]
-position = Vector2(733, 15)
+position = Vector2(711.4, 9)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_5pdws")
 
 [node name="enemies_Label" type="Label" parent="."]
-offset_left = 731.0
-offset_top = -10.0
-offset_right = 938.0
-offset_bottom = 68.0
+offset_left = 709.4
+offset_top = -16.0
+offset_right = 916.4
+offset_bottom = 62.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
@@ -143,56 +144,68 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="G_ICON" type="TextureRect" parent="."]
-offset_left = 907.0
-offset_top = -54.0
-offset_right = 971.0
-offset_bottom = 10.0002
+offset_left = 908.0
+offset_top = -41.0
+offset_right = 972.0
+offset_bottom = 23.0002
 texture = ExtResource("7_am7sw")
 
 [node name="Gold" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = 979.589
-offset_top = -49.2941
-offset_right = 1059.59
-offset_bottom = 9.70622
+offset_left = 974.0
+offset_top = -34.0
+offset_right = 1054.0
+offset_bottom = 25.0003
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "58743"
 horizontal_alignment = 2
 
 [node name="W_ICON" type="TextureRect" parent="."]
-offset_left = 910.53
-offset_top = -3.41167
-offset_right = 974.53
-offset_bottom = 60.5882
+offset_left = 911.0
+offset_top = -0.999988
+offset_right = 975.0
+offset_bottom = 62.9999
 texture = ExtResource("8_ixkb2")
 
 [node name="Wood" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = 977.589
-offset_top = -1.29408
-offset_right = 1057.59
-offset_bottom = 57.7059
+offset_left = 974.0
+offset_top = 4.99999
+offset_right = 1054.0
+offset_bottom = 64.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "58743"
 horizontal_alignment = 2
 
 [node name="REPAIR" type="TextureButton" parent="."]
-offset_left = 888.0
-offset_top = -102.0
-offset_right = 1088.0
-offset_bottom = -30.0
+offset_left = 878.0
+offset_top = -131.0
+offset_right = 1078.0
+offset_bottom = -58.0
 texture_normal = ExtResource("6_2ptjp")
 texture_pressed = ExtResource("7_md4fy")
 
-[node name="Label" type="Label" parent="REPAIR"]
+[node name="Title" type="Label" parent="REPAIR"]
 layout_mode = 0
-offset_left = 52.0
-offset_right = 137.0
-offset_bottom = 50.0
+offset_left = 49.0
+offset_top = -1.0
+offset_right = 145.0
+offset_bottom = 49.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 text = "REPAIR"
+
+[node name="Amount" type="Label" parent="REPAIR"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -47.0
+offset_top = 57.0
+offset_right = 108.0
+offset_bottom = 107.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Repair cost:"
 
 [connection signal="pressed" from="REPAIR" to="." method="_on_repair_pressed"]

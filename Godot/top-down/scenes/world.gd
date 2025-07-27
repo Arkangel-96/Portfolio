@@ -8,6 +8,8 @@ const GOBLIN = preload("res://scenes/enemy/Goblin.tscn")
 
 ## variables del jugador ##
 var hp : int
+var hpMax : int
+var hpDmg : int
 var level : int
 var exp : int
 var gold : int
@@ -49,6 +51,7 @@ func _ready() -> void:
 
 func new_game():	
 	get_tree().call_group("items", "queue_free") 
+	hpMax = 100
 	hp = 100
 	level = 1
 	exp = 0
@@ -83,7 +86,8 @@ func is_wave_completed():
 		return false
 	
 func _physics_process(delta: float) -> void:
-
+	
+	hpDmg = (hpMax -hp) 
 	$HUD/HP_Label.text = "HP: " + str(hp)
 	$HUD/EXP_Label.text = "EXP: " + str(exp)
 	if is_wave_completed():

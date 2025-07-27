@@ -38,16 +38,20 @@ func _on_inv_item_consumed(item_type: Item.ItemType, quantity_left: int) -> void
 			existing_node.set_quantity(quantity_left)
 		else:
 			existing_node.queue_free()	
-		if item_type == Item.ItemType.MUSHROOM:
-			world.gold += 25
-		elif item_type == Item.ItemType.GEM:
-			world.gold += 25
-		elif item_type == Item.ItemType.COCA:
+			
+		## OTORGAN ORO ##
+		if item_type == Item.ItemType.GEM:
 			world.gold += 50
-		elif item_type == Item.ItemType.PUMPKIN:
+		elif item_type == Item.ItemType.COCA:
 			world.gold += 50
 		elif item_type == Item.ItemType.GOLD:
 			world.gold += 100
+			
+		## OTORGAN MADERA ##
+		elif item_type == Item.ItemType.MUSHROOM:
+			world.wood += 50
+		elif item_type == Item.ItemType.PUMPKIN:
+			world.wood += 50
 		elif item_type == Item.ItemType.WOOD:
 			world.wood += 100	
 		
