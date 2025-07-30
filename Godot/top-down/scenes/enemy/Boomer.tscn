@@ -237,9 +237,9 @@ radius = 81.0062
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wwv6"]
 bg_color = Color(0.858579, 0, 0.166135, 1)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u7t47"]
-radius = 15.0
-height = 40.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3ndp6"]
+radius = 16.0
+height = 32.0
 
 [node name="Boomer" type="CharacterBody2D"]
 collision_layer = 2
@@ -250,7 +250,7 @@ script = ExtResource("1_3ndp6")
 process_mode = 3
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_pul1y")
-animation = &"dead"
+animation = &"run"
 autoplay = "run"
 offset = Vector2(0, -10)
 
@@ -282,12 +282,12 @@ theme_override_styles/background = SubResource("StyleBoxFlat_ft8do")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5wwv6")
 show_percentage = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_u7t47")
-debug_color = Color(0.740857, 0.542835, 0.113842, 0.42)
-
 [node name="AudioStreamPlayerATK" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_6m2q0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_3ndp6")
+debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AreaAttack" to="." method="_on_area_attack_body_entered"]

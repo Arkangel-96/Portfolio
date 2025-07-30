@@ -10,6 +10,8 @@ class_name Player extends Info
 
 @onready var shop_menu: CanvasLayer = $"../ShopMenu"
 
+@onready var trade_menu: TradeMenu = $"../TradeMenu"
+
 
 @onready var worker = get_node("/root/World/Worker")
 #@onready var pawn: Pawn = $"../Pawn"
@@ -203,7 +205,10 @@ func _on_area_lr_body_entered(body: Node2D) -> void:
 		shop_menu.show()
 		inventory_ui.show()
 		world.shop = true
-		
+	elif body is Trader:
+		print("olaaa")	
+		trade_menu.show()
+		world.shop = true	
 
 func _on_area_lr_body_exited(body: Node2D) -> void:
 	if body is Enemy:
@@ -211,6 +216,9 @@ func _on_area_lr_body_exited(body: Node2D) -> void:
 	elif body is Worker:
 		shop_menu.hide()
 		inventory_ui.hide()
+		world.shop = false
+	elif body is Trader:
+		trade_menu.hide()
 		world.shop = false
 		
 func _on_area_ud_body_entered(body: Node2D) -> void:

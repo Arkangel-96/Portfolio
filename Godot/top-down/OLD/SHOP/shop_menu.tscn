@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bd0hv10crsk8d"]
 
-[ext_resource type="PackedScene" uid="uid://ca1a183620qj5" path="res://Shop/Shop_Item_Button.tscn" id="1_d3ese"]
-[ext_resource type="Script" uid="uid://c1o4ijtg0reys" path="res://Shop/shop_menu.gd" id="1_ftc3e"]
+[ext_resource type="PackedScene" uid="uid://ca1a183620qj5" path="res://shop/TradeMenu.tscn" id="1_d3ese"]
+[ext_resource type="Script" uid="uid://c1o4ijtg0reys" path="res://shop/shopMenu.gd" id="1_ftc3e"]
 [ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="2_dl1a4"]
 [ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="2_trc7g"]
 [ext_resource type="Texture2D" uid="uid://nhuspb4j46tc" path="res://art/UI/Buttons/Button_Blue_3Slides.png" id="5_6j77p"]

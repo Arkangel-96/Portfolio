@@ -150,22 +150,23 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 		if body is Fortress:	
 			move_speed = 0
 			attack()
-			incoming = false
+			#incoming = false
 	
 		elif body is Player:
-			move_speed =0
-			attack()
+			pass
+			#move_speed =0
+			#attack()
 		#elif (body is Enemy) and incoming:
 			#await get_tree().create_timer(15).timeout
 		#
 	else:
 		pass
 
-
-func _on_area_attack_body_exited(body: Node2D) -> void:
-	if (body is Player) and incoming :
-		move_speed = 200
-		is_attack = false
+#
+#func _on_area_attack_body_exited(body: Node2D) -> void:
+	#if (body is Player) and incoming :
+		#move_speed = 200
+		#is_attack = false
 
 
 		

@@ -58,7 +58,7 @@ func new_game():
 	gold = 0
 	wood = 0
 	wave = 1
-	difficulty = 5.0
+	difficulty = 10.0
 	#$EnemySpawnerTimer/Timer.wait_time = 1.0
 	min = 0
 	sec = 0
