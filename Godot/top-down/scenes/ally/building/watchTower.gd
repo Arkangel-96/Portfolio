@@ -47,24 +47,19 @@ func _on_area_body_entered(body: Node2D) -> void:
 		elif body.is_in_group("enemies"):  
 				###                              ###	
 			tempArray.append(body)
-			move_direction = (body.position - global_position).normalized()	
+			
+			move_direction = (body.position - global_position).normalized()
+			if move_direction.x !=0:
+				animated_sprite.flip_h = move_direction.x < 0
+				animated_sprite.play("attack_0º")
+			$Area.scale.x = -1 if move_direction.x < 0 else 1	
 			var tempArrow = ARROW.instantiate()
 				## COOLDOWN DEL ATAQUE ##
 			await get_tree().create_timer(1).timeout
 				##                  ###
 			get_node("arrowManager").add_child(tempArrow)
-			#if move_direction.x !=0:
-				#animated_sprite.flip_h = move_direction.x < 0
-				#$Top.scale.x = -1 if move_direction.x < 0 else 1
-				#
-				#$TopCorner.scale.x = -1 if move_direction.x < 0 else 1
-				#
-				#$Mid.scale.x = -1 if move_direction.x < 0 else 1	
-				#
-				#$BotCorner.scale.x = -1 if move_direction.x < 0 else 1
-					#
-				#$Bot.scale.x = -1 if move_direction.x < 0 else 1	
-				
+			
+
 				
 			if tempArray == []:
 					animated_sprite.play("idle")  

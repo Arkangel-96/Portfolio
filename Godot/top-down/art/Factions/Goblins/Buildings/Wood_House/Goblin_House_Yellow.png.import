@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm7bdtwc626mg"
-path="res://.godot/imported/Warrior.png-795ac3ded506cee46d72cef760090162.ctex"
+uid="uid://cqop46k1qn3tq"
+path="res://.godot/imported/Goblin_House_Yellow.png-6be35f734accbcd4518a6962a030fe4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Factions/Knights/Troops/Warrior/Steel/Warrior.png"
-dest_files=["res://.godot/imported/Warrior.png-795ac3ded506cee46d72cef760090162.ctex"]
+source_file="res://art/Factions/Goblins/Buildings/Wood_House/Goblin_House_Yellow.png"
+dest_files=["res://.godot/imported/Goblin_House_Yellow.png-6be35f734accbcd4518a6962a030fe4e.ctex"]
 
 [params]
 

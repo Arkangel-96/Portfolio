@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://yb71r62ykcia"]
+[gd_scene load_steps=8 format=3 uid="uid://dlakspr6opa3o"]
 
-[ext_resource type="Script" uid="uid://cgoupgds1d4vi" path="res://scenes/ally/building/house.gd" id="1_e8omn"]
-[ext_resource type="Texture2D" uid="uid://cf4755sjeepro" path="res://art/Factions/Knights/Buildings/House/House_Blue.png" id="2_cvppa"]
-[ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="3_6h4bn"]
-[ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="4_f7ld6"]
+[ext_resource type="Script" uid="uid://cgoupgds1d4vi" path="res://scenes/ally/building/house.gd" id="1_jl5hl"]
+[ext_resource type="Texture2D" uid="uid://cbwdjmluq7opc" path="res://art/Factions/Knights/Buildings/House/House_Purple.png" id="2_uwr8g"]
+[ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="3_tdx88"]
+[ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="4_00bu3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cutwm"]
 size = Vector2(121.75, 132)
@@ -13,14 +13,14 @@ size = Vector2(121.75, 132)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6pmem"]
 bg_color = Color(0.858579, 0, 0.166135, 1)
 
-[node name="House" type="CharacterBody2D"]
-script = ExtResource("1_e8omn")
+[node name="House_Purple" type="CharacterBody2D"]
+script = ExtResource("1_jl5hl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, 65)
 scale = Vector2(1.25, 1.25)
-texture = ExtResource("2_cvppa")
+texture = ExtResource("2_uwr8g")
 offset = Vector2(0, -50)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -30,9 +30,9 @@ shape = SubResource("RectangleShape2D_cutwm")
 
 [node name="Components" type="Node" parent="."]
 
-[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("progress_bar") instance=ExtResource("3_6h4bn")]
+[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("progress_bar") instance=ExtResource("3_tdx88")]
 position = Vector2(0, -96)
-script = ExtResource("4_f7ld6")
+script = ExtResource("4_00bu3")
 progress_bar = NodePath("../../ProgressBar")
 current_health = 100
 

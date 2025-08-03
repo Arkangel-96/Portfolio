@@ -462,9 +462,8 @@ script = ExtResource("1_3li8b")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_gp031")
-animation = &"idle_L&R"
+animation = &"attack_down_1"
 autoplay = "idle_L&R"
-frame_progress = 0.0386027
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 9)
@@ -472,7 +471,6 @@ shape = SubResource("CapsuleShape2D_ixa2j")
 debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 
 [node name="shooting_point" type="Node2D" parent="."]
 unique_name_in_owner = true

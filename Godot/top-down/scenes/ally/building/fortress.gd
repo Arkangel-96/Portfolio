@@ -45,6 +45,8 @@ func repair():
 		get_node("Worker").visible= true
 		get_node("Worker").process_mode = Node.PROCESS_MODE_INHERIT	
 		
-		
+
+func reset():
+	progress_bar.value = 100		
 ###await get_tree().create_timer(3).timeout
  ##world.call_deferred("add_child", MUSHROOM)

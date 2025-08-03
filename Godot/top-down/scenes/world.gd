@@ -28,8 +28,10 @@ var shop: bool = false
 @onready var EnemySpawner: Timer = $EnemySpawnerTimer
 @onready var player = get_node("/root/World/Player")
 @onready var fortress = get_node("/root/World/Fortress")
-@onready var torre: CharacterBody2D = $Torre
-@onready var torre_2: CharacterBody2D = $Torre2
+@onready var watch_tower: CharacterBody2D = $Watch_Tower
+@onready var watch_tower_2: CharacterBody2D = $Watch_Tower_2
+@onready var watch_tower_3: CharacterBody2D = $Watch_Tower_3
+
 
 
 
@@ -62,9 +64,11 @@ func new_game():
 	#$EnemySpawnerTimer/Timer.wait_time = 1.0
 	min = 0
 	sec = 0
+	fortress.reset()
 	player.reset()
-	torre.reset()
-	torre_2.reset()
+	watch_tower.reset()
+	watch_tower_2.reset()
+	watch_tower_3.reset()
 	reset()
 
 func is_wave_completed():
@@ -93,8 +97,8 @@ func _physics_process(delta: float) -> void:
 	if is_wave_completed():
 		wave += 1
 		difficulty *= DIFF_MULTIPLIER
-		torre.reset()
-		torre_2.reset()
+		watch_tower.reset()
+		watch_tower_2.reset()
 		#if $EnemySpawnerTimer/Timer.wait_time > 0.25:
 			#$EnemySpawnerTimer/Timer.wait_time -= 0.05
 		reset()
