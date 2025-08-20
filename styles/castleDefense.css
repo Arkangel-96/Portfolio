@@ -93,34 +93,48 @@
 }
 
 .menu{
-    background:url(/img/naranja.jpeg);
+    background-image:url(../img/Carved_3Slides_pattern.png);
+    background-size: contain;  
+
     width: 100%;
-    height: 170px;
+
     display: flex;
     justify-content: center;
     align-items:center;
-    font-family: "Julee", cursive;
-    font-size: 4vh;
-    color: goldenrod;
-    justify-content: center;
-    align-items:center;
+
+  
    
    
 }
 
+.btnMenu {
+  display: inline-block;
+  background: url("../img/Buttons/Button_Hover_3Slides.png") no-repeat center center;
+  background-size: contain;
+  width: 190px;   /* ajusta al tamaño real de la imagen */
+  height: 64px;   /* ajusta al tamaño real de la imagen */
+  line-height: 64px;
+  text-align: center;
+  color: black;   /* cambia según contraste */
+  font-family: 'Julee', cursive;
+  font-size: 4vh;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.btnMenu:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
 
 .elementosMenu{
     
     position: relative; 
     display: flex;
-    background-color:rgb(255, 165, 0, 0.15) ;
-    animation-play-state: paused ;
     border-radius: 10%;
     margin: 1%;
     align-items: center;
-    border-style: solid;
-    border-width: 2.5px;
-    border-color: black;
+
     
 
 
@@ -139,22 +153,60 @@ a {
 
  
 .main{
-
+    background-image:url("https://i.redd.it/f22woqj3miz91.gif") ;
+    background-size: cover;
     display: flex;
     justify-content: center;
     gap: 2.5vh;
-    width: 75%;
-    color: goldenrod;
+    width: 75%; 
+    color: black;
     font-size: 3vh;
     align-items: center;
+    min-height:100dvh;
+    min-width :230dvh;
+    position: relative;
+
+/*     position:relative;  display:grid; place-items:center; overflow:hidden;
+    isolation:isolate; */
+    
+}
+.text {
  
+    padding: 2.5vh;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    margin-bottom: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
 }
 
- 
+.btnPlay {
 
+    margin-top: 23%;
+    margin-left: 3%;
 
+    z-index: 2; /* Asegura que esté encima del gif */
+    display: inline-block; 
+    background: url("../img/Buttons/Button_Hover_3Slides.png") no-repeat center center;
+    background-size: contain;
+    position: absolute;
+    width: 190px;   /* ajusta al tamaño real de la imagen */
+    height: 64px;   /* ajusta al tamaño real de la imagen */
+    line-height: 64px;
+    text-align: center;
+    color: black;   /* cambia según contraste */
+    font-family: 'Julee', cursive;
+    font-size: 4vh;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+    transform-origin: center;
+}
 
-
+.btnPlay:hover{
+   
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
 
 .footer{
 

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vibes — Página temática GIF</title>
+  <meta name="description" content="Landing estética inspirada en un GIF. Efecto neon, glassmorphism y héroe a pantalla completa."/>
+  <link rel="preconnect" href="https://i.redd.it" crossorigin>
+  <style>
+    :root{
+      --bg: #0b0b12;
+      --card: rgba(255,255,255,.08);
+      --card-strong: rgba(255,255,255,.12);
+      --text: #e9ecf1;
+      --muted: #b7c0d0;
+      --neon-1: #00e5ff; /* cian */
+      --neon-2: #ff3cac; /* magenta */
+      --accent: #a9ff68; /* lima */
+      --radius: 22px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+      line-height:1.6;
+    }
+
+    /* ======= HERO ======= */
+    .hero{
+      position:relative; min-height:100dvh; display:grid; place-items:center; overflow:hidden;
+      isolation:isolate;
+    }
+    .hero::before{ /* GIF de fondo */
+      content:""; position:absolute; inset:0; z-index:-2;
+      background-image:url('https://i.redd.it/f22woqj3miz91.gif');
+      background-size:cover; background-position:center; filter:saturate(1.15) contrast(1.05) brightness(.9);
+      transform:scale(1.02);
+    }
+    .hero::after{ /* degradé de lectura */
+      content:""; position:absolute; inset:0; z-index:-1;
+      background: radial-gradient(1200px 600px at 70% 40%, transparent 20%, rgba(0,0,0,.45) 60%, rgba(0,0,0,.75)),
+                  linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.15));
+      pointer-events:none;
+    }
+
+    .container{width:min(1100px, 92vw); margin-inline:auto}
+
+    .nav{
+      position:fixed; inset: 18px 18px auto; display:flex; align-items:center; gap:14px;
+      padding:10px 14px; border-radius:calc(var(--radius) - 6px);
+      background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow); border:1px solid rgba(255,255,255,.18);
+    }
+    .nav a{color:var(--text); text-decoration:none; font-weight:600; opacity:.9}
+    .nav .dot{width:7px; height:7px; border-radius:99px; background:var(--accent); box-shadow:0 0 12px var(--accent)}
+
+    .hero-inner{padding: 120px 0 70px; text-align:center}
+    h1{
+      margin:0 0 14px; font-size: clamp(2.2rem, 5.6vw, 4rem); line-height:1.1; letter-spacing:.4px;
+      text-shadow: 0 8px 24px rgba(0,0,0,.5);
+    }
+    .gradient-text{
+      background: linear-gradient(90deg, var(--neon-2), var(--neon-1));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      filter: drop-shadow(0 0 14px rgba(0,229,255,.18)) drop-shadow(0 0 18px rgba(255,60,172,.15));
+    }
+    .lead{color:var(--muted); max-width: 68ch; margin: 0 auto 28px; font-size: clamp(1.05rem, 1.9vw, 1.2rem)}
+
+    .actions{display:flex; justify-content:center; gap:12px; flex-wrap:wrap}
+    .btn{
+      appearance:none; border:0; cursor:pointer; padding:12px 18px; font-weight:700;
+      border-radius: var(--radius); box-shadow: var(--shadow); transition:.22s transform, .22s filter;
+    }
+    .btn-primary{
+      color:#08141a; background: linear-gradient(90deg, var(--neon-1), var(--accent));
+      text-shadow: none;
+    }
+    .btn-ghost{
+      color:var(--text); background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
+    .btn:hover{ transform: translateY(-2px); filter:saturate(1.05)}
+
+    /* ======= TARJETAS ======= */
+    .cards{ display:grid; grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) ); gap:18px; margin-top:60px }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.16);
+      border-radius: var(--radius); padding:18px; box-shadow: var(--shadow);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
+    .chip{ display:inline-flex; align-items:center; gap:8px; font-size:.9rem; opacity:.9 }
+    .chip .pulse{ width:9px; height:9px; border-radius:99px; background:var(--neon-2); box-shadow:0 0 14px var(--neon-2); }
+
+    .card h3{margin:10px 0 6px}
+    .card p{ color: var(--muted); margin:0 }
+
+    /* ======= SECCIÓN GALERÍA ======= */
+    .section{padding:80px 0; position:relative}
+    .section h2{ text-align:center; font-size: clamp(1.6rem, 3.4vw, 2.6rem); margin:0 0 12px }
+    .section .sub{ text-align:center; color:var(--muted); margin:0 0 26px }
+
+    .gallery{ display:grid; grid-template-columns: repeat( auto-fit, minmax(240px, 1fr) ); gap:16px }
+    .figure{
+      position:relative; border-radius: calc(var(--radius) + 4px); overflow:hidden; aspect-ratio: 4/3;
+      background: #111;
+    }
+    .figure img{ width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.05) saturate(1.05) }
+    .figure::after{ content:""; position:absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,.6), rgba(0,0,0,.0)); }
+
+    /* ======= FOOTER ======= */
+    footer{ padding:24px 0 40px; color:var(--muted); text-align:center; border-top: 1px solid rgba(255,255,255,.08) }
+    .links{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:8px }
+    .links a{ color:var(--text); opacity:.85; text-decoration:none }
+
+    /* ======= CONTROLES ======= */
+    .controls{
+      position: fixed; right:18px; bottom:18px; z-index: 10;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .control{
+      padding:10px 12px; border-radius: 14px; backdrop-filter: blur(8px);
+      background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.18); color:var(--text);
+      font-weight:600; cursor:pointer; box-shadow: var(--shadow);
+    }
+
+    @media (prefers-reduced-motion: no-preference){
+      .float{ animation: float 6s ease-in-out infinite }
+      @keyframes float{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-8px) } }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <span class="dot"></span>
+    <a href="#inicio">Inicio</a>
+    <a href="#galeria">Galería</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <header id="inicio" class="hero">
+    <div class="container hero-inner">
+      <h1>
+        Estética <span class="gradient-text">Vibes</span>
+      </h1>
+      <p class="lead">Landing moderna inspirada en tu GIF. Efecto glass + neón, tipografía limpia y secciones listas para contenido real.</p>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="document.getElementById('galeria').scrollIntoView({behavior:'smooth'})">Ver galería</button>
+        <a class="btn btn-ghost" href="#contacto">Contactar</a>
+      </div>
+
+      <div class="cards container">
+        <article class="card float">
+          <div class="chip"><span class="pulse"></span> Animación de fondo</div>
+          <h3>Hero con GIF</h3>
+          <p>Se adapta a pantalla completa. Trae un overlay para buena legibilidad.</p>
+        </article>
+        <article class="card float" style="animation-delay:.4s">
+          <div class="chip"><span class="pulse" style="background:var(--neon-1); box-shadow:0 0 14px var(--neon-1)"></span> Estilo</div>
+          <h3>Neón + Glass</h3>
+          <p>Botones con gradiente, tarjetas translúcidas y sombras suaves.</p>
+        </article>
+        <article class="card float" style="animation-delay:.8s">
+          <div class="chip"><span class="pulse" style="background:var(--accent); box-shadow:0 0 14px var(--accent)"></span> Fácil</div>
+          <h3>Personalizable</h3>
+          <p>Cambia el enlace del GIF, colores y textos en segundos.</p>
+        </article>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="galeria" class="section">
+      <div class="container">
+        <h2>Galería</h2>
+        <p class="sub">Imágenes que combinan con la vibra de tu GIF (puedes reemplazarlas por las tuyas).</p>
+        <div class="gallery">
+          <figure class="figure"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop" alt="neón"></figure>
+          <figure class="figure"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop" alt="paisaje"></figure>
+          <figure class="figure"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="luces"></figure>
+          <figure class="figure"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop" alt="ciudad"></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="section">
+      <div class="container">
+        <h2>Contacto</h2>
+        <p class="sub">¿Te gustó? Escribe un mensaje y te respondo en breve.</p>
+        <form class="cards" onsubmit="event.preventDefault(); alert('¡Gracias! Me pondré en contacto pronto.');">
+          <div class="card">
+            <label>Nombre<br><input required placeholder="Tu nombre" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.2); background:rgba(0,0,0,.2); color:var(--text)"></label>
+          </div>
+          <div class="card">
+            <label>Email<br><input required type="email" placeholder="tu@email.com" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.2); background:rgba(0,0,0,.2); color:var(--text)"></label>
+          </div>
+          <div class="card" style="grid-column:1/-1">
+            <label>Mensaje<br><textarea required placeholder="Cuéntame tu idea" rows="5" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.2); background:rgba(0,0,0,.2); color:var(--text)"></textarea></label>
+          </div>
+          <div style="text-align:center; grid-column:1/-1">
+            <button class="btn btn-primary" type="submit">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year"></span> Vibes — Hecho con ❤️</small>
+      <div class="links">
+        <a href="#inicio">Volver arriba</a>
+        <a href="https://i.redd.it/f22woqj3miz91.gif" target="_blank" rel="noopener">Ver GIF</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Controles rápidos -->
+  <div class="controls">
+    <button class="control" id="swapPalette">Cambiar paleta</button>
+    <button class="control" id="swapGif">Cambiar GIF</button>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Alterna entre dos paletas llamativas por si el GIF es más frío o más cálido
+    let alt = false;
+    document.getElementById('swapPalette').addEventListener('click', () => {
+      alt = !alt;
+      if(alt){
+        document.documentElement.style.setProperty('--neon-1', '#ffd166');
+        document.documentElement.style.setProperty('--neon-2', '#ef476f');
+        document.documentElement.style.setProperty('--accent',  '#06d6a0');
+      }else{
+        document.documentElement.style.setProperty('--neon-1', '#00e5ff');
+        document.documentElement.style.setProperty('--neon-2', '#ff3cac');
+        document.documentElement.style.setProperty('--accent',  '#a9ff68');
+      }
+    });
+
+    // Permite pegar otro enlace de GIF/imagen para el hero
+    document.getElementById('swapGif').addEventListener('click', () => {
+      const url = prompt('Pega el enlace de tu GIF o imagen:');
+      if(!url) return;
+      const hero = document.querySelector('.hero');
+      hero.style.setProperty('--bg-url', `url('${url}')`);
+      hero.style.setProperty('background-image', `url('${url}')`);
+      // Ajustamos usando ::before, así que modificamos el style directamente en el pseudo via data-attr
+      hero.dataset.bg = url;
+      // Hack: inyectar una regla dinámica para ::before
+      const id = 'dynamic-bg';
+      let style = document.getElementById(id);
+      if(!style){ style = document.createElement('style'); style.id = id; document.head.appendChild(style); }
+      style.textContent = `.hero::before{background-image:url('${url}');}`;
+    });
+  </script>
+</body>
+</html>

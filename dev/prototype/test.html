@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Matías Baltieri — Developer</title>
+  <title>Matías Baltieri — Desarrollador</title>
   <meta name="description" content="Sitio personal: proyectos, blog y contacto." />
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -11,8 +11,6 @@
     /* Gradientes y utilidades pequeñas personalizadas */
     .hero-bg{background: radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,.25), transparent 60%),radial-gradient(1000px 500px at 110% 10%, rgba(139,92,246,.25), transparent 60%),linear-gradient(180deg,#0a0a0a 0%,#0b0b0b 100%);} 
     .glass{backdrop-filter:saturate(160%) blur(8px);}
-
-    
   </style>
 </head>
 <body class="bg-neutral-950 text-neutral-100 selection:bg-indigo-400/30 selection:text-white">
@@ -21,15 +19,14 @@
     <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
       <a href="#inicio" class="flex items-center gap-3">
         <span class="inline-block h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 to-sky-500"></span>
-        <span class="text-sm font-semibold tracking-wide">ARKANGEL-96</span>
+        <span class="text-sm font-semibold tracking-wide">MATÍAS BALTIERI</span>
       </a>
       <ul class="hidden gap-6 text-sm md:flex">
         <li><a class="hover:text-white/90 text-white/70" href="#inicio">Inicio</a></li>
-        <li><a class="hover:text-white/90 text-white/70" href="#github">Actividad</a></li>
-  <!--   <li><a class="hover:text-white/90 text-white/70" href="#experiencia">Experiencia</a></li> -->
+        <li><a class="hover:text-white/90 text-white/70" href="#actividad">Actividad</a></li>
+        <li><a class="hover:text-white/90 text-white/70" href="#experiencia">Experiencia</a></li>
         <li><a class="hover:text-white/90 text-white/70" href="#tecnologias">Tecnologías</a></li>
         <li><a class="hover:text-white/90 text-white/70" href="#proyectos">Proyectos</a></li>
-        <li><a class="hover:text-white/90 text-white/70" href="#codersrank">CodersRank</a></li>
         <li><a class="hover:text-white/90 text-white/70" href="#contacto">Contacto</a></li>
       </ul>
       <button id="menuBtn" class="md:hidden rounded-xl border border-white/10 px-3 py-1 text-sm text-white/80">Menú</button>
@@ -38,12 +35,11 @@
     <div id="mobileMenu" class="hidden border-t border-white/5 bg-neutral-950/95 md:hidden">
       <ul class="mx-auto max-w-6xl px-4 py-3 grid grid-cols-2 gap-3 text-sm">
         <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#inicio">Inicio</a></li>
-        <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="github">Actividad</a></li>
-<!--     <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#experiencia">Experiencia</a></li> -->
+        <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#actividad">Actividad</a></li>
+        <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#experiencia">Experiencia</a></li>
         <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#tecnologias">Tecnologías</a></li>
         <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#articulos">Artículos</a></li>
         <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#proyectos">Proyectos</a></li>
-        <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#codersrank">CodersRank</a></li>
         <li class="col-span-2"><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#contacto">Contacto</a></li>
       </ul>
     </div>
@@ -58,22 +54,21 @@
             Hola, soy <span class="bg-gradient-to-r from-indigo-400 to-sky-400 bg-clip-text text-transparent">Matías</span>.
           </h1>
           <p class="mt-4 max-w-2xl text-base sm:text-lg text-white/80">
-            Python Full Stack Developer y Graphic Designer. Entusiasta de la tecnología, trato de sacarle el mayor provecho a la IA. Comparto recursos, tutoriales y proyectos
-            sobre programación, web. Este es mi espacio para aprender y crear.
+            Desarrollador y entusiasta de la tecnología. Comparto recursos, tutoriales y proyectos
+            sobre programación, web. Este es mi espacio para aprender y crear en comunidad.
           </p>
-           <!-- Redes -->
-          <div class="mt-6 flex flex-wrap items-center gap-3 text-white/70">
-            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://whatsapp.com/channel/0029Vb6X4Oc4NVifA4IroN2S" target="_blank" rel="noopener">WhatsApp</a>
-            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://www.youtube.com/@game-dev-96" target="_blank" rel="noopener">YouTube</a>
-            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://steamcommunity.com/id/troyano207" target="_blank" rel="noopener">Steam</a>
-            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://github.com/Arkangel-96" target="_blank" rel="noopener">GitHub</a>
-            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://www.linkedin.com/in/mat%C3%ADas-baltieri-6b09662a6/" target="_blank" rel="noopener">LinkedIn</a>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#articulos" class="rounded-xl bg-white/10 px-4 py-2 text-sm hover:bg-white/20">Ir al Blog</a>
             <a href="#contacto" class="rounded-xl bg-indigo-500/90 px-4 py-2 text-sm font-semibold hover:bg-indigo-400">Contacto</a>
           </div>
-          <!--  <div class="mt-6 flex flex-wrap gap-3">
-            <a href="#contacto" class="rounded-xl bg-indigo-500/90 px-4 py-2 text-sm font-semibold hover:bg-indigo-400">Contacto</a>
-          </div> -->
-         
+          <!-- Redes -->
+          <div class="mt-6 flex flex-wrap items-center gap-3 text-white/70">
+            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
+            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
+            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
         </div>
         <div class="justify-self-center">
           <div class="relative">
@@ -104,8 +99,27 @@
     </div>
   </section>
 
+  <!-- ACTIVIDAD / CTA BARRA -->
+  <section id="actividad" class="border-y border-white/5 bg-neutral-950/60">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid gap-4 py-6 sm:grid-cols-3">
+        <div class="rounded-2xl border border-white/10 p-4">
+          <p class="text-sm text-white/60">Actividad</p>
+          <p class="text-xl font-semibold">Escribiendo sobre JS y herramientas web</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 p-4">
+          <p class="text-sm text-white/60">Haciendo</p>
+          <p class="text-xl font-semibold">Construyendo un portafolio con Astro/Vite</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 p-4">
+          <p class="text-sm text-white/60">Disponibilidad</p>
+          <p class="text-xl font-semibold">Abierto a colaboraciones y freelance</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- EXPERIENCIA 
+  <!-- EXPERIENCIA -->
   <section id="experiencia" class="mx-auto max-w-6xl px-4 py-14">
     <h2 class="text-2xl font-bold">Experiencia Laboral</h2>
     <div class="mt-6 grid gap-4 md:grid-cols-2">
@@ -120,7 +134,7 @@
         <p class="mt-3 text-white/80">Aplicaciones web con Node.js, TypeScript y bases de datos SQL/NoSQL. Automatización CI/CD.</p>
       </article>
     </div>
-  </section> -->
+  </section>
 
   <!-- TECNOLOGÍAS -->
   <section id="tecnologias" class="border-y border-white/5 bg-neutral-950">
@@ -182,7 +196,7 @@
     </div>
   </section>
 
-  <!-- SPONSORS / LOGOS 
+  <!-- SPONSORS / LOGOS -->
   <section class="mx-auto max-w-6xl px-4 py-12">
     <h3 class="text-lg font-semibold">Sponsors</h3>
     <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -191,9 +205,9 @@
       <div class="rounded-2xl border border-white/10 p-6 text-center text-white/60">Sponsor 3</div>
       <div class="rounded-2xl border border-white/10 p-6 text-center text-white/60">Sponsor 4</div>
     </div>
-  </section> -->
+  </section>
 
-  <!-- CTA COMUNIDAD 
+  <!-- CTA COMUNIDAD -->
   <section class="border-t border-white/5 bg-neutral-950/60">
     <div class="mx-auto max-w-6xl px-4 py-12">
       <div class="flex flex-col items-start justify-between gap-6 rounded-2xl border border-white/10 p-6 md:flex-row md:items-center">
@@ -204,35 +218,7 @@
         <a href="#contacto" class="rounded-xl bg-indigo-500/90 px-4 py-2 text-sm font-semibold hover:bg-indigo-400">Quiero participar</a>
       </div>
     </div>
-  </section>-->
-
-
-  <!-- CODERSRANK -->
-  <section id="codersrank" class="border-y border-white/5 bg-neutral-950">
-    <div class="mx-auto max-w-6xl px-4 py-14">
-      <h2 class="text-2xl font-bold">Perfil en CodersRank</h2>
-      <p class="mt-2 text-white/70">Visualiza mis skills y actividad profesional.</p>
-
-      <div class="mt-6 rounded-2xl border border-white/10 bg-neutral-900 p-4">
-        <codersrank-portfolio
-          username="Arkangel-96"
-          max-items="6"
-          grid="4"
-          logos
-          dates
-          title
-          description
-          company
-          skills="JavaScript, TypeScript, Vue, Tailwind CSS"
-          links
-          branding
-        ></codersrank-portfolio>
-      </div>
-    </div>
   </section>
-
-  <!-- script CodersRank -->
-  <script src="https://unpkg.com/@codersrank/portfolio@latest/codersrank-portfolio.min.js"></script>
 
   <!-- CONTACTO -->
   <section id="contacto" class="mx-auto max-w-6xl px-4 py-14">
@@ -262,7 +248,8 @@
       <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p>© <span id="year"></span> Matías Baltieri. Hecho con ♥ en Argentina.</p>
         <ul class="flex flex-wrap gap-4">
-          <li><a href="#" class="hover:text-white/90">Autor</a></li>
+          <li><a href="#" class="hover:text-white/90">Autores</a></li>
+          <li><a href="#" class="hover:text-white/90">Pensamientos</a></li>
           <li><a href="#" class="hover:text-white/90">Privacidad</a></li>
         </ul>
       </div>
@@ -276,6 +263,5 @@
     const menu = document.getElementById('mobileMenu');
     btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
   </script>
-  
 </body>
 </html>
