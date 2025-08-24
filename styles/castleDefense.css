@@ -1,14 +1,10 @@
-*{
-    margin: 0%;
-    border: 0%;
-    padding: 0%;
-}
+
 
 @media only screen and (height <  300px ) {
 
-    .a{
+    .btnMenu{
      
-        font-size: 4vh;
+        size: 4vh;
     
     }
 
@@ -21,9 +17,9 @@
  
 
  
-    .a{
+    .btnMenu{
      
-     font-size: 4vh;
+     size: 4vh;
  
  }
       
@@ -31,21 +27,27 @@
  
   @media only screen and (width >  1080px ) {
  
-    .a{
+     .btnMenu{
      
-        font-size: 4vh;
+        size: 4vh;
     
     }
-
-/*     .ra {
+  }
+/*     .btnMenu {
  
      width: 2.5vh;
      height: 2.5vh;
     
- } */
+ }  */
 
  
- }
+ *{
+    margin: 0%;
+    border: 0%;
+    padding: 0%;
+    font-family: "Julee", cursive;
+    font-size: 5vh;
+}
        
  
  
@@ -66,17 +68,28 @@
 .header{
 
     display:flex;
-    background:url(/img/acolyte.jpeg);
-    width: 100%;  /* 1800px; */
-    height: 175px;
+    background-image:url(/img/background.png);
+    background-repeat:repeat-x;
+    background-size: 40%;        
+    background-position:top;    
+    width: 100%; 
+    height: 30vh;
+  
     align-items: center;
     justify-content:space-around;
     color: gold;
-    font-family: "Julee", cursive;
-    font-size: 5vh;
+   
+    
 
 }
 
+.headerTitle{
+   
+    text-overflow: clip;
+    color: goldenrod;
+    text-shadow: 0.5vh 0.5vh 0vh black; 
+    font-size: 10vh;
+}
 .boxHeader {
     margin: 0% 1% 0% 1%;
     display: flex;
@@ -97,7 +110,7 @@
     background-size: contain;  
 
     width: 100%;
-
+    height: 17vh;
     display: flex;
     justify-content: center;
     align-items:center;
@@ -108,19 +121,22 @@
 }
 
 .btnMenu {
+
   display: inline-block;
   background: url("../img/Buttons/Button_Hover_3Slides.png") no-repeat center center;
   background-size: contain;
-  width: 190px;   /* ajusta al tamaño real de la imagen */
-  height: 64px;   /* ajusta al tamaño real de la imagen */
-  line-height: 64px;
+  width: 15vw;      /* ancho relativo a la ventana */
+  height: 10vh;      /* alto relativo a la ventana */
+  min-width: 120px; /* tamaño mínimo para no ser demasiado pequeño */
+  min-height: 40px;
+/*   line-height: 7vh; */
   text-align: center;
-  color: black;   /* cambia según contraste */
-  font-family: 'Julee', cursive;
-  font-size: 4vh;
+  color: black;
+  font-size: 6vh;
   text-decoration: none;
   transition: transform 0.2s ease;
 }
+
 
 .btnMenu:hover {
   transform: scale(1.05);
@@ -147,7 +163,10 @@
 }
 
 a {
-    color: goldenrod;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    color: black;
     text-decoration: none;
 }
 
@@ -173,7 +192,7 @@ a {
 .text {
  
     padding: 2.5vh;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(148, 160, 43, 0.8);
     border-radius: 10px;
     margin-bottom: 50%;
     margin-right: 25%;
@@ -190,13 +209,12 @@ a {
     background: url("../img/Buttons/Button_Hover_3Slides.png") no-repeat center center;
     background-size: contain;
     position: absolute;
-    width: 190px;   /* ajusta al tamaño real de la imagen */
-    height: 64px;   /* ajusta al tamaño real de la imagen */
+    width: 15vw;      
+    height: 10vh; 
     line-height: 64px;
     text-align: center;
     color: black;   /* cambia según contraste */
-    font-family: 'Julee', cursive;
-    font-size: 4vh;
+    font-size: 6vh;
     text-decoration: none;
     transition: transform 0.2s ease;
     transform-origin: center;
@@ -210,18 +228,29 @@ a {
 
 .footer{
 
+    background-image:url(../img/Carved_3Slides_pattern.png);
+    background-size: contain;  
     width: 100%;
+
+
+    height: 20vh;
     display:flex;
     justify-content: center;
-    background-image: url(/img/ambar.jpeg);
-    background-size: cover;
     text-align: center;
     align-items: center;
-    color: goldenrod;
+    color: black;
     font-size: 3vh;
     
 }
 
+.footerLink{
+    text-decoration:none;
+    color:black;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    padding-bottom:5%;
+}
 .imgRedes{
     height: 5%;
     width: 5%;
