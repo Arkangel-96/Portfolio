@@ -177,12 +177,12 @@ a {
     display: flex;
     justify-content: center;
     gap: 2.5vh;
-    width: 75%; 
+   /*  width: 100%;  */
     color: black;
     font-size: 3vh;
     align-items: center;
     min-height:100dvh;
-    min-width :230dvh;
+    min-width :200dvh;
     position: relative;
 
 /*     position:relative;  display:grid; place-items:center; overflow:hidden;
