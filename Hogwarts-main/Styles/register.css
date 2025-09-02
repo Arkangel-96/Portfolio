@@ -1,0 +1,187 @@
+@font-face {
+    font-family: 'BluuNext-Bold';
+    src: url(font/BluuNext-Bold.otf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'BluuNext-Bold';
+}
+
+h3 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: blue;
+}
+
+.conteiner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/Image/registro.png);
+    min-height: 100vh;
+}
+
+.registro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 350px;
+    width: 300px;
+    flex-direction: column;
+    gap: 35px;
+    border-radius: 15px;
+    background: #e3e3e3 transparent;
+    box-shadow: 16px 16px 32px grey;
+}
+
+.inputBox {
+    position: relative;
+    width: 250px;
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    color: #000;
+    font-size: 1em;
+    background: transparent;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    transition: 0.1s;
+}
+
+.inputBox span {
+    margin-top: 5px;
+    position: absolute;
+    left: 0;
+    transform: translateY(-4px);
+    margin-left: 10px;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 12px;
+    color: #000;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 3px;
+}
+
+.inputBox input:valid~span, .inputBox input:focus~span {
+    transform: translateX(113px) translateY(-15px);
+    font-size: 0.8em;
+    padding: 5px 10px;
+    background: #000;
+    letter-spacing: 0.2em;
+    color: #fff;
+    border: 2px;
+}
+
+.inputBox input:valid, .inputBox input:focus {
+    border: 2px solid #000;
+}
+.inputBox-Login {
+    position: relative;
+    width: 250px;
+}
+
+.inputBox-Login input {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    color: #fff;
+    font-size: 1em;
+    background: transparent;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transition: 0.1s;
+}
+
+.inputBox-Login span {
+    margin-top: 5px;
+    position: absolute;
+    left: 0;
+    transform: translateY(-4px);
+    margin-left: 10px;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 12px;
+    color: #fff;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 3px;
+}
+
+.inputBox-Login input:valid~span, .inputBox-Login input:focus~span {
+    transform: translateX(113px) translateY(-15px);
+    font-size: 0.8em;
+    padding: 5px 10px;
+    background: #fff;
+    letter-spacing: 0.2em;
+    color: #000;
+    border: 2px;
+}
+
+.inputBox-Login input:valid, .inputBox-Login input:focus {
+    border: 2px solid #fff;
+}
+button {
+    height: 45px;
+    width: 100px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.5s;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+button:hover {
+    background-color: #000;
+    color: white;
+
+}
+
+.abotonregistro {
+    text-decoration: none;
+    color: rgb(255, 123, 0);
+}
+
+@media (max-width: 800px) and (min-width: 626px){
+    .conteiner {
+        background-image: url(/Image/loginresponsive.jpg);
+        background-size: 800px 1024px;
+        background-repeat: no-repeat;
+    }
+    .registro {
+        background: #D4D5C9;
+        box-shadow: none
+    }
+}
+
+@media (max-width: 419px) and (min-width: 300px){
+    h3 {
+        color: #000;
+    }
+    .conteiner {
+        background-image: url(/Image/registerresponsive.jpg);
+        background-size: 419px 896px;
+        background-position: center;
+        height: auto;
+
+    }
+    .registro {
+        background: #D4D5C9;
+        box-shadow: none
+    }
+    .abotonregistro {
+        text-decoration: none;
+        color: black;
+    }
+}

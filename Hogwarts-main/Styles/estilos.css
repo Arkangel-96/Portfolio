@@ -1,0 +1,244 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+
+
+body, h1, p {
+    font-family: "Roboto", sans-serif;
+    background-color: none;
+    color: white;
+    font-size: 2vh;
+    text-align: justify;
+}
+
+h1 {
+    font-size: 5vh;
+    font-weight: 900;
+    color: white;
+    text-align: justify;
+}
+
+main {
+  background-color: #1A2328 ;
+  position: static;
+}
+.sombrero {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 2rem;
+    height: auto;
+    margin-top: 0;
+}
+
+
+.sombrero img{
+    max-width: 35vh;
+    border-radius: 50%;
+    border-style: groove;
+}
+.imagenharry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
+}
+
+.imagenharry img {
+    transition: transform 0.5s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.imagenharry img:hover {
+    transform: scale(1.050);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+}
+
+.parraf {
+    display: flex;
+    justify-content: center;
+    padding: 4vh;
+}
+
+.parraf p {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    overflow: hidden;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow: row nowrap;
+    height: 70%;
+    width: 90%;
+    gap: 3vh;
+    padding: 10vh;
+    
+
+
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 35vh;
+    height: 70vh;
+    transition: transform 0.5s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: black;
+}
+
+.card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: white;
+    font-size: 1em;
+    background-color: black;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+#surveyButton {
+  display: inline-block;
+  background-color: violet;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+  animation: colorChange 4s infinite;
+}
+
+#surveyButton:hover {
+  background-color: darkviolet;
+}
+
+
+@keyframes colorChange {
+  0% {
+      background-color: red;
+  }
+  25% {
+      background-color: green;
+  }
+  50% {
+      background-color: yellow;
+  }
+  75% {
+      background-color: blue;
+  }
+  100% {
+      background-color: red;
+  }
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sombrero {
+    width: 100%;
+  }
+
+  .sombrero h1 {
+    font-size: 3.5vh;
+  }
+
+  .sombrero .parraf {
+    font-size: 2vh;
+    width: 75%;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 2.5vh;
+    text-align: center;
+  }
+
+.card-container {
+  flex-wrap: wrap;
+  height: auto;
+  gap: 10vh;
+}
+.pie-pagina .grupo-1{
+  grid-template-columns: repeat(1, 1fr);
+  width: 75%;
+}
+
+.grid .texto{
+  color: white;
+  text-shadow: 1px 1px 10px black;
+  font-family: 'BluuNext-Bold';
+}
+
+
+@media screen and (max-width: 412px) {
+.card-container {
+  flex-wrap: wrap;
+  height: auto;
+
+}
+}
+}

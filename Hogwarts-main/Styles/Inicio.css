@@ -1,0 +1,110 @@
+*{
+    margin: 0%;
+    border: 0%;
+    padding: 0%;
+}
+
+body{
+    display: grid;
+}
+
+.header { grid-area: header; }
+.menu { grid-area: menu; }
+.main { grid-area: main; }
+.footer { grid-area: footer; }
+
+.bodyConteiner{
+    grid-template-areas:
+    'header header  header  header  header'
+    'menu   main    main    main    main'
+    'menu   main    main    main    main'
+    'menu   main    main    main    main'
+    'menu   footer  footer  footer  footer';
+    height: 100vh;
+    gap: 1%;
+    margin: 1%;
+    background-color: rgb(22, 23, 23);
+}
+
+.header{
+    display:flex;
+    background-image: url(/Image/fondo-header.jpg);
+    align-items: center;
+    justify-content:space-between;
+    color: gold;
+}
+.main{
+    display: flex;
+    background-image: url(/Image/Hogwarts.jpg);
+    background-size: cover;
+    color: goldenrod;
+    flex-direction: column;
+    text-align: justify;
+    align-items: center; /*alinea los itemes con el eje Y*/
+    row-gap: 1%; /*genera los espascios entre las columnas*/
+}
+
+.menu{
+    display: grid;
+    background-image: url(/Image/fondo.menu.jpg);
+    background-size: cover;
+    color: goldenrod;
+    text-align: center;
+    align-items: center;
+}
+
+
+.boxHeader {
+    margin: 0% 1% 0% 1%;
+}
+
+.imgLogo{
+    display: flex;
+    justify-content: end;
+}
+
+.logo{
+    display: flex;
+    align-items: end;
+    height: 100%;
+    width: 10%;
+}
+
+.elementosMenu{
+    display: grid;
+    background-image: url(/Image/Red-Flu.png);
+    animation-play-state: paused ;
+    border-radius: 10%;
+    margin: 10%;
+    align-items: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    transition: height 1s;
+
+}
+
+.elementosMenu:hover{
+    height: 3em;
+    background-image: url(/Gif/Red-Flu.gif);
+}
+
+a {
+    color: goldenrod;
+    text-decoration: none;
+}
+
+.footer{
+    display:flex;
+    justify-content: space-around;
+    background-image: url(/Image/fondo-footer.avif);
+    background-size: cover;
+    text-align: left;
+    align-items: center;
+    color: goldenrod;
+}
+
+.imgRedes{
+    height: 5%;
+    width: 5%;
+}

@@ -1,6 +1,7 @@
-[gd_scene load_steps=41 format=3 uid="uid://244pheyxv44y"]
+[gd_scene load_steps=42 format=3 uid="uid://244pheyxv44y"]
 
 [ext_resource type="Texture2D" uid="uid://dsfts8nup7vyn" path="res://art/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="1_ksyrh"]
+[ext_resource type="Script" uid="uid://bt5fnrl3q1x7v" path="res://scenes/gif/goblin_gif.gd" id="1_vr3hk"]
 [ext_resource type="Texture2D" uid="uid://dcmplr5ieeroi" path="res://art/Factions/Knights/Troops/Dead/Dead.png" id="2_vr3hk"]
 [ext_resource type="Texture2D" uid="uid://7qi52xb7eck4" path="res://art/UI/Banners/Banner_Connection_Right.png" id="3_xto4k"]
 [ext_resource type="Texture2D" uid="uid://d3b5of4teaj1v" path="res://art/UI/Banners/Banner_Connection_Left.png" id="4_xb8b0"]
@@ -274,6 +275,7 @@ offset_right = -190.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vr3hk")
 
 [node name="RibbonRed3Slides" type="Sprite2D" parent="."]
 position = Vector2(168, -162)
