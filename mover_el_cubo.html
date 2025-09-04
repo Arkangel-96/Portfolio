@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Juego Canvas — Fondo con Imagen</title>
+  <style>
+    :root{--bg:#111}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:#eee}
+    .wrap{display:flex;align-items:center;justify-content:center;height:100vh;padding:16px}
+    canvas{background:#222;border-radius:8px;border:1px solid #333;max-width:100%;height:auto}
+    .info{position:fixed;left:12px;top:12px;background:rgba(0,0,0,.45);padding:8px 10px;border-radius:8px;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <canvas id="game" width="800" height="500" aria-label="Juego con fondo"></canvas>
+  </div>
+  <div class="info">Controles: Flechas / WASD — Presiona <strong>R</strong> para reiniciar</div>
+
+  <script>
+    // --- Referencias ---
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+
+    // --- Recursos (cambia la ruta "fondo.png" por la tuya) ---
+    const bg = new Image();
+    bg.src = './Background_01.png'; // <-- coloca aquí la ruta/URL de tu fondo
+
+    // Opcional: imagen del jugador (si la quieres)
+    // const playerImg = new Image();
+    // playerImg.src = 'jugador.png';
+
+    // --- Estado simple ---
+    const player = { x: 60, y: 60, size: 48, speed: 220, color: 'lime' };
+    const keys = { up:false, down:false, left:false, right:false };
+    let lastTime = performance.now();
+
+    // --- Teclado ---
+    const keyMap = {
+      ArrowUp: 'up', KeyW: 'up',
+      ArrowDown: 'down', KeyS: 'down',
+      ArrowLeft: 'left', KeyA: 'left',
+      ArrowRight: 'right', KeyD: 'right'
+    };
+    window.addEventListener('keydown', e => { if (keyMap[e.code]) { keys[keyMap[e.code]] = true; e.preventDefault(); }});
+    window.addEventListener('keyup', e => { if (keyMap[e.code]) { keys[keyMap[e.code]] = false; } });
+   /*    if (e.code === 'KeyR') reset(); */
+   /*    function reset(){ player.x = 60; player.y = 60; } */
+
+    // --- Actualizar ---
+    function update(dt){
+      let dx=0, dy=0;
+      if (keys.up) dy -= 1;
+      if (keys.down) dy += 1;
+      if (keys.left) dx -= 1;
+      if (keys.right) dx += 1;
+      if (dx || dy){
+        const len = Math.hypot(dx,dy) || 1;
+        dx /= len; dy /= len;
+        player.x += dx * player.speed * dt;
+        player.y += dy * player.speed * dt;
+      }
+      // Limitar a bordes
+      player.x = Math.max(8, Math.min(canvas.width - player.size - 8, player.x));
+      player.y = Math.max(8, Math.min(canvas.height - player.size - 8, player.y));
+    }
+
+    // --- Dibujar ---
+    function draw(){
+      // Fondo: si la imagen está lista, la dibujamos ocupando todo el canvas.
+      if (bg.complete && bg.naturalWidth !== 0) {
+        // Mantener proporción de la imagen: cubierta (cover)
+        const canvasRatio = canvas.width / canvas.height;
+        const imgRatio = bg.width / bg.height;
+        let sx=0, sy=0, sWidth=bg.width, sHeight=bg.height;
+        if (imgRatio > canvasRatio) {
+          // imagen más ancha -> recortar lados
+          sWidth = Math.round(bg.height * canvasRatio);
+          sx = Math.round((bg.width - sWidth) / 2);
+        } else {
+          // imagen más alta -> recortar arriba/abajo
+          sHeight = Math.round(bg.width / canvasRatio);
+          sy = Math.round((bg.height - sHeight) / 2);
+        }
+        // Dibujar recortando para cubrir todo el canvas (like CSS background-size: cover)
+        ctx.drawImage(bg, sx, sy, sWidth, sHeight, 0, 0, canvas.width, canvas.height);
+      } else {
+        // Fallback: color sólido mientras carga o si falla
+        ctx.fillStyle = '#222';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+      }
+
+      // Dibujar jugador encima
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.size, player.size);
+    }
+
+    // --- Bucle ---
+    function loop(now){
+      const dt = Math.min(0.033, (now - lastTime) / 1000);
+      lastTime = now;
+      update(dt);
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    // --- Ajustes para pantallas retina ---
+    function fitCanvasToDisplaySize(){
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      const cssW = canvas.clientWidth || canvas.width;
+      const cssH = canvas.clientHeight || canvas.height;
+      const displayW = Math.round(cssW * dpr);
+      const displayH = Math.round(cssH * dpr);
+      if (canvas.width !== displayW || canvas.height !== displayH){
+        canvas.width = displayW;
+        canvas.height = displayH;
+      }
+      // mantenemos el sistema de coordenadas en CSS pixels: reset transform
+      ctx.setTransform(1,0,0,1,0,0);
+    }
+
+    // Observador de redimension
+    const ro = new ResizeObserver(() => {
+      // fijar tamaño visual en CSS y luego ajustar el buffer de pixels
+      canvas.style.width = Math.min(1100, window.innerWidth - 40) + 'px';
+      canvas.style.height = (canvas.style.width ? (parseInt(canvas.style.width) * 0.625) + 'px' : 'auto');
+      fitCanvasToDisplaySize();
+    });
+    ro.observe(canvas);
+
+    // Iniciar
+    window.addEventListener('load', () => {
+      // Si quieres probar rápido sin imagen, comenta la siguiente línea y el juego usará el color de fallback
+      // bg.src = 'https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=60'
+      fitCanvasToDisplaySize();
+      requestAnimationFrame(loop);
+    });
+  </script>
+</body>
+</html>
