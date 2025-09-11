@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Animación de ataque</title>
+  <style>
+    body {
+      background: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    canvas {
+      border: 2px solid white;
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="500" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // ===== SPRITES =====
+    const runFrames = [], runCount = 10;
+    const idleFrames = [], idleCount = 10;
+    const attackFrames = [], attackCount = 10;
+    const jumpFrames = [], jumpCount = 10;
+    let loaded = 0;
+
+    function preloadImages(folder, count, array) {
+      for (let i = 1; i <= count; i++) {
+        const img = new Image();
+        img.src = `${folder}/frame_${i}.png`;
+        img.onload = () => {
+          loaded++;
+          if (loaded === runCount + idleCount + attackCount + jumpCount) {
+            requestAnimationFrame(gameLoop);
+          }
+        };
+        array.push(img);
+      }
+    }
+
+    // Cargar imágenes
+    preloadImages("ninja/run", runCount, runFrames);
+    preloadImages("ninja/idle", idleCount, idleFrames);
+    preloadImages("ninja/attack", attackCount, attackFrames);
+    preloadImages("ninja/jump", jumpCount, jumpFrames);
+
+    // ===== VARIABLES DEL JUEGO =====
+    let x = 200, y = 250;
+    const speedWalk = 3;
+    let jumpY = 0;
+    let jumping = false;
+    let attacking = false;
+
+    const keys = {};
+    window.addEventListener("keydown", e => keys[e.key] = true);
+    window.addEventListener("keyup", e => {
+      keys[e.key] = false;
+      if (e.key === "d") attacking = false; // terminar ataque al soltar "d"
+    });
+
+    let playerState = "idle";
+    let currentFrame = 0;
+    let frameCounter = 0;
+
+    function updatePlayerState() {
+      if (attacking) {
+        playerState = "attack";
+        return;
+      }
+
+      if (jumping) {
+        playerState = "jump";
+        return;
+      }
+
+      if (keys["d"] && !attacking) {
+        attacking = true;
+        playerState = "attack";
+        return;
+      }
+
+      if (keys[" "] && !jumping) {
+        jumping = true;
+        jumpY = 0;
+        playerState = "jump";
+      } else if (keys["ArrowUp"] || keys["ArrowDown"] || keys["ArrowLeft"] || keys["ArrowRight"]) {
+        playerState = "run";
+      } else {
+        playerState = "idle";
+      }
+    }
+
+    function updatePosition() {
+      if (playerState === "run") {
+        if (keys["ArrowUp"]) y -= speedWalk;
+        if (keys["ArrowDown"]) y += speedWalk;
+        if (keys["ArrowLeft"]) x -= speedWalk;
+        if (keys["ArrowRight"]) x += speedWalk;
+      }
+
+      if (jumping) {
+        jumpY += 5;
+        if (jumpY >= 50) {
+          jumpY = 50;
+          setTimeout(() => {
+            jumping = false;
+            jumpY = 0;
+          }, 200);
+        }
+      }
+    }
+
+    function getAnimationFrames() {
+      switch (playerState) {
+        case "attack": return { frames: attackFrames, count: attackCount };
+        case "run": return { frames: runFrames, count: runCount };
+        case "jump": return { frames: jumpFrames, count: jumpCount };
+        default: return { frames: idleFrames, count: idleCount };
+      }
+    }
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      updatePlayerState();
+      updatePosition();
+      const { frames, count } = getAnimationFrames();
+      const width = 100;  // ancho uniforme
+     
+      const height = 120; // alto uniforme
+      ctx.drawImage(frames[currentFrame], x, y - jumpY, width, height);
+
+      /*  const baseY = 250; // posición del suelo
+      const spriteHeight = 80; // altura uniforme al dibujar
+      ctx.drawImage(frames[currentFrame], x, baseY - spriteHeight, width, spriteHeight);
+ */
+      
+
+      frameCounter++;
+      const delay = 10;
+      if (frameCounter % delay === 0) {
+        currentFrame = (currentFrame + 1) % count;
+      }
+
+      requestAnimationFrame(gameLoop);
+    }
+  </script>
+</body>
+</html>
