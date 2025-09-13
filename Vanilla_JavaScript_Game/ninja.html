@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Animación de ataque</title>
+  <meta charset="UTF-8" />
+  <title>Ninja Animaciones</title>
   <style>
     body {
       background: #222;
@@ -18,139 +18,189 @@
   </style>
 </head>
 <body>
-  <canvas id="gameCanvas" width="500" height="400"></canvas>
+<canvas id="gameCanvas" width="500" height="400"></canvas>
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
 
-  <script>
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
+// === FRAMES ===
+const frameCount = 10;
+const animations = {
+  run: [], idle: [], attack: [], jump: [],
+  dead: [], slide: [], jump_throw: [], jump_attack: [], throw: []
+};
+let loaded = 0;
 
-    // ===== SPRITES =====
-    const runFrames = [], runCount = 10;
-    const idleFrames = [], idleCount = 10;
-    const attackFrames = [], attackCount = 10;
-    const jumpFrames = [], jumpCount = 10;
-    let loaded = 0;
-
-    function preloadImages(folder, count, array) {
-      for (let i = 1; i <= count; i++) {
-        const img = new Image();
-        img.src = `${folder}/frame_${i}.png`;
-        img.onload = () => {
-          loaded++;
-          if (loaded === runCount + idleCount + attackCount + jumpCount) {
-            requestAnimationFrame(gameLoop);
-          }
-        };
-        array.push(img);
+// Preload todas las animaciones
+function preloadImages(folder, array) {
+  for (let i = 1; i <= frameCount; i++) {
+    const img = new Image();
+    img.src = `ninja/${folder}/frame_${i}.png`;
+    img.onload = () => {
+      loaded++;
+      if (loaded === Object.keys(animations).length * frameCount) {
+        requestAnimationFrame(gameLoop);
       }
-    }
+    };
+    array.push(img);
+  }
+}
 
-    // Cargar imágenes
-    preloadImages("ninja/run", runCount, runFrames);
-    preloadImages("ninja/idle", idleCount, idleFrames);
-    preloadImages("ninja/attack", attackCount, attackFrames);
-    preloadImages("ninja/jump", jumpCount, jumpFrames);
+for (let anim in animations) preloadImages(anim, animations[anim]);
 
-    // ===== VARIABLES DEL JUEGO =====
-    let x = 200, y = 250;
-    const speedWalk = 3;
-    let jumpY = 0;
-    let jumping = false;
-    let attacking = false;
+// === VARIABLES ===
+let x = 200, y = 350;
+const spriteWidth = 80, spriteHeight = 80;
+const speedRun = 5;
+const jumpBoost = 6;
+const jumpAccel = 0.4;
+let jumpY = 0;
+let jumping = false;
+let facingRight = true;
+let jumpHorizontalSpeed = 0;
 
-    const keys = {};
-    window.addEventListener("keydown", e => keys[e.key] = true);
-    window.addEventListener("keyup", e => {
-      keys[e.key] = false;
-      if (e.key === "d") attacking = false; // terminar ataque al soltar "d"
-    });
+let actionPlaying = false; // controla attack y throw
 
-    let playerState = "idle";
-    let currentFrame = 0;
-    let frameCounter = 0;
+const keys = {};
+window.addEventListener("keydown", e => keys[e.key] = true);
+window.addEventListener("keyup", e => keys[e.key] = false);
 
-    function updatePlayerState() {
-      if (attacking) {
-        playerState = "attack";
-        return;
-      }
+let playerState = "idle";
+let currentFrame = 0;
+let frameCounter = 0;
 
-      if (jumping) {
-        playerState = "jump";
-        return;
-      }
+// === ACTUALIZAR ESTADO DEL JUGADOR ===
+function updatePlayerState() {
+  // Proteger animaciones que se reproducen completas
+  if (actionPlaying) return;
 
-      if (keys["d"] && !attacking) {
-        attacking = true;
-        playerState = "attack";
-        return;
-      }
+  if (keys["x"]) {
+    playerState = "dead";
+    return;
+  }
 
-      if (keys[" "] && !jumping) {
-        jumping = true;
+  if (jumping && keys["c"]) {
+    playerState = "jump_attack";
+    return;
+  }
+
+  if (jumping && keys["v"]) {
+    playerState = "jump_throw";
+    return;
+  }
+
+  if (keys["z"]) {
+    playerState = "slide";
+    return;
+  }
+
+  if (keys["d"] && !jumping) {
+    actionPlaying = true;
+    currentFrame = 0;
+    playerState = "attack";
+    return;
+  }
+
+  if (keys["t"] && !jumping) {
+    actionPlaying = true;
+    currentFrame = 0;
+    playerState = "throw";
+    return;
+  }
+
+  if (jumping && !["jump_attack","jump_throw"].includes(playerState)) {
+    playerState = "jump";
+    return;
+  }
+
+  if (keys["ArrowUp"] && !jumping) {
+    jumping = true;
+    jumpY = 0;
+    if (keys["ArrowLeft"]) jumpHorizontalSpeed = -2, facingRight = false;
+    else if (keys["ArrowRight"]) jumpHorizontalSpeed = 2, facingRight = true;
+    else jumpHorizontalSpeed = 0;
+    playerState = "jump";
+  } else if (keys["ArrowLeft"] || keys["ArrowRight"]) {
+    playerState = "run";
+  } else {
+    playerState = "idle";
+  }
+}
+
+// === ACTUALIZAR POSICIÓN ===
+function updatePosition() {
+  if (!jumping && playerState === "run") {
+    if (keys["ArrowLeft"]) x -= speedRun, facingRight = false;
+    if (keys["ArrowRight"]) x += speedRun, facingRight = true;
+  }
+
+  if (jumping) {
+    if (keys["ArrowLeft"]) jumpHorizontalSpeed = Math.max(jumpHorizontalSpeed - jumpAccel, -jumpBoost), facingRight = false;
+    else if (keys["ArrowRight"]) jumpHorizontalSpeed = Math.min(jumpHorizontalSpeed + jumpAccel, jumpBoost), facingRight = true;
+
+    x += jumpHorizontalSpeed;
+    jumpY += 5;
+
+    if (jumpY >= 50) {
+      jumpY = 50;
+      setTimeout(() => {
+        jumping = false;
         jumpY = 0;
-        playerState = "jump";
-      } else if (keys["ArrowUp"] || keys["ArrowDown"] || keys["ArrowLeft"] || keys["ArrowRight"]) {
-        playerState = "run";
-      } else {
-        playerState = "idle";
-      }
+        jumpHorizontalSpeed = 0;
+      }, 200);
     }
+  }
 
-    function updatePosition() {
-      if (playerState === "run") {
-        if (keys["ArrowUp"]) y -= speedWalk;
-        if (keys["ArrowDown"]) y += speedWalk;
-        if (keys["ArrowLeft"]) x -= speedWalk;
-        if (keys["ArrowRight"]) x += speedWalk;
-      }
+  if (x < 0) x = 0;
+  if (x > canvas.width - spriteWidth) x = canvas.width - spriteWidth;
+  if (y - jumpY > canvas.height) y = canvas.height;
+}
 
-      if (jumping) {
-        jumpY += 5;
-        if (jumpY >= 50) {
-          jumpY = 50;
-          setTimeout(() => {
-            jumping = false;
-            jumpY = 0;
-          }, 200);
-        }
-      }
+// === OBTENER FRAMES ===
+function getAnimationFrames() {
+  return { frames: animations[playerState], count: frameCount };
+}
+
+// === DIBUJAR SPRITE ===
+function drawSprite(frames, currentFrame, x, y, width, height, facingRight = true) {
+  ctx.save();
+  if (!facingRight) {
+    ctx.translate(x + width / 2, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(frames[currentFrame], -width / 2, y - height, width, height);
+  } else {
+    ctx.drawImage(frames[currentFrame], x, y - height, width, height);
+  }
+  ctx.restore();
+}
+
+// === GAME LOOP ===
+function gameLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  updatePlayerState();
+  updatePosition();
+
+  const { frames, count } = getAnimationFrames();
+  drawSprite(frames, currentFrame, x, y - jumpY, spriteWidth, spriteHeight, facingRight);
+
+  frameCounter++;
+  const delay = 6;
+  if (frameCounter % delay === 0) {
+    currentFrame++;
+
+    // Si era attack o throw y terminó
+    if ((playerState === "attack" || playerState === "throw") && currentFrame >= count) {
+      actionPlaying = false;
+      currentFrame = 0;
+      playerState = jumping ? "jump" : (keys["ArrowLeft"] || keys["ArrowRight"] ? "run" : "idle");
+    } else {
+      currentFrame %= count;
     }
+  }
 
-    function getAnimationFrames() {
-      switch (playerState) {
-        case "attack": return { frames: attackFrames, count: attackCount };
-        case "run": return { frames: runFrames, count: runCount };
-        case "jump": return { frames: jumpFrames, count: jumpCount };
-        default: return { frames: idleFrames, count: idleCount };
-      }
-    }
-
-    function gameLoop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      updatePlayerState();
-      updatePosition();
-      const { frames, count } = getAnimationFrames();
-      const width = 100;  // ancho uniforme
-     
-      const height = 120; // alto uniforme
-      ctx.drawImage(frames[currentFrame], x, y - jumpY, width, height);
-
-      /*  const baseY = 250; // posición del suelo
-      const spriteHeight = 80; // altura uniforme al dibujar
-      ctx.drawImage(frames[currentFrame], x, baseY - spriteHeight, width, spriteHeight);
- */
-      
-
-      frameCounter++;
-      const delay = 10;
-      if (frameCounter % delay === 0) {
-        currentFrame = (currentFrame + 1) % count;
-      }
-
-      requestAnimationFrame(gameLoop);
-    }
-  </script>
+  requestAnimationFrame(gameLoop);
+}
+</script>
 </body>
 </html>
