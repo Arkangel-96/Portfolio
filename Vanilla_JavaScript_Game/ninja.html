@@ -18,20 +18,27 @@ canvas {
 </style>
 </head>
 <body>
-<canvas id="gameCanvas" width="500" height="400"></canvas>
+<canvas id="gameCanvas" width="1024" height="400"></canvas>
 <script>
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+const bgImage = new Image();
+bgImage.src = "Background_01.png";
+
+const platformImage = new Image();
+platformImage.src = "./medieval-ruins/Platformer/Ground_06.png"; // Cambia el nombre/ruta según tu archivo
+
+platformImage.onload = () => {
+  platformPattern = ctx.createPattern(platformImage, "repeat");
+};
 // === CONFIGURACIÓN DE FRAMES ===
 const frameCount = 10;
 const animations = {
   run: [], idle: [], attack: [], throw: [],
   dead: [], slide: [], jump: [], jump_attack: [], jump_throw: []
 };
-let loaded = 0;
-
-// Precarga de imágenes
+  loaded = 0;
 function preloadImages(folder, array) {
   for (let i = 1; i <= frameCount; i++) {
     const img = new Image();
@@ -47,43 +54,35 @@ function preloadImages(folder, array) {
 }
 for (let anim in animations) preloadImages(anim, animations[anim]);
 
-// === HITBOX Y SPRITE SEPARADOS ===
-const hitbox = { x: 200, y: 270, w: 50, h: 80 }; // posición física
-const spriteWidth = 80, spriteHeight = 80;       // tamaño visual
+// === HITBOX Y SPRITE ===
+const hitbox = { x: 200, y: 270, w: 50, h: 80 };
+const spriteWidth = 80, spriteHeight = 80;
 let facingRight = true;
 
 // === ESTADO DEL JUGADOR ===
-let velocityY = 0;
-let jumpHorizontalSpeed = 0;
-let jumping = false;
-let actionPlaying = false;
+let debugMode = true; // ⬅️ NUEVO: modo debug apagado por defecto
+let velocityY = 0, jumpHorizontalSpeed = 0;
+let jumping = false, actionPlaying = false;
 const keys = {};
 window.addEventListener("keydown", e => keys[e.key.toLowerCase()] = true);
 window.addEventListener("keyup", e => keys[e.key.toLowerCase()] = false);
 
 let playerState = "idle";
-let currentFrame = 0;
-let frameCounter = 0;
+let currentFrame = 0, frameCounter = 0;
 
-// === ESCALADO X/Y Y OFFSETS ===
+// === ESCALADO/DELAY ===
 const scaleFactors = { 
-  idle:        { x: 0.7, y: 1.0 }, 
-  attack:      { x: 1.5, y: 1.2 },
-  throw:       { x: 1.03, y: 1.03 },
-  dead:        { x: 1.2, y: 1.2 },
-  jump_attack: { x: 1.3, y: 1.3 },
-  default:     { x: 1.0, y: 1.0 }
-};
-const animationOffsets = {
-  attack:      { x: 0, y: 15 }, 
-  jump_attack: { x: 0, y: 20 }, 
-  default:     { x: 0, y: 0 }
-};
-const animationDelays = { idle: 10, jump: 12, default: 6 };
+  idle:{x:.7,y:1}, 
+  attack:{x:1.5,y:1.2}, 
+  throw:{x:1.03,y:1.03},
+  dead:{x:1.2,y:1.2}, 
+  jump_attack:{x:1.3,y:1.3}, 
+  default:{x:1,y:1}};
+const animationOffsets = { attack:{x:15,y:10}, jump_attack:{x:0,y:20}, default:{x:0,y:0}};
+const animationDelays = { idle:10, jump:12, default:6 };
 
-// === SALTO Y GRAVEDAD ===
-const jumpBoost = 7;
-const gravity = 0.15;
+// === FÍSICA ===
+const jumpBoost = 7, gravity = 0.15;
 
 // === PROYECTILES ===
 let projectiles = [];
@@ -91,28 +90,34 @@ function shootProjectile(startX, startY, direction) {
   projectiles.push({ x: startX, y: startY, speed: 6, dir: direction });
 }
 
-// === CUBO DE PRUEBA ===
-let enemy = { x: 300, y: 350, w: 80, h: 80 };
+// === PLATAFORMAS ===
+const platforms = [
+  { x: 0,  y: 350, w: 4096,  h: -50 },
+  { x: 800,  y: 250, w: 250, h: 20 },
+  { x: 1200, y: 320, w: 400, h: 20 },
+  { x: 1700, y: 350, w: 600, h: 20 }
+];
+
+// === CÁMARA ===
+let cameraX = 0;
 
 // === FUNCIONES DE ESTADO ===
 function updatePlayerState() {
   if (actionPlaying) return;
-
   if (keys["x"]) { playerState = "dead"; return; }
-  
-  // Actualizar dirección del sprite según movimiento lateral
+
   if (!jumping) {
     if (keys["arrowleft"]) facingRight = false;
     else if (keys["arrowright"]) facingRight = true;
-}
+  }
 
-  if ((jumping) && keys["c"]) {
+  if ((jumping || debugMode) && keys["c"]) {
     playerState = "jump_attack";
     actionPlaying = true;
     currentFrame = 0;
     return;
   }
-  if ((jumping) && keys["v"]) {
+  if ((jumping || debugMode) && keys["v"]) {
     playerState = "jump_throw";
     actionPlaying = true;
     currentFrame = 0;
@@ -120,101 +125,96 @@ function updatePlayerState() {
     return;
   }
 
+
   if (keys["z"]) { playerState = "slide"; return; }
 
   if (keys["d"] && !jumping) {
-    actionPlaying = true; currentFrame=0; playerState="attack"; return;
+    actionPlaying=true; currentFrame=0; playerState="attack"; return;
   }
   if (keys["f"] && !jumping) {
-    actionPlaying = true; currentFrame=0; playerState="throw";
+    actionPlaying=true; currentFrame=0; playerState="throw";
     shootProjectile(hitbox.x + hitbox.w/2, hitbox.y + hitbox.h/2, facingRight?1:-1);
     return;
   }
 
-  if (jumping && !["jump_attack","jump_throw"].includes(playerState)) playerState="jump";
-  
-  if (!jumping && keys["arrowup"]) {
-    jumping = true;
-    velocityY = -jumpBoost;
+  if (jumping) playerState="jump";
+  else if (!jumping && keys["arrowup"]) {
+    jumping = true; velocityY=-jumpBoost;
     if (keys["arrowleft"]) { jumpHorizontalSpeed=-2.5; facingRight=false; }
     else if (keys["arrowright"]) { jumpHorizontalSpeed=2.5; facingRight=true; }
     else jumpHorizontalSpeed=0;
     playerState="jump";
-  } else if (!jumping && (keys["arrowleft"] || keys["arrowright"])) playerState="run";
-  else if (!jumping) playerState="idle";
+  } else if (!jumping && (keys["arrowleft"]||keys["arrowright"])) playerState="run";
+  else playerState="idle";
 }
 
-// === ACTUALIZAR POSICIÓN CON COLISIONES SUAVES ===
 function updatePosition() {
-  const prevX = hitbox.x;
-  const prevY = hitbox.y;
-
-  // Movimiento horizontal
+  const prevX = hitbox.x, prevY = hitbox.y;
   let dx = 0;
-  if (!jumping) {
+// 🚫 Bloquear movimiento mientras ataca o lanza
+  if (!jumping && playerState !== "attack" && playerState !== "throw") {
     if (keys["arrowleft"]) dx=-5;
     if (keys["arrowright"]) dx=5;
-  }
-
+}
   hitbox.x += dx + jumpHorizontalSpeed;
 
-  // Colisión horizontal con cubo
-  if (hitbox.x + hitbox.w > enemy.x &&
-      hitbox.x < enemy.x + enemy.w &&
-      hitbox.y + hitbox.h > enemy.y - enemy.h &&
-      hitbox.y < enemy.y) {
-    hitbox.x = prevX;
+  // Colisiones horizontales simples
+  for (const p of platforms) {
+    if (hitbox.x + hitbox.w > p.x &&
+        hitbox.x < p.x + p.w &&
+        hitbox.y + hitbox.h > p.y - p.h &&
+        hitbox.y < p.y) {
+      hitbox.x = prevX;
+    }
   }
 
-  // Movimiento vertical
   velocityY += gravity;
   hitbox.y += velocityY;
 
-  // Colisión vertical (solo si cae)
+  // Colisiones verticales
   if (velocityY > 0) {
-    if (hitbox.x + hitbox.w > enemy.x &&
-        hitbox.x < enemy.x + enemy.w) {
+    for (const p of platforms) {
       const hitboxBottomPrev = prevY + hitbox.h;
-      const enemyTop = enemy.y - enemy.h;
+      const platformTop = p.y - p.h;
       const hitboxBottomCurr = hitbox.y + hitbox.h;
-
-      if (hitboxBottomPrev <= enemyTop && hitboxBottomCurr >= enemyTop) {
-        hitbox.y = enemyTop - hitbox.h;
+      if (hitbox.x + hitbox.w > p.x &&
+          hitbox.x < p.x + p.w &&
+          hitboxBottomPrev <= platformTop &&
+          hitboxBottomCurr >= platformTop) {
+        hitbox.y = platformTop - hitbox.h;
         velocityY = 0;
         jumping = false;
       }
     }
   }
 
-  // Colisión con suelo
+  // Suelo infinito
   if (hitbox.y + hitbox.h > 350) {
     hitbox.y = 350 - hitbox.h;
     velocityY = 0;
     jumping = false;
   }
 
-  // Límites del canvas
   if (hitbox.x < 0) hitbox.x = 0;
-  if (hitbox.x + hitbox.w > canvas.width) hitbox.x = canvas.width - hitbox.w;
 
-  // Mantener impulso horizontal mientras salta
-  if (jumping) {
-    jumpHorizontalSpeed *= 0.98; // ligera fricción aérea
-  } else {
-    jumpHorizontalSpeed = 0;
-  }
+  // Fricción aérea
+  if (jumping) jumpHorizontalSpeed *= 0.98;
+  else jumpHorizontalSpeed = 0;
+
+  // Actualizar cámara (centra al ninja)
+  cameraX = hitbox.x - canvas.width / 2;
+  if (cameraX < 0) cameraX = 0;
 }
 
-// === DIBUJAR SPRITE ===
 function drawSprite(frames, currentFrame, hitbox, state) {
   ctx.save();
-  ctx.imageSmoothingEnabled=true;
-  ctx.imageSmoothingQuality="high";
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
   const factor = scaleFactors[state] || scaleFactors.default;
   const offset = animationOffsets[state] || animationOffsets.default;
   const drawW = Math.round(spriteWidth * factor.x);
   const drawH = Math.round(spriteHeight * factor.y);
-  const drawX = hitbox.x + (hitbox.w - drawW)/2 + offset.x;
+  const drawX = hitbox.x - cameraX + (hitbox.w - drawW)/2 + offset.x;
   const drawY = hitbox.y + (hitbox.h - drawH) + offset.y;
 
   if (!facingRight) {
@@ -225,50 +225,82 @@ function drawSprite(frames, currentFrame, hitbox, state) {
   ctx.restore();
 }
 
-// === GAME LOOP ===
 function gameLoop() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
 
+    // === FONDO REPETIBLE ===
+  const bgWidth = bgImage.width;
+  const bgHeight = bgImage.height;
+  const yOffset = 0; // Ajusta si quieres moverlo verticalmente
+
+  // Calcula desplazamiento basado en la cámara
+  let startX = - (cameraX % bgWidth);
+
+  for (let x = startX; x < canvas.width; x += bgWidth) {
+    ctx.drawImage(bgImage, x, yOffset, bgWidth, canvas.height);
+  }
+  
+  /* ctx.clearRect(0,0,canvas.width,canvas.height); */
   updatePlayerState();
   updatePosition();
 
-  const { frames,count } = { frames: animations[playerState], count: frameCount };
-  drawSprite(frames, currentFrame, hitbox, playerState);
+/*   // Dibujar plataformas
+  ctx.fillStyle="grey";
+  for (const p of platforms) {
+    ctx.fillRect(p.x - cameraX, p.y - p.h, p.w, p.h);
+  } */
 
-  // Dibujar cubo
-  ctx.fillStyle="orange";
-  ctx.fillRect(enemy.x, enemy.y - enemy.h, enemy.w, enemy.h);
+ 
+  // Dibujar plataformas como imagen
+  for (const p of platforms) {
+  if (platformPattern) {
+    ctx.save(); // Guardamos el estado del contexto
+
+    // Desplazamos el contexto para que el patrón quede fijo en la plataforma
+    ctx.translate(p.x - cameraX, p.y - p.h);
+
+    // Ahora rellenamos un rectángulo empezando en (0,0) relativo a la plataforma
+    ctx.fillStyle = platformPattern;
+    ctx.fillRect(0, 0, p.w, p.h);
+
+    ctx.restore(); // Restauramos para no afectar otros dibujos
+  }
+}
 
   // Dibujar hitbox
   ctx.strokeStyle="lime";
-  ctx.strokeRect(hitbox.x, hitbox.y, hitbox.w, hitbox.h);
+  ctx.strokeRect(hitbox.x - cameraX, hitbox.y, hitbox.w, hitbox.h);
+
+  // Dibujar sprite
+  const frames = animations[playerState];
+  drawSprite(frames, currentFrame, hitbox, playerState);
 
   // Proyectiles
   for (let i=projectiles.length-1;i>=0;i--){
     const p=projectiles[i];
     p.x+=p.speed*p.dir;
     ctx.fillStyle="green";
-    ctx.fillRect(Math.round(p.x), Math.round(p.y), 10, 10);
-    if (p.x<enemy.x+enemy.w && p.x+10>enemy.x &&
-        p.y<enemy.y && p.y+10>enemy.y-enemy.h) { projectiles.splice(i,1); }
-    if (p.x<0 || p.x>canvas.width) projectiles.splice(i,1);
+    ctx.fillRect(Math.round(p.x - cameraX), Math.round(p.y), 10,10);
+    // Eliminar fuera de pantalla
+    if (p.x<0||p.x>3000) projectiles.splice(i,1);
   }
 
+  // Animaciones
   frameCounter++;
   const delay = animationDelays[playerState] || animationDelays.default;
   if (frameCounter % delay === 0){
     currentFrame++;
     if ((playerState==="attack"||playerState==="throw"||
          playerState==="jump_attack"||playerState==="jump_throw") &&
-        currentFrame>=count) {
+        currentFrame>=frameCount) {
       actionPlaying=false;
       currentFrame=0;
-      playerState = jumping ? "jump" : ((keys["arrowleft"]||keys["arrowright"])?"run":"idle");
-    } else currentFrame%=count;
+      playerState = jumping?"jump":((keys["arrowleft"]||keys["arrowright"])?"run":"idle");
+    } else currentFrame%=frameCount;
   }
 
   requestAnimationFrame(gameLoop);
 }
 </script>
+
 </body>
 </html>
