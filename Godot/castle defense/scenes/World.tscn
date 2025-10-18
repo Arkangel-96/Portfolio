@@ -511,23 +511,19 @@ metadata/_edit_vertical_guides_ = [933.0, 850.0]
 [node name="Seconds" type="Timer" parent="."]
 autostart = true
 
-[node name="EnemySpawnerTimer" type="Timer" parent="."]
-one_shot = true
-autostart = true
-
 [node name="ShopMenu" parent="." instance=ExtResource("3_aqlsr")]
 visible = false
 
 [node name="TradeMenu" parent="." instance=ExtResource("3_n2fr6")]
 visible = false
 
-[node name="WaveOverTimer" type="Timer" parent="."]
-process_mode = 2
-one_shot = true
-
 [node name="GameScore" parent="." instance=ExtResource("2_128ka")]
 process_mode = 2
 visible = false
+
+[node name="Wave_Cooldown" type="Timer" parent="."]
+process_mode = 4
+autostart = true
 
 [node name="Pause" parent="." instance=ExtResource("12_c0d7e")]
 
@@ -746,4 +742,4 @@ scale = Vector2(1, -1)
 position = Vector2(2427, 2525)
 
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
-[connection signal="timeout" from="WaveOverTimer" to="." method="_on_wave_over_timer_timeout"]
+[connection signal="timeout" from="Wave_Cooldown" to="." method="_on_wave_cooldown_timeout"]

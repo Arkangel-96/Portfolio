@@ -17,6 +17,7 @@ var wood: int
 var wave : int
 var sec : int
 var min : int
+var wave_cc :int
 var max_enemies: int
 var deaths : int
 var difficulty : float
@@ -31,6 +32,7 @@ var shop: bool = false
 @onready var watch_tower: CharacterBody2D = $Watch_Tower
 @onready var watch_tower_2: CharacterBody2D = $Watch_Tower_2
 @onready var watch_tower_3: CharacterBody2D = $Watch_Tower_3
+@onready var wave_cooldown: Timer = $Wave_Cooldown
 
 
 
@@ -45,6 +47,7 @@ func _on_seconds_timeout() -> void:
 	#print("Min:" + str(min)," ", "Sec:" + str(sec))
 	$HUD/Minutes.text = "Min:" + str(min)
 	$HUD/Seconds.text = "Sec:" + str(sec)
+
 	#print(player.position)
 	
 func _ready() -> void:
@@ -60,10 +63,11 @@ func new_game():
 	gold = 0
 	wood = 0
 	wave = 1
-	difficulty = 10.0
+	difficulty = 4.0
 	#$EnemySpawnerTimer/Timer.wait_time = 1.0
 	min = 0
 	sec = 0
+	wave_cc = 20
 	fortress.reset()
 	player.reset()
 	watch_tower.reset()
@@ -94,14 +98,10 @@ func _physics_process(delta: float) -> void:
 	hpDmg = (hpMax -hp) 
 	$HUD/HP_Label.text = "HP: " + str(hp)
 	$HUD/EXP_Label.text = "EXP: " + str(exp)
+	
 	if is_wave_completed():
-		wave += 1
-		difficulty *= DIFF_MULTIPLIER
-		watch_tower.reset()
-		watch_tower_2.reset()
-		#if $EnemySpawnerTimer/Timer.wait_time > 0.25:
-			#$EnemySpawnerTimer/Timer.wait_time -= 0.05
-		reset()
+		get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_INHERIT
+		
 	if wave == 5:
 		victory()
 		#get_tree().paused = true
@@ -109,6 +109,25 @@ func _physics_process(delta: float) -> void:
 		#
 #func _on_wave_over_timer_timeout() -> void:
 	#reset()
+	
+func _on_wave_cooldown_timeout() -> void:
+
+	wave_cc -= 1
+	$HUD/Wave_Cooldown.text = " Next wave: " + str(wave_cc)+ " s"
+	$HUD/TOP.visible= true
+	if wave_cc == 0 :
+		wave += 1
+		difficulty *= DIFF_MULTIPLIER
+		watch_tower.reset()
+		watch_tower_2.reset()
+		#if $EnemySpawnerTimer/Timer.wait_time > 0.25:
+			#$EnemySpawnerTimer/Timer.wait_time -= 0.05
+		reset()
+		$HUD/Wave_Cooldown.text = ""
+		wave_cc = 20
+		$HUD/TOP.visible= false
+		get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_DISABLED
+	
 
 func reset():
 	max_enemies = int(difficulty)
