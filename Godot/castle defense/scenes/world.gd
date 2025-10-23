@@ -63,7 +63,7 @@ func new_game():
 	gold = 0
 	wood = 0
 	wave = 1
-	difficulty = 4.0
+	difficulty = 10.0
 	#$EnemySpawnerTimer/Timer.wait_time = 1.0
 	min = 0
 	sec = 0
@@ -114,7 +114,7 @@ func _on_wave_cooldown_timeout() -> void:
 
 	wave_cc -= 1
 	$HUD/Wave_Cooldown.text = " Next wave: " + str(wave_cc)+ " s"
-	$HUD/TOP.visible= true
+	$HUD/TOP.visible= true 
 	if wave_cc == 0 :
 		wave += 1
 		difficulty *= DIFF_MULTIPLIER
@@ -123,8 +123,8 @@ func _on_wave_cooldown_timeout() -> void:
 		#if $EnemySpawnerTimer/Timer.wait_time > 0.25:
 			#$EnemySpawnerTimer/Timer.wait_time -= 0.05
 		reset()
-		$HUD/Wave_Cooldown.text = ""
 		wave_cc = 20
+		$HUD/Wave_Cooldown.text = ""
 		$HUD/TOP.visible= false
 		get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_DISABLED
 	

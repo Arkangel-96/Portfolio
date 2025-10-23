@@ -8,12 +8,16 @@ var flames
 @onready var nodo: Node2D = $Flames
 @onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 @onready var obrero: Node2D = $Worker
-#@onready var health_component: HealthComponent = $Components/HealthComponent
+@onready var health_component: HealthComponent = $Components/HealthComponent
 @onready var progress_bar: ProgressBar = $ProgressBar
 #@onready var world = get_node("/root/World/")
 #@onready var player = get_node("/root/World/Player")
 
-func _process(delta: float) -> void:
+func _ready() -> void:
+	health_component.progress_bar.value = 52
+
+func _process(_delta: float) -> void:
+	
 	
 	flames = [get_node("Flames").get_children()]
 	in_flames()
