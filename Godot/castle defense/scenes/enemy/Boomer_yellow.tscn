@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ducmyploeje0t"]
+[gd_scene load_steps=27 format=3 uid="uid://ducmyploeje0t"]
 
 [ext_resource type="Script" uid="uid://dl6sfq77iyd2q" path="res://scenes/enemy/boomer.gd" id="1_3v7t4"]
 [ext_resource type="Texture2D" uid="uid://7ne30qqve035" path="res://art/Factions/Goblins/Troops/Barrel/Yellow/Barrel_Yellow.png" id="2_3v7t4"]
@@ -20,14 +20,6 @@ region = Rect2(128, 640, 128, 128)
 atlas = ExtResource("2_3v7t4")
 region = Rect2(0, 640, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pc0gd"]
-atlas = ExtResource("3_f71tg")
-region = Rect2(0, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nga3n"]
-atlas = ExtResource("3_f71tg")
-region = Rect2(192, 0, 192, 192)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjodp"]
 atlas = ExtResource("3_f71tg")
 region = Rect2(384, 0, 192, 192)
@@ -36,25 +28,9 @@ region = Rect2(384, 0, 192, 192)
 atlas = ExtResource("3_f71tg")
 region = Rect2(576, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tgxjy"]
-atlas = ExtResource("3_f71tg")
-region = Rect2(768, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ow6su"]
-atlas = ExtResource("3_f71tg")
-region = Rect2(960, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u5mmm"]
-atlas = ExtResource("3_f71tg")
-region = Rect2(1152, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ho8cm"]
-atlas = ExtResource("3_f71tg")
-region = Rect2(1344, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ad5k"]
-atlas = ExtResource("3_f71tg")
-region = Rect2(1536, 0, 192, 192)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v7t4"]
+atlas = ExtResource("2_3v7t4")
+region = Rect2(128, 640, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ebkr"]
 atlas = ExtResource("4_aw606")
@@ -101,51 +77,15 @@ animations = [{
 "texture": SubResource("AtlasTexture_aw606")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gkw7f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f71tg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aw606")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gkw7f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f71tg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aw606")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pc0gd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nga3n")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_sjodp")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_u6vtl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tgxjy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ow6su")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u5mmm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ho8cm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4ad5k")
+"texture": SubResource("AtlasTexture_3v7t4")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack",
 "speed": 10.0
 }, {
@@ -185,7 +125,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5w24h"]
-radius = 81.0062
+radius = 47.042534
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ft8do"]
 
@@ -205,7 +145,7 @@ script = ExtResource("1_3v7t4")
 process_mode = 3
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_pul1y")
-animation = &"run"
+animation = &"attack"
 autoplay = "run"
 offset = Vector2(0, -10)
 
@@ -223,7 +163,6 @@ visible = false
 position = Vector2(2, -59)
 script = ExtResource("6_8t1qk")
 progress_bar = NodePath("../../ProgressBar")
-current_health = 100
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 z_index = 90

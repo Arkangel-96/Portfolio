@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 var speed = 750
 var pathName = ""
-var arrowDamage = 20
+var arrowDamage = 0
 var enemy 
 
 var pos : Vector2

@@ -457,7 +457,6 @@ debug_color = Color(0.718702, 0.59397, 0.273698, 0.42)
 position = Vector2(2, -59)
 script = ExtResource("4_xsoqg")
 progress_bar = NodePath("../../ProgressBar")
-current_health = 100
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false

@@ -208,7 +208,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5w24h"]
-radius = 307.47
+radius = 182.00275
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ft8do"]
 
@@ -234,11 +234,8 @@ autoplay = "run"
 offset = Vector2(0, -10)
 
 [node name="AreaAttack" type="Area2D" parent="."]
-position = Vector2(-6, 2)
-scale = Vector2(-1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAttack"]
-position = Vector2(-5, 0)
 shape = SubResource("CircleShape2D_5w24h")
 one_way_collision_margin = 0.0
 debug_color = Color(0.921468, 0.23476, 0.392542, 0.42)
@@ -249,7 +246,6 @@ debug_color = Color(0.921468, 0.23476, 0.392542, 0.42)
 position = Vector2(2, -59)
 script = ExtResource("5_rum27")
 progress_bar = NodePath("../../ProgressBar")
-current_health = 100
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 z_index = 90

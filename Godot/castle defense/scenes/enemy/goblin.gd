@@ -1,7 +1,7 @@
 class_name Enemy extends CharacterBody2D
 
 var move_speed= randi_range(200,250)
-var attack_damage:= 1
+var attack_damage:= 0
 var is_attack:= false
 var in_attack_Player_range := false
 

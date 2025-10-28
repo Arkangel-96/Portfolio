@@ -21,7 +21,7 @@ var wave_cc :int
 var max_enemies: int
 var deaths : int
 var difficulty : float
-const DIFF_MULTIPLIER: float = 1.2
+const DIFF_MULTIPLIER: float = 1.15
 var shop: bool = false
 
 @onready var castle: CharacterBody2D = $Castle
@@ -63,11 +63,11 @@ func new_game():
 	gold = 0
 	wood = 0
 	wave = 1
-	difficulty = 10.0
+	difficulty = 6.0
 	#$EnemySpawnerTimer/Timer.wait_time = 1.0
 	min = 0
 	sec = 0
-	wave_cc = 20
+	wave_cc = 3
 	fortress.reset()
 	player.reset()
 	watch_tower.reset()
@@ -93,17 +93,17 @@ func is_wave_completed():
 	else:
 		return false
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	
 	hpDmg = (hpMax -hp) 
 	$HUD/HP_Label.text = "HP: " + str(hp)
 	$HUD/EXP_Label.text = "EXP: " + str(exp)
 	
-	if is_wave_completed():
-		get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_INHERIT
-		
-	if wave == 5:
+	if wave == 11:
 		victory()
+	elif is_wave_completed():
+			get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_INHERIT
+		
 		#get_tree().paused = true
 		#$WaveOverTimer.start()
 		#
@@ -123,7 +123,7 @@ func _on_wave_cooldown_timeout() -> void:
 		#if $EnemySpawnerTimer/Timer.wait_time > 0.25:
 			#$EnemySpawnerTimer/Timer.wait_time -= 0.05
 		reset()
-		wave_cc = 20
+		wave_cc = 3
 		$HUD/Wave_Cooldown.text = ""
 		$HUD/TOP.visible= false
 		get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_DISABLED

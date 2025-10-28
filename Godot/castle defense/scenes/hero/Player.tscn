@@ -471,6 +471,7 @@ shape = SubResource("CapsuleShape2D_ixa2j")
 debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+rotation = -0.0004316583
 
 [node name="shooting_point" type="Node2D" parent="."]
 unique_name_in_owner = true
