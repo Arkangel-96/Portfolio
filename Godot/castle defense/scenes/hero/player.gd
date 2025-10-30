@@ -120,7 +120,7 @@ func _on_attack_timer_timeout() -> void:
 				#
 		
 func attack_1():
-	attack_damage = 100
+	attack_damage = 50
 	sprite_animation.play("attack_1")
 	is_attack = true
 	velocity = velocity.move_toward(Vector2.ZERO, move_speed)	
@@ -138,7 +138,7 @@ func attack_1():
 	
 	
 func attack_2():
-	attack_damage = 100
+	attack_damage = 50
 	sprite_animation.play("attack_2")
 	is_attack = true
 	velocity = velocity.move_toward(Vector2.ZERO, move_speed)			
