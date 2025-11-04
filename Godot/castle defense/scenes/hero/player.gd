@@ -14,20 +14,24 @@ class_name Player extends Info
 
 
 @onready var worker = get_node("/root/World/Worker")
-#@onready var pawn: Pawn = $"../Pawn"
 
 
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
 @onready var atk_2 = $"AudioStreamPlayerATK-2"
 
-const TNT = preload("res://prototypes/1/TNT.tscn")
-
-@onready var shooting_point: Node2D = %shooting_point
+@onready var dash_cooldown: Timer = $DashCooldown
 
 
 var screen_size
 
+
+var dash_ready : bool 
+
+
+
 func _ready() -> void:
+	dash_ready = true
+	move_speed = 500
 	#health_component.death.connect(on_death)
 	screen_size = get_viewport_rect().size
 	reset()
@@ -37,11 +41,12 @@ func _ready() -> void:
 	
 func reset():
 	#position = screen_size * 2.5
-	move_speed = START_SPEED
+	pass
 	
 			
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	movement()
+	#print(dash_cooldown.wait_time)
 	
 func movement():	
 	var move_direction := Input.get_vector("ui_left","ui_right","ui_up","ui_down")	
@@ -70,12 +75,17 @@ func movement():
 			$"Area_U&D".scale.y = -1 if move_direction.y < 0 else 1
 			up = true	
 	move_and_slide()
-	
+
+
+		
 func _input(event: InputEvent) -> void:
 	
-	if Input.is_action_just_released("E"):
+	if Input.is_action_just_pressed("Space") and dash_ready == true:
+		dashing()
+				
+	if Input.is_action_just_pressed("E"):
 		inventory_ui.show()
-	if Input.is_action_just_released("V"):
+	if Input.is_action_just_pressed("V"):
 		inventory_ui.hide()
 	
 	if event is InputEventMouseButton and !world.shop:
@@ -85,40 +95,33 @@ func _input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_RIGHT and !world.shop:
 			if event.pressed:
 				attack_2()	
-				
-				#shooting_point.look_at(get_global_mouse_position())
-				#fire()
-		
-		#else:	
-			#canvas_layer.hide()
-		#
-func fire():	
-	var tnt = TNT.instantiate()
-	tnt.dir= %shooting_point.rotation
-	tnt.pos= %shooting_point.global_position
-	tnt.rota= global_rotation
-	get_parent().add_child(tnt)
 
+
+
+func dashing():
+	dash_ready = false
+	dash_cooldown.start()
 	
-func _on_attack_timer_timeout() -> void:
-	can_shoot = true			
+	attack_damage = 100
+	sprite_animation.play("dash_L&R")
+	is_attack = true
+	if velocity.x > 0:
+		velocity = velocity.move_toward(Vector2(1000,0), move_speed)	
+	if velocity.x < 0:
+		velocity = velocity.move_toward(Vector2(-1000,0), move_speed)
+					
+	if Input.is_action_pressed("ui_down") or down == true:
+		sprite_animation.play("dash_DOWN")
+		is_attack = true
+		velocity = velocity.move_toward(Vector2(0,1000), move_speed)
+	if Input.is_action_pressed("ui_up") or up == true :
+		sprite_animation.play("dash_UP")
+		is_attack = true
+		velocity = velocity.move_toward(Vector2(0,-1000), move_speed)
 
-
-
-
-
-		
-		
-
-
-#func _on_area_body_exited(body: Node2D) -> void:
-	#if body is Castle or Player:
-		#sprite_animation.play("idle")	
-		#dialog.hide()
-		#shop_menu.hide()
-		##player.inventory_ui.hide()	
-				#
-		
+func _on_dash_cooldown_timeout() -> void:
+	dash_ready = true
+						
 func attack_1():
 	attack_damage = 50
 	sprite_animation.play("attack_1")
@@ -154,15 +157,6 @@ func attack_2():
 
  
 
-
-
-
-	
-		
-
-
-
-
 func _on_animated_sprite_2d_animation_finished() -> void:
 	is_attack = false 
 	attack_finished.emit()
@@ -186,13 +180,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		sprite_animation.play("idle_up")
 		atk_2.play()
 		
-func boost():
-	$BoostTimer.start()
-	move_speed = BOOST_SPEED
-	
-func _on_boost_timer_timeout() -> void:
-	move_speed = START_SPEED	
-	
+
 	
 
 func _on_area_lr_body_entered(body: Node2D) -> void:
@@ -260,3 +248,23 @@ func _on_area_ud_body_exited(body: Node2D) -> void:
 			#
 			#$"Area_U&D".scale.y = 1 if move_direction.y < 0 else -1
 		#velocity = move_direction * move_speed	
+
+## PROJECTILES ##
+			
+	#shooting_point.look_at(get_global_mouse_position())
+	#fire()
+#func fire():	
+	#var tnt = TNT.instantiate()
+	#tnt.dir= %shooting_point.rotation
+	#tnt.pos= %shooting_point.global_position
+	#tnt.rota= global_rotation
+	#get_parent().add_child(tnt)
+#	
+
+
+#func _on_area_body_exited(body: Node2D) -> void:
+	#if body is Castle or Player:
+		#sprite_animation.play("idle")	
+		#dialog.hide()
+		#shop_menu.hide()
+		#player.inventory_ui.hide()	

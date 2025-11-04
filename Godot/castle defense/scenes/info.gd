@@ -23,6 +23,5 @@ var can_shoot:bool = true
 var gold = 0
 var exp = 0
 
-const START_SPEED = 400
-const BOOST_SPEED = 600
+
 #@export var item :InvItem

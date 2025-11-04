@@ -368,6 +368,39 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_lkdrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7iby")
+}],
+"loop": false,
+"name": &"dash_DOWN",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejplr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8g2k")
+}],
+"loop": false,
+"name": &"dash_L&R",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvsjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxdpb")
+}],
+"loop": false,
+"name": &"dash_UP",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_3s6ie")
 }, {
 "duration": 1.0,
@@ -462,7 +495,7 @@ script = ExtResource("1_3li8b")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_gp031")
-animation = &"idle_L&R"
+animation = &"dash_L&R"
 autoplay = "idle_L&R"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -472,10 +505,6 @@ debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 rotation = -0.0004316583
-
-[node name="shooting_point" type="Node2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(34, -1)
 
 [node name="INV" type="Area2D" parent="."]
 script = ExtResource("4_cw2d6")
@@ -500,11 +529,8 @@ position = Vector2(0.5, -46.75)
 shape = SubResource("RectangleShape2D_mdl7e")
 debug_color = Color(0.946605, 0.174212, 0.39312, 0.42)
 
-[node name="BoostTimer" type="Timer" parent="."]
-wait_time = 6.0
-one_shot = true
-
-[node name="AttackTimer" type="Timer" parent="."]
+[node name="DashCooldown" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="AudioStreamPlayerATK-1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_qu4a1")
@@ -562,6 +588,5 @@ columns = 3
 [connection signal="body_exited" from="Area_L&R" to="." method="_on_area_lr_body_exited"]
 [connection signal="body_entered" from="Area_U&D" to="." method="_on_area_ud_body_entered"]
 [connection signal="body_exited" from="Area_U&D" to="." method="_on_area_ud_body_exited"]
-[connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="inventory_item_ui_selected" from="CanvasLayer/InventoryUI" to="INV" method="_on_inventory_ui_inventory_item_ui_selected"]
