@@ -4,6 +4,7 @@ var move_speed= randi_range(200,250)
 var attack_damage:= 0
 var is_attack:= false
 var in_attack_Player_range := false
+var in_attack_Player_shout := false
 
 var GEM = preload("res://inventory/scenes/Item-1-GEM.tscn")
 var MUSH = preload("res://inventory/scenes/Item-2-MUSH.tscn")
@@ -104,7 +105,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func verify_receive_damage():
 	if in_attack_Player_range:
 		health_component.receive_damage(player.attack_damage)
-	
+	if in_attack_Player_shout:
+		health_component.receive_damage(player.attack_damage)
 
 func on_death():
 	alive = false

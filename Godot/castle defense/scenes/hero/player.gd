@@ -8,6 +8,7 @@ class_name Player extends Info
 @onready var inventory_ui: PanelContainer = $CanvasLayer/InventoryUI
 
 
+
 @onready var shop_menu: CanvasLayer = $"../ShopMenu"
 
 @onready var trade_menu: TradeMenu = $"../TradeMenu"
@@ -18,18 +19,22 @@ class_name Player extends Info
 
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
 @onready var atk_2 = $"AudioStreamPlayerATK-2"
+@onready var player_dash: AudioStreamPlayer = $AudioStreamPlayerDASH
+@onready var player_shout: AudioStreamPlayer = $AudioStreamPlayerSHOUT
 
 @onready var dash_cooldown: Timer = $DashCooldown
+@onready var shout_cooldown: Timer = $ShoutCooldown
 
 
 var screen_size
 
 
 var dash_ready : bool 
-
-
+var shout_ready : bool 
 
 func _ready() -> void:
+	
+	shout_ready = true	
 	dash_ready = true
 	move_speed = 500
 	#health_component.death.connect(on_death)
@@ -46,6 +51,7 @@ func reset():
 			
 func _physics_process(_delta: float) -> void:
 	movement()
+	
 	#print(dash_cooldown.wait_time)
 	
 func movement():	
@@ -81,8 +87,11 @@ func movement():
 func _input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("Space") and dash_ready == true:
-		dashing()
-				
+		dash()
+	
+	if Input.is_action_just_pressed("Q") and shout_ready == true:
+		shout()	
+		
 	if Input.is_action_just_pressed("E"):
 		inventory_ui.show()
 	if Input.is_action_just_pressed("V"):
@@ -96,34 +105,11 @@ func _input(event: InputEvent) -> void:
 			if event.pressed:
 				attack_2()	
 
-
-
-func dashing():
-	dash_ready = false
-	dash_cooldown.start()
-	
-	attack_damage = 100
-	sprite_animation.play("dash_L&R")
-	is_attack = true
-	if velocity.x > 0:
-		velocity = velocity.move_toward(Vector2(1000,0), move_speed)	
-	if velocity.x < 0:
-		velocity = velocity.move_toward(Vector2(-1000,0), move_speed)
-					
-	if Input.is_action_pressed("ui_down") or down == true:
-		sprite_animation.play("dash_DOWN")
-		is_attack = true
-		velocity = velocity.move_toward(Vector2(0,1000), move_speed)
-	if Input.is_action_pressed("ui_up") or up == true :
-		sprite_animation.play("dash_UP")
-		is_attack = true
-		velocity = velocity.move_toward(Vector2(0,-1000), move_speed)
-
-func _on_dash_cooldown_timeout() -> void:
-	dash_ready = true
-						
+							
 func attack_1():
+	
 	attack_damage = 50
+	get_node("SHOUT").process_mode = Node.PROCESS_MODE_DISABLED
 	sprite_animation.play("attack_1")
 	is_attack = true
 	velocity = velocity.move_toward(Vector2.ZERO, move_speed)	
@@ -136,12 +122,14 @@ func attack_1():
 		sprite_animation.play("attack_up_1")
 		is_attack = true
 		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
-	
+		
 	
 	
 	
 func attack_2():
+	
 	attack_damage = 50
+	get_node("SHOUT").process_mode = Node.PROCESS_MODE_DISABLED
 	sprite_animation.play("attack_2")
 	is_attack = true
 	velocity = velocity.move_toward(Vector2.ZERO, move_speed)			
@@ -156,6 +144,56 @@ func attack_2():
 		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 
  
+
+
+func dash():
+	
+	attack_damage = 100
+	dash_ready = false
+	get_node("SHOUT").process_mode = Node.PROCESS_MODE_DISABLED
+	dash_cooldown.start()
+	sprite_animation.play("dash_L&R")
+	is_attack = true
+	if velocity.x > 0:
+		velocity = velocity.move_toward(Vector2(1000,0), move_speed)	
+	if velocity.x < 0:
+		velocity = velocity.move_toward(Vector2(-1000,0), move_speed)
+					
+	if Input.is_action_pressed("ui_down") or down == true:
+		sprite_animation.play("dash_DOWN")
+		is_attack = true
+		if velocity.y > 0:
+			velocity = velocity.move_toward(Vector2(0,1000), move_speed)
+	if Input.is_action_pressed("ui_up") or up == true :
+		sprite_animation.play("dash_UP")
+		is_attack = true
+		if velocity.y < 0:
+			velocity = velocity.move_toward(Vector2(0,-1000), move_speed)
+
+func _on_dash_cooldown_timeout() -> void:
+	dash_ready = true
+
+func shout():
+	
+	attack_damage = 100
+	shout_ready = false	
+	get_node("SHOUT").process_mode = Node.PROCESS_MODE_INHERIT
+	shout_cooldown.start()
+	sprite_animation.play("shout_L&R")
+	is_attack = true
+	velocity = velocity.move_toward(Vector2.ZERO, move_speed)	
+			
+	if Input.is_action_pressed("ui_down") or down == true:
+		sprite_animation.play("shout_DOWN")
+		is_attack = true
+		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
+	if Input.is_action_pressed("ui_up") or up == true :
+		sprite_animation.play("shout_UP")
+		is_attack = true
+		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
+
+func _on_shout_cooldown_timeout() -> void:
+	shout_ready = true
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	is_attack = false 
@@ -180,14 +218,31 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		sprite_animation.play("idle_up")
 		atk_2.play()
 		
-
-	
-
+	if sprite_animation.animation == "dash_L&R":
+		sprite_animation.play("idle_L&R")	
+		player_dash.play()
+	if sprite_animation.animation == "dash_DOWN":
+		sprite_animation.play("idle_down")	
+		player_dash.play()
+	if sprite_animation.animation == "dash_UP":
+		sprite_animation.play("idle_up")	
+		player_dash.play()
+		
+	if sprite_animation.animation == "shout_L&R":
+		sprite_animation.play("idle_L&R")	
+		player_shout.play()
+	if sprite_animation.animation == "shout_DOWN":
+		sprite_animation.play("idle_down")	
+		player_shout.play()
+	if sprite_animation.animation == "shout_UP":
+		sprite_animation.play("idle_up")	
+		player_shout.play()
+		
 func _on_area_lr_body_entered(body: Node2D) -> void:
 	print(body.name)
 	if body is Enemy:
 		body.in_attack_Player_range = true
-	
+		
 	elif body is Worker:
 		print("olaaa")	
 		shop_menu.show()
@@ -201,6 +256,7 @@ func _on_area_lr_body_entered(body: Node2D) -> void:
 func _on_area_lr_body_exited(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = false
+		
 	elif body is Worker:
 		shop_menu.hide()
 		inventory_ui.hide()
@@ -220,7 +276,16 @@ func _on_area_ud_body_exited(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = false
 
-
+func _on_shout_body_entered(body: Node2D) -> void:
+	if body is Enemy:
+		body.in_attack_Player_shout = true
+		body.in_attack_Player_range = false
+		
+func _on_shout_body_exited(body: Node2D) -> void:
+	if body is Enemy:
+		body.in_attack_Player_shout = false
+		body.in_attack_Player_range = false
+		
 ## EXTRA CODE, 4 directions ##
 
 #var input_vector = Vector2.ZERO

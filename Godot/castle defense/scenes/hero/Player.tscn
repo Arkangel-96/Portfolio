@@ -1,10 +1,12 @@
-[gd_scene load_steps=69 format=3 uid="uid://c4kqxardye58q"]
+[gd_scene load_steps=72 format=3 uid="uid://c4kqxardye58q"]
 
 [ext_resource type="Script" uid="uid://dcmg4jautpp6a" path="res://scenes/hero/player.gd" id="1_3li8b"]
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
 [ext_resource type="Script" uid="uid://cdbicm6s5jqyb" path="res://inventory/inventory.gd" id="4_cw2d6"]
 [ext_resource type="AudioStream" uid="uid://io4tvoxefi7r" path="res://sound/SFX/07_human_atk_sword_1.wav" id="4_qu4a1"]
 [ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://sound/SFX/07_human_atk_sword_2.wav" id="5_70d11"]
+[ext_resource type="AudioStream" uid="uid://d3lvvml11xm32" path="res://sound/SFX/10_human_special_atk_2.wav" id="6_6mvoa"]
+[ext_resource type="AudioStream" uid="uid://cvujt5wi0xwkh" path="res://sound/SFX/17_orc_atk_sword_3.wav" id="7_6mvoa"]
 [ext_resource type="AudioStream" uid="uid://bnwpvyq4c3wkd" path="res://sound/SFX/01_chest_open_3.wav" id="7_bruh7"]
 [ext_resource type="AudioStream" uid="uid://dogkvyqf0s34a" path="res://sound/SFX/04_sack_open_2.wav" id="8_6eyey"]
 [ext_resource type="Script" uid="uid://1kc3agbiw7da" path="res://inventory/inventory_ui.gd" id="8_bruh7"]
@@ -472,11 +474,56 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eyey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3wef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4126")
+}],
+"loop": false,
+"name": &"shout_DOWN",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kktmi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g4la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5idg")
+}],
+"loop": false,
+"name": &"shout_L&R",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jpwa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfeki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axnmu")
+}],
+"loop": false,
+"name": &"shout_UP",
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ixa2j"]
 radius = 16.0
 height = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6mvoa"]
+radius = 358.31412
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_khinc"]
 radius = 16.0312
@@ -495,7 +542,7 @@ script = ExtResource("1_3li8b")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_gp031")
-animation = &"dash_L&R"
+animation = &"shout_UP"
 autoplay = "idle_L&R"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -505,6 +552,13 @@ debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 rotation = -0.0004316583
+
+[node name="SHOUT" type="Area2D" parent="."]
+collision_mask = 14
+
+[node name="Collision" type="CollisionShape2D" parent="SHOUT"]
+shape = SubResource("CircleShape2D_6mvoa")
+debug_color = Color(0.08235294, 0.65882355, 0.49803922, 0.41960785)
 
 [node name="INV" type="Area2D" parent="."]
 script = ExtResource("4_cw2d6")
@@ -530,6 +584,8 @@ shape = SubResource("RectangleShape2D_mdl7e")
 debug_color = Color(0.946605, 0.174212, 0.39312, 0.42)
 
 [node name="DashCooldown" type="Timer" parent="."]
+
+[node name="ShoutCooldown" type="Timer" parent="."]
 wait_time = 3.0
 
 [node name="AudioStreamPlayerATK-1" type="AudioStreamPlayer" parent="."]
@@ -539,6 +595,15 @@ volume_db = -4.0
 [node name="AudioStreamPlayerATK-2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_70d11")
 volume_db = -4.0
+
+[node name="AudioStreamPlayerDASH" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6mvoa")
+volume_db = -4.0
+
+[node name="AudioStreamPlayerSHOUT" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_6mvoa")
+volume_db = 2.0
+pitch_scale = 0.45
 
 [node name="AudioStreamPlayerPickUp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_bruh7")
@@ -581,6 +646,8 @@ scale = Vector2(0.5, 0.5)
 columns = 3
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="SHOUT" to="." method="_on_shout_body_entered"]
+[connection signal="body_exited" from="SHOUT" to="." method="_on_shout_body_exited"]
 [connection signal="area_entered" from="INV" to="INV" method="_on_area_entered"]
 [connection signal="item_added" from="INV" to="CanvasLayer/InventoryUI" method="_on_inv_item_added"]
 [connection signal="item_consumed" from="INV" to="CanvasLayer/InventoryUI" method="_on_inv_item_consumed"]
@@ -589,4 +656,5 @@ columns = 3
 [connection signal="body_entered" from="Area_U&D" to="." method="_on_area_ud_body_entered"]
 [connection signal="body_exited" from="Area_U&D" to="." method="_on_area_ud_body_exited"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="ShoutCooldown" to="." method="_on_shout_cooldown_timeout"]
 [connection signal="inventory_item_ui_selected" from="CanvasLayer/InventoryUI" to="INV" method="_on_inventory_ui_inventory_item_ui_selected"]
