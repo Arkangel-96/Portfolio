@@ -19,7 +19,7 @@ var attack_damage
 var is_attack = false
 var down = false
 var up = false
-var lr = false
+var running = false
 var can_shoot:bool = true
 var gold = 0
 var exp = 0

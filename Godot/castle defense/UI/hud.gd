@@ -11,16 +11,5 @@ func _process(_delta: float) -> void:
 	
 	%Gold.text =  str(world.gold)
 	%Wood.text =  str(world.wood)
-	%Amount.text  = "Healing cost:" +str((world.hpDmg*5))
+
 	
-func _on_repair_pressed() -> void:
-	if (world.gold > (world.hpDmg*5))  and (world.wood > (world.hpDmg*5)) :
-		world.hp +=  world.hpDmg
-		fortress.health_component.current_health += world.hpDmg
-		fortress.health_component.update_health_bar()
-		#fortress.health_component.progress_bar.value += float((world.hpDmg) +25)
-		fortress.audio.play() 
-		world.gold -= (world.hpDmg*5)
-		world.wood -= (world.hpDmg*5)
-	else:
-		pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cpyutp7s05mx2"]
+[gd_scene load_steps=11 format=3 uid="uid://cpyutp7s05mx2"]
 
 [ext_resource type="Texture2D" uid="uid://c2mk7abve4gru" path="res://art/UI/Ribbons/Ribbon_Red_Connection_Left.png" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://eyakmw30gmhj" path="res://UI/hud.gd" id="1_md4fy"]
@@ -6,10 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://duuojw554nq6j" path="res://art/UI/Ribbons/Ribbon_Yellow_Connection_Right.png" id="2_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://dlgepk5gjfpjh" path="res://art/UI/Banners/Banner_Vertical.png" id="3_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://bjus81st5h7pk" path="res://art/Deco/18.png" id="4_5pdws"]
-[ext_resource type="Texture2D" uid="uid://ca5luf4ctodsi" path="res://art/UI/Buttons/Button_Hover_3Slides.png" id="6_2ptjp"]
 [ext_resource type="Texture2D" uid="uid://ko8oxfh44xsj" path="res://art/Deco/16.png" id="6_047uy"]
 [ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="7_am7sw"]
-[ext_resource type="Texture2D" uid="uid://cpmni5sum80ks" path="res://art/UI/Buttons/Button_Disable_3Slides.png" id="7_md4fy"]
 [ext_resource type="Texture2D" uid="uid://parjab6ss210" path="res://art/Deco/W_Idle 64 X 64.png" id="8_ixkb2"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ixkb2"]
@@ -140,10 +138,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="G_ICON" type="TextureRect" parent="."]
-offset_left = 908.0
-offset_top = -41.0
-offset_right = 972.0
-offset_bottom = 23.0002
+offset_left = 905.0
+offset_top = -39.0
+offset_right = 969.0
+offset_bottom = 25.000198
 texture = ExtResource("7_am7sw")
 
 [node name="Gold" type="Label" parent="."]
@@ -158,20 +156,20 @@ text = "58743"
 horizontal_alignment = 2
 
 [node name="TOP" type="Panel" parent="."]
-offset_left = 289.00006
-offset_top = -113.99996
-offset_right = 601.89844
-offset_bottom = -72.74392
+offset_left = 816.0
+offset_top = -70.99997
+offset_right = 1128.8984
+offset_bottom = -29.743927
 scale = Vector2(0.642381, 1.04227)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_ixkb2")
 
 [node name="Wave_Cooldown" type="Label" parent="."]
-offset_left = 252.0
-offset_top = -120.0
-offset_right = 525.0
-offset_bottom = -61.0
+offset_left = 779.0
+offset_top = -77.0
+offset_right = 1052.0
+offset_bottom = -18.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -180,10 +178,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="W_ICON" type="TextureRect" parent="."]
-offset_left = 911.0
-offset_top = -0.999988
-offset_right = 975.0
-offset_bottom = 62.9999
+offset_left = 906.0
+offset_top = 1.1920929e-05
+offset_right = 970.0
+offset_bottom = 64.000015
 texture = ExtResource("8_ixkb2")
 
 [node name="Wood" type="Label" parent="."]
@@ -196,34 +194,3 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "58743"
 horizontal_alignment = 2
-
-[node name="HEAL" type="TextureButton" parent="."]
-offset_left = 898.0
-offset_top = -126.0
-offset_right = 1090.0
-offset_bottom = -53.0
-texture_normal = ExtResource("6_2ptjp")
-texture_pressed = ExtResource("7_md4fy")
-
-[node name="Title" type="Label" parent="HEAL"]
-layout_mode = 0
-offset_left = 49.0
-offset_top = -1.0
-offset_right = 145.0
-offset_bottom = 49.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
-text = "Heal me"
-
-[node name="Amount" type="Label" parent="HEAL"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = -54.0
-offset_top = 50.0
-offset_right = 101.0
-offset_bottom = 100.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
-text = "Healing cost:"
-
-[connection signal="pressed" from="HEAL" to="." method="_on_repair_pressed"]

@@ -20,6 +20,8 @@ func _on_timer_timeout() -> void:
 	#print(enemies)
 	if enemies.size() < get_parent().max_enemies:
 		var enemy = spawn[type].instantiate()
+		#enemy.health_component.current_health += 10
+		#print(enemy.health_component)
 		enemy.position = marker_2d.global_position
 		enemy.add_to_group("enemies")
 		world.add_child(enemy)

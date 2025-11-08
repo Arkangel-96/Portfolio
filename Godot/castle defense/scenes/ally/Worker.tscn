@@ -1,105 +1,58 @@
-[gd_scene load_steps=23 format=3 uid="uid://dbwxade3be1tu"]
+[gd_scene load_steps=17 format=3 uid="uid://dbwxade3be1tu"]
 
 [ext_resource type="Script" uid="uid://chvh1r18w4f72" path="res://scenes/ally/worker.gd" id="1_fw4m7"]
-[ext_resource type="Texture2D" uid="uid://cnati1ra15p6u" path="res://art/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="2_fw4m7"]
+[ext_resource type="Texture2D" uid="uid://dq6tp78ogvygw" path="res://art/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="2_fw4m7"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="4_5yfgx"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="5_ud5bw"]
 [ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://sound/SFX/06_door_close_1.mp3" id="6_uw8hk"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iq8qx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo1v8"]
 atlas = ExtResource("2_fw4m7")
 region = Rect2(0, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t83vi"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l28jw"]
 atlas = ExtResource("2_fw4m7")
 region = Rect2(192, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ikfm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0q38n"]
 atlas = ExtResource("2_fw4m7")
 region = Rect2(384, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dbdpb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jv00n"]
 atlas = ExtResource("2_fw4m7")
 region = Rect2(576, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mh04m"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nud2o"]
 atlas = ExtResource("2_fw4m7")
 region = Rect2(768, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c08wa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_oifwa"]
 atlas = ExtResource("2_fw4m7")
 region = Rect2(960, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7j1fu"]
-atlas = ExtResource("2_fw4m7")
-region = Rect2(0, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rc8kl"]
-atlas = ExtResource("2_fw4m7")
-region = Rect2(192, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7o1k8"]
-atlas = ExtResource("2_fw4m7")
-region = Rect2(384, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8vdn1"]
-atlas = ExtResource("2_fw4m7")
-region = Rect2(576, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k58c1"]
-atlas = ExtResource("2_fw4m7")
-region = Rect2(768, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_806kn"]
-atlas = ExtResource("2_fw4m7")
-region = Rect2(960, 384, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bo1v8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iq8qx")
+"texture": SubResource("AtlasTexture_bo1v8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t83vi")
+"texture": SubResource("AtlasTexture_l28jw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6ikfm")
+"texture": SubResource("AtlasTexture_0q38n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dbdpb")
+"texture": SubResource("AtlasTexture_jv00n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mh04m")
+"texture": SubResource("AtlasTexture_nud2o")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c08wa")
+"texture": SubResource("AtlasTexture_oifwa")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7j1fu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rc8kl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7o1k8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8vdn1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k58c1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_806kn")
-}],
-"loop": true,
-"name": &"repair",
 "speed": 10.0
 }]
 
@@ -125,8 +78,9 @@ script = ExtResource("1_fw4m7")
 y_sort_enabled = true
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_bo1v8")
-animation = &"repair"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.114261456
 offset = Vector2(0, -10)
 
 [node name="Components" type="Node" parent="."]
@@ -135,7 +89,6 @@ offset = Vector2(0, -10)
 position = Vector2(2, -59)
 script = ExtResource("5_ud5bw")
 progress_bar = NodePath("../../ProgressBar")
-current_health = 100
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false

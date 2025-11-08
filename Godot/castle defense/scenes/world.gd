@@ -72,8 +72,7 @@ func new_game():
 	wave_cc = 3
 	fortress.reset()
 	player.reset()
-	watch_tower.reset()
-	watch_tower_2.reset()
+
 
 	reset()
 
@@ -98,10 +97,11 @@ func is_wave_completed():
 func _physics_process(_delta: float) -> void:
 	
 	hpDmg = (hpMax -hp) 
+	print(hpMax)
 	$HUD/HP_Label.text = "HP: " + str(hp)
 	$HUD/EXP_Label.text = "EXP: " + str(exp)
 	
-	if wave == 11:
+	if wave == 51:
 		victory()
 	elif is_wave_completed():
 			get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_INHERIT
@@ -120,8 +120,7 @@ func _on_wave_cooldown_timeout() -> void:
 	if wave_cc == 0 :
 		wave += 1
 		difficulty *= DIFF_MULTIPLIER
-		watch_tower.reset()
-		watch_tower_2.reset()
+		
 		#if $EnemySpawnerTimer/Timer.wait_time > 0.25:
 			#$EnemySpawnerTimer/Timer.wait_time -= 0.05
 		reset()

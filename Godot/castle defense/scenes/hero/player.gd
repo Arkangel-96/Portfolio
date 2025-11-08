@@ -12,6 +12,8 @@ class_name Player extends Info
 @onready var shop_menu: CanvasLayer = $"../ShopMenu"
 
 @onready var trade_menu: TradeMenu = $"../TradeMenu"
+@onready var shaman_menu: CanvasLayer = $"../ShamanMenu"
+@onready var captain_menu: CanvasLayer = $"../CaptainMenu"
 
 
 @onready var worker = get_node("/root/World/Worker")
@@ -31,11 +33,12 @@ var screen_size
 
 var dash_ready : bool 
 var shout_ready : bool 
-
-
+var attack_ready : bool
+#var shout_damage = attack_damage *= 2
 
 func _ready() -> void:
-	
+	attack_damage = 50
+	attack_ready = true
 	shout_ready = true	
 	dash_ready = true
 	move_speed = 500
@@ -52,6 +55,7 @@ func reset():
 	
 			
 func _physics_process(_delta: float) -> void:
+	
 	movement()
 	
 	#print(dash_cooldown.wait_time)
@@ -64,7 +68,7 @@ func movement():
 			down = false
 			up = false
 			velocity = move_direction * move_speed
-			lr = true
+			
 			sprite_animation.play("run")
 			if move_direction.x != 0 :
 				sprite_animation.flip_h = move_direction.x < 0
@@ -78,13 +82,14 @@ func movement():
 			sprite_animation.play("idle_down")
 			$"Area_U&D".scale.y = 1 if move_direction.y < 0 else -1
 			down = true
-			lr = false
+			
 		elif Input.is_action_just_released("ui_up"):
 			velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 			sprite_animation.play("idle_up")
 			$"Area_U&D".scale.y = -1 if move_direction.y < 0 else 1
 			up = true
-				
+			
+			
 	move_and_slide()
 
 
@@ -103,22 +108,23 @@ func _input(event: InputEvent) -> void:
 		inventory_ui.hide()
 	
 	if event is InputEventMouseButton and !world.shop:
-		if event.button_index == MOUSE_BUTTON_LEFT and !world.shop:
+		if event.button_index == MOUSE_BUTTON_LEFT and !world.shop and attack_ready:
 			if event.pressed:
 				attack_1()							
-		elif event.button_index == MOUSE_BUTTON_RIGHT and !world.shop:
-			if event.pressed:
+		elif event.button_index == MOUSE_BUTTON_RIGHT and !world.shop and dash_ready:
+			if event.pressed :
 				attack_2()	
 
 							
 func attack_1():
+	attack_ready = false
 	var attackLR = ["attack_1","attack_2"]
 	var typeLR = randi_range(0,1)
 	var attackDOWN = ["attack_down_1","attack_down_2"]
 	var typeDOWN = randi_range(0,1)
 	var attackUP = ["attack_up_1","attack_up_2"]
 	var typeUP= randi_range(0,1)
-	attack_damage = 50
+	
 	get_node("SHOUT").process_mode = Node.PROCESS_MODE_DISABLED
 	sprite_animation.play(attackLR[typeLR])
 	is_attack = true
@@ -138,40 +144,48 @@ func attack_1():
 	
 func attack_2():
 	
-	attack_damage = 100
+	
 	dash_ready = false
 	get_node("SHOUT").process_mode = Node.PROCESS_MODE_DISABLED
 	dash_cooldown.start()
 	sprite_animation.play("dash_L&R")
 	is_attack = true
-	if velocity.x > 0:
+	if velocity.x > 0 :
+		velocity = velocity.move_toward(Vector2(1000,0), move_speed)
+		await get_tree().create_timer(0.25).timeout	
+		velocity = Vector2.ZERO
+		#move_speed = 1000	
 		
-		velocity = velocity.move_toward(Vector2(1000,0), move_speed)	
-	if velocity.x < 0:
-		
+	if velocity.x < 0 :
 		velocity = velocity.move_toward(Vector2(-1000,0), move_speed)
+		await get_tree().create_timer(0.25).timeout	
+		velocity = Vector2.ZERO
+		#move_speed = 1000
+		
 					
-	if Input.is_action_pressed("ui_down") or down == true:
+	if Input.is_action_pressed("ui_down") == true:
 		sprite_animation.play("dash_DOWN")
 		is_attack = true
 		if velocity.y > 0:
-			
 			velocity = velocity.move_toward(Vector2(0,1000), move_speed)
-	if Input.is_action_pressed("ui_up") or up == true :
+			await get_tree().create_timer(0.25).timeout	
+			velocity = Vector2.ZERO
+			
+	if Input.is_action_pressed("ui_up") == true :
 		sprite_animation.play("dash_UP")
 		is_attack = true
 		if velocity.y < 0:
-			
 			velocity = velocity.move_toward(Vector2(0,-1000), move_speed)
-	
+			await get_tree().create_timer(0.25).timeout	
+			velocity = Vector2.ZERO
  
 
 func _on_dash_cooldown_timeout() -> void:
 	dash_ready = true
-
+	move_speed = 500
+	
 func shout():
 	
-	attack_damage = 100
 	shout_ready = false	
 	get_node("SHOUT").process_mode = Node.PROCESS_MODE_INHERIT
 	shout_cooldown.start()
@@ -190,9 +204,11 @@ func shout():
 
 func _on_shout_cooldown_timeout() -> void:
 	shout_ready = true
-
+	
+	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	is_attack = false 
+	attack_ready = true
 	attack_finished.emit()
 	
 	if sprite_animation.animation == "attack_1":
@@ -239,14 +255,21 @@ func _on_area_lr_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = true
 		
-	elif body is Worker:
-		print("olaaa")	
+	elif body is Worker:	
 		shop_menu.show()
 		inventory_ui.show()
 		world.shop = true
+		
 	elif body is Trader:
-		print("olaaa")	
 		trade_menu.show()
+		world.shop = true	
+		
+	elif body is Shaman:
+		shaman_menu.show()
+		world.shop = true	
+		
+	elif body is Captain:
+		captain_menu.show()
 		world.shop = true	
 
 func _on_area_lr_body_exited(body: Node2D) -> void:
@@ -259,6 +282,12 @@ func _on_area_lr_body_exited(body: Node2D) -> void:
 		world.shop = false
 	elif body is Trader:
 		trade_menu.hide()
+		world.shop = false
+	elif body is Shaman:
+		shaman_menu.hide()
+		world.shop = false
+	elif body is Captain:
+		captain_menu.hide()
 		world.shop = false
 		
 func _on_area_ud_body_entered(body: Node2D) -> void:

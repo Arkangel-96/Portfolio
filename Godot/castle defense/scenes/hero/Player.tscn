@@ -374,6 +374,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p7iby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7iby")
 }],
 "loop": false,
 "name": &"dash_DOWN",
@@ -385,6 +388,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p8g2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8g2k")
 }],
 "loop": false,
 "name": &"dash_L&R",
@@ -393,6 +399,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fvsjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxdpb")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hxdpb")
@@ -542,7 +551,7 @@ script = ExtResource("1_3li8b")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_gp031")
-animation = &"shout_UP"
+animation = &"dash_UP"
 autoplay = "idle_L&R"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
