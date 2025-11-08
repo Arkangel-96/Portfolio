@@ -1,7 +1,7 @@
 class_name Enemy extends CharacterBody2D
 
 var move_speed= randi_range(200,250)
-var attack_damage:= 0
+var attack_damage:= 1
 var is_attack:= false
 var in_attack_Player_range := false
 var in_attack_Player_shout := false
@@ -73,7 +73,7 @@ func _physics_process(_delta: float) -> void:
 		if !is_attack and player:
 			sprite_animation.play("run")
 
-		move_direction = (fortress.position - global_position).normalized()
+		move_direction = (player.position - global_position).normalized()
 		if move_direction:
 			velocity = move_direction * move_speed
 			if move_direction.x !=0:
@@ -149,13 +149,13 @@ func drop_item():
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
 	if alive:
-		if body is Fortress:	
+		if body is Player:	
 			move_speed = 0
 			attack()
-			#incoming = false
-	
-		elif body is Player:
-			pass
+			incoming = false 
+		
+		#elif body == null:
+			#sprite_animation.play("run")
 			#move_speed =0
 			#attack()
 		#elif (body is Enemy) and incoming:
@@ -165,10 +165,10 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 		pass
 
 #
-#func _on_area_attack_body_exited(body: Node2D) -> void:
-	#if (body is Player) and incoming :
-		#move_speed = 200
-		#is_attack = false
+func _on_area_attack_body_exited(body: Node2D) -> void:
+	if (body is Player)  :
+		move_speed = 200
+		is_attack = false
 
 
 		

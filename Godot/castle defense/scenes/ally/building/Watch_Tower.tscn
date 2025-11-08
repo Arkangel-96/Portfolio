@@ -421,7 +421,7 @@ bg_color = Color(0.858579, 0, 0.166135, 1)
 radius = 38.0
 height = 112.0
 
-[node name="Torre" type="CharacterBody2D"]
+[node name="WatchTower" type="CharacterBody2D"]
 process_mode = 3
 collision_layer = 8
 collision_mask = 3
@@ -436,7 +436,7 @@ offset = Vector2(0, -40)
 y_sort_enabled = true
 position = Vector2(0, -90)
 sprite_frames = SubResource("SpriteFrames_pul1y")
-animation = &"attack_-90º"
+animation = &"attack_0º"
 autoplay = "idle"
 offset = Vector2(0, -10)
 

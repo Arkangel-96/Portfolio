@@ -32,6 +32,8 @@ var screen_size
 var dash_ready : bool 
 var shout_ready : bool 
 
+
+
 func _ready() -> void:
 	
 	shout_ready = true	
@@ -62,6 +64,7 @@ func movement():
 			down = false
 			up = false
 			velocity = move_direction * move_speed
+			lr = true
 			sprite_animation.play("run")
 			if move_direction.x != 0 :
 				sprite_animation.flip_h = move_direction.x < 0
@@ -75,19 +78,21 @@ func movement():
 			sprite_animation.play("idle_down")
 			$"Area_U&D".scale.y = 1 if move_direction.y < 0 else -1
 			down = true
+			lr = false
 		elif Input.is_action_just_released("ui_up"):
 			velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 			sprite_animation.play("idle_up")
 			$"Area_U&D".scale.y = -1 if move_direction.y < 0 else 1
-			up = true	
+			up = true
+				
 	move_and_slide()
 
 
 		
 func _input(event: InputEvent) -> void:
 	
-	if Input.is_action_just_pressed("Space") and dash_ready == true:
-		dash()
+	#if Input.is_action_just_pressed("Space") and dash_ready == true:
+		#dash()
 	
 	if Input.is_action_just_pressed("Q") and shout_ready == true:
 		shout()	
@@ -107,19 +112,24 @@ func _input(event: InputEvent) -> void:
 
 							
 func attack_1():
-	
+	var attackLR = ["attack_1","attack_2"]
+	var typeLR = randi_range(0,1)
+	var attackDOWN = ["attack_down_1","attack_down_2"]
+	var typeDOWN = randi_range(0,1)
+	var attackUP = ["attack_up_1","attack_up_2"]
+	var typeUP= randi_range(0,1)
 	attack_damage = 50
 	get_node("SHOUT").process_mode = Node.PROCESS_MODE_DISABLED
-	sprite_animation.play("attack_1")
+	sprite_animation.play(attackLR[typeLR])
 	is_attack = true
 	velocity = velocity.move_toward(Vector2.ZERO, move_speed)	
 			
 	if Input.is_action_pressed("ui_down") or down == true:
-		sprite_animation.play("attack_down_1")
+		sprite_animation.play(attackDOWN[typeDOWN])
 		is_attack = true
 		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 	if Input.is_action_pressed("ui_up") or up == true :
-		sprite_animation.play("attack_up_1")
+		sprite_animation.play(attackUP[typeUP])
 		is_attack = true
 		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 		
@@ -128,26 +138,6 @@ func attack_1():
 	
 func attack_2():
 	
-	attack_damage = 50
-	get_node("SHOUT").process_mode = Node.PROCESS_MODE_DISABLED
-	sprite_animation.play("attack_2")
-	is_attack = true
-	velocity = velocity.move_toward(Vector2.ZERO, move_speed)			
-
-	if Input.is_action_pressed("ui_down") or down == true:
-		sprite_animation.play("attack_down_2")
-		is_attack = true
-		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
-	if Input.is_action_pressed("ui_up") or up == true :
-		sprite_animation.play("attack_up_2")
-		is_attack = true
-		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
-
- 
-
-
-func dash():
-	
 	attack_damage = 100
 	dash_ready = false
 	get_node("SHOUT").process_mode = Node.PROCESS_MODE_DISABLED
@@ -155,20 +145,26 @@ func dash():
 	sprite_animation.play("dash_L&R")
 	is_attack = true
 	if velocity.x > 0:
+		
 		velocity = velocity.move_toward(Vector2(1000,0), move_speed)	
 	if velocity.x < 0:
+		
 		velocity = velocity.move_toward(Vector2(-1000,0), move_speed)
 					
 	if Input.is_action_pressed("ui_down") or down == true:
 		sprite_animation.play("dash_DOWN")
 		is_attack = true
 		if velocity.y > 0:
+			
 			velocity = velocity.move_toward(Vector2(0,1000), move_speed)
 	if Input.is_action_pressed("ui_up") or up == true :
 		sprite_animation.play("dash_UP")
 		is_attack = true
 		if velocity.y < 0:
+			
 			velocity = velocity.move_toward(Vector2(0,-1000), move_speed)
+	
+ 
 
 func _on_dash_cooldown_timeout() -> void:
 	dash_ready = true

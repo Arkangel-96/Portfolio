@@ -137,6 +137,8 @@ script = ExtResource("5_2hsce")
 progress_bar = NodePath("../../ProgressBar")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+process_mode = 4
+visible = false
 z_index = 90
 y_sort_enabled = true
 offset_left = -134.0

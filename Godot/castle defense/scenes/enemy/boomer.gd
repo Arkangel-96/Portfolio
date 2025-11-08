@@ -6,7 +6,7 @@ class_name Boomer extends Enemy
 
 func _ready() -> void:
 
-	attack_damage= 0
+	attack_damage= 3
 	move_speed = randi_range(100,150)
 	health_component.death.connect(on_death)
 	if player:

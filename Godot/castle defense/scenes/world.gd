@@ -29,10 +29,12 @@ var shop: bool = false
 @onready var EnemySpawner: Timer = $EnemySpawnerTimer
 @onready var player = get_node("/root/World/Player")
 @onready var fortress = get_node("/root/World/Fortress")
-@onready var watch_tower: CharacterBody2D = $Watch_Tower
-@onready var watch_tower_2: CharacterBody2D = $Watch_Tower_2
-@onready var watch_tower_3: CharacterBody2D = $Watch_Tower_3
+
 @onready var wave_cooldown: Timer = $Wave_Cooldown
+@onready var watch_tower: CharacterBody2D = $WatchTower
+@onready var watch_tower_2: CharacterBody2D = $WatchTower2
+
+
 
 
 
@@ -72,7 +74,7 @@ func new_game():
 	player.reset()
 	watch_tower.reset()
 	watch_tower_2.reset()
-	watch_tower_3.reset()
+
 	reset()
 
 func is_wave_completed():

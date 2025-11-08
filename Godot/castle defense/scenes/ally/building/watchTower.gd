@@ -11,7 +11,7 @@ var arrowDamage
 var f 
 var	move_direction	
 var move_speed = 10
-
+var flecha
 
 	
 #move_direction = (body.position - global_position).normalized()
@@ -52,11 +52,11 @@ func _on_area_body_entered(body: Node2D) -> void:
 			if move_direction.x !=0:
 				animated_sprite.flip_h = move_direction.x < 0
 				animated_sprite.play("attack_0º")
-			$Area.scale.x = -1 if move_direction.x < 0 else 1	
+			$Area.scale.x = -1 if move_direction.x < 0 else 1
+			flecha = true
+			await get_tree().create_timer(1).timeout	
+			flecha = false
 			var tempArrow = ARROW.instantiate()
-				## COOLDOWN DEL ATAQUE ##
-			await get_tree().create_timer(1).timeout
-				##                  ###
 			get_node("arrowManager").add_child(tempArrow)
 			
 
@@ -120,7 +120,13 @@ func _on_area_body_entered(body: Node2D) -> void:
 		#tempArrow.target = tempArray[0].position
 	#if body is Enemy:
 		#animated_sprite.play("attack_0º")		
-#
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animated_sprite.animation == "attack_0°":
+		pass
+		
+			
 func _on_area_body_exited(body: Node2D) -> void:
 	
 	animated_sprite.play("idle")

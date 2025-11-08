@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bx4dicnqdyccp"]
+[gd_scene load_steps=34 format=3 uid="uid://bx4dicnqdyccp"]
 
 [ext_resource type="Script" uid="uid://cw4mb6lnrr5s7" path="res://scenes/enemy/techie.gd" id="1_5w24h"]
 [ext_resource type="Texture2D" uid="uid://bof0o7p3nyh1f" path="res://art/Factions/Goblins/Troops/TNT/Red/TNT_Red.png" id="2_qsdd2"]
@@ -18,22 +18,6 @@ region = Rect2(192, 384, 192, 192)
 [sub_resource type="AtlasTexture" id="AtlasTexture_j8s55"]
 atlas = ExtResource("2_qsdd2")
 region = Rect2(384, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gsra6"]
-atlas = ExtResource("2_qsdd2")
-region = Rect2(576, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6fyq8"]
-atlas = ExtResource("2_qsdd2")
-region = Rect2(768, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tgq33"]
-atlas = ExtResource("2_qsdd2")
-region = Rect2(960, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jywje"]
-atlas = ExtResource("2_qsdd2")
-region = Rect2(1152, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8wjt"]
 atlas = ExtResource("3_cc1bb")
@@ -122,22 +106,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j8s55")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gsra6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6fyq8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tgq33")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jywje")
 }],
 "loop": false,
 "name": &"attack",
-"speed": 7.5
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,

@@ -248,7 +248,6 @@ debug_color = Color(0.921468, 0.23476, 0.392542, 0.42)
 position = Vector2(2, -59)
 script = ExtResource("4_dwl8l")
 progress_bar = NodePath("../../ProgressBar")
-current_health = 100
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 z_index = 90
