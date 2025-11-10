@@ -5,7 +5,7 @@ const TNT = preload("uid://5661u4kogfhe")
 var targets
 
 func _ready() -> void:
-	attack_damage= 2
+	attack_damage= 1
 	is_attack= false
 	in_attack_Player_range = false
 	move_speed = randi_range(200,250)

@@ -23,7 +23,7 @@ func _physics_process(_delta: float) -> void:
 	velocity = global_position.direction_to(target) * speed  
 	look_at(target)
 	move_and_slide()
-	
+	await get_tree().create_timer(0.25).timeout
 	animated_sprite.play("boom")
 	await get_tree().create_timer(0.25).timeout
 	queue_free()

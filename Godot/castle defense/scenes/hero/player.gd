@@ -37,7 +37,7 @@ var attack_ready : bool
 #var shout_damage = attack_damage *= 2
 
 func _ready() -> void:
-	attack_damage = 50
+	attack_damage = 100
 	attack_ready = true
 	shout_ready = true	
 	dash_ready = true
