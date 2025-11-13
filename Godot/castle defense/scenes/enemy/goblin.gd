@@ -37,7 +37,7 @@ var ITEM = preload("res://inventory/Item.tscn")
 
 @onready var atk = $AudioStreamPlayerATK
 
-var move_direction	
+
 var move
 var alive = true
 var incoming = true
@@ -65,25 +65,40 @@ func _ready() -> void:
 	if player:
 		player.attack_finished.connect(verify_receive_damage)
 
-
 func _physics_process(_delta: float) -> void: 
 	if health_component.current_health <= 0:
 		alive = false
 		
 	if alive:
-		if !is_attack and player:
+		if not is_attack and player:
 			sprite_animation.play("run")
 
-		move_direction = (player.position - global_position).normalized()
-		if move_direction:
-			velocity = move_direction * move_speed
-			if move_direction.x != 0:
-				sprite_animation.flip_h = move_direction.x < 0
-				$AreaAttack.scale.x = 1 if move_direction.x < 0 else -1
-			
-				move_and_slide()	
-	else:
-		pass
+		var move_direction: Vector2 = (player.position - global_position).normalized()
+
+		# --- REPULSIÓN ENTRE ENEMIGOS ---
+		var repulsion: Vector2 = Vector2.ZERO
+		for other in get_tree().get_nodes_in_group("enemies"):
+			if other == self or not other.alive:
+				continue
+			var dist: float = global_position.distance_to(other.global_position)
+			if dist < 60.0:  # radio de separación
+				# cuanto más cerca, más fuerte la repulsión
+				var force: float = (60.0 - dist) / 60.0
+				repulsion += (global_position - other.global_position).normalized() * force
+
+		# combinamos dirección hacia el jugador + repulsión
+		var final_direction: Vector2 = (move_direction + repulsion * 0.8).normalized()
+
+		# movimiento
+		velocity = final_direction * move_speed
+
+		# orientación del sprite
+		if move_direction.x != 0:
+			sprite_animation.flip_h = move_direction.x < 0
+			$AreaAttack.scale.x = 1 if move_direction.x < 0 else -1
+
+		move_and_slide()
+
 		
 
 func attack():

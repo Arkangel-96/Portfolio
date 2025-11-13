@@ -27,6 +27,9 @@ class_name Player extends Info
 @onready var dash_cooldown: Timer = $DashCooldown
 @onready var shout_cooldown: Timer = $ShoutCooldown
 
+@onready var nodo: Node2D = $Flames
+@onready var inventory_tween: Tween = create_tween()
+var inventory_open: bool = false
 
 var screen_size
 
@@ -50,6 +53,7 @@ func _ready() -> void:
 	#canvas_layer.hide()
 	
 func reset():
+	nodo.visible= false
 	#position = screen_size * 2.5
 	pass
 	
@@ -102,10 +106,9 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Q") and shout_ready == true:
 		shout()	
 		
-	if Input.is_action_just_pressed("E"):
-		inventory_ui.show()
-	if Input.is_action_just_pressed("V"):
-		inventory_ui.hide()
+	if Input.is_action_just_pressed("E") and !world.shop:
+		toggle_inventory()
+
 	
 	if event is InputEventMouseButton and !world.shop:
 		if event.button_index == MOUSE_BUTTON_LEFT and !world.shop and attack_ready:
@@ -115,7 +118,37 @@ func _input(event: InputEvent) -> void:
 			if event.pressed :
 				attack_2()	
 
-							
+func toggle_inventory() -> void:
+	# Si ya hay una animación corriendo, la detiene
+	if inventory_tween and inventory_tween.is_running():
+		inventory_tween.kill()
+
+	inventory_open = !inventory_open
+
+	# Guardamos la escala original solo una vez (por si el nodo tiene escala custom en el editor)
+	var original_scale := Vector2.ONE
+	if not inventory_ui.has_meta("original_scale"):
+		inventory_ui.set_meta("original_scale", inventory_ui.scale)
+	original_scale = inventory_ui.get_meta("original_scale")
+
+	inventory_tween = create_tween()
+
+	if inventory_open:
+		inventory_ui.show()
+		inventory_ui.modulate.a = 0.0
+		inventory_ui.scale = original_scale * 1.1  # un poquito más grande al abrir
+
+		inventory_tween.tween_property(inventory_ui, "modulate:a", 1.0, 0.2).set_trans(Tween.TRANS_SINE)
+		inventory_tween.tween_property(inventory_ui, "scale", original_scale, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	else:
+		inventory_tween.tween_property(inventory_ui, "modulate:a", 0.0, 0.2).set_trans(Tween.TRANS_SINE)
+		inventory_tween.tween_property(inventory_ui, "scale", original_scale * 1.1, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		inventory_tween.finished.connect(func():
+			inventory_ui.hide()
+			inventory_ui.scale = original_scale
+		)
+
+
 func attack_1():
 	attack_ready = false
 	var attackLR = ["attack_1","attack_2"]
@@ -186,6 +219,12 @@ func _on_dash_cooldown_timeout() -> void:
 	
 func shout():
 	
+	
+	for x in get_node("Flames").get_child_count():
+		get_node("Flames").get_child(x).process_mode = Node.PROCESS_MODE_INHERIT
+		get_node("Flames").get_child(x).visible= true
+		
+	nodo.visible= true	
 	shout_ready = false	
 	get_node("SHOUT").process_mode = Node.PROCESS_MODE_INHERIT
 	shout_cooldown.start()
@@ -201,9 +240,12 @@ func shout():
 		sprite_animation.play("shout_UP")
 		is_attack = true
 		velocity = velocity.move_toward(Vector2.ZERO, move_speed)
+	
 
+		
 func _on_shout_cooldown_timeout() -> void:
 	shout_ready = true
+	nodo.visible= false
 	
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
@@ -243,12 +285,21 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite_animation.animation == "shout_L&R":
 		sprite_animation.play("idle_L&R")	
 		player_shout.play()
+		for x in get_node("Flames").get_child_count():
+			get_node("Flames").get_child(x).visible= false
+			get_node("Flames").get_child(x).process_mode = Node.PROCESS_MODE_DISABLED
 	if sprite_animation.animation == "shout_DOWN":
 		sprite_animation.play("idle_down")	
 		player_shout.play()
+		for x in get_node("Flames").get_child_count():
+			get_node("Flames").get_child(x).visible= false
+			get_node("Flames").get_child(x).process_mode = Node.PROCESS_MODE_DISABLED
 	if sprite_animation.animation == "shout_UP":
 		sprite_animation.play("idle_up")	
 		player_shout.play()
+		for x in get_node("Flames").get_child_count():
+			get_node("Flames").get_child(x).visible= false
+			get_node("Flames").get_child(x).process_mode = Node.PROCESS_MODE_DISABLED
 		
 func _on_area_lr_body_entered(body: Node2D) -> void:
 	print(body.name)

@@ -50,7 +50,7 @@ func new_game():
 	difficulty = 6.0
 	min = 0
 	sec = 0
-	wave_cc = 3
+	wave_cc = 30
 	fortress.reset()
 	player.reset()
 	reset()
@@ -100,7 +100,7 @@ func _on_wave_cooldown_timeout() -> void:
 		wave += 1
 		difficulty *= DIFF_MULTIPLIER
 		reset()
-		wave_cc = 3
+		wave_cc = 30
 		$HUD/Wave_Cooldown.text = ""
 		$HUD/TOP.visible = false
 		get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_DISABLED
@@ -138,8 +138,8 @@ func spawn_wave_enemies() -> void:
 	# punto central de fallback (en caso de no poder spawnear alrededor del player)
 	var center_fallback: Vector2 = (map_min + map_max) * 0.5
 
-	var health_multiplier: float = pow(1.25, wave - 1)
-	var damage_multiplier: float = pow(1.5, wave - 1)
+	var health_multiplier: float = pow(1.1, wave - 1)
+	var damage_multiplier: float = pow(1.25, wave - 1)
 
 	# chequeo básico: que el player exista y tenga posición
 	if not player:

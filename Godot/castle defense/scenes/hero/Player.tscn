@@ -1,7 +1,9 @@
-[gd_scene load_steps=72 format=3 uid="uid://c4kqxardye58q"]
+[gd_scene load_steps=77 format=3 uid="uid://c4kqxardye58q"]
 
 [ext_resource type="Script" uid="uid://dcmg4jautpp6a" path="res://scenes/hero/player.gd" id="1_3li8b"]
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
+[ext_resource type="Texture2D" uid="uid://creesiop4alpf" path="res://art/Effects/Explosion/Explosions.png" id="3_h822q"]
+[ext_resource type="PackedScene" uid="uid://b3yq1bsqorpq" path="res://scenes/FX/Fire.tscn" id="4_2crnb"]
 [ext_resource type="Script" uid="uid://cdbicm6s5jqyb" path="res://inventory/inventory.gd" id="4_cw2d6"]
 [ext_resource type="AudioStream" uid="uid://io4tvoxefi7r" path="res://sound/SFX/07_human_atk_sword_1.wav" id="4_qu4a1"]
 [ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://sound/SFX/07_human_atk_sword_2.wav" id="5_70d11"]
@@ -493,12 +495,30 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o4126")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eyey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3wef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4126")
 }],
 "loop": false,
 "name": &"shout_DOWN",
 "speed": 10.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kktmi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g4la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5idg")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kktmi")
 }, {
@@ -521,6 +541,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_axnmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jpwa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfeki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axnmu")
 }],
 "loop": false,
 "name": &"shout_UP",
@@ -531,8 +560,30 @@ animations = [{
 radius = 16.0
 height = 32.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2crnb"]
+atlas = ExtResource("3_h822q")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2xcf"]
+atlas = ExtResource("3_h822q")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6c5tw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2crnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2xcf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_6mvoa"]
-radius = 358.31412
+radius = 271.1494
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_khinc"]
 radius = 16.0312
@@ -551,8 +602,10 @@ script = ExtResource("1_3li8b")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_gp031")
-animation = &"idle_L&R"
+animation = &"shout_UP"
 autoplay = "idle_L&R"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 9)
@@ -561,6 +614,139 @@ debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 rotation = -0.0004316583
+
+[node name="Flames" type="Node2D" parent="."]
+visible = false
+
+[node name="Fire" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(-69, -173)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+frame_progress = 0.9802131
+
+[node name="Fire2" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(-110, -39)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+
+[node name="Fire3" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(19, -133)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+
+[node name="Fire4" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(97, -46)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+
+[node name="Fire5" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(-194, 41)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+
+[node name="Fire6" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(-112, 148)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+frame_progress = 0.71660405
+
+[node name="Fire7" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(-11, 201)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+
+[node name="Fire8" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(97, 157)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+
+[node name="Fire9" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(172, 75)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+frame_progress = 0.5706276
+
+[node name="Fire10" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(-7, 101)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+frame_progress = 0.5706276
+
+[node name="Fire11" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(211, -21)
+scale = Vector2(2, 2.0052083)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+frame_progress = 0.5706276
+
+[node name="Fire12" type="AnimatedSprite2D" parent="Flames"]
+process_mode = 4
+position = Vector2(-153, -79)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6c5tw")
+autoplay = "default"
+frame_progress = 0.5706276
+
+[node name="Fire15" parent="Flames" instance=ExtResource("4_2crnb")]
+process_mode = 4
+position = Vector2(97, -201)
+scale = Vector2(2, 2)
+
+[node name="Fire16" parent="Flames" instance=ExtResource("4_2crnb")]
+process_mode = 4
+position = Vector2(-163, 81)
+scale = Vector2(2, 2)
+
+[node name="Fire17" parent="Flames" instance=ExtResource("4_2crnb")]
+process_mode = 4
+position = Vector2(185, -161)
+scale = Vector2(2, 2)
+
+[node name="Fire18" parent="Flames" instance=ExtResource("4_2crnb")]
+process_mode = 4
+position = Vector2(67, 172)
+scale = Vector2(2, 2)
+
+[node name="Fire19" parent="Flames" instance=ExtResource("4_2crnb")]
+process_mode = 4
+position = Vector2(-94, -1)
+scale = Vector2(2, 2)
+
+[node name="Fire20" parent="Flames" instance=ExtResource("4_2crnb")]
+process_mode = 4
+position = Vector2(-162, -211)
+scale = Vector2(2, 2)
+
+[node name="Fire21" parent="Flames" instance=ExtResource("4_2crnb")]
+process_mode = 4
+position = Vector2(97, 22)
+scale = Vector2(2, 2)
+
+[node name="Fire22" parent="Flames" instance=ExtResource("4_2crnb")]
+process_mode = 4
+position = Vector2(27, -294)
+scale = Vector2(2, 2)
 
 [node name="SHOUT" type="Area2D" parent="."]
 collision_mask = 14
@@ -595,7 +781,6 @@ debug_color = Color(0.946605, 0.174212, 0.39312, 0.42)
 [node name="DashCooldown" type="Timer" parent="."]
 
 [node name="ShoutCooldown" type="Timer" parent="."]
-wait_time = 3.0
 
 [node name="AudioStreamPlayerATK-1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_qu4a1")

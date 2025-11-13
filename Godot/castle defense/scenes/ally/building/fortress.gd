@@ -27,6 +27,7 @@ func _process(_delta: float) -> void:
 	
 		
 func in_flames():
+	
 	for x in get_node("Flames").get_child_count():
 		if world.hp == 0 or world.hp >=75 :
 			nodo.visible= false
