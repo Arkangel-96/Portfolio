@@ -1,13 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd0hv10crsk8d"]
+[gd_scene load_steps=6 format=3 uid="uid://bd0hv10crsk8d"]
 
-[ext_resource type="Script" uid="uid://c1o4ijtg0reys" path="res://shop/shopMenu.gd" id="1_ftc3e"]
+[ext_resource type="Script" uid="uid://c1o4ijtg0reys" path="res://shop/traderMenu.gd" id="1_ftc3e"]
 [ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="2_dl1a4"]
 [ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="2_trc7g"]
 [ext_resource type="Texture2D" uid="uid://nhuspb4j46tc" path="res://art/UI/Buttons/Button_Blue_3Slides.png" id="5_6j77p"]
-[ext_resource type="Texture2D" uid="uid://parjab6ss210" path="res://art/Deco/W_Idle 64 X 64.png" id="5_qyr4j"]
 [ext_resource type="Texture2D" uid="uid://dgii26q667qtf" path="res://art/UI/Buttons/Button_Blue_3Slides_Pressed.png" id="6_lnn3d"]
 
-[node name="ShopMenu" type="CanvasLayer"]
+[node name="TraderMenu" type="CanvasLayer"]
 script = ExtResource("1_ftc3e")
 
 [node name="Control" type="Control" parent="."]
@@ -55,39 +54,19 @@ text = "Hello Sir, How can I help you??"
 
 [node name="G_ICON" type="TextureRect" parent="Control/TextureRect2"]
 layout_mode = 0
-offset_left = 357.588
-offset_top = 47.0588
-offset_right = 421.588
-offset_bottom = 111.059
+offset_left = 359.99997
+offset_top = 71.76472
+offset_right = 423.99997
+offset_bottom = 135.76492
 texture = ExtResource("2_dl1a4")
 
 [node name="Gold" type="Label" parent="Control/TextureRect2"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 430.177
-offset_top = 51.7647
-offset_right = 510.177
-offset_bottom = 110.765
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "58743"
-horizontal_alignment = 2
-
-[node name="W_ICON" type="TextureRect" parent="Control/TextureRect2"]
-layout_mode = 0
-offset_left = 361.118
-offset_top = 97.6471
-offset_right = 425.118
-offset_bottom = 161.647
-texture = ExtResource("5_qyr4j")
-
-[node name="Wood" type="Label" parent="Control/TextureRect2"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 428.177
-offset_top = 99.7647
-offset_right = 508.177
-offset_bottom = 158.764
+offset_left = 432.58896
+offset_top = 76.47062
+offset_right = 512.589
+offset_bottom = 135.47092
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "58743"

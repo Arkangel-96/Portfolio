@@ -10,6 +10,6 @@ func _process(_delta: float) -> void:
 	
 	
 	%Gold.text =  str(world.gold)
-	%Wood.text =  str(world.wood)
+
 
 	

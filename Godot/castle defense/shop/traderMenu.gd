@@ -18,11 +18,11 @@ extends CanvasLayer
 @onready var audio_stream: AudioStreamPlayer = $AudioStreamPlayer
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 
 	%Gold.text = "Gold: " + str(world.gold)
-	%Wood.text = "Wood: " + str(world.wood)
+
 	
 
 

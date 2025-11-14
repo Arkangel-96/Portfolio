@@ -1,33 +1,33 @@
-[gd_scene load_steps=17 format=3 uid="uid://6msbrhjmwulx"]
+[gd_scene load_steps=17 format=3 uid="uid://dbwxade3be1tu"]
 
-[ext_resource type="Script" uid="uid://cuqmtldprem8p" path="res://scenes/ally/trader.gd" id="1_jnl3f"]
-[ext_resource type="Texture2D" uid="uid://bqp60kwxdplvy" path="res://art/Factions/Knights/Troops/Archer/Purple/Archer_Purlple.png" id="2_jnl3f"]
-[ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="3_ehx3h"]
-[ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="4_4ls0b"]
-[ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://sound/SFX/06_door_close_1.mp3" id="5_1271e"]
+[ext_resource type="Script" uid="uid://chvh1r18w4f72" path="res://scenes/ally/trader.gd" id="1_jnl3f"]
+[ext_resource type="Texture2D" uid="uid://bqp60kwxdplvy" path="res://art/Factions/Knights/Troops/Archer/Purple/Archer_Purlple.png" id="2_fw4m7"]
+[ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="4_5yfgx"]
+[ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="5_ud5bw"]
+[ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://sound/SFX/06_door_close_1.mp3" id="6_uw8hk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vkxl4"]
-atlas = ExtResource("2_jnl3f")
+atlas = ExtResource("2_fw4m7")
 region = Rect2(0, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ehx3h"]
-atlas = ExtResource("2_jnl3f")
+atlas = ExtResource("2_fw4m7")
 region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ls0b"]
-atlas = ExtResource("2_jnl3f")
+atlas = ExtResource("2_fw4m7")
 region = Rect2(384, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1271e"]
-atlas = ExtResource("2_jnl3f")
+atlas = ExtResource("2_fw4m7")
 region = Rect2(576, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s2ikw"]
-atlas = ExtResource("2_jnl3f")
+atlas = ExtResource("2_fw4m7")
 region = Rect2(768, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_emcwh"]
-atlas = ExtResource("2_jnl3f")
+atlas = ExtResource("2_fw4m7")
 region = Rect2(960, 0, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bo1v8"]
@@ -85,9 +85,9 @@ offset = Vector2(0, -10)
 
 [node name="Components" type="Node" parent="."]
 
-[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("progress_bar") instance=ExtResource("3_ehx3h")]
+[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("progress_bar") instance=ExtResource("4_5yfgx")]
 position = Vector2(2, -59)
-script = ExtResource("4_4ls0b")
+script = ExtResource("5_ud5bw")
 progress_bar = NodePath("../../ProgressBar")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -109,7 +109,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qipyy")
 
 [node name="AudioStreamPlayerREP" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_1271e")
+stream = ExtResource("6_uw8hk")
 
 [node name="Area" type="Area2D" parent="."]
 position = Vector2(0, -90)

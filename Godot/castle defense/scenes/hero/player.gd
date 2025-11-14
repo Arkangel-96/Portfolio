@@ -9,9 +9,8 @@ class_name Player extends Info
 
 
 
-@onready var shop_menu: CanvasLayer = $"../ShopMenu"
 
-@onready var trade_menu: TradeMenu = $"../TradeMenu"
+@onready var trader_menu: CanvasLayer = $"../TraderMenu"
 @onready var shaman_menu: CanvasLayer = $"../ShamanMenu"
 @onready var captain_menu: CanvasLayer = $"../CaptainMenu"
 
@@ -306,15 +305,12 @@ func _on_area_lr_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = true
 		
-	elif body is Worker:	
-		shop_menu.show()
-		inventory_ui.show()
+	elif body is Trader:	
+		trader_menu.show()
+		inventory_open= false
+		toggle_inventory()
 		world.shop = true
-		
-	elif body is Trader:
-		trade_menu.show()
-		world.shop = true	
-		
+			
 	elif body is Shaman:
 		shaman_menu.show()
 		world.shop = true	
@@ -327,16 +323,16 @@ func _on_area_lr_body_exited(body: Node2D) -> void:
 	if body is Enemy:
 		body.in_attack_Player_range = false
 		
-	elif body is Worker:
-		shop_menu.hide()
-		inventory_ui.hide()
-		world.shop = false
 	elif body is Trader:
-		trade_menu.hide()
+		trader_menu.hide()
+		inventory_open= true
+		toggle_inventory()
 		world.shop = false
+
 	elif body is Shaman:
 		shaman_menu.hide()
 		world.shop = false
+		
 	elif body is Captain:
 		captain_menu.hide()
 		world.shop = false

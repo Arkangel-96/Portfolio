@@ -12,7 +12,7 @@ var hpDmg : int
 var level : int
 var exp : int
 var gold : int
-var wood: int
+
 var wave : int
 var sec : int
 var min : int
@@ -45,7 +45,6 @@ func new_game():
 	level = 1
 	exp = 0
 	gold = 0
-	wood = 0
 	wave = 1
 	difficulty = 6.0
 	min = 0
@@ -82,9 +81,9 @@ func is_wave_completed():
 
 func _physics_process(_delta: float) -> void:
 	hpDmg = (hpMax - hp) 
-	$HUD/HP_Label.text = "HP: " + str(hp)
+	$HUD/HP_Label.text = "HP: " + str(hp) + "/" + str(hpMax)
 	$HUD/EXP_Label.text = "EXP: " + str(exp)
-	
+	$HUD/ATK_Label.text = "ATK: " + str(player.attack_damage)
 	if wave == 51:
 		victory()
 	elif is_wave_completed():

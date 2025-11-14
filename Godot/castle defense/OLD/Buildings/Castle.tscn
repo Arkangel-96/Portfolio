@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="2_hwvuk"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="3_ws4va"]
 [ext_resource type="PackedScene" uid="uid://b3yq1bsqorpq" path="res://scenes/FX/Fire.tscn" id="5_35tp3"]
-[ext_resource type="PackedScene" uid="uid://dbwxade3be1tu" path="res://scenes/ally/Worker.tscn" id="6_2lg7r"]
+[ext_resource type="PackedScene" uid="uid://dbwxade3be1tu" path="res://scenes/ally/Trader.tscn" id="6_2lg7r"]
 [ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://sound/SFX/06_door_close_1.mp3" id="7_2lg7r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xd15"]

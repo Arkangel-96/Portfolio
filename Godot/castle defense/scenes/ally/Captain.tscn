@@ -53,7 +53,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 5.0
 }]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ft8do"]
@@ -80,7 +80,7 @@ position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_bo1v8")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.8219093
+frame_progress = 0.5535833
 offset = Vector2(0, -10)
 
 [node name="Components" type="Node" parent="."]

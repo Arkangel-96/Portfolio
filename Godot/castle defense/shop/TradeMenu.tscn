@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://ca1a183620qj5"]
+[gd_scene load_steps=8 format=3 uid="uid://bqpo5r1yutkf6"]
 
-[ext_resource type="Script" uid="uid://b631dlgajk4de" path="res://shop/tradeMenu.gd" id="1_lkqge"]
 [ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="2_bvr5l"]
 [ext_resource type="AudioStream" uid="uid://dogkvyqf0s34a" path="res://sound/SFX/04_sack_open_2.wav" id="3_bvr5l"]
 [ext_resource type="Texture2D" uid="uid://nhuspb4j46tc" path="res://art/UI/Buttons/Button_Blue_3Slides.png" id="3_td31b"]
@@ -8,8 +7,40 @@
 [ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="6_ow1gs"]
 [ext_resource type="Texture2D" uid="uid://parjab6ss210" path="res://art/Deco/W_Idle 64 X 64.png" id="7_bvr5l"]
 
+[sub_resource type="GDScript" id="GDScript_lkqge"]
+script/source = "class_name TradeMenu extends CanvasLayer
+
+
+@onready var world = get_node(\"/root/World\")
+
+@onready var audio_stream: AudioStreamPlayer = $AudioStreamPlayer
+
+func _ready() -> void:
+	pass
+
+
+func _on_close_pressed() -> void:
+		hide()
+
+
+
+
+func _on_gold_button_pressed() -> void:
+	if world.wood >= 50:
+		world.wood -= 50	
+		world.gold += 50	
+		audio_stream.play()
+
+
+func _on_wood_button_pressed() -> void:
+	if world.gold >= 50:
+		world.gold -= 50	
+		world.wood += 50	
+		audio_stream.play()
+"
+
 [node name="TradeMenu" type="CanvasLayer"]
-script = ExtResource("1_lkqge")
+script = SubResource("GDScript_lkqge")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

@@ -41,19 +41,19 @@ func _on_inv_item_consumed(item_type: Item.ItemType, quantity_left: int) -> void
 			
 		## OTORGAN ORO ##
 		if item_type == Item.ItemType.GEM:
-			world.gold += 50
+			world.gold += 25
 		elif item_type == Item.ItemType.COCA:
-			world.gold += 50
-		elif item_type == Item.ItemType.GOLD:
-			world.gold += 100
+			world.gold += 25
 			
-		## OTORGAN MADERA ##
 		elif item_type == Item.ItemType.MUSHROOM:
-			world.wood += 50
+			world.gold += 25
 		elif item_type == Item.ItemType.PUMPKIN:
-			world.wood += 50
+			world.gold += 25
+			
+		elif item_type == Item.ItemType.GOLD:
+			world.gold += 50
 		elif item_type == Item.ItemType.WOOD:
-			world.wood += 100	
+			world.gold += 50	
 		
 		## PARA USAR DESDE EL INVENTARIO ##
 		#if item_type == Item.ItemType.MUSHROOM:
