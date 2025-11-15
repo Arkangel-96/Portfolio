@@ -2,6 +2,8 @@ extends Node2D
 
 const GOBLIN = preload("res://scenes/enemy/Goblin.tscn")
 const TECHIE = preload("uid://bx4dicnqdyccp")
+const KNIGHT = preload("uid://de3hhy02tqefk")
+const ARCHER = preload("uid://0g50ua6nypjf")
 
 @onready var game_score: CanvasLayer = $"../GameScore"
 
@@ -147,8 +149,8 @@ func spawn_wave_enemies() -> void:
 
 	for i in range(max_enemies):
 		 
-		var spawn = [ GOBLIN, TECHIE ]
-		var type = randi_range(0,1)
+		var spawn = [ GOBLIN, TECHIE, KNIGHT , ARCHER ]
+		var type = randi_range(0,3)
 		var enemy = spawn[type].instantiate()
 		enemy.add_to_group("enemies")
 

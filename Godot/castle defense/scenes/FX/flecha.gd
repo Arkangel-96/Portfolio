@@ -8,7 +8,6 @@ var target
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-@onready var fortress = get_node("/root/World/Fortress")
 @onready var player = get_node("/root/World/Player")
 
 func _ready() -> void:
@@ -24,6 +23,4 @@ func _physics_process(_delta: float) -> void:
 	look_at(target)
 	move_and_slide()
 	await get_tree().create_timer(0.5).timeout
-	animated_sprite.play("boom")
-	await get_tree().create_timer(0.25).timeout
 	queue_free()

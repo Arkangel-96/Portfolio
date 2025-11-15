@@ -1,6 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://bx4dicnqdyccp"]
 
-[ext_resource type="Script" uid="uid://cw4mb6lnrr5s7" path="res://scenes/enemy/techie.gd" id="1_5w24h"]
+[ext_resource type="Script" uid="uid://bugmfxrdunvdh" path="res://scenes/enemy/techie.gd" id="1_5w24h"]
 [ext_resource type="Texture2D" uid="uid://bof0o7p3nyh1f" path="res://art/Factions/Goblins/Troops/TNT/Red/TNT_Red.png" id="2_qsdd2"]
 [ext_resource type="Texture2D" uid="uid://dcmplr5ieeroi" path="res://art/Factions/Knights/Troops/Dead/Dead.png" id="3_cc1bb"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="4_ip6rc"]
@@ -180,7 +180,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5w24h"]
-radius = 163.00307
+radius = 360.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ft8do"]
 
@@ -201,7 +201,7 @@ script = ExtResource("1_5w24h")
 y_sort_enabled = true
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_pul1y")
-animation = &"attack"
+animation = &"run"
 autoplay = "run"
 offset = Vector2(0, -10)
 

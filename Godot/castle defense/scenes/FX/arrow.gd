@@ -15,7 +15,7 @@ func _ready() -> void:
 	enemy = null
 	global_position=pos
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	
 	if enemy != null:
 		target = enemy.global_position	
