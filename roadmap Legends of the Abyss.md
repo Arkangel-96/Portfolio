@@ -1,4 +1,4 @@
-# Roadmap de Versiones – Juego tipo Vampire Survivors
+# Roadmap de Versiones – Legends of the Abyss
 
 Este documento define el plan completo de versiones usando *Semantic Versioning (SemVer)* para tu juego estilo **Vampire Survivors** desarrollado en Godot.
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=44 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/hero/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scenes/world.gd" id="1_ro7oq"]
@@ -10,13 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://bta4bllaigg7u" path="res://shop/ShamanMenu.tscn" id="5_x70b3"]
 [ext_resource type="PackedScene" uid="uid://hhubv32s18cf" path="res://shop/CaptainMenu.tscn" id="6_5w2bu"]
 [ext_resource type="AudioStream" uid="uid://gvxbpaccrdmi" path="res://sound/Music/Goblins_Den__Regular_.mp3" id="7_n2fr6"]
+[ext_resource type="PackedScene" uid="uid://d1yuai8yn0do7" path="res://UI/Auras.tscn" id="8_e4yt5"]
 [ext_resource type="Texture2D" uid="uid://bi37fcva1ife2" path="res://art/Terrain/Ground/Tilemap_Rocky.png" id="11_128ka"]
 [ext_resource type="PackedScene" uid="uid://tjtf1rx4w8sd" path="res://UI/Pause.tscn" id="12_c0d7e"]
 [ext_resource type="PackedScene" uid="uid://dlakspr6opa3o" path="res://scenes/ally/building/House_Purple.tscn" id="13_128ka"]
 [ext_resource type="PackedScene" uid="uid://cpyutp7s05mx2" path="res://UI/HUD.tscn" id="13_nrtoj"]
-[ext_resource type="Script" uid="uid://1qaau3pog44s" path="res://scenes/FX/arrow_manager.gd" id="14_rpuxp"]
+[ext_resource type="Script" uid="uid://1qaau3pog44s" path="res://OLD/arrow_manager.gd" id="14_rpuxp"]
 [ext_resource type="PackedScene" uid="uid://bw7qh42eu3qo0" path="res://scenes/ally/building/Tower_Blue.tscn" id="15_x70b3"]
-[ext_resource type="PackedScene" uid="uid://be2et3h4rnd1o" path="res://scenes/FX/Arrow.tscn" id="20_128ka"]
+[ext_resource type="PackedScene" uid="uid://be2et3h4rnd1o" path="res://OLD/Arrow.tscn" id="20_128ka"]
 [ext_resource type="PackedScene" uid="uid://6wcinelx81q0" path="res://inventory/scenes/Item-1-GEM.tscn" id="22_dgldv"]
 [ext_resource type="PackedScene" uid="uid://bu21b3qjrpn65" path="res://inventory/scenes/Item-2-MUSH.tscn" id="23_lawxi"]
 [ext_resource type="PackedScene" uid="uid://m6oaqmqpxodx" path="res://inventory/scenes/Item-3-PUMP.tscn" id="24_uni40"]
@@ -551,6 +552,8 @@ visible = false
 [node name="Pause" parent="." instance=ExtResource("12_c0d7e")]
 
 [node name="HUD" parent="." instance=ExtResource("13_nrtoj")]
+
+[node name="Auras" parent="." instance=ExtResource("8_e4yt5")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_n2fr6")

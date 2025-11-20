@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://be2et3h4rnd1o"]
 
-[ext_resource type="Script" uid="uid://c2ryc5s5yox2w" path="res://scenes/FX/arrow.gd" id="1_84idj"]
+[ext_resource type="Script" uid="uid://c2ryc5s5yox2w" path="res://OLD/arrow.gd" id="1_84idj"]
 [ext_resource type="Texture2D" uid="uid://bna2mfvuglaes" path="res://art/Factions/Knights/Troops/Archer/Arrow/Arrow.png" id="2_rmtv1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8t2u"]

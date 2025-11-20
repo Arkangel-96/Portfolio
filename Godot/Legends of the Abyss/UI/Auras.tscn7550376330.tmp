@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1yuai8yn0do7"]
+
+[ext_resource type="Script" uid="uid://c657gnnm6ghel" path="res://UI/auras.gd" id="1_ac4db"]
+
+[node name="Auras" type="CanvasLayer"]
+script = ExtResource("1_ac4db")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TickDamageAura" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/TickDamageAura"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/TickDamageAura"]
+layout_mode = 2
+text = "TickDamageAura /"
+
+[node name="ShoutDurationAura" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ShoutDurationAura"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/ShoutDurationAura"]
+layout_mode = 2
+text = "ShoutDurationAura /"
+
+[node name="ShoutCooldownAura" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ShoutCooldownAura"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/ShoutCooldownAura"]
+layout_mode = 2
+text = "ShoutCooldownAura"
