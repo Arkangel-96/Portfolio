@@ -21,8 +21,8 @@ var ITEM = preload("res://inventory/Item.tscn")
 
 @onready var world = get_node("/root/World")
 @onready var HP_label = get_node("/root/World/HUD/HP_Label")
-@onready var EXP_label = get_node("/root/World/HUD/EXP_Label")
-@onready var Level_label = get_node("/root/World/HUD/Level_Label")
+
+@onready var score_label = get_node("/root/World/HUD/Score_Label")
 
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 @onready var recalc_timer: Timer = $RecalcTimer
@@ -138,13 +138,8 @@ func on_death():
 	effect.process_mode = Node.PROCESS_MODE_ALWAYS
 	
 	# Drop exp
-	world.exp += 20
-	EXP_label.text = "EXP: " + str(world.exp)
-	if world.exp >= 100:
-		world.exp = 0
-		EXP_label.text = "EXP: " + str(world.exp)
-		world.level += 1
-		Level_label.text = "Level: " + str(world.level)
+	world.score += 20
+	score_label.text = "SCORE: " + str(world.score)
 	drop_item()
 
 

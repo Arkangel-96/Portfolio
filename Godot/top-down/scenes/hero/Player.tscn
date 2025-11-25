@@ -1,15 +1,12 @@
-[gd_scene load_steps=78 format=3 uid="uid://c4kqxardye58q"]
+[gd_scene load_steps=71 format=3 uid="uid://c4kqxardye58q"]
 
 [ext_resource type="Script" uid="uid://dcmg4jautpp6a" path="res://scenes/hero/player.gd" id="1_3li8b"]
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
 [ext_resource type="PackedScene" uid="uid://rw8bs18y23kj" path="res://scenes/FX/Flame.tscn" id="2_s2xcf"]
-[ext_resource type="Texture2D" uid="uid://creesiop4alpf" path="res://art/Effects/Explosion/Explosions.png" id="3_h822q"]
-[ext_resource type="PackedScene" uid="uid://b3yq1bsqorpq" path="res://scenes/FX/Fire.tscn" id="4_2crnb"]
 [ext_resource type="Script" uid="uid://cdbicm6s5jqyb" path="res://inventory/inventory.gd" id="4_cw2d6"]
 [ext_resource type="AudioStream" uid="uid://io4tvoxefi7r" path="res://sound/SFX/07_human_atk_sword_1.wav" id="4_qu4a1"]
 [ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://sound/SFX/07_human_atk_sword_2.wav" id="5_70d11"]
 [ext_resource type="AudioStream" uid="uid://d3lvvml11xm32" path="res://sound/SFX/10_human_special_atk_2.wav" id="6_6mvoa"]
-[ext_resource type="AudioStream" uid="uid://cvujt5wi0xwkh" path="res://sound/SFX/17_orc_atk_sword_3.wav" id="7_6mvoa"]
 [ext_resource type="AudioStream" uid="uid://bnwpvyq4c3wkd" path="res://sound/SFX/01_chest_open_3.wav" id="7_bruh7"]
 [ext_resource type="AudioStream" uid="uid://dogkvyqf0s34a" path="res://sound/SFX/04_sack_open_2.wav" id="8_6eyey"]
 [ext_resource type="Script" uid="uid://1kc3agbiw7da" path="res://inventory/inventory_ui.gd" id="8_bruh7"]
@@ -561,31 +558,6 @@ animations = [{
 radius = 16.0
 height = 32.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2crnb"]
-atlas = ExtResource("3_h822q")
-region = Rect2(384, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s2xcf"]
-atlas = ExtResource("3_h822q")
-region = Rect2(576, 0, 192, 192)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_6c5tw"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2crnb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s2xcf")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_6mvoa"]
-radius = 215.00931
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_khinc"]
 radius = 16.0312
 
@@ -604,10 +576,8 @@ projectile_scene = ExtResource("2_s2xcf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_gp031")
-animation = &"shout_UP"
+animation = &"idle_L&R"
 autoplay = "idle_L&R"
-frame = 5
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 9)
@@ -616,99 +586,6 @@ debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 rotation = -0.0004316583
-
-[node name="Flames" type="Node2D" parent="."]
-
-[node name="Fire" type="AnimatedSprite2D" parent="Flames"]
-process_mode = 4
-position = Vector2(-69, -138)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_6c5tw")
-autoplay = "default"
-frame_progress = 0.9802131
-
-[node name="Fire2" type="AnimatedSprite2D" parent="Flames"]
-process_mode = 4
-position = Vector2(-110, -39)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_6c5tw")
-autoplay = "default"
-
-[node name="Fire3" type="AnimatedSprite2D" parent="Flames"]
-process_mode = 4
-position = Vector2(35, -136)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_6c5tw")
-autoplay = "default"
-
-[node name="Fire4" type="AnimatedSprite2D" parent="Flames"]
-process_mode = 4
-position = Vector2(97, -46)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_6c5tw")
-autoplay = "default"
-
-[node name="Fire5" type="AnimatedSprite2D" parent="Flames"]
-process_mode = 4
-position = Vector2(-140, 66)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_6c5tw")
-autoplay = "default"
-
-[node name="Fire6" type="AnimatedSprite2D" parent="Flames"]
-process_mode = 4
-position = Vector2(-61, 131)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_6c5tw")
-autoplay = "default"
-frame_progress = 0.71660405
-
-[node name="Fire8" type="AnimatedSprite2D" parent="Flames"]
-process_mode = 4
-position = Vector2(-15, 102)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_6c5tw")
-autoplay = "default"
-
-[node name="Fire9" type="AnimatedSprite2D" parent="Flames"]
-process_mode = 4
-position = Vector2(134, 59)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_6c5tw")
-autoplay = "default"
-frame_progress = 0.5706276
-
-[node name="Fire15" parent="Flames" instance=ExtResource("4_2crnb")]
-process_mode = 4
-position = Vector2(133, -151)
-scale = Vector2(2, 2)
-
-[node name="Fire18" parent="Flames" instance=ExtResource("4_2crnb")]
-process_mode = 4
-position = Vector2(62, 127)
-scale = Vector2(2, 2)
-
-[node name="Fire19" parent="Flames" instance=ExtResource("4_2crnb")]
-process_mode = 4
-position = Vector2(-94, -1)
-scale = Vector2(2, 2)
-
-[node name="Fire20" parent="Flames" instance=ExtResource("4_2crnb")]
-process_mode = 4
-position = Vector2(-140, -107)
-scale = Vector2(2, 2)
-
-[node name="Fire21" parent="Flames" instance=ExtResource("4_2crnb")]
-process_mode = 4
-position = Vector2(97, 22)
-scale = Vector2(2, 2)
-
-[node name="SHOUT" type="Area2D" parent="."]
-collision_mask = 14
-
-[node name="Collision" type="CollisionShape2D" parent="SHOUT"]
-shape = SubResource("CircleShape2D_6mvoa")
-debug_color = Color(0.08235294, 0.65882355, 0.49803922, 0.41960785)
 
 [node name="INV" type="Area2D" parent="."]
 script = ExtResource("4_cw2d6")
@@ -735,15 +612,6 @@ debug_color = Color(0.946605, 0.174212, 0.39312, 0.42)
 
 [node name="DashCooldown" type="Timer" parent="."]
 
-[node name="TickDamage" type="Timer" parent="."]
-
-[node name="ShoutDuration" type="Timer" parent="."]
-wait_time = 10.0
-one_shot = true
-
-[node name="ShoutCooldown" type="Timer" parent="."]
-wait_time = 10.0
-
 [node name="AudioStreamPlayerATK-1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_qu4a1")
 volume_db = -4.0
@@ -755,11 +623,6 @@ volume_db = -4.0
 [node name="AudioStreamPlayerDASH" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_6mvoa")
 volume_db = -4.0
-
-[node name="AudioStreamPlayerSHOUT" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_6mvoa")
-volume_db = 2.0
-pitch_scale = 0.45
 
 [node name="AudioStreamPlayerPickUp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_bruh7")
@@ -802,8 +665,6 @@ scale = Vector2(0.5, 0.5)
 columns = 3
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="body_entered" from="SHOUT" to="." method="_on_shout_body_entered"]
-[connection signal="body_exited" from="SHOUT" to="." method="_on_shout_body_exited"]
 [connection signal="area_entered" from="INV" to="INV" method="_on_area_entered"]
 [connection signal="item_added" from="INV" to="CanvasLayer/InventoryUI" method="_on_inv_item_added"]
 [connection signal="item_consumed" from="INV" to="CanvasLayer/InventoryUI" method="_on_inv_item_consumed"]
@@ -812,7 +673,4 @@ columns = 3
 [connection signal="body_entered" from="Area_U&D" to="." method="_on_area_ud_body_entered"]
 [connection signal="body_exited" from="Area_U&D" to="." method="_on_area_ud_body_exited"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
-[connection signal="timeout" from="TickDamage" to="." method="_on_tick_damage_timeout"]
-[connection signal="timeout" from="ShoutDuration" to="." method="_on_shout_duration_timeout"]
-[connection signal="timeout" from="ShoutCooldown" to="." method="_on_shout_cooldown_timeout"]
 [connection signal="inventory_item_ui_selected" from="CanvasLayer/InventoryUI" to="INV" method="_on_inventory_ui_inventory_item_ui_selected"]

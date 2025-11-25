@@ -22,18 +22,17 @@ class_name Player extends Info
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
 @onready var atk_2 = $"AudioStreamPlayerATK-2"
 @onready var player_dash: AudioStreamPlayer = $AudioStreamPlayerDASH
-@onready var player_shout: AudioStreamPlayer = $AudioStreamPlayerSHOUT
+
 
 @onready var dash_cooldown: Timer = $DashCooldown
-@onready var shout_cooldown: Timer = $ShoutCooldown
+
+
 
 @onready var nodo: Node2D = $Flames
 @onready var inventory_tween: Tween = create_tween()
 
 
-@onready var shout_cooldown_timer_node: Timer = $ShoutCooldown            # cooldown de 5s
-@onready var shout_duration_timer_node: Timer = $ShoutDuration         # duración del shout (10s)
-@onready var tick_damage_timer_node: Timer = $TickDamage  # tick cada 3s (dentro de SHOUT Area2D)
+
 
 var inventory_open: bool = false
 
@@ -59,33 +58,15 @@ func _ready() -> void:
 	#canvas_layer.hide()
 	
 func reset():
-	nodo.visible= false
+
 	#position = screen_size * 2.5
 	pass
 	
 			
 func _physics_process(_delta: float) -> void:
-	update_timers()
+
 	movement()
 	
-	#print(dash_cooldown.wait_time)
-func update_timers():
-	# obtener referencia al HUD (ajusta la ruta si tu HUD está en otro lugar)
-	var hud = get_tree().root.get_node("World/Auras")  # o la ruta correcta a tu HUD
-
-	# tiempo restante (0 si el timer está parado)
-	var tick_remaining = 0.0 if tick_damage_timer_node.is_stopped() else tick_damage_timer_node.time_left
-	var tick_max = tick_damage_timer_node.wait_time
-
-	var shout_duration_remaining = 0.0 if shout_duration_timer_node.is_stopped() else shout_duration_timer_node.time_left
-	var shout_duration_max = shout_duration_timer_node.wait_time
-	
-	var shout_cooldown_remaining = 0.0 if shout_cooldown_timer_node.is_stopped() else shout_cooldown_timer_node.time_left
-	var shout_cooldown_max = shout_cooldown_timer_node.wait_time
-
-	hud.update_aura("TickDamageAura", tick_remaining, tick_max)
-	hud.update_aura("ShoutDurationAura", shout_duration_remaining, shout_duration_max)
-	hud.update_aura("ShoutCooldownAura", shout_cooldown_remaining, shout_cooldown_max)
 		
 func movement():	
 	var move_direction := Input.get_vector("ui_left","ui_right","ui_up","ui_down")	
@@ -126,8 +107,7 @@ func _input(event: InputEvent) -> void:
 	#if Input.is_action_just_pressed("Space") and dash_ready == true:
 		#dash()
 	
-	if Input.is_action_just_pressed("Q") and shout_ready == true:
-		shout()	
+
 		
 	if Input.is_action_just_pressed("E") and !world.shop:
 		toggle_inventory()
@@ -173,21 +153,7 @@ func toggle_inventory() -> void:
 		)
 
 
-func flame():
-	var projectile = projectile_scene.instantiate()
 
-	# Posición inicial en el personaje
-	projectile.global_position = global_position
-
-	# Dirección hacia el mouse
-	var mouse_pos = get_global_mouse_position()
-	var direction = (mouse_pos - global_position).normalized()
-
-	# Pasamos la dirección al proyectil
-	projectile.direction = direction
-	projectile.speed = projectile_speed
-
-	get_tree().current_scene.add_child(projectile)
 	
 func attack_1():
 	attack_ready = false
@@ -197,8 +163,8 @@ func attack_1():
 	var typeDOWN = randi_range(0,1)
 	var attackUP = ["attack_up_1","attack_up_2"]
 	var typeUP= randi_range(0,1)
-	flame()	
-	get_node("SHOUT").process_mode = Node.PROCESS_MODE_DISABLED
+	
+
 	sprite_animation.play(attackLR[typeLR])
 	is_attack = true
 	velocity = velocity.move_toward(Vector2.ZERO, move_speed)	
@@ -219,7 +185,7 @@ func attack_2():
 	
 	
 	dash_ready = false
-	get_node("SHOUT").process_mode = Node.PROCESS_MODE_DISABLED
+
 	dash_cooldown.start()
 	sprite_animation.play("dash_L&R")
 	is_attack = true
@@ -256,85 +222,6 @@ func attack_2():
 func _on_dash_cooldown_timeout() -> void:
 	dash_ready = true
 	move_speed = 500
-	
-func shout():
-
-	# Activar timers
-	$TickDamage.start()      # daño cada 3s
-	$ShoutDuration.start()         # shout dura 10s
-	
-	# Habilitar área de daño
-	$SHOUT.monitoring = true
-	$SHOUT.monitorable = true
-	
-	for x in get_node("Flames").get_child_count():
-		get_node("Flames").get_child(x).process_mode = Node.PROCESS_MODE_INHERIT
-		get_node("Flames").get_child(x).visible= true
-		
-	nodo.visible= true	
-	shout_ready = false	
-	get_node("SHOUT").process_mode = Node.PROCESS_MODE_INHERIT
-	shout_cooldown.start()
-
-	#sprite_animation.play("shout_L&R")
-	#is_attack = true
-	#velocity = velocity.move_toward(Vector2.ZERO, move_speed)	
-			#
-	#if Input.is_action_pressed("ui_down") or down == true:
-		#sprite_animation.play("shout_DOWN")
-		#is_attack = true
-		#velocity = velocity.move_toward(Vector2.ZERO, move_speed)
-	#if Input.is_action_pressed("ui_up") or up == true :
-		#sprite_animation.play("shout_UP")
-		#is_attack = true
-		#velocity = velocity.move_toward(Vector2.ZERO, move_speed)
-		
-func _on_tick_damage_timeout() -> void:
-	
-		for body in $SHOUT.get_overlapping_bodies():
-			if body is Enemy and body.alive:
-				body.health_component.receive_damage(attack_damage / 3) # multiplicador opcional
-	
-
-func _on_shout_duration_timeout() -> void:
-	# Ocultamos efecto
-	nodo.visible = false
-
-	# Desactivamos el área
-	$SHOUT.monitoring = false
-	$SHOUT.monitorable = false
-
-	# Cortamos el daño periódico
-	$TickDamage.stop()
-
-	# Comienza el cooldown de 5 segundos
-	$ShoutCooldown.start()
-
-	if sprite_animation.animation == "shout_L&R":
-		sprite_animation.play("idle_L&R")	
-		player_shout.play()
-		for x in get_node("Flames").get_child_count():
-			get_node("Flames").get_child(x).visible= false
-			get_node("Flames").get_child(x).process_mode = Node.PROCESS_MODE_DISABLED
-	if sprite_animation.animation == "shout_DOWN":
-		sprite_animation.play("idle_down")	
-		player_shout.play()
-		for x in get_node("Flames").get_child_count():
-			get_node("Flames").get_child(x).visible= false
-			get_node("Flames").get_child(x).process_mode = Node.PROCESS_MODE_DISABLED
-	if sprite_animation.animation == "shout_UP":
-		sprite_animation.play("idle_up")	
-		player_shout.play()
-		for x in get_node("Flames").get_child_count():
-			get_node("Flames").get_child(x).visible= false
-			get_node("Flames").get_child(x).process_mode = Node.PROCESS_MODE_DISABLED
-
-
-
-func _on_shout_cooldown_timeout() -> void:
-	shout_ready = true
-
-		
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	is_attack = false 

@@ -11,8 +11,8 @@ const ARCHER = preload("uid://0g50ua6nypjf")
 var hp : int
 var hpMax : int
 var hpDmg : int
-var level : int
-var exp : int
+var score : int
+
 var gold : int
 
 var wave : int
@@ -31,8 +31,7 @@ var shop: bool = false
 @onready var player = get_node("/root/World/Player")
 @onready var fortress = get_node("/root/World/Fortress")
 @onready var wave_cooldown: Timer = $Wave_Cooldown
-@onready var watch_tower: CharacterBody2D = $WatchTower
-@onready var watch_tower_2: CharacterBody2D = $WatchTower2
+
 
 
 func _ready() -> void:
@@ -44,15 +43,14 @@ func new_game():
 	get_tree().call_group("items", "queue_free") 
 	hpMax = 100
 	hp = 100
-	level = 1
-	exp = 0
+	score = 0
 	gold = 0
 	wave = 1
+	player.attack_damage = 100
 	difficulty = 6.0
 	min = 0
 	sec = 0
-	wave_cc = 3
-	fortress.reset()
+	wave_cc = 20
 	player.reset()
 	reset()
 
@@ -62,8 +60,8 @@ func _on_seconds_timeout() -> void:
 	if sec >= 60:
 		sec = 0
 		min += 1
-	$HUD/Minutes.text = "Min:" + str(min)
-	$HUD/Seconds.text = "Sec:" + str(sec)
+	$HUD/Minutes.text = str(min) + " :" 
+	$HUD/Seconds.text = str(sec)
 
 
 func is_wave_completed():
@@ -84,9 +82,9 @@ func is_wave_completed():
 func _physics_process(_delta: float) -> void:
 	hpDmg = (hpMax - hp) 
 	$HUD/HP_Label.text = "HP: " + str(hp) + "/" + str(hpMax)
-	$HUD/EXP_Label.text = "EXP: " + str(exp)
+	$HUD/Score_Label.text = "SCORE: " + str(score)
 	$HUD/ATK_Label.text = "ATK: " + str(player.attack_damage)
-	if wave == 2:
+	if wave == 4:
 		victory()
 	elif is_wave_completed():
 		get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_INHERIT
@@ -95,29 +93,27 @@ func _physics_process(_delta: float) -> void:
 func _on_wave_cooldown_timeout() -> void:
 	wave_cc -= 1
 	$HUD/Wave_Cooldown.text = " Next wave: " + str(wave_cc) + " s"
-	$HUD/TOP.visible = true 
+	
 
 	if wave_cc == 0:
 		wave += 1
 		difficulty *= DIFF_MULTIPLIER
 		reset()
-		wave_cc = 3
+		wave_cc = 20
 		$HUD/Wave_Cooldown.text = ""
-		$HUD/TOP.visible = false
+	
 		get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func reset():
 	max_enemies = int(difficulty)
 	get_tree().call_group("enemies", "queue_free")
-	 
 	$HUD/HP_Label.text = "HP: " + str(hp)
-	$HUD/Level_Label.text = "Level: " + str(level)
-	$HUD/EXP_Label.text = "EXP: " + str(exp)
+	$HUD/Score_Label.text = "SCORE: " + str(score	)
 	$HUD/wave_Label.text = "Wave: " + str(wave)
 	$HUD/enemies_Label.text = "Enemies: " + str(max_enemies)
-	$HUD/Minutes.text = "Min:" + str(min)
-	$HUD/Seconds.text = "Sec:" + str(sec)
+	$HUD/Minutes.text = str(min) + " :"
+	$HUD/Seconds.text = str(sec)
 	$GameScore.hide()	
 	get_tree().paused = false
 
@@ -197,8 +193,11 @@ func on_death():
 	
 	
 func victory():
-	print("YOU WON")
+	
+	
 	get_tree().paused = true
+	print("YOU WON")
+	
 	$GameScore/Title.text = "___ YOU WON ___ " 
 	$GameScore/Waves.text = "WAVES SURVIVE: " + str(wave-1)
 	$GameScore.show()
