@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bta4bllaigg7u"]
 
-[ext_resource type="Script" uid="uid://dnoqi75bacb7n" path="res://shop/shamanMenu.gd" id="1_2ewp2"]
+[ext_resource type="Script" uid="uid://dnoqi75bacb7n" path="res://scenes/shop/shamanMenu.gd" id="1_2ewp2"]
 [ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="2_wrhpd"]
 [ext_resource type="AudioStream" uid="uid://dogkvyqf0s34a" path="res://sound/SFX/04_sack_open_2.wav" id="3_4bjni"]
 [ext_resource type="Texture2D" uid="uid://ca5luf4ctodsi" path="res://art/UI/Buttons/Button_Hover_3Slides.png" id="6_2ewp2"]
