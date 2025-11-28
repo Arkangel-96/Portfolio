@@ -10,18 +10,19 @@ config_version=5
 
 [application]
 
-config/name="top-down"
-run/main_scene="uid://cihq4jlc2v8j5"
+config/name="Legacy of the Exile"
+run/main_scene="uid://0x1fkar36bkx"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 0)
+boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://art/icon.svg"
+boot_splash/image="/home/admin/Descargas/nightstalker.png"
+config/icon="uid://caqhyudftrl53"
+boot_splash/minimum_display_time=3000
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/mode=2
 window/size/transparent=true
 window/stretch/mode="viewport"
 window/per_pixel_transparency/allowed=true

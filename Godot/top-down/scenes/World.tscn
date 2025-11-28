@@ -43,11 +43,6 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(3, 3, 4976, 0, 4991, 49
 texture = ExtResource("4_bovj0")
 texture_region_size = Vector2i(64, 64)
 0:0/size_in_atlas = Vector2i(3, 3)
-0:0/animation_columns = 4
-0:0/animation_frame_0/duration = 0.25
-0:0/animation_frame_1/duration = 0.25
-0:0/animation_frame_2/duration = 0.25
-0:0/animation_frame_3/duration = 0.25
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 35)
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(2.5, 18, -14, 23.5, -15.5, 37, -4.5, 43.5, 10.5, 45, 18, 38, 18, 24)
@@ -704,14 +699,14 @@ position = Vector2(4596.299, 578.9319)
 position = Vector2(632, 623)
 
 [node name="Captain" parent="." instance=ExtResource("35_x70b3")]
-position = Vector2(2378, 4312)
+position = Vector2(2826, 2415)
 scale = Vector2(-1, 1)
 
 [node name="Shaman" parent="." instance=ExtResource("36_x70b3")]
-position = Vector2(659, 1582)
+position = Vector2(2149, 2640)
 
 [node name="Trader" parent="." instance=ExtResource("30_128ka")]
-position = Vector2(4242, 1619)
+position = Vector2(2321, 2278)
 scale = Vector2(-1, 1)
 
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
