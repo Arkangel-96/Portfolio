@@ -10,17 +10,16 @@ class_name Info extends CharacterBody2D
 @onready var wood_label = get_node("/root/World/HUD/wood_Label")
 
 
-signal shoot
 signal attack_finished
 
-var disable_mouse:bool = false
-var move_speed 
+var disable_mouse: bool = false
+var move_speed
 var attack_damage
 var is_attack = false
 var down = false
 var up = false
 var running = false
-var can_shoot:bool = true
+var can_shoot: bool = true
 var gold = 0
 var exp = 0
 
