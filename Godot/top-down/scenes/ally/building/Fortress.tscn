@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b3yq1bsqorpq" path="res://scenes/FX/Fire.tscn" id="4_elyww"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="5_2hsce"]
 [ext_resource type="Texture2D" uid="uid://cnati1ra15p6u" path="res://art/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="6_7qc6e"]
-[ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://sound/SFX/06_door_close_1.mp3" id="6_mhsi1"]
+[ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://UI/sound/SFX/06_door_close_1.mp3" id="6_mhsi1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbf5s"]
 size = Vector2(185, 311)

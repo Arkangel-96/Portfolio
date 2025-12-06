@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://4f7hr03wouih" path="res://art/Terrain/Ground/Tilemap_Flat.png" id="4_hyhxd"]
 [ext_resource type="PackedScene" uid="uid://bta4bllaigg7u" path="res://scenes/shop/ShamanMenu.tscn" id="5_x70b3"]
 [ext_resource type="PackedScene" uid="uid://hhubv32s18cf" path="res://scenes/shop/CaptainMenu.tscn" id="6_5w2bu"]
-[ext_resource type="AudioStream" uid="uid://gvxbpaccrdmi" path="res://sound/Music/Goblins_Den__Regular_.mp3" id="7_n2fr6"]
+[ext_resource type="AudioStream" uid="uid://gvxbpaccrdmi" path="res://UI/sound/Music/Goblins_Den__Regular_.mp3" id="7_n2fr6"]
 [ext_resource type="Texture2D" uid="uid://bi37fcva1ife2" path="res://art/Terrain/Ground/Tilemap_Rocky.png" id="11_128ka"]
 [ext_resource type="PackedScene" uid="uid://tjtf1rx4w8sd" path="res://UI/PauseMenu.tscn" id="12_c0d7e"]
 [ext_resource type="PackedScene" uid="uid://dlakspr6opa3o" path="res://scenes/ally/building/House_Purple.tscn" id="13_128ka"]
@@ -548,6 +548,7 @@ visible = false
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_n2fr6")
 autoplay = true
+bus = &"Music"
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false

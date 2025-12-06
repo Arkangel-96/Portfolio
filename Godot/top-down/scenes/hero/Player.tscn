@@ -4,11 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://ccjapvn2jpagq" path="res://art/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_4kcxx"]
 [ext_resource type="PackedScene" uid="uid://rw8bs18y23kj" path="res://scenes/FX/Flame.tscn" id="2_s2xcf"]
 [ext_resource type="Script" uid="uid://cdbicm6s5jqyb" path="res://inventory/inventory.gd" id="4_cw2d6"]
-[ext_resource type="AudioStream" uid="uid://io4tvoxefi7r" path="res://sound/SFX/07_human_atk_sword_1.wav" id="4_qu4a1"]
-[ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://sound/SFX/07_human_atk_sword_2.wav" id="5_70d11"]
-[ext_resource type="AudioStream" uid="uid://d3lvvml11xm32" path="res://sound/SFX/10_human_special_atk_2.wav" id="6_6mvoa"]
-[ext_resource type="AudioStream" uid="uid://bnwpvyq4c3wkd" path="res://sound/SFX/01_chest_open_3.wav" id="7_bruh7"]
-[ext_resource type="AudioStream" uid="uid://dogkvyqf0s34a" path="res://sound/SFX/04_sack_open_2.wav" id="8_6eyey"]
+[ext_resource type="AudioStream" uid="uid://io4tvoxefi7r" path="res://UI/sound/SFX/07_human_atk_sword_1.wav" id="4_qu4a1"]
+[ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://UI/sound/SFX/07_human_atk_sword_2.wav" id="5_70d11"]
+[ext_resource type="AudioStream" uid="uid://d3lvvml11xm32" path="res://UI/sound/SFX/10_human_special_atk_2.wav" id="6_6mvoa"]
+[ext_resource type="AudioStream" uid="uid://bnwpvyq4c3wkd" path="res://UI/sound/SFX/01_chest_open_3.wav" id="7_bruh7"]
+[ext_resource type="AudioStream" uid="uid://dogkvyqf0s34a" path="res://UI/sound/SFX/04_sack_open_2.wav" id="8_6eyey"]
 [ext_resource type="Script" uid="uid://1kc3agbiw7da" path="res://inventory/inventory_ui.gd" id="8_bruh7"]
 [ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="9_bruh7"]
 
@@ -615,22 +615,27 @@ debug_color = Color(0.946605, 0.174212, 0.39312, 0.42)
 [node name="AudioStreamPlayerATK-1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_qu4a1")
 volume_db = -4.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayerATK-2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_70d11")
 volume_db = -4.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayerDASH" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_6mvoa")
 volume_db = -4.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayerPickUp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_bruh7")
 volume_db = -4.0
+bus = &"SFX"
 
 [node name="AudioStreamPlayerUse" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_6eyey")
 volume_db = -4.0
+bus = &"SFX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

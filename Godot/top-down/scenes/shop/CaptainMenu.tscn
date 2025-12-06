@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cor2755ts56ab" path="res://scenes/shop/captainMenu.gd" id="1_wubw8"]
 [ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="2_kd4ap"]
-[ext_resource type="AudioStream" uid="uid://dogkvyqf0s34a" path="res://sound/SFX/04_sack_open_2.wav" id="3_548lc"]
+[ext_resource type="AudioStream" uid="uid://dogkvyqf0s34a" path="res://UI/sound/SFX/04_sack_open_2.wav" id="3_548lc"]
 [ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="4_843qc"]
 [ext_resource type="Texture2D" uid="uid://nhuspb4j46tc" path="res://art/UI/Buttons/Button_Blue_3Slides.png" id="6_arqgy"]
 [ext_resource type="Texture2D" uid="uid://dgii26q667qtf" path="res://art/UI/Buttons/Button_Blue_3Slides_Pressed.png" id="7_ui3h1"]
@@ -55,6 +55,7 @@ text = "Hello Sir, How can I help you??"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_548lc")
+bus = &"SFX"
 
 [node name="HPButton" type="Button" parent="."]
 offset_left = 480.0

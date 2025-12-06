@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cnb24wx0bxqga" path="res://art/Factions/Goblins/Troops/Torch/Blue/Torch_Blue.png" id="2_db0jp"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="3_5r8l6"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="4_nl06f"]
-[ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://sound/SFX/06_door_close_1.mp3" id="5_vqktm"]
+[ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://UI/sound/SFX/06_door_close_1.mp3" id="5_vqktm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l5roe"]
 atlas = ExtResource("2_db0jp")

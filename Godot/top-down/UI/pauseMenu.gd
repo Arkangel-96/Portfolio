@@ -56,7 +56,7 @@ func _on_button_options_pressed() -> void:
 
 
 func _on_button_quit_pressed() -> void:
-	get_tree().change_scene_to_file("res://menu/Main.tscn")
+	get_tree().change_scene_to_file("res://UI/Main.tscn")
 
 
 func _on_button_exit_game_pressed() -> void:
