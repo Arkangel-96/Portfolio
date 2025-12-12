@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bqp60kwxdplvy" path="res://art/Factions/Knights/Troops/Archer/Purple/Archer_Purlple.png" id="2_fw4m7"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="4_5yfgx"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="5_ud5bw"]
-[ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://UI/sound/SFX/06_door_close_1.mp3" id="6_uw8hk"]
+[ext_resource type="AudioStream" uid="uid://ukvo8dlqyolb" path="res://sound/SFX/06_door_close_1.mp3" id="6_uw8hk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vkxl4"]
 atlas = ExtResource("2_fw4m7")

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dcmplr5ieeroi" path="res://art/Factions/Knights/Troops/Dead/Dead.png" id="3_cc1bb"]
 [ext_resource type="PackedScene" uid="uid://dq16uubywrowm" path="res://UI/Health_Bar/Health_Bar.tscn" id="4_ip6rc"]
 [ext_resource type="Script" uid="uid://d1lpmbn2iem23" path="res://UI/Health_Bar/health_bar.gd" id="5_w0po7"]
-[ext_resource type="AudioStream" uid="uid://cflmqsuc32kkj" path="res://UI/sound/SFX/22_orc_jump_1.wav" id="6_bliiq"]
+[ext_resource type="AudioStream" uid="uid://cflmqsuc32kkj" path="res://sound/SFX/22_orc_jump_1.wav" id="6_bliiq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qnbja"]
 atlas = ExtResource("2_qsdd2")
