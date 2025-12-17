@@ -614,27 +614,22 @@ debug_color = Color(0.946605, 0.174212, 0.39312, 0.42)
 
 [node name="AudioStreamPlayerATK-1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_qu4a1")
-volume_db = -4.0
 bus = &"SFX"
 
 [node name="AudioStreamPlayerATK-2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_70d11")
-volume_db = -4.0
 bus = &"SFX"
 
 [node name="AudioStreamPlayerDASH" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_6mvoa")
-volume_db = -4.0
 bus = &"SFX"
 
 [node name="AudioStreamPlayerPickUp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_bruh7")
-volume_db = -4.0
 bus = &"SFX"
 
 [node name="AudioStreamPlayerUse" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_6eyey")
-volume_db = -4.0
 bus = &"SFX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

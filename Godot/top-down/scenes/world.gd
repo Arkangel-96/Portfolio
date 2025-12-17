@@ -16,8 +16,8 @@ var score : int
 var gold : int
 
 var wave : int
-var sec : int
-var min : int
+var min: int = 10
+var sec: int = 0
 var wave_cc : int
 var max_enemies: int
 var deaths : int
@@ -48,21 +48,31 @@ func new_game():
 	wave = 1
 	player.attack_damage = 100
 	difficulty = 6.0
-	min = 0
+	min = 10
 	sec = 0
 	wave_cc = 20
 	player.reset()
 	reset()
+	# 🔥 activar cooldown para la PRIMERA oleada
+	wave_cooldown.process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func _on_seconds_timeout() -> void:
-	sec += 1
-	if sec >= 60:
-		sec = 0
-		min += 1
-	$HUD/Minutes.text = str(min) + " :" 
-	$HUD/Seconds.text = str(sec)
+	if min == 0 and sec == 0:
+		# ⛔ El tiempo terminó
+		victory()
+		return
 
+	if sec == 0:
+		sec = 59
+		min -= 1
+	else:
+		sec -= 1
+
+	# Formato bonito (02:05)
+	$HUD/Minutes.text = "%02d :" % min
+	$HUD/Seconds.text = "%02d" % sec
+	# $HUD/Time.text = "%02d:%02d" % [min, sec] #  ONE LINE
 
 func is_wave_completed():
 	var all_dead = true
@@ -84,25 +94,23 @@ func _physics_process(_delta: float) -> void:
 	$HUD/HP_Label.text = "HP: " + str(hp) + "/" + str(hpMax)
 	$HUD/Score_Label.text = "SCORE: " + str(score)
 	$HUD/ATK_Label.text = "ATK: " + str(player.attack_damage)
-	if wave == 4:
-		victory()
-	elif is_wave_completed():
+		
+	if is_wave_completed():
 		get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_INHERIT
 		
 
 func _on_wave_cooldown_timeout() -> void:
 	wave_cc -= 1
 	$HUD/Wave_Cooldown.text = " Next wave: " + str(wave_cc) + " s"
-	
 
 	if wave_cc == 0:
-		wave += 1
 		difficulty *= DIFF_MULTIPLIER
 		reset()
+		spawn_wave_enemies()
+		wave += 1
 		wave_cc = 20
 		$HUD/Wave_Cooldown.text = ""
-	
-		get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_DISABLED
+		wave_cooldown.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func reset():
@@ -117,8 +125,6 @@ func reset():
 	$GameScore.hide()	
 	get_tree().paused = false
 
-	### 🔥 NUEVO → Spawnear enemigos escalados por oleada ###
-	spawn_wave_enemies()
 
 
 

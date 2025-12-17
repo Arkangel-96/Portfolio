@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=40 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/hero/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scenes/world.gd" id="1_ro7oq"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://4f7hr03wouih" path="res://art/Terrain/Ground/Tilemap_Flat.png" id="4_hyhxd"]
 [ext_resource type="PackedScene" uid="uid://bta4bllaigg7u" path="res://scenes/shop/ShamanMenu.tscn" id="5_x70b3"]
 [ext_resource type="PackedScene" uid="uid://hhubv32s18cf" path="res://scenes/shop/CaptainMenu.tscn" id="6_5w2bu"]
-[ext_resource type="AudioStream" uid="uid://gvxbpaccrdmi" path="res://sound/Music/Goblins_Den__Regular_.mp3" id="7_n2fr6"]
 [ext_resource type="Texture2D" uid="uid://bi37fcva1ife2" path="res://art/Terrain/Ground/Tilemap_Rocky.png" id="11_128ka"]
 [ext_resource type="PackedScene" uid="uid://tjtf1rx4w8sd" path="res://UI/PauseMenu.tscn" id="12_c0d7e"]
 [ext_resource type="PackedScene" uid="uid://dlakspr6opa3o" path="res://scenes/ally/building/House_Purple.tscn" id="13_128ka"]
@@ -545,11 +544,6 @@ visible = false
 
 [node name="HUD" parent="." instance=ExtResource("13_nrtoj")]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_n2fr6")
-autoplay = true
-bus = &"Music"
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_aqlsr")
@@ -700,15 +694,14 @@ position = Vector2(4596.299, 578.9319)
 position = Vector2(632, 623)
 
 [node name="Captain" parent="." instance=ExtResource("35_x70b3")]
-position = Vector2(2826, 2415)
+position = Vector2(4191, 1547)
 scale = Vector2(-1, 1)
 
 [node name="Shaman" parent="." instance=ExtResource("36_x70b3")]
-position = Vector2(2149, 2640)
+position = Vector2(2043, 4179)
 
 [node name="Trader" parent="." instance=ExtResource("30_128ka")]
-position = Vector2(2321, 2278)
-scale = Vector2(-1, 1)
+position = Vector2(652, 1564)
 
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="Wave_Cooldown" to="." method="_on_wave_cooldown_timeout"]

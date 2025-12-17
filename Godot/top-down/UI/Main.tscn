@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://0x1fkar36bkx"]
+[gd_scene load_steps=7 format=3 uid="uid://0x1fkar36bkx"]
 
 [ext_resource type="Script" uid="uid://peqvsdoswhbg" path="res://UI/main.gd" id="1_6vb77"]
 [ext_resource type="Texture2D" uid="uid://brdfm8hrhy1v0" path="res://UI/Background.png" id="2_dcm1j"]
-[ext_resource type="AudioStream" uid="uid://gvxbpaccrdmi" path="res://sound/Music/Goblins_Den__Regular_.mp3" id="3_2cxiq"]
 [ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://sound/SFX/07_human_atk_sword_2.wav" id="3_crsyg"]
 
 [sub_resource type="Animation" id="Animation_kqmha"]
@@ -473,16 +472,10 @@ text = "Back
 "
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../AudioStreamPlayer")
+root_node = NodePath("")
 libraries = {
 &"": SubResource("AnimationLibrary_e6xo8")
 }
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_2cxiq")
-autoplay = true
-bus = &"Music"
-parameters/looping = true
 
 [connection signal="pressed" from="Main/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Main/Options" to="." method="_on_options_pressed"]

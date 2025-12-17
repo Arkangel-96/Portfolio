@@ -41,18 +41,9 @@ func hide_menu():
 	
 
 
-
-
-
-
-
-
 func _on_button_resume_pressed() -> void:
 	toggle_pause()
 
-
-func _on_button_options_pressed() -> void:
-	print("Options")
 
 
 func _on_button_quit_pressed() -> void:

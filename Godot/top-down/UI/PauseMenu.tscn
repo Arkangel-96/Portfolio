@@ -107,12 +107,6 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 36
 text = "Resume"
 
-[node name="ButtonOptions" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 36
-text = "Options"
-
 [node name="ButtonQuit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -132,6 +126,5 @@ libraries = {
 }
 
 [connection signal="pressed" from="VBoxContainer/ButtonResume" to="." method="_on_button_resume_pressed"]
-[connection signal="pressed" from="VBoxContainer/ButtonOptions" to="." method="_on_button_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonQuit" to="." method="_on_button_quit_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonExitGame" to="." method="_on_button_exit_game_pressed"]

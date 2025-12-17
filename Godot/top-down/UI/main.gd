@@ -40,6 +40,10 @@ var pending_sfx := 1.0
 
 # ===================== READY =====================
 func _ready():
+	
+	MusicManager.play(preload("res://sound/Music/Goblins_Den__Regular_.mp3"))
+
+	#MusicManager.fade_in()
 	show_main()
 
 	# Llenar OptionButton de resolución (escala)
@@ -121,11 +125,10 @@ func set_bus_volume(bus_name: String, value: float):
 
 	AudioServer.set_bus_mute(bus, false)
 
-	var min_db: float = -30.0
-	var max_db: float = -6.0
-	var db: float = lerpf(min_db, max_db, value)
-
+	# curva perceptual correcta
+	var db := linear_to_db(value)
 	AudioServer.set_bus_volume_db(bus, db)
+
 
 # =================================================
 # ===================== GUARDADO ===================
@@ -217,8 +220,9 @@ func show_resolutions():
 # =================================================
 
 func _on_play_pressed():
+	#MusicManager.fade_down_and_restore(3.0)
 	get_tree().change_scene_to_file("res://scenes/World.tscn")
-
+	
 func _on_exit_pressed():
 	get_tree().quit()
 
