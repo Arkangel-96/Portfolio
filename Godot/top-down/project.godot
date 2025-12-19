@@ -11,12 +11,11 @@ config_version=5
 [application]
 
 config/name="Pixel Hero Survival"
-run/main_scene="uid://cihq4jlc2v8j5"
+run/main_scene="uid://0x1fkar36bkx"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-boot_splash/image="/home/admin/Descargas/nightstalker.png"
 config/icon="uid://caqhyudftrl53"
 boot_splash/minimum_display_time=3000
 

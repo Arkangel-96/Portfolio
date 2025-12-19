@@ -18,7 +18,7 @@ extends Control
 @onready var sfx_slider: HSlider = $Volume/SFX
 @onready var sfx_test: AudioStreamPlayer = $"Volume/SFX TEST/AudioStreamPlayer"
 
-@onready var anim = $AnimationPlayer
+
 
 # ===================== CONFIG =====================
 var config_path := "user://config.cfg"
@@ -41,7 +41,7 @@ var pending_sfx := 1.0
 # ===================== READY =====================
 func _ready():
 	
-	MusicManager.play(preload("res://sound/Music/Goblins_Den__Regular_.mp3"))
+	
 
 	#MusicManager.fade_in()
 	show_main()
@@ -67,6 +67,8 @@ func _ready():
 # =================================================
 # ===================== RESOLUCIÓN =================
 # =================================================
+var music_started := false
+
 
 func _on_resolution_selected(index: int):
 	pending_scale = scales[index].scale
@@ -183,7 +185,7 @@ func show_main():
 	credits_panel.visible = false
 	volume_panel.visible = false
 	resolution_panel.visible = false
-	anim.play("fade_in")
+
 
 func show_options():
 	main_panel.visible = false
@@ -191,7 +193,7 @@ func show_options():
 	credits_panel.visible = false
 	volume_panel.visible = false
 	resolution_panel.visible = false
-	anim.play("slide_left")
+
 
 func show_credits():
 	main_panel.visible = false
@@ -199,7 +201,7 @@ func show_credits():
 	credits_panel.visible = true
 	volume_panel.visible = false
 	resolution_panel.visible = false
-	anim.play("slide_left")
+
 
 func show_volume():
 	main_panel.visible = false
@@ -220,8 +222,17 @@ func show_resolutions():
 # =================================================
 
 func _on_play_pressed():
-	#MusicManager.fade_down_and_restore(3.0)
+	print("CLICK PLAY")
+
+	MusicManager.unlock_audio()
+	MusicManager.play(preload("res://sound/Music/Goblins_Den__Regular_.ogg"))
+
+	if OS.has_feature("web"):
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
 	get_tree().change_scene_to_file("res://scenes/World.tscn")
+
+	
 	
 func _on_exit_pressed():
 	get_tree().quit()
