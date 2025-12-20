@@ -1,0 +1,123 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Enemy",
+"class": "Archer",
+"language": "GDScript",
+"path": "res://scenes/enemy/archer.gd"
+}, {
+"base": "Enemy",
+"class": "Boomer",
+"language": "GDScript",
+"path": "res://scenes/enemy/boomer.gd"
+}, {
+"base": "Info",
+"class": "Captain",
+"language": "GDScript",
+"path": "res://scenes/ally/captain.gd"
+}, {
+"base": "CharacterBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://scenes/enemy/goblin.gd"
+}, {
+"base": "Info",
+"class": "Fortress",
+"language": "GDScript",
+"path": "res://scenes/ally/building/fortress.gd"
+}, {
+"base": "Node2D",
+"class": "HealthComponent",
+"language": "GDScript",
+"path": "res://UI/Health_Bar/health_bar.gd"
+}, {
+"base": "Info",
+"class": "House",
+"language": "GDScript",
+"path": "res://scenes/ally/building/house.gd"
+}, {
+"base": "CharacterBody2D",
+"class": "Info",
+"language": "GDScript",
+"path": "res://scenes/info.gd"
+}, {
+"base": "Resource",
+"class": "InvItem",
+"language": "GDScript",
+"path": "res://inventory/resources/data/DATA_ITEM.gd"
+}, {
+"base": "Resource",
+"class": "InvSlot",
+"language": "GDScript",
+"path": "res://inventory/resources/data/DATA_SLOT.gd"
+}, {
+"base": "Panel",
+"class": "InventoryItemUI",
+"language": "GDScript",
+"path": "res://inventory/inventory_item_ui.gd"
+}, {
+"base": "Info",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scenes/hero/player.gd"
+}, {
+"base": "Info",
+"class": "Shaman",
+"language": "GDScript",
+"path": "res://scenes/ally/shaman.gd"
+}, {
+"base": "Enemy",
+"class": "Techie",
+"language": "GDScript",
+"path": "res://scenes/enemy/techie.gd"
+}, {
+"base": "Info",
+"class": "Trader",
+"language": "GDScript",
+"path": "res://scenes/ally/trader.gd"
+} ]
+_global_script_class_icons={
+"Archer": "",
+"Boomer": "",
+"Captain": "",
+"Enemy": "",
+"Fortress": "",
+"HealthComponent": "",
+"House": "",
+"Info": "",
+"InvItem": "",
+"InvSlot": "",
+"InventoryItemUI": "",
+"Player": "",
+"Shaman": "",
+"Techie": "",
+"Trader": ""
+}
+
+[application]
+
+config/name="Web Project"
+config/icon="res://icon.png"
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_environment="res://default_env.tres"

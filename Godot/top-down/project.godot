@@ -25,7 +25,8 @@ buses/default_bus_layout="uid://bw84qr5dt60y5"
 
 [autoload]
 
-MusicManager="*res://UI/MusicManager.gd"
+bg_music="*res://UI/bg_music.gd"
+WebAudioUnlock="*res://UI/web_audio_unlock.gd"
 
 [display]
 
