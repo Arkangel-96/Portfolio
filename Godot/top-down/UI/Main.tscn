@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://0x1fkar36bkx"]
+[gd_scene load_steps=4 format=3 uid="uid://0x1fkar36bkx"]
 
 [ext_resource type="Script" uid="uid://peqvsdoswhbg" path="res://UI/main.gd" id="1_6vb77"]
-[ext_resource type="Script" uid="uid://dp7wmtiid4pfm" path="res://UI/control.gd" id="2_crsyg"]
 [ext_resource type="Texture2D" uid="uid://brdfm8hrhy1v0" path="res://UI/Background.png" id="2_dcm1j"]
 [ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://sound/SFX/07_human_atk_sword_2.wav" id="3_crsyg"]
 
@@ -280,19 +279,6 @@ text = "Sound Effect "
 stream = ExtResource("3_crsyg")
 bus = &"SFX"
 
-[node name="Control" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2_crsyg")
-
-[node name="Button" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 786.0
-offset_top = 137.0
-offset_right = 850.0
-offset_bottom = 200.0
-
 [node name="Resolution" type="Control" parent="."]
 visible = false
 anchors_preset = 0
@@ -452,7 +438,6 @@ text = "Back
 [connection signal="pressed" from="Volume/ApplyButtonVOL" to="." method="_on_apply_button_vol_pressed"]
 [connection signal="pressed" from="Volume/RestoreButtonVOL" to="." method="_on_restore_button_vol_pressed"]
 [connection signal="pressed" from="Volume/SFX TEST" to="." method="_on_sfx_test_pressed"]
-[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
 [connection signal="item_selected" from="Resolution/ResolutionButton" to="." method="_on_resolution_button_item_selected"]
 [connection signal="toggled" from="Resolution/FullscreenCheck" to="." method="_on_fullscreen_check_toggled"]
 [connection signal="pressed" from="Resolution/ApplyButton" to="." method="_on_apply_button_pressed"]

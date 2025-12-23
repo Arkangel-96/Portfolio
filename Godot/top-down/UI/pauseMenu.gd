@@ -16,9 +16,9 @@ func _input(event):
 		toggle_pause()
 
 func toggle_pause():
-	player.inventory_ui.hide()
 	is_paused = not is_paused
 	get_tree().paused = is_paused
+	player.inventory_ui.hide()
 
 	if is_paused:
 		show_menu()

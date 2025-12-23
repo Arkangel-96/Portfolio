@@ -39,7 +39,7 @@ func _ready() -> void:
 
 	new_game()
 	$GameScore/Button.pressed.connect(new_game)
-
+	get_tree().paused = true
 
 func new_game():	
 	get_tree().call_group("items", "queue_free") 

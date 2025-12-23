@@ -258,11 +258,7 @@ func _on_credits_back_pressed():
 func _on_sfx_test_pressed():
 	sfx_test.play()
 
-func _on_button_pressed():
-	print("BOTON OK")
-	WebAudioUnlock.unlock()
-	bg_music.play_music()
-	
+
 #func _on_button_pressed():
 	#var p := AudioStreamPlayer.new()
 	#add_child(p)

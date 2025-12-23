@@ -23,15 +23,11 @@ boot_splash/minimum_display_time=3000
 
 buses/default_bus_layout="uid://bw84qr5dt60y5"
 
-[autoload]
-
-bg_music="*res://UI/bg_music.gd"
-WebAudioUnlock="*res://UI/web_audio_unlock.gd"
-
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/resizable=false
 window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 window/per_pixel_transparency/allowed=true

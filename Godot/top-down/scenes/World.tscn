@@ -1,9 +1,10 @@
-[gd_scene load_steps=40 format=4 uid="uid://cihq4jlc2v8j5"]
+[gd_scene load_steps=41 format=4 uid="uid://cihq4jlc2v8j5"]
 
 [ext_resource type="PackedScene" uid="uid://c4kqxardye58q" path="res://scenes/hero/Player.tscn" id="1_5euw2"]
 [ext_resource type="Script" uid="uid://8frursiijycr" path="res://scenes/world.gd" id="1_ro7oq"]
 [ext_resource type="PackedScene" uid="uid://bflrrr4ouvpaa" path="res://UI/GameScore.tscn" id="2_128ka"]
 [ext_resource type="PackedScene" uid="uid://bd0hv10crsk8d" path="res://scenes/shop/TraderMenu.tscn" id="3_aqlsr"]
+[ext_resource type="PackedScene" uid="uid://cmjpwpkbbf20o" path="res://UI/StartMenu.tscn" id="3_b64vv"]
 [ext_resource type="Texture2D" uid="uid://3gdvbr1d53k0" path="res://art/Resources/Trees/Tree.png" id="4_bovj0"]
 [ext_resource type="Texture2D" uid="uid://vwwmgdekpgrc" path="res://art/Terrain/Ground/Tilemap_Elevation.png" id="4_ddnin"]
 [ext_resource type="Texture2D" uid="uid://4f7hr03wouih" path="res://art/Terrain/Ground/Tilemap_Flat.png" id="4_hyhxd"]
@@ -531,6 +532,9 @@ visible = false
 process_mode = 4
 autostart = true
 
+[node name="StartMenu" parent="." instance=ExtResource("3_b64vv")]
+process_mode = 3
+
 [node name="TraderMenu" parent="." instance=ExtResource("3_aqlsr")]
 visible = false
 
@@ -541,6 +545,7 @@ visible = false
 visible = false
 
 [node name="Pause" parent="." instance=ExtResource("12_c0d7e")]
+visible = false
 
 [node name="HUD" parent="." instance=ExtResource("13_nrtoj")]
 
