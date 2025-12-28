@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpyutp7s05mx2"]
+[gd_scene load_steps=11 format=3 uid="uid://cpyutp7s05mx2"]
 
 [ext_resource type="Texture2D" uid="uid://c2mk7abve4gru" path="res://art/UI/Ribbons/Ribbon_Red_Connection_Left.png" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://eyakmw30gmhj" path="res://UI/hud.gd" id="1_md4fy"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ko8oxfh44xsj" path="res://art/Deco/16.png" id="6_047uy"]
 [ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="7_am7sw"]
 [ext_resource type="Texture2D" uid="uid://bju43nffmex5" path="res://art/UI/Pointers/01.png" id="9_7i7fj"]
+[ext_resource type="Texture2D" uid="uid://bjmd1s2hs3v8s" path="res://art/UI/Pointers/02.png" id="9_rbci0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ixkb2"]
 texture = ExtResource("2_am7sw")
@@ -175,3 +176,12 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="FullscreenButton" type="TextureButton" parent="."]
+offset_left = 1184.0
+offset_top = -658.0
+offset_right = 1248.0
+offset_bottom = -594.0
+texture_normal = ExtResource("9_rbci0")
+
+[connection signal="pressed" from="FullscreenButton" to="." method="_on_fullscreen_button_pressed"]

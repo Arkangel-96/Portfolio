@@ -13,3 +13,12 @@ func _process(_delta: float) -> void:
 
 
 	
+
+
+func _on_fullscreen_button_pressed():
+	var mode := DisplayServer.window_get_mode()
+
+	if mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
