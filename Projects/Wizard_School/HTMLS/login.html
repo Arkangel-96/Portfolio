@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://img.stablecog.com/insecure/1024w/aHR0cHM6Ly9iLnN0YWJsZWNvZy5jb20vYjAwODI0ZDktZTUxYi00NDc0LWEzMWItYzdjMDUwZTVkNjNjLmpwZWc.webp">
+    <title>Accede a Hogwarts</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('/Image/login-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ffee00;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .home-tab {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #ffee00;
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <a href="/HTMLS/Inicio.html" class="home-tab">INICIO</a>
+    <div class="login-container">
+        <h2>Iniciar sesión</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Mago" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">Mantener sesión iniciada</label>
+            </div>
+            <button type="submit">Acceder</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var savedUsername = localStorage.getItem('username');
+            if (savedUsername) {
+                document.getElementById('username').value = savedUsername;
+                document.getElementById('rememberMe').checked = true;
+            }
+        });
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            
+            if (username === 'usuario' && password === 'contraseña') {
+                alert('Inicio de sesión exitoso');
+            } else {
+                alert('Usuario o contraseña incorrectos');
+            }
+        });
+    </script>
+</body>
+</html>

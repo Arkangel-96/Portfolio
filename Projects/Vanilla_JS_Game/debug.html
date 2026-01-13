@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ninja con hitbox y colisiones correctas</title>
+<style>
+body { background:#222; display:flex; justify-content:center; align-items:center; height:100vh; overflow:hidden; }
+canvas { border:2px solid white; background:#444; }
+</style>
+</head>
+<body>
+<canvas id="gameCanvas" width="1000" height="500"></canvas>
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+// === HITBOX FIJO DEL JUGADOR ===
+const hitbox = { x:200, y:350, w:50, h:80 };
+
+// === SPRITES ===
+const frameCount = 10;
+const animations = { run:[], idle:[], attack:[], throw:[], dead:[], slide:[], jump:[], jump_attack:[], jump_throw:[] };
+for(let anim in animations){
+  for(let i=1;i<=frameCount;i++){
+    const img=new Image();
+    img.src=`ninja/${anim}/frame_${i}.png`;
+    animations[anim].push(img);
+  }
+}
+
+// === ESCALADO Y OFFSETS ===
+const scaleFactors = { idle:{x:0.7,y:1}, attack:{x:1.5,y:1.2}, throw:{x:1.03,y:1.03}, dead:{x:1.2,y:1.2}, jump_attack:{x:1.3,y:1.3}, default:{x:1,y:1} };
+const animationOffsets = { attack:{x:0,y:15}, jump_attack:{x:0,y:20}, default:{x:0,y:0} };
+const animationDelays = { idle:10, jump:12, default:6 };
+
+// === ESTADO DEL JUGADOR ===
+let velocityY=0;
+let jumpHorizontalSpeed=0;
+let jumping=false;
+let facingRight=true;
+let actionPlaying=false;
+let playerState="idle";
+let currentFrame=0;
+let frameCounter=0;
+const keys={};
+window.addEventListener("keydown", e=>keys[e.key.toLowerCase()]=true);
+window.addEventListener("keyup", e=>keys[e.key.toLowerCase()]=false);
+
+// === SALTO Y GRAVEDAD ===
+const jumpBoost=7;
+const gravity=0.15;
+
+// === PROYECTILES ===
+let projectiles=[];
+function shootProjectile(startX,startY,direction){ projectiles.push({x:startX,y:startY,speed:6,dir:direction}); }
+
+// === PLATAFORMAS Y CUBO ===
+let enemy={x:1200,y:450,w:80,h:80};
+let platforms=[{x:100,y:420,w:300,h:20},{x:500,y:350,w:400,h:20},{x:1000,y:300,w:300,h:20}];
+
+// === CÁMARA ===
+let cameraX=0;
+
+// === FUNCIONES ===
+function isOnGround(){
+  // Suelo
+  if(hitbox.y + hitbox.h >= canvas.height) return true;
+  // Plataformas
+  for(let p of platforms){
+    if(hitbox.x + hitbox.w > p.x && hitbox.x < p.x + p.w){
+      if(hitbox.y + hitbox.h >= p.y && hitbox.y + hitbox.h <= p.y + 5) return true;
+    }
+  }
+  // Cubo
+  if(hitbox.x + hitbox.w > enemy.x && hitbox.x < enemy.x + enemy.w){
+    if(hitbox.y + hitbox.h >= enemy.y && hitbox.y + hitbox.h <= enemy.y + 5) return true;
+  }
+  return false;
+}
+
+function updatePlayerState(){
+  if(actionPlaying) return;
+
+  if((jumping) && keys["c"]){ playerState="jump_attack"; actionPlaying=true; currentFrame=0; return; }
+  if((jumping) && keys["v"]){ playerState="jump_throw"; actionPlaying=true; currentFrame=0; shootProjectile(hitbox.x+hitbox.w/2,hitbox.y+hitbox.h/2,facingRight?1:-1); return; }
+  if(keys["z"]){ playerState="slide"; return; }
+  if(keys["d"] && !jumping){ actionPlaying=true; currentFrame=0; playerState="attack"; return; }
+  if(keys["f"] && !jumping){ actionPlaying=true; currentFrame=0; playerState="throw"; shootProjectile(hitbox.x+hitbox.w/2,hitbox.y+hitbox.h/2,facingRight?1:-1); return; }
+
+  if(jumping && !["jump_attack","jump_throw"].includes(playerState)) playerState="jump";
+  if(!jumping && keys["arrowup"] && isOnGround()){ jumping=true; velocityY=-jumpBoost;
+    if(keys["arrowleft"]){ jumpHorizontalSpeed=-3; facingRight=false; }
+    else if(keys["arrowright"]){ jumpHorizontalSpeed=3; facingRight=true; }
+    else jumpHorizontalSpeed=0;
+    playerState="jump";
+  } else if(!jumping && (keys["arrowleft"]||keys["arrowright"])) playerState="run";
+  else if(!jumping) playerState="idle";
+
+  if(!jumping){ if(keys["arrowleft"]) facingRight=false; else if(keys["arrowright"]) facingRight=true; }
+}
+
+function updatePosition(){
+  const prevX=hitbox.x, prevY=hitbox.y;
+
+  // Movimiento horizontal
+  let dx=0;
+  if(!jumping){ if(keys["arrowleft"]) dx=-5; if(keys["arrowright"]) dx=5; }
+  hitbox.x += dx + jumpHorizontalSpeed;
+
+  // Colisiones horizontales
+  [...platforms,enemy].forEach(obj=>{
+    if(hitbox.x + hitbox.w > obj.x && hitbox.x < obj.x + obj.w &&
+       hitbox.y + hitbox.h > obj.y - obj.h && hitbox.y < obj.y){
+         hitbox.x=prevX; // solo bloquea horizontal
+    }
+  });
+
+  // Movimiento vertical
+  velocityY += gravity;
+  hitbox.y += velocityY;
+
+  // Colisiones verticales
+  [...platforms, enemy].forEach(obj=>{
+    if(hitbox.x + hitbox.w > obj.x && hitbox.x < obj.x + obj.w){
+      const hitboxBottomPrev=prevY + hitbox.h;
+      const objTop = obj===enemy ? obj.y : obj.y;
+      const hitboxBottomCurr=hitbox.y+hitbox.h;
+      if(hitboxBottomPrev <= objTop && hitboxBottomCurr >= objTop){
+        hitbox.y = objTop - hitbox.h;
+        velocityY=0;
+        jumping=false;
+      }
+    }
+  });
+
+  // Suelo
+  if(hitbox.y + hitbox.h > canvas.height){ hitbox.y = canvas.height - hitbox.h; velocityY=0; jumping=false; }
+
+  // Límites mundo
+  if(hitbox.x<0) hitbox.x=0;
+  if(hitbox.x+hitbox.w>2000) hitbox.x=2000-hitbox.w;
+
+  if(jumping) jumpHorizontalSpeed*=0.98; else jumpHorizontalSpeed=0;
+
+  // Cámara
+  cameraX = hitbox.x - canvas.width/2 + hitbox.w/2;
+  if(cameraX<0) cameraX=0;
+  if(cameraX>2000-canvas.width) cameraX=2000-canvas.width;
+}
+
+function drawSprite(frames,currentFrame,x,y,width,height,facingRight=true,state="default"){
+  if(frames.length===0) return;
+  ctx.save();
+  ctx.imageSmoothingEnabled=true;
+  ctx.imageSmoothingQuality="high";
+
+  const factor = scaleFactors[state]||scaleFactors.default;
+  const offset = animationOffsets[state]||animationOffsets.default;
+  const drawW=Math.round(width*factor.x);
+  const drawH=Math.round(height*factor.y);
+  const drawX=Math.round(x + hitbox.w/2 - drawW/2 + offset.x);
+  const drawY=Math.round(y + hitbox.h - drawH + offset.y);
+
+  ctx.translate(drawX + drawW/2, drawY + drawH/2);
+  ctx.scale(facingRight?factor.x:-factor.x, factor.y);
+  ctx.drawImage(frames[currentFrame], -drawW/2, -drawH/2, drawW, drawH);
+  ctx.restore();
+}
+
+function getAnimationFrames(){ return { frames: animations[playerState], count: frameCount }; }
+
+function gameLoop(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  updatePlayerState();
+  updatePosition();
+
+  // Dibujar plataformas
+  ctx.fillStyle="brown";
+  platforms.forEach(p=>ctx.fillRect(p.x-cameraX,p.y,p.w,p.h));
+
+  // Dibujar cubo
+  ctx.fillStyle="orange";
+  ctx.fillRect(enemy.x-cameraX,enemy.y-enemy.h,enemy.w,enemy.h);
+
+  // Proyectiles
+  projectiles.forEach((p,i)=>{
+    p.x += p.speed*p.dir;
+    ctx.fillStyle="green";
+    ctx.fillRect(p.x-cameraX,p.y,10,10);
+    if(p.x<0 || p.x>2000) projectiles.splice(i,1);
+  });
+
+  // Hitbox
+  ctx.strokeStyle="lime";
+  ctx.strokeRect(hitbox.x-cameraX,hitbox.y,hitbox.w,hitbox.h);
+
+  // Sprite
+  const {frames,count} = getAnimationFrames();
+  drawSprite(frames,currentFrame,hitbox.x,hitbox.y,80,80,facingRight,playerState);
+
+  // Animación
+  frameCounter++;
+  const delay = animationDelays[playerState]||animationDelays.default;
+  if(frameCounter%delay===0){
+    currentFrame++;
+    if(["attack","throw","jump_attack","jump_throw"].includes(playerState) && currentFrame>=count){
+      actionPlaying=false; currentFrame=0;
+      playerState=jumping?"jump":(keys["arrowleft"]||keys["arrowright"]?"run":"idle");
+    } else currentFrame%=count;
+  }
+
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+</script>
+</body>
+</html>

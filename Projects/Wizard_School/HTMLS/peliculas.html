@@ -1,0 +1,128 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://img.stablecog.com/insecure/1024w/aHR0cHM6Ly9iLnN0YWJsZWNvZy5jb20vYjAwODI0ZDktZTUxYi00NDc0LWEzMWItYzdjMDUwZTVkNjNjLmpwZWc.webp">
+    <title>Peliculas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/Image/peliculas.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 20px;
+            color: #ffffff;
+        }
+        h1 {
+            color: #ffee00;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 15px;
+            width: calc(33.33% - 20px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .card h3 {
+            margin: 10px 0;
+            color: #ffee00;
+            text-align: center;
+        }
+        .card p {
+            margin: 5px 0;
+            text-align: center;
+        }
+        .home-tab {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #ffee00;
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        @media (max-width: 1024px) {
+            .card {
+                width: calc(50% - 20px);
+            }
+        }
+        @media (max-width: 768px) {
+            .card {
+                width: calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/index.html" class="home-tab">INICIO</a>
+    <h1>Peliculas de Harry Potter</h1>
+    
+    <div id="moviesContainer" class="container"></div>
+    <script>
+        async function getAllMovies() {
+            const response = await fetch('https://api.potterdb.com/v1/movies');
+            const data = await response.json();
+            return data.data;
+        }
+
+        function displayMovies(movies) {
+            const container = document.getElementById('moviesContainer');
+            container.innerHTML = '';
+            movies.forEach(movie => {
+                const attributes = movie.attributes;
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${attributes.poster || 'https://via.placeholder.com/400x600.png?text=No+Poster+Available'}" alt="${attributes.title}">
+                    <h3>${attributes.title}</h3>
+                    <p>Director: ${attributes.directors.join(', ') || 'Desconocido'}</p>
+                    <p>Fecha de lanzamiento: ${attributes.release_date || 'Desconocida'}</p>
+                    <p>Duración: ${attributes.running_time || 'Desconocida'} minutos</p>
+                    <p>Box Office: $${attributes.box_office?.toLocaleString() || 'Desconocido'}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const allMovies = await getAllMovies();
+                displayMovies(allMovies);
+            } catch (error) {
+                console.error('Error al cargar las películas:', error);
+            }
+        });
+    </script>
+
+</body>
+</html>

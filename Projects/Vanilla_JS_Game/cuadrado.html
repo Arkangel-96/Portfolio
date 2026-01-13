@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego Metroidvania</title>
+  <style>
+    body { margin:0; background:#111; display:flex; justify-content:center; align-items:center; height:100vh; }
+    canvas { background:#222; border:2px solid #555; }
+  </style>
+</head>
+<body>
+  <canvas id="game" width="800" height="400"></canvas>
+  <script>
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+    const W = canvas.width, H = canvas.height;
+
+    let platforms=[], player, camX=0, score=0, highscore=0;
+    let keys={}, gameRunning=true, restartBtnRect=null;
+
+    function makePlatform(x,y,w){ return {x,y,w,h:20,color:'#6cf'}; }
+
+    function resetPlatforms(){
+      platforms=[
+        makePlatform(50,H-20,3000),
+        makePlatform(350,H-180,300),
+        makePlatform(650,H-300,300),
+        makePlatform(950,H-300,300),
+        makePlatform(1250,H-120,300),
+        makePlatform(2000,H-130,300)
+      ];
+    }
+
+    function init(){
+      resetPlatforms();
+      player={x:100,y:H-150,w:30,h:30,vx:0,vy:0,onGround:false,color:'#f55'};
+      camX=0; score=0; gameRunning=true;
+    }
+
+    init();
+
+    document.addEventListener('keydown',e=>{ keys[e.key]=true; if(e.key==='º') init(); });
+    document.addEventListener('keyup',e=>keys[e.key]=false);
+
+    canvas.addEventListener('mousedown',e=>{
+      if(!gameRunning && restartBtnRect){
+        const rect=canvas.getBoundingClientRect();
+        const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+        const {x,y,w,h}=restartBtnRect;
+        if(mx>=x && mx<=x+w && my>=y && my<=y+h) init();
+      }
+    });
+
+    function update(){
+      if(!gameRunning) return;
+
+      // Movimiento horizontal
+      let dx = 0;
+      if(keys['ArrowLeft']) dx = -4;
+      if(keys['ArrowRight']) dx = 4;
+      player.x += dx;
+
+      // Colisión lateral con plataformas
+      for (let p of platforms) {
+        if (
+          player.x + player.w > p.x &&
+          player.x < p.x + p.w &&
+          player.y + player.h > p.y &&
+          player.y < p.y + p.h
+        ) {
+          if (dx > 0) player.x = p.x - player.w;
+          else if (dx < 0) player.x = p.x + p.w;
+        }
+      }
+
+      // Gravedad y salto
+      player.vy += 0.25;
+      player.y += player.vy;
+      player.onGround = false;
+
+      // Colisiones verticales con plataformas
+      for (let p of platforms) {
+        if (
+          player.x + player.w > p.x && player.x < p.x + p.w &&
+          player.y + player.h > p.y && player.y + player.h < p.y + 20 &&
+          player.vy >= 0
+        ) {
+          player.y = p.y - player.h;
+          player.vy = 0;
+          player.onGround = true;
+        }
+      }
+
+      // Salto
+      if(keys['ArrowUp'] && player.onGround){ player.vy=-10; }
+
+      // Scroll cámara
+      camX = player.x - W/2;
+      if(camX<0) camX=0;
+
+      // Puntaje
+      score = Math.max(score, Math.floor(player.x/10));
+      highscore = Math.max(highscore, score);
+
+      // Game Over
+      if(player.y>H){ gameRunning=false; }
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      const g = ctx.createLinearGradient(0,0,W,0);
+      g.addColorStop(0,'#07101a');
+      g.addColorStop(1,'#041019');
+      ctx.fillStyle = g;
+      ctx.fillRect(0,0,W,H);
+
+      // Plataformas y jugador
+      ctx.save();
+      ctx.translate(-camX,0);
+      for(let p of platforms){ ctx.fillStyle=p.color; ctx.fillRect(p.x,p.y,p.w,p.h); }
+      ctx.fillStyle=player.color;
+      ctx.fillRect(player.x,player.y,player.w,player.h);
+      ctx.restore();
+
+      // HUD
+      ctx.fillStyle='#fff';
+      ctx.font='18px system-ui';
+      ctx.textAlign='left';
+      ctx.fillText('Puntaje: '+score,20,30);
+      ctx.fillText('Mejor: '+highscore,20,55);
+
+      ctx.font='14px system-ui';
+      ctx.textAlign='center';
+      ctx.fillText('←/→ mover · ↑ saltar · º reinicia', W/2, 30);
+
+      // Botón reinicio dentro del canvas
+      if(!gameRunning){
+        ctx.fillStyle='rgba(0,0,0,0.6)';
+        ctx.fillRect(W/2-100,H/2-40,200,80);
+        ctx.fillStyle='#fff';
+        ctx.textAlign='center';
+        ctx.font='bold 24px system-ui';
+        ctx.fillText('YOU DIED', W/2, H/2+8);
+        restartBtnRect={x:W/2-100,y:H/2-40,w:200,h:80};
+      } else {
+        restartBtnRect=null;
+      }
+    }
+
+    function loop(){ update(); draw(); requestAnimationFrame(loop); }
+    loop();
+  </script>
+</body>
+</html>

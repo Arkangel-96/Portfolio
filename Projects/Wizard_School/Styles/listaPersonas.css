@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+/* Estilo para la tabla */
+table {
+    border-collapse: collapse;
+    margin: 0 auto; /* Centra la tabla horizontalmente */
+}
+
+/* Estilo para la tabla */
+table {
+    border-collapse: collapse;
+    margin: 0 auto; /* Centra la tabla horizontalmente */
+    width: 100%; /* Ancho total de la tabla */
+}
+
+/* Estilo para las celdas del encabezado */
+th {
+    background-color: #ccc; /* Fondo gris para el encabezado */
+    border: 1px solid black; /* Bordes negros */
+    padding: 10px; /* Espaciado interno */
+    text-align: left; /* Alineación del texto a la izquierda */
+    width: 20%; /* Ancho igual para todas las columnas del encabezado */
+}
+
+/* Estilo para las celdas de datos */
+td {
+    border: 1px solid black; /* Bordes negros */
+    padding: 10px; /* Espaciado interno */
+    vertical-align: top; /* Alineación vertical superior */
+    width: 20%; /* Ancho igual para todas las columnas de datos */
+}
+
+/* Estilo para la imagen */
+td img {
+    width: 100px; /* Ancho de la imagen */
+}

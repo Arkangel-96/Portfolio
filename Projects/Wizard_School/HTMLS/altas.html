@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Usuario</title>
+    <link rel="stylesheet" href="/Styles/estilosCRUD.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Julee&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar-index ">
+            <h1>Agregar Usuario al sistema</h1>
+        </nav>
+    </header>
+
+    <br>
+
+    <form id='form' enctype="multipart/form-data">
+
+        <label for="email">Email:</label>
+            <input type="text"  id="email" class="box" name="email"><br>
+
+        <label for="nombre">Personas:</label>
+            <input type="text"  id="nombre" class="box" name="nombre"><br>
+
+        <label for="edad">Edad:</label>
+            <input type="number" id="edad" class="box" name="edad"><br>
+        
+        <label for='imagen'>Imagen:</label>
+            <input type="file" id='imagen' name="imagen">
+        <br>
+        <button type='submit'>Agregar Persona</button>
+    </form>
+
+    <script>
+
+        //const URL = "http://127.0.0.1:5000/";
+        const URL = "https://gabryel96.pythonanywhere.com/";
+           
+            // Capturamos el evento de envío del formulario
+            document.getElementById('form').addEventListener('submit', function (event) {
+                event.preventDefault(); // Evitamos que se envie el form 
+
+                var formData = new FormData(this);
+                
+                fetch( URL + 'personas', {
+                    method:'POST',
+                    body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
+                })
+
+                    //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
+                    .then(function (response) {
+                        if (response.ok) {
+                            //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
+                            return response.json();
+                        } else {
+                            // Si hubo un error, lanzar explícitamente una excepción
+                            // para ser "catcheada" más adelante
+                            throw new Error('Error al agregar la persona.(L69)');
+                        }
+                    })
+
+                    //Respuesta OK, muestra una alerta informando que el personas se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
+                    .then(function (data) {
+                        alert('Persona agregado correctamente.');
+                    })
+
+                    // En caso de error, mostramos una alerta con un mensaje de error.
+                    .catch(function (error) {
+                        alert('Error al agregar el persona.(L80)');
+                    })
+
+                    // Limpiar el formulario en ambos casos (éxito o error)
+                    .finally(function () {
+                        document.getElementById('email').value = "";
+                        document.getElementById('nombre').value = "";
+                        document.getElementById('edad').value = "";
+                        document.getElementById('imagen').value = "";
+                    })
+            })
+    </script>
+
+    <br><br>
+    <a href="index.html">Menu principal</a>
+    </div>
+
+</body>
+</html>

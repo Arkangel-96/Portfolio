@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listado de Usuarios </title>
+<link rel="stylesheet" href="/Styles/estilosCRUD.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Julee&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+
+    <nav class="navbar-index ">
+        Listado de Usuarios del Sistema
+    </nav>
+    </header>
+
+    <br>
+    <div class="back">
+    <table> <!-- Se crea una tabla para mostrar los productos. -->
+        <thead> <!--Encabezado de la tabla con columnas para código,
+        descripción, cantidad, precio y acciones.-->
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Usuario</th>
+                <th>Edad</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+    <tbody id="tablaPersonas"> </tbody>
+    </table><br>
+    </div>
+
+    <script>
+        //const URL = 'http://127.0.0.1:5000/'
+        const URL = "https://gabryel96.pythonanywhere.com/";
+        //al subir al servidor deberan utilizar las siguientes rutas.
+        //USUARIO debe ser remplazado
+        // URL="http://USUARIO.pythonanywere.com/"
+       
+        //Realizamos la slicitud web para obtener la lista -->
+           fetch(URL + 'personas')
+           
+               .then(function (response){
+                   if(response.ok){
+                       //Si la respuesta es exitosa convertir a json
+                       return response.json();
+                   }else{
+                       throw new Error ('Error al obtener persona #1');
+                   }
+               })
+               //Manejo de los datos convertidos a Json
+               .then(function (data){
+                   let tabla_personas = document.getElementById('tablaPersonas');
+                   //Iteramos las personas y agregamos filas a la tabla
+                   for(let persona of data){
+                       let fila = document.createElement('tr')//Crea una nueva fila tr
+                       fila.innerHTML = '<td>' + persona.id + '</td>' +
+                       '<td>' + persona.email + '</td>' +
+                       '<td>' + persona.nombre + '</td>' +
+                       '<td>' + persona.edad + '</td>' +
+                       //Mostrar miniatura de la imagen
+                       '<td><img src="../HTMLS/Img{{ persona.imagen_url }}" style="width: 100px;"></td>'
+                       //Al subir al servidor, la ruta cambia. USUARIO debe ser remplazado por el nombre de usuario en phyntonanywhere
+                       //'<td><scr=//http:www.phytonanywhere.com/user/USUARIO/....../Image + 'alt="Imagen de la persona" style="whidth 100px"></td>'
+                       tabla_personas.appendChild(fila)
+                   }//
+               })
+               //Capturamos errores y enviamos mensaje de alerta
+               .catch(function (error){
+                   alert('Error al obtener persona #2')
+               })
+    </script>
+
+    <div class="contenedor-centrado">
+        <a href="index.html">Menu principal</a>
+    </div>
+</body>
+</html>

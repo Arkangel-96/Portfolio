@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personajes de las Casas de Hogwarts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #4a4a4a;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            width: calc(25% - 20px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .home-tab {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #ffee00;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        @media (max-width: 1024px) {
+            .card {
+                width: calc(33.33% - 20px);
+            }
+        }
+        @media (max-width: 768px) {
+            .card {
+                width: calc(50% - 20px);
+            }
+        }
+        @media (max-width: 480px) {
+            .card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="home-tab">HOME</a>
+    <h1>Personajes de las Casas de Hogwarts</h1>
+    
+    <div id="charactersContainer" class="container"></div>
+
+    <script>
+        const houses = ['Gryffindor', 'Hufflepuff', 'Slytherin', 'Ravenclaw'];
+
+        async function getAllCharacters() {
+            let allCharacters = [];
+            let nextPage = 'https://api.potterdb.com/v1/characters';
+            let pageCount = 0;
+
+            while (nextPage && pageCount < 5) {
+                console.log(`Fetching page ${pageCount + 1}: ${nextPage}`);
+                try {
+                    const response = await fetch(nextPage);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    allCharacters = allCharacters.concat(data.data);
+                    nextPage = data.links && data.links.next;
+                    pageCount++;
+                    console.log(`Received ${data.data.length} characters. Total: ${allCharacters.length}`);
+                } catch (error) {
+                    console.error('Error fetching characters:', error);
+                    break;
+                }
+            }
+
+            return allCharacters;
+        }
+
+        function getHouseCharacters(characters) {
+            const houseChars = characters.filter(char => 
+                houses.includes(char.attributes.house)
+            );
+            console.log(`Found ${houseChars.length} characters from Hogwarts houses`);
+            return houseChars;
+        }
+
+        function getOneCharacterPerLetter(characters) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const characterMap = new Map();
+
+            characters.forEach(char => {
+                const firstLetter = char.attributes.name.charAt(0).toUpperCase();
+                if (alphabet.includes(firstLetter) && !characterMap.has(firstLetter)) {
+                    characterMap.set(firstLetter, char);
+                }
+            });
+
+            const result = Array.from(characterMap.values());
+            console.log(`Selected ${result.length} characters, one per letter`);
+            return result;
+        }
+
+        function getRandomCharacters(characters, count) {
+            return characters.sort(() => 0.5 - Math.random()).slice(0, count);
+        }
+
+        function displayCharacters(characters) {
+            const container = document.getElementById('charactersContainer');
+            container.innerHTML = '';
+            characters.forEach(char => {
+                const attributes = char.attributes;
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${attributes.image || 'https://via.placeholder.com/150'}" alt="${attributes.name}">
+                    <h3>${attributes.name}</h3>
+                    <p>Casa: ${attributes.house}</p>
+                    <p>Especie: ${attributes.species || 'Desconocida'}</p>
+                    <p>Patronus: ${attributes.patronus || 'Desconocido'}</p>
+                `;
+                container.appendChild(card);
+            });
+            console.log(`Displayed ${characters.length} character cards`);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                console.log('Starting to fetch characters');
+                const allCharacters = await getAllCharacters();
+                console.log(`Fetched a total of ${allCharacters.length} characters`);
+                
+                const houseCharacters = getHouseCharacters(allCharacters);
+                const onePerLetter = getOneCharacterPerLetter(houseCharacters);
+                const randomCharacters = getRandomCharacters(onePerLetter, 6);
+                
+                if (randomCharacters.length > 0) {
+                    displayCharacters(randomCharacters);
+                } else {
+                    console.error('No characters to display');
+                    document.getElementById('charactersContainer').innerHTML = '<p>Lo siento, no se pudieron cargar los personajes.</p>';
+                }
+            } catch (error) {
+                console.error('Error in main process:', error);
+                document.getElementById('charactersContainer').innerHTML = '<p>Ocurrió un error al cargar los personajes. Por favor, intenta de nuevo más tarde.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
