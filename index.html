@@ -6,57 +6,7 @@
   <title>Matías Baltieri — Developer</title>
   <meta name="description" content="Sitio personal: proyectos, blog y contacto." />
   <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com">
-   
-  const svg = document.getElementById("github-graph");
-
-  /* === 1. DATOS (ahora mock, luego reales) === */
-  const contributions =
-    data.user.contributionsCollection
-      .contributionCalendar.weeks;
-
-  /* === 2. FUNCION PARA CADA CUADRADO === */
-  function createRect(x, y, level, count, date) {
-    return `
-      <rect
-        x="${x}"
-        y="${y}"
-        width="12"
-        height="12"
-        rx="2"
-        class="lvl-${level}">
-        <title>${count} contributions on ${date}</title>
-      </rect>
-    `;
-  }
-
-  /* === 3. GENERAR SVG === */
-  let output = '<g>';
-
-  contributions.forEach((week, w) => {
-    week.contributionDays.forEach((day, d) => {
-      const count = day.contributionCount;
-
-      const level =
-        count === 0 ? 0 :
-        count < 3 ? 1 :
-        count < 6 ? 2 :
-        count < 9 ? 3 : 4;
-
-      output += createRect(
-        w * 14,
-        d * 14,
-        level,
-        count,
-        day.date
-      );
-    });
-  });
-
-  output += '</g>';
-  svg.innerHTML = output;
-
-  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     /* Gradientes y utilidades pequeñas personalizadas */
     .hero-bg{background: radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,.25), transparent 60%),radial-gradient(1000px 500px at 110% 10%, rgba(139,92,246,.25), transparent 60%),linear-gradient(180deg,#0a0a0a 0%,#0b0b0b 100%);} 
@@ -64,6 +14,18 @@
     /* GitHub-like contribution colors */
     .contrib-grid rect {
       transition: fill 0.15s ease;
+    }
+
+    .month-label {
+    fill: #9ca3af; /* gris suave */
+    font-size: 10px;
+    font-family: system-ui, sans-serif;
+    }
+
+      .month-label {
+    fill: #9ca3af; /* gris GitHub */
+    font-size: 10px;
+    font-family: system-ui, sans-serif;
     }
 
     .lvl-0 { fill: #1f2937; } /* gris oscuro (inactivo) */
@@ -229,11 +191,14 @@
     </p>
 
     <div class="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 p-4">
-      <svg
-      viewBox="0 0 720 110"
-      class="w-full h-auto"
-      aria-label="GitHub contributions"
+     <svg
+      id="github-graph"
+      viewBox="0 0 900 130"
+      width="100%"
+      height="130"
       >
+    </svg>
+
       <g class="contrib-grid">
         <!-- Semana 1 -->
         <rect x="0"   y="0"  width="12" height="12" rx="2" class="lvl-0"><title>0 contributions</title></rect>
@@ -305,13 +270,105 @@
     </div>
   </footer>
 
-  <script>
-    // Año dinámico y menú móvil
+  
+  <script src="github-graph.js">
+  // Año dinámico y menú móvil
     document.getElementById('year').textContent = new Date().getFullYear();
     const btn = document.getElementById('menuBtn');
     const menu = document.getElementById('mobileMenu');
     btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
-  </script>
+ 
+  const months = [
+  "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+  "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+  ];
   
+  
+  const svg = document.getElementById("github-graph");
+  svg.innerHTML = `
+    <rect x="10" y="20" width="12" height="12" fill="#22c55e" />
+    <rect x="26" y="20" width="12" height="12" fill="#16a34a" />
+    <rect x="42" y="20" width="12" height="12" fill="#15803d" />
+  `;
+  
+  /* === 1. DATOS (ahora mock, luego reales) === */
+  const contributions =
+    data.user.contributionsCollection
+      .contributionCalendar.weeks;
+
+  /* === 2. FUNCION PARA CADA CUADRADO === */
+  function createRect(x, y, level, count, date) {
+    return `
+      <rect
+        x="${x}"
+        y="${y}"
+        width="12"
+        height="12"
+        rx="2"
+        class="lvl-${level}">
+        <title>${count} contributions on ${date}</title>
+      </rect>
+    `;
+  }
+
+
+  let output = '<g>';
+  let monthLabels = [];
+  let lastMonth = null;
+
+  /* === 1. DETECTAR MESES === */
+  contributions.forEach((week, w) => {
+    const firstDay = week.contributionDays[0];
+    const date = new Date(firstDay.date);
+    const month = date.getMonth();
+
+    if (month !== lastMonth) {
+      monthLabels.push({
+        month,
+        x: w * 14
+      });
+      lastMonth = month;
+    }
+  });
+
+  /* === 2. DIBUJAR MESES (PRIMERO) === */
+  monthLabels.forEach(label => {
+    output += `
+      <text
+        x="${label.x}"
+        y="10"
+        class="month-label">
+        ${months[label.month]}
+      </text>
+    `;
+  });
+
+  /* === 3. DIBUJAR LOS CUADRADOS === */
+  contributions.forEach((week, w) => {
+    week.contributionDays.forEach((day, d) => {
+      const count = day.contributionCount;
+
+      const level =
+        count === 0 ? 0 :
+        count < 3 ? 1 :
+        count < 6 ? 2 :
+        count < 9 ? 3 : 4;
+
+      output += createRect(
+        w * 14,
+        d * 14 + 14, // deja espacio arriba
+        level,
+        count,
+        day.date
+      );
+    });
+  });
+
+  output += '</g>';
+  svg.innerHTML = output;
+
+
+</script>
 </body>
+  
 </html>

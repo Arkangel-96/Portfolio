@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Actividad GitHub</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Colores tipo GitHub */
+    .lvl-0 { fill: #1f2937; }
+    .lvl-1 { fill: #0e4429; }
+    .lvl-2 { fill: #006d32; }
+    .lvl-3 { fill: #26a641; }
+    .lvl-4 { fill: #39d353; }
+
+    .month-label {
+      fill: #9ca3af;
+      font-size: 10px;
+      font-family: system-ui, sans-serif;
+    }
+
+    .contrib-grid rect {
+      transition: stroke 0.15s ease;
+    }
+
+    .contrib-grid rect:hover {
+      stroke: #ffffff;
+      stroke-width: 1;
+    }
+  </style>
+</head>
+
+<body class="bg-neutral-950 text-neutral-100">
+
+  <main class="mx-auto max-w-6xl px-4 py-20">
+    <h1 class="text-3xl font-bold mb-6">Actividad en GitHub</h1>
+
+    <div class="rounded-2xl border border-white/10 bg-neutral-900 p-4 overflow-x-auto">
+    <svg
+      id="github-graph"
+      width="900"
+      height="160"
+      viewBox="0 0 900 160"
+      style="border:1px solid red"
+    ></svg>
+
+
+
+    </div>
+  </main>
+
+  <!-- ========================= -->
+  <!-- SCRIPT DEL GRAFICO GITHUB -->
+  <!-- ========================= -->
+  <script src="github-graph.js"></script>
+
+  
+
+</body>
+</html>
