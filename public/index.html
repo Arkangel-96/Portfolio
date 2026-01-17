@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Matías Baltieri — Developer</title>
+  <meta name="description" content="Sitio personal: proyectos, blog y contacto." />
+  <!-- Tailwind -->
+ <link rel="stylesheet" href="./assets/css/output.css">
+
+
+  <style>
+    /* Gradientes y utilidades pequeñas personalizadas */
+    .hero-bg{background: radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,.25), transparent 60%),radial-gradient(1000px 500px at 110% 10%, rgba(139,92,246,.25), transparent 60%),linear-gradient(180deg,#0a0a0a 0%,#0b0b0b 100%);} 
+    .glass{backdrop-filter:saturate(160%) blur(8px);}
+    /* GitHub-like contribution colors */
+    .contrib-grid rect {
+      transition: fill 0.15s ease;
+    }
+
+    .month-label {
+    fill: #9ca3af; /* gris suave */
+    font-size: 10px;
+    font-family: system-ui, sans-serif;
+    }
+
+      .month-label {
+    fill: #9ca3af; /* gris GitHub */
+    font-size: 10px;
+    font-family: system-ui, sans-serif;
+    }
+
+    .lvl-0 { fill: #1f2937; } /* gris oscuro (inactivo) */
+    .lvl-1 { fill: #0e4429; }
+    .lvl-2 { fill: #006d32; }
+    .lvl-3 { fill: #26a641; }
+    .lvl-4 { fill: #39d353; }
+
+    /* Hover */
+    .contrib-grid rect:hover {
+      stroke: #ffffff;
+      stroke-width: 1;
+    }
+        
+  </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100 selection:bg-indigo-400/30 selection:text-white">
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 border-b border-white/5 bg-neutral-950/70 glass">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+      <a href="#inicio" class="flex items-center gap-3">
+        <span class="inline-block h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 to-sky-500"></span>
+        <span class="text-sm font-semibold tracking-wide">ARKANGEL-96</span>
+      </a>
+      <ul class="hidden gap-6 text-sm md:flex">
+        <li><a class="hover:text-white/90 text-white/70" href="#inicio">Inicio</a></li>
+        <li><a class="hover:text-white/90 text-white/70" href="#proyectos">Proyectos</a></li>
+  <!--   <li><a class="hover:text-white/90 text-white/70" href="#experiencia">Experiencia</a></li> -->
+        <li><a class="hover:text-white/90 text-white/70" href="#tecnologias">Tecnologías</a></li>
+        <li><a class="hover:text-white/90 text-white/70" href="#github">Actividad</a></li>    
+
+        <li><a class="hover:text-white/90 text-white/70" href="#contacto">Contacto</a></li>
+      </ul>
+      <button id="menuBtn" class="md:hidden rounded-xl border border-white/10 px-3 py-1 text-sm text-white/80">Menú</button>
+    </nav>
+    <!-- Menú móvil -->
+    <div id="mobileMenu" class="hidden border-t border-white/5 bg-neutral-950/95 md:hidden">
+      <ul class="mx-auto max-w-6xl px-4 py-3 grid grid-cols-2 gap-3 text-sm">
+        <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#inicio">Inicio</a></li>
+        <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="github">Actividad</a></li>
+<!--     <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#experiencia">Experiencia</a></li> -->
+        <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#tecnologias">Tecnologías</a></li>
+        <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#articulos">Artículos</a></li>
+        <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#proyectos">Proyectos</a></li>
+        
+        <li class="col-span-2"><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero-bg">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:py-20 md:py-28">
+      <div class="grid items-center gap-10 md:grid-cols-[1.2fr_.8fr]">
+        <div>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-black leading-tight">
+            Hola, soy <span class="bg-gradient-to-r from-indigo-400 to-sky-400 bg-clip-text text-transparent">Matías</span>.
+          </h1>
+          <br>
+          <p class="mt-4 max-w-2xl text-lg text-white/80">
+          <strong>Product Developer – Interactive / Game-focused.</strong><br><br>
+          Creo experiencias interactivas y videojuegos donde diseño, UX y lógica trabajan juntos.
+          Me enfoco en cómo se sienten y se usan los productos, no solo en que funcionen.
+          </p>
+         
+           <!-- Redes -->
+          <div class="mt-6 flex flex-wrap items-center gap-3 text-white/70">
+            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://whatsapp.com/channel/0029Vb6X4Oc4NVifA4IroN2S" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://www.youtube.com/@game-dev-96" target="_blank" rel="noopener">YouTube</a>
+            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://steamcommunity.com/id/troyano207" target="_blank" rel="noopener">Steam</a>
+            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://github.com/Arkangel-96" target="_blank" rel="noopener">GitHub</a>
+            <a class="rounded-lg border border-white/10 px-3 py-1.5 hover:border-white/20" href="https://www.linkedin.com/in/mat%C3%ADas-baltieri-6b09662a6/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="#contacto" class="rounded-xl bg-indigo-500/90 px-4 py-2 text-sm font-semibold hover:bg-indigo-400">Contacto</a>
+          </div>
+          <!--  <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#contacto" class="rounded-xl bg-indigo-500/90 px-4 py-2 text-sm font-semibold hover:bg-indigo-400">Contacto</a>
+          </div> -->
+         
+        </div>
+        <div class="justify-self-center">
+          <div class="relative">
+            <!-- FOTO DE PERFIL -->
+            <img class="h-44 w-44 sm:h-56 sm:w-56 md:h-64 md:w-64 rounded-3xl object-cover ring-1 ring-white/10" src="/img/yo.png" alt="Foto de perfil" />
+            <div class="absolute -left-4 -top-4 h-16 w-16 rounded-2xl bg-indigo-500/20"></div>
+            <div class="absolute -right-6 -bottom-6 h-20 w-20 rounded-2xl bg-sky-500/20"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- PROYECTOS -->
+  <section id="proyectos" class="border-y border-white/5 bg-neutral-950">
+    <div class="mx-auto max-w-6xl px-4 py-14">
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="text-2xl font-bold">Proyectos</h2>
+        <a href="#" class="text-sm text-indigo-400 hover:underline">Ver repos en GitHub</a>
+      </div>
+      <div class="mt-6 grid gap-5 md:grid-cols-3">
+
+        <article class="rounded-2xl border border-white/10 p-5">
+          <a href="https://hogwarts-universidad.vercel.app/index.html" target="_blank" class="font-semibold">Hogwarts Fanpage</a>
+          <p class="mt-2 text-white/70">Página dedicada a la saga de Harry Potter.</p>
+          <div class="mt-4 flex gap-2 text-xs text-white/60">
+            <span class="rounded-lg border border-white/10 px-2 py-1">HTML / CSS</span>
+            <span class="rounded-lg border border-white/10 px-2 py-1">Javascript</span>
+            <span class="rounded-lg border border-white/10 px-2 py-1">Supabase</span>
+          </div>
+        </article>
+
+        <article class="rounded-2xl border border-white/10 p-5">
+          <a href="https://arkangel-96.itch.io/pixel-hero-survival" target="_blank" class="font-semibold">Pixel Hero Survival</a>
+          <p class="mt-2 text-white/70">Action roguelike </p>
+          <div class="mt-4 flex gap-2 text-xs text-white/60">
+            <span class="rounded-lg border border-white/10 px-2 py-1">Godot</span>
+            <span class="rounded-lg border border-white/10 px-2 py-1">GDScript (Python)</span>
+          </div>
+        </article>
+
+        <article class="rounded-2xl border border-white/10 p-5">
+          <a href="Vanilla_JavaScript_Game\ninja.html" target="_blank" class="font-semibold">Sword and Knife - The Shadow of Steel</a>
+          <p class="mt-2 text-white/70">2D side-scroller game.</p>
+          <div class="mt-4 flex gap-2 text-xs text-white/60">
+            <span class="rounded-lg border border-white/10 px-2 py-1">HTML / CSS</span>
+            <span class="rounded-lg border border-white/10 px-2 py-1">TypeScript</span>
+            <span class="rounded-lg border border-white/10 px-2 py-1">Supabase</span>
+            
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+    <!-- TECNOLOGÍAS -->
+  <section id="tecnologias" class="border-y border-white/5 bg-neutral-950">
+    <div class="mx-auto max-w-6xl px-4 py-14">
+      <h2 class="text-2xl font-bold">Tecnologías</h2>
+      <p class="mt-2 text-white/70">Herramientas que uso para crear experiencias interactivas y productos digitales.</p>
+      <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+        <!-- Tarjetas simples, enlaza a documentación oficial -->
+        <a class="rounded-2xl border border-white/10 p-4 hover:bg-white/5" href="https://developer.mozilla.org/" target="_blank" rel="noopener">HTML/CSS/JS</a>
+        <a class="rounded-2xl border border-white/10 p-4 hover:bg-white/5" href="https://tailwindcss.com/" target="_blank" rel="noopener">Tailwind</a>
+        <a class="rounded-2xl border border-white/10 p-4 hover:bg-white/5" href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>
+        <a class="rounded-2xl border border-white/10 p-4 hover:bg-white/5" href="https://vuejs.org/" target="_blank" rel="noopener">Vue</a>
+        <a class="rounded-2xl border border-white/10 p-4 hover:bg-white/5" href="https://godotengine.org/es/" target="_blank" rel="noopener">Godot</a>
+        <a class="rounded-2xl border border-white/10 p-4 hover:bg-white/5" href="https://supabase.com/" target="_blank" rel="noopener">Supabase</a>
+        <a class="rounded-2xl border border-white/10 p-4 hover:bg-white/5" href="https://www.postgresql.org/" target="_blank" rel="noopener">PostgreSQL</a>
+        
+  
+    </div>
+      </div>
+    </div>
+  </section>
+
+<!-- GITHUB ACTIVITY -->
+<section id="github" class="border-y border-white/5 bg-neutral-950">
+  <div class="mx-auto max-w-6xl px-4 py-14">
+    <h2 class="text-2xl font-bold">Actividad en GitHub</h2>
+    <p class="mt-2 text-white/70">
+      Constancia y práctica real en proyectos personales.
+    </p>
+
+    <div class="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 p-4">
+     <svg
+      id="github-graph"
+      viewBox="0 0 900 130"
+      width="100%"
+      height="130"
+      >
+    </svg>
+
+      <g class="contrib-grid">
+        <!-- Semana 1 -->
+        <rect x="0"   y="0"  width="12" height="12" rx="2" class="lvl-0"><title>0 contributions</title></rect>
+        <rect x="0"   y="14" width="12" height="12" rx="2" class="lvl-1"><title>2 contributions</title></rect>
+        <rect x="0"   y="28" width="12" height="12" rx="2" class="lvl-2"><title>5 contributions</title></rect>
+        <rect x="0"   y="42" width="12" height="12" rx="2" class="lvl-0"><title>0 contributions</title></rect>
+        <rect x="0"   y="56" width="12" height="12" rx="2" class="lvl-3"><title>10 contributions</title></rect>
+
+        <!-- Semana 2 -->
+        <rect x="14" y="0"  width="12" height="12" rx="2" class="lvl-0"></rect>
+        <rect x="14" y="14" width="12" height="12" rx="2" class="lvl-1"></rect>
+        <rect x="14" y="28" width="12" height="12" rx="2" class="lvl-4"></rect>
+        <rect x="14" y="42" width="12" height="12" rx="2" class="lvl-2"></rect>
+        <rect x="14" y="56" width="12" height="12" rx="2" class="lvl-0"></rect>
+
+        <!-- seguís columnas igual -->
+      </g>
+      </svg>
+    </div>
+
+
+
+    <div class="mt-6">
+      <a
+        href="https://github.com/Arkangel-96"
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 rounded-xl bg-indigo-500/90 px-4 py-2 text-sm font-semibold hover:bg-indigo-400"
+      >
+        Ver mi perfil en GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="mx-auto max-w-6xl px-4 py-14">
+    <h2 class="text-2xl font-bold">Contacto</h2>
+    <p class="mt-2 text-white/70">¿Tienes una idea o propuesta? Conversemos.</p>
+    <form class="mt-6 grid gap-4 md:max-w-xl">
+      <div class="grid gap-2">
+        <label class="text-sm" for="name">Nombre</label>
+        <input id="name" name="name" type="text" required class="rounded-xl border border-white/10 bg-white/5 px-3 py-2 outline-none placeholder:text-white/40 focus:border-indigo-400" placeholder="Tu nombre" />
+      </div>
+      <div class="grid gap-2">
+        <label class="text-sm" for="email">Email</label>
+        <input id="email" name="email" type="email" required class="rounded-xl border border-white/10 bg-white/5 px-3 py-2 outline-none placeholder:text-white/40 focus:border-indigo-400" placeholder="tucorreo@ejemplo.com" />
+      </div>
+      <div class="grid gap-2">
+        <label class="text-sm" for="msg">Mensaje</label>
+        <textarea id="msg" name="msg" rows="5" required class="rounded-xl border border-white/10 bg-white/5 px-3 py-2 outline-none placeholder:text-white/40 focus:border-indigo-400" placeholder="Cuéntame sobre tu proyecto"></textarea>
+      </div>
+      <button type="submit" class="rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold hover:bg-white/20">Enviar</button>
+      <p class="text-xs text-white/40">* Este formulario es de ejemplo. Conéctalo a tu backend o un servicio como Formspree/Netlify.</p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 bg-neutral-950/80">
+    <div class="mx-auto max-w-6xl px-4 py-8 text-sm text-white/60">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p>© <span id="year"></span> Matías Baltieri. Hecho con ♥ en Argentina.</p>
+        <ul class="flex flex-wrap gap-4">
+          <li><a href="#" class="hover:text-white/90">Autor</a></li>
+          <li><a href="#" class="hover:text-white/90">Privacidad</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  
+
+</body>
+    <script src=".\JS\github-graph.js">  
+  // Año dinámico y menú móvil
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
+ 
+  const months = [
+  "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+  "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+  ];
+  
+  
+  const svg = document.getElementById("github-graph");
+  svg.innerHTML = `
+    <rect x="10" y="20" width="12" height="12" fill="#22c55e" />
+    <rect x="26" y="20" width="12" height="12" fill="#16a34a" />
+    <rect x="42" y="20" width="12" height="12" fill="#15803d" />
+  `;
+  
+  /* === 1. DATOS (ahora mock, luego reales) === */
+  const contributions =
+    data.user.contributionsCollection
+      .contributionCalendar.weeks;
+
+  /* === 2. FUNCION PARA CADA CUADRADO === */
+  function createRect(x, y, level, count, date) {
+    return `
+      <rect
+        x="${x}"
+        y="${y}"
+        width="12"
+        height="12"
+        rx="2"
+        class="lvl-${level}">
+        <title>${count} contributions on ${date}</title>
+      </rect>
+    `;
+  }
+
+
+  let output = '<g>';
+  let monthLabels = [];
+  let lastMonth = null;
+
+  /* === 1. DETECTAR MESES === */
+  contributions.forEach((week, w) => {
+    const firstDay = week.contributionDays[0];
+    const date = new Date(firstDay.date);
+    const month = date.getMonth();
+
+    if (month !== lastMonth) {
+      monthLabels.push({
+        month,
+        x: w * 14
+      });
+      lastMonth = month;
+    }
+  });
+
+  /* === 2. DIBUJAR MESES (PRIMERO) === */
+  monthLabels.forEach(label => {
+    output += `
+      <text
+        x="${label.x}"
+        y="10"
+        class="month-label">
+        ${months[label.month]}
+      </text>
+    `;
+  });
+
+  /* === 3. DIBUJAR LOS CUADRADOS === */
+  contributions.forEach((week, w) => {
+    week.contributionDays.forEach((day, d) => {
+      const count = day.contributionCount;
+
+      const level =
+        count === 0 ? 0 :
+        count < 3 ? 1 :
+        count < 6 ? 2 :
+        count < 9 ? 3 : 4;
+
+      output += createRect(
+        w * 14,
+        d * 14 + 14, // deja espacio arriba
+        level,
+        count,
+        day.date
+      );
+    });
+  });
+
+  output += '</g>';
+  svg.innerHTML = output;
+
+
+</script>
+</html>
