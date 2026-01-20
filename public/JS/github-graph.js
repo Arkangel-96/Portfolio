@@ -4,58 +4,60 @@ const svg = document.getElementById("github-graph");
 const months = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
 
 /* ===============================
-   CACHE CONFIG
+   CACHE
 ================================ */
 const CACHE_KEY = "github_contributions_cache";
 const CACHE_TIME_KEY = "github_contributions_cache_time";
-const CACHE_TTL = 1000 * 60 * 60 * 12; // 12 horas
+const CACHE_TTL = 1000 * 60 * 60 * 12; // 12h
 
-function getCachedWeeks() {
+function getCachedData() {
   const data = localStorage.getItem(CACHE_KEY);
   const time = localStorage.getItem(CACHE_TIME_KEY);
-
   if (!data || !time) return null;
   if (Date.now() - Number(time) > CACHE_TTL) return null;
-
   return JSON.parse(data);
 }
 
-function setCachedWeeks(weeks) {
-  localStorage.setItem(CACHE_KEY, JSON.stringify(weeks));
+function setCachedData(data) {
+  localStorage.setItem(CACHE_KEY, JSON.stringify(data));
   localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
 }
 
 /* ===============================
-   FETCH + CACHE
+   FETCH
 ================================ */
 async function loadGithubActivity() {
-
-  // 🧠 cache primero
-  const cachedWeeks = getCachedWeeks();
-  if (cachedWeeks) {
-    console.log("🟢 GitHub data desde cache");
-    renderSVG(cachedWeeks);
+  const cached = getCachedData();
+  if (cached) {
+    renderSVG(buildWeeks(cached));
     return;
   }
-
-  console.log("🔵 GitHub data desde backend (GraphQL)");
 
   const res = await fetch("/api/github-activity");
+  const days = await res.json();
 
-  if (!res.ok) {
-    console.error("Error cargando GitHub activity");
-    return;
-  }
-
-  // 👇 YA VIENE EN FORMATO weeks[]
-  const weeks = await res.json();
-
-  setCachedWeeks(weeks);
-  renderSVG(weeks);
+  setCachedData(days);
+  renderSVG(buildWeeks(days));
 }
 
 /* ===============================
-   SVG RENDER
+   DATA SHAPE
+================================ */
+function buildWeeks(days) {
+  const weeks = [];
+  for (let i = 0; i < days.length; i += 7) {
+    weeks.push({
+      contributionDays: days.slice(i, i + 7).map(d => ({
+        date: d.date,
+        contributionCount: d.count
+      }))
+    });
+  }
+  return weeks;
+}
+
+/* ===============================
+   SVG
 ================================ */
 function getLevel(count) {
   if (count === 0) return 0;
@@ -68,14 +70,12 @@ function getLevel(count) {
 function renderSVG(weeks) {
   let output = `<g class="contrib-grid">`;
 
-  // 🗓️ meses
+  // meses
   let lastMonth = null;
   weeks.forEach((week, w) => {
     if (!week.contributionDays[0]) return;
-
     const date = new Date(week.contributionDays[0].date);
     const month = date.getMonth();
-
     if (month !== lastMonth) {
       output += `
         <text x="${w * 14}" y="10" class="month-label">
@@ -86,11 +86,10 @@ function renderSVG(weeks) {
     }
   });
 
-  // 🟩 cuadrados
+  // cuadrados
   weeks.forEach((week, w) => {
     week.contributionDays.forEach((day, d) => {
       const level = getLevel(day.contributionCount);
-
       output += `
         <rect
           x="${w * 14}"
