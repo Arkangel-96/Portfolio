@@ -9,22 +9,24 @@
 
 ## Tech
 - SVG
-- GitHub GraphQL API
+- GitHub REST API 
 - Local cache
-- Cloudflare (planned)
+- Cloudflare Pages + Functions
 
 
-## portfolio/
-    ├─ dev (para pruebas)
-    ├─ img
+### Portfolio //
+    ├─ dev (testing)
+    ├─ functions/api
+    │    └─ github-activity.ts
+    ├─ img --> (SOLO 4 IMÁGENES)
     ├─ Projects/
     │  ├─ Wizard_School/
-    │  │  ├─ index.html
-    │  │  ├─ flask_app.py
-    │  │  └─ vercel.json
     │  ├─ Pixel_Hero_Survival/
     │  └─ Vanilla_JavaScript_Game/
-    ├─ github-graph.js
-    ├─ index.html
-    ├─ svgMock.js
-    └─ readme.txt
+    ├─ public
+    │    ├─assets/css --> output.css
+    │    ├─index.html        
+    │    └─JS --> github-graph.js
+    │        └─--> svgMock.js
+    ├─ .gitignore
+    └─  readme.txt

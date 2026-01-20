@@ -71,16 +71,22 @@ async function loadGithubActivity() {
       };
     }
 
-    daysMap[date].contributionCount += 1;
+    daysMap[date].contributionCount +=
+    event.payload?.commits?.length ?? 1;
+
   });
 
-  const days = Object.values(daysMap);
+  const days = Object.values(daysMap).sort(
+  (a, b) => new Date(a.date) - new Date(b.date)
+  );
+
 
   const weeks = [];
   for (let i = 0; i < days.length; i += 7) {
     weeks.push({
       contributionDays: days.slice(i, i + 7),
     });
+  
   }
 
   // 🧠 2️⃣ guardar cache
