@@ -1,7 +1,4 @@
 
-
-const GITHUB_USERNAME = "Arkangel-96";
-
 const svg = document.getElementById("github-graph");
 
 const months = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
@@ -33,7 +30,7 @@ function setCachedWeeks(weeks) {
 ================================ */
 async function loadGithubActivity() {
 
-  // 🧠 1️⃣ intentar cache
+  // 🧠 cache primero
   const cachedWeeks = getCachedWeeks();
   if (cachedWeeks) {
     console.log("🟢 GitHub data desde cache");
@@ -41,9 +38,8 @@ async function loadGithubActivity() {
     return;
   }
 
-  console.log("🔵 GitHub data desde API (backend)");
+  console.log("🔵 GitHub data desde backend (GraphQL)");
 
-  // 🔥 NUEVO FETCH → TU BACKEND
   const res = await fetch("/api/github-activity");
 
   if (!res.ok) {
@@ -51,47 +47,10 @@ async function loadGithubActivity() {
     return;
   }
 
-  const events = await res.json();
+  // 👇 YA VIENE EN FORMATO weeks[]
+  const weeks = await res.json();
 
-  /*
-    Convertimos eventos públicos en formato compatible
-    con contributionCalendar.weeks
-  */
-  const daysMap = {};
-
-  events.forEach(event => {
-    if (event.type !== "PushEvent") return;
-
-    const date = event.created_at.split("T")[0];
-
-    if (!daysMap[date]) {
-      daysMap[date] = {
-        date,
-        contributionCount: 0,
-      };
-    }
-
-    daysMap[date].contributionCount +=
-    event.payload?.commits?.length ?? 1;
-
-  });
-
-  const days = Object.values(daysMap).sort(
-  (a, b) => new Date(a.date) - new Date(b.date)
-  );
-
-
-  const weeks = [];
-  for (let i = 0; i < days.length; i += 7) {
-    weeks.push({
-      contributionDays: days.slice(i, i + 7),
-    });
-  
-  }
-
-  // 🧠 2️⃣ guardar cache
   setCachedWeeks(weeks);
-
   renderSVG(weeks);
 }
 
@@ -116,6 +75,7 @@ function renderSVG(weeks) {
 
     const date = new Date(week.contributionDays[0].date);
     const month = date.getMonth();
+
     if (month !== lastMonth) {
       output += `
         <text x="${w * 14}" y="10" class="month-label">
@@ -130,6 +90,7 @@ function renderSVG(weeks) {
   weeks.forEach((week, w) => {
     week.contributionDays.forEach((day, d) => {
       const level = getLevel(day.contributionCount);
+
       output += `
         <rect
           x="${w * 14}"
