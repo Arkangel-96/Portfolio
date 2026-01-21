@@ -41,18 +41,40 @@ async function loadGithubActivity() {
 }
 
 /* ===============================
-   DATA SHAPE
+   DATA SHAPE (FIX DOMINGO)
 ================================ */
+function getWeekday(dateStr) {
+  return new Date(dateStr + "T00:00:00").getDay(); // 0 = domingo
+}
+
 function buildWeeks(days) {
+  if (!days.length) return [];
+
+  const normalized = [...days];
+
+  // 🔥 Alinear al domingo como GitHub
+  const firstDay = normalized[0];
+  const offset = getWeekday(firstDay.date);
+
+  for (let i = 0; i < offset; i++) {
+    normalized.unshift({
+      date: "",
+      count: 0,
+      empty: true
+    });
+  }
+
   const weeks = [];
-  for (let i = 0; i < days.length; i += 7) {
+  for (let i = 0; i < normalized.length; i += 7) {
     weeks.push({
-      contributionDays: days.slice(i, i + 7).map(d => ({
+      contributionDays: normalized.slice(i, i + 7).map(d => ({
         date: d.date,
-        contributionCount: d.count
+        contributionCount: d.count,
+        empty: d.empty
       }))
     });
   }
+
   return weeks;
 }
 
@@ -75,6 +97,7 @@ function renderSVG(weeks) {
   weeks.forEach((week, w) => {
     const firstValidDay = week.contributionDays.find(d => d?.date);
     if (!firstValidDay) return;
+
     const date = new Date(firstValidDay.date);
     const month = date.getMonth();
 
@@ -91,6 +114,8 @@ function renderSVG(weeks) {
   // cuadrados
   weeks.forEach((week, w) => {
     week.contributionDays.forEach((day, d) => {
+      if (day.empty) return;
+
       const level = getLevel(day.contributionCount);
       output += `
         <rect
