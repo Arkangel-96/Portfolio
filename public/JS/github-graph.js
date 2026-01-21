@@ -73,9 +73,11 @@ function renderSVG(weeks) {
   // meses
   let lastMonth = null;
   weeks.forEach((week, w) => {
-    if (!week.contributionDays[0]) return;
-    const date = new Date(week.contributionDays[0].date);
+    const firstValidDay = week.contributionDays.find(d => d?.date);
+    if (!firstValidDay) return;
+    const date = new Date(firstValidDay.date);
     const month = date.getMonth();
+
     if (month !== lastMonth) {
       output += `
         <text x="${w * 14}" y="10" class="month-label">
