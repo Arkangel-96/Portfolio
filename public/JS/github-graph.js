@@ -3,7 +3,7 @@ const svg = document.getElementById("github-graph");
 
 const months = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
 
-const GRID_OFFSET_X = 14; // espacio para semanas incompletas
+const GRID_OFFSET_X = -14; // espacio para semanas incompletas
 
 /* ===============================
    CACHE
