@@ -193,32 +193,15 @@
     </p>
 
     <div class="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 p-4">
-     <svg
+      <svg
       id="github-graph"
       viewBox="0 0 900 130"
-      width="100%"
-      height="130"
-      >
+      class="w-full"
+      style="height: 180px"
+    >
     </svg>
 
-      <g class="contrib-grid">
-        <!-- Semana 1 -->
-        <rect x="0"   y="0"  width="12" height="12" rx="2" class="lvl-0"><title>0 contributions</title></rect>
-        <rect x="0"   y="14" width="12" height="12" rx="2" class="lvl-1"><title>2 contributions</title></rect>
-        <rect x="0"   y="28" width="12" height="12" rx="2" class="lvl-2"><title>5 contributions</title></rect>
-        <rect x="0"   y="42" width="12" height="12" rx="2" class="lvl-0"><title>0 contributions</title></rect>
-        <rect x="0"   y="56" width="12" height="12" rx="2" class="lvl-3"><title>10 contributions</title></rect>
 
-        <!-- Semana 2 -->
-        <rect x="14" y="0"  width="12" height="12" rx="2" class="lvl-0"></rect>
-        <rect x="14" y="14" width="12" height="12" rx="2" class="lvl-1"></rect>
-        <rect x="14" y="28" width="12" height="12" rx="2" class="lvl-4"></rect>
-        <rect x="14" y="42" width="12" height="12" rx="2" class="lvl-2"></rect>
-        <rect x="14" y="56" width="12" height="12" rx="2" class="lvl-0"></rect>
-
-        <!-- seguís columnas igual -->
-      </g>
-      </svg>
     </div>
 
 
@@ -275,102 +258,5 @@
   
 
 </body>
-    <script src=".\JS\github-graph.js">  
-  // Año dinámico y menú móvil
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const btn = document.getElementById('menuBtn');
-    const menu = document.getElementById('mobileMenu');
-    btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
- 
-  const months = [
-  "Ene", "Feb", "Mar", "Abr", "May", "Jun",
-  "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
-  ];
-  
-  
-  const svg = document.getElementById("github-graph");
-  svg.innerHTML = `
-    <rect x="10" y="20" width="12" height="12" fill="#22c55e" />
-    <rect x="26" y="20" width="12" height="12" fill="#16a34a" />
-    <rect x="42" y="20" width="12" height="12" fill="#15803d" />
-  `;
-  
-  /* === 1. DATOS (ahora mock, luego reales) === */
-  const contributions =
-    data.user.contributionsCollection
-      .contributionCalendar.weeks;
-
-  /* === 2. FUNCION PARA CADA CUADRADO === */
-  function createRect(x, y, level, count, date) {
-    return `
-      <rect
-        x="${x}"
-        y="${y}"
-        width="12"
-        height="12"
-        rx="2"
-        class="lvl-${level}">
-        <title>${count} contributions on ${date}</title>
-      </rect>
-    `;
-  }
-
-
-  let output = '<g>';
-  let monthLabels = [];
-  let lastMonth = null;
-
-  /* === 1. DETECTAR MESES === */
-  contributions.forEach((week, w) => {
-    const firstDay = week.contributionDays[0];
-    const date = new Date(firstDay.date);
-    const month = date.getMonth();
-
-    if (month !== lastMonth) {
-      monthLabels.push({
-        month,
-        x: w * 14
-      });
-      lastMonth = month;
-    }
-  });
-
-  /* === 2. DIBUJAR MESES (PRIMERO) === */
-  monthLabels.forEach(label => {
-    output += `
-      <text
-        x="${label.x}"
-        y="10"
-        class="month-label">
-        ${months[label.month]}
-      </text>
-    `;
-  });
-
-  /* === 3. DIBUJAR LOS CUADRADOS === */
-  contributions.forEach((week, w) => {
-    week.contributionDays.forEach((day, d) => {
-      const count = day.contributionCount;
-
-      const level =
-        count === 0 ? 0 :
-        count < 3 ? 1 :
-        count < 6 ? 2 :
-        count < 9 ? 3 : 4;
-
-      output += createRect(
-        w * 14,
-        d * 14 + 14, // deja espacio arriba
-        level,
-        count,
-        day.date
-      );
-    });
-  });
-
-  output += '</g>';
-  svg.innerHTML = output;
-
-
-</script>
+    <script src=".\JS\github-graph.js"></script>
 </html>
