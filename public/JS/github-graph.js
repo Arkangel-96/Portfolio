@@ -3,6 +3,8 @@ const svg = document.getElementById("github-graph");
 
 const months = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
 
+const GRID_OFFSET_X = 14; // espacio para semanas incompletas
+
 /* ===============================
    CACHE
 ================================ */
@@ -81,11 +83,12 @@ function buildWeeks(days) {
 /* ===============================
    SVG
 ================================ */
+
 function getLevel(count) {
   if (count === 0) return 0;
-  if (count < 3) return 1;
-  if (count < 6) return 2;
-  if (count < 9) return 3;
+  if (count === 1) return 1;
+  if (count <= 3) return 2;
+  if (count <= 6) return 3;
   return 4;
 }
 
@@ -103,7 +106,7 @@ function renderSVG(weeks) {
 
     if (month !== lastMonth) {
       output += `
-        <text x="${w * 14}" y="10" class="month-label">
+        <text x="${w * 14 + GRID_OFFSET_X}" y="10" class="month-label">
           ${months[month]}
         </text>
       `;
@@ -119,7 +122,7 @@ function renderSVG(weeks) {
       const level = getLevel(day.contributionCount);
       output += `
         <rect
-          x="${w * 14}"
+          x="${w * 14 + GRID_OFFSET_X}"
           y="${d * 14 + 14}"
           width="12"
           height="12"
