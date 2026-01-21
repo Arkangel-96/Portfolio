@@ -50,35 +50,40 @@ function getWeekday(dateStr) {
 }
 
 function buildWeeks(days) {
-  if (!days.length) return [];
+  const result = [];
 
-  const normalized = [...days];
+  if (!days.length) return result;
 
-  // 🔥 Alinear al domingo como GitHub
-  const firstDay = normalized[0];
-  const offset = getWeekday(firstDay.date);
+  const firstDate = new Date(days[0].date);
+  const startDay = firstDate.getDay(); // 0 = domingo
 
-  for (let i = 0; i < offset; i++) {
-    normalized.unshift({
-      date: "",
-      count: 0,
-      empty: true
+  // 1️⃣ rellenar días vacíos ANTES del primer día real
+  for (let i = 0; i < startDay; i++) {
+    result.push({
+      date: null,
+      contributionCount: 0
     });
   }
 
+  // 2️⃣ agregar días reales
+  days.forEach(d => {
+    result.push({
+      date: d.date,
+      contributionCount: d.count
+    });
+  });
+
+  // 3️⃣ agrupar en semanas de 7
   const weeks = [];
-  for (let i = 0; i < normalized.length; i += 7) {
+  for (let i = 0; i < result.length; i += 7) {
     weeks.push({
-      contributionDays: normalized.slice(i, i + 7).map(d => ({
-        date: d.date,
-        contributionCount: d.count,
-        empty: d.empty
-      }))
+      contributionDays: result.slice(i, i + 7)
     });
   }
 
   return weeks;
 }
+
 
 /* ===============================
    SVG
@@ -119,7 +124,7 @@ function renderSVG(weeks) {
     week.contributionDays.forEach((day, d) => {
       if (day.empty) return;
 
-      const level = getLevel(day.contributionCount);
+      const level = getLevel(day?.contributionCount ?? 0);
       output += `
         <rect
           x="${w * 14 + GRID_OFFSET_X}"
@@ -128,7 +133,11 @@ function renderSVG(weeks) {
           height="12"
           rx="2"
           class="lvl-${level}">
-          <title>${day.contributionCount} contributions on ${day.date}</title>
+          <title>
+          ${day?.date 
+            ? `${day.contributionCount} contributions on ${day.date}` 
+            : "No contributions"}
+        </title>
         </rect>
       `;
     });
