@@ -3,7 +3,7 @@ const svg = document.getElementById("github-graph");
 
 const months = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
 
-const GRID_OFFSET_X = -14; // espacio para semanas incompletas
+
 
 /* ===============================
    CACHE
@@ -98,20 +98,27 @@ function getLevel(count) {
 }
 
 function renderSVG(weeks) {
+  const OFFSET_X = 42;
+  const OFFSET_Y = 14;
+
   let output = `<g class="contrib-grid">`;
 
   // meses
   let lastMonth = null;
   weeks.forEach((week, w) => {
-    const firstValidDay = week.contributionDays.find(d => d?.date);
-    if (!firstValidDay) return;
+    const firstDay = week.contributionDays.find(d => d?.date);
+    if (!firstDay) return;
 
-    const date = new Date(firstValidDay.date);
+    const date = new Date(firstDay.date);
     const month = date.getMonth();
 
     if (month !== lastMonth) {
       output += `
-        <text x="${w * 14 + GRID_OFFSET_X}" y="10" class="month-label">
+        <text
+          x="${OFFSET_X + w * 14}"
+          y="10"
+          class="month-label"
+        >
           ${months[month]}
         </text>
       `;
@@ -122,22 +129,16 @@ function renderSVG(weeks) {
   // cuadrados
   weeks.forEach((week, w) => {
     week.contributionDays.forEach((day, d) => {
-      if (day.empty) return;
-
-      const level = getLevel(day?.contributionCount ?? 0);
+      const level = getLevel(day.contributionCount);
       output += `
         <rect
-          x="${w * 14 + GRID_OFFSET_X}"
-          y="${d * 14 + 14}"
+          x="${OFFSET_X + w * 14}"
+          y="${OFFSET_Y + d * 14}"
           width="12"
           height="12"
           rx="2"
           class="lvl-${level}">
-          <title>
-          ${day?.date 
-            ? `${day.contributionCount} contributions on ${day.date}` 
-            : "No contributions"}
-        </title>
+          <title>${day.contributionCount} contributions on ${day.date}</title>
         </rect>
       `;
     });
@@ -146,6 +147,7 @@ function renderSVG(weeks) {
   output += `</g>`;
   svg.innerHTML = output;
 }
+
 
 /* ===============================
    BOOT
