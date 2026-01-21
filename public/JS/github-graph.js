@@ -52,36 +52,49 @@ function getWeekday(dateStr) {
 function buildWeeks(days) {
   const result = [];
 
-  if (!days.length) return result;
-
-  const firstDate = new Date(days[0].date);
-  const startDay = firstDate.getDay(); // 0 = domingo
-
-  // 1️⃣ rellenar días vacíos ANTES del primer día real
-  for (let i = 0; i < startDay; i++) {
-    result.push({
-      date: null,
-      contributionCount: 0
-    });
-  }
-
-  // 2️⃣ agregar días reales
+  // 1️⃣ mapa rápido por fecha
+  const map = {};
   days.forEach(d => {
-    result.push({
-      date: d.date,
-      contributionCount: d.count
-    });
+    map[d.date] = d.count;
   });
 
-  // 3️⃣ agrupar en semanas de 7
-  const weeks = [];
-  for (let i = 0; i < result.length; i += 7) {
-    weeks.push({
-      contributionDays: result.slice(i, i + 7)
-    });
+  // 2️⃣ rango completo
+  const start = new Date(days[0].date);
+  const end   = new Date(days[days.length - 1].date);
+
+  // 3️⃣ retroceder hasta domingo
+  while (start.getDay() !== 0) {
+    start.setDate(start.getDate() - 1);
   }
 
-  return weeks;
+  let currentWeek = [];
+
+  // 4️⃣ recorrer día por día
+  for (
+    let d = new Date(start);
+    d <= end;
+    d.setDate(d.getDate() + 1)
+  ) {
+    const iso = d.toISOString().slice(0, 10);
+
+    currentWeek.push({
+      date: iso,
+      contributionCount: map[iso] ?? 0
+    });
+
+    // 5️⃣ domingo → sábado = semana completa
+    if (d.getDay() === 6) {
+      result.push({ contributionDays: currentWeek });
+      currentWeek = [];
+    }
+  }
+
+  // 6️⃣ cola incompleta
+  if (currentWeek.length) {
+    result.push({ contributionDays: currentWeek });
+  }
+
+  return result;
 }
 
 
@@ -98,7 +111,7 @@ function getLevel(count) {
 }
 
 function renderSVG(weeks) {
-  const OFFSET_X = 42;
+  const OFFSET_X = 28;
   const OFFSET_Y = 14;
 
   let output = `<g class="contrib-grid">`;
