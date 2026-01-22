@@ -50,7 +50,7 @@ function getWeekday(dateStr) {
 }
 
 function buildWeeks(days) {
-  console.log("🧠 buildWeeks ejecutado", days[0].date)
+  
   const result = [];
 
   // 1️⃣ mapa rápido por fecha
@@ -76,7 +76,7 @@ function buildWeeks(days) {
     d <= end;
     d.setDate(d.getDate() + 1)
   ) {
-    console.log("Primer día real:", new Date(result[0].contributionDays[0].date).getDay());
+    
     const iso = d.toISOString().slice(0, 10);
 
     currentWeek.push({
