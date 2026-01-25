@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="./Styles/Inicio.css">
+     <title>Wizard School</title>
+     <link rel="icon" href="./Images/amatista.jpg">
+</head>
+
+<body class="bodyConteiner">
+     <div class="header">
+          <div class="boxHeader"><a href="index.html">INICIO</a></div>
+          <div class="boxHeader" id="registrateBtn"><a href="/HTMLS/register.html">REGISTRATE</a></div>
+          <div class="boxHeader" id="cerrarSesionBtn" style="display: none;"><a href="index.html">CERRAR SESIÓN</a></div>
+          <div class="boxHeader"><a href="HTMLS/index.html">ACCEDER</a></div>
+          <div class="imgLogo">
+               <img src="./Images/amatista.jpg" class="logo">
+          </div>
+     </div>
+
+     <div class="menu">
+          <a href="./HTMLS/casas.html" target="_self" class="elementosMenu">CASAS</a>
+          <a href="./HTMLS/formulario.html" target="_self" class="elementosMenu">ENCUESTA</a>
+          <a href="./HTMLS/libros.html" target="_self" class="elementosMenu">LIBROS</a>
+          <a href="./HTMLS/peliculas.html" target="_self" class="elementosMenu">PELICULAS</a>
+          <a href="./HTMLS/personajes.html" target="_self" class="elementosMenu">PERSONAJES DESTACADOS</a>
+          <a href="./HTMLS/spells.html" target="_self" class="elementosMenu">ENCANTAMIENTOS</a>
+          <a href="../index.html" target="_blank" class="elementosMenu">NOVEDADES</a>
+
+     </div>
+     <div class="main">
+          <p>
+              Elysara is a grim and immersive medieval fantasy setting where steel speaks louder than spells and every choice has weight. Magic exists—but it is rare, dangerous, and often feared. Here, death is never far, kingdoms rise and fall in the shadows of forgotten powers, and heroes are forged not by prophecy but by grit and fire.
+
+          This site is your window into that world: a living archive of lore, tools, and music—all built to support the Elysara RPG, but flexible enough to serve any dark fantasy game.
+
+          Whether you're a GM looking for inspiration, a player seeking atmosphere, or a worldbuilder in need of tools, Elysara has something for you.
+               <br><br>
+              For more info on Elysara, the Elysara toolset and the upcoming Elysara RPG, check out https://www.elysaraworld.com/
+          </p>
+     
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/Ap3hc0gb3XY?si=YmbobMypIlYrcciI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          
+     </div>
+     
+     <div class="footer">
+          <div class="redes">
+               <br>
+               <a href="https://whatsapp.com/channel/0029Vb6X4Oc4NVifA4IroN2S"><img class="imgRedes" src="./Images/Logo-Whatsapp.png"></img></a>
+               <br>
+               <a href="mattyyb96@gmail.com"><img class="imgRedes" src="./Images/png-transparent-google-mail-gmail-logo-icon.png"></img></a>
+          </div>
+          <div>
+               <p>Made by</p>
+               <p>Baltieri, Matias</p>
+ 
+     </div>
+          <script>
+          function checkLoginStatus() {
+          const registrateBtn = document.getElementById('registrateBtn');
+          const cerrarSesionBtn = document.getElementById('cerrarSesionBtn');
+
+          if (registrateBtn && cerrarSesionBtn) {
+               if (localStorage.getItem('userData')) {
+                    registrateBtn.style.display = 'none';
+                    cerrarSesionBtn.style.display = 'inline-block';
+               } else {
+                    registrateBtn.style.display = 'inline-block';
+                    cerrarSesionBtn.style.display = 'none';
+               }
+          } else {
+               console.log('Botones de registro o cierre de sesión no encontrados');
+          }
+          }
+          document.addEventListener('DOMContentLoaded', function() {
+          const registrateBtn = document.getElementById('register-tab');
+          const cerrarSesionBtn = document.getElementById('cerrarSesionBtn');
+     
+          checkLoginStatus();
+     
+          cerrarSesionBtn.addEventListener('click', function(e) {
+               e.preventDefault();
+               localStorage.removeItem('userData');
+               checkLoginStatus();
+               window.location.href = '/index.html';
+          });
+
+     })
+     
+          </script>
+</body>
+
+</html>
