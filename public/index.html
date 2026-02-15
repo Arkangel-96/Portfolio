@@ -394,18 +394,32 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="border-t border-white/5 bg-neutral-950/80">
-    <div class="mx-auto max-w-6xl px-4 py-8 text-sm text-white/60">
-      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
-        <!--    
-        <ul class="flex flex-wrap gap-4">
-          <li><a href="#" class="hover:text-white/90">Autor</a></li>
-          <li><a href="#" class="hover:text-white/90">Privacidad</a></li>
-        </ul> -->
-         <p>© <span id="year"></span>Made by Matías Baltieri 2025-2026 </p>
-      </div>
-    </div>
-  </footer>
+  <footer style="
+    text-align:center;
+    padding:25px 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:18px;
+    color:rgba(255, 255, 255, 0.801);
+    background-color:bg-neutral-900;
+    border-top:1px solid #555;
+">
+  <p style="margin:0; line-height:1.5; display:inline-flex; align-items:center; gap:5px; justify-content:center;">
+    <span style="font-weight:bold; transition: transform 0.3s;" id="copyright-icon">©</span>
+    Noctyr Studio <span id="year"></span>. 
+    <span style="font-style:italic;">Made by Matías Baltieri</span>. 
+    <span style="text-transform:uppercase; letter-spacing:0.5px;">All rights reserved</span>
+  </p>
+</footer>
+
+<script>
+  // Actualiza automáticamente el año
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Efecto sutil al pasar el mouse sobre el icono de copyright
+  const icon = document.getElementById('copyright-icon');
+  icon.addEventListener('mouseenter', () => icon.style.transform = 'scale(1.2)');
+  icon.addEventListener('mouseleave', () => icon.style.transform = 'scale(1)');
+</script>
 
   
 
