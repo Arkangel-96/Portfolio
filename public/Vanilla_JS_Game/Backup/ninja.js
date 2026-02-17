@@ -1,25 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<title>Ninja Debug Hitbox Mejorado</title>
-<style>
-body {
-  background: #222;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-canvas {
-  border: 2px solid white;
-  background: #444;
-}
-</style>
-</head>
-<body>
-<canvas id="gameCanvas" width="1024" height="400"></canvas>
-<script>
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -300,7 +279,3 @@ function gameLoop() {
 
   requestAnimationFrame(gameLoop);
 }
-</script>
-
-</body>
-</html>
