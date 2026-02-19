@@ -1,6 +1,6 @@
 
-const WORLD_WIDTH = 4000;
-const WORLD_HEIGHT = 4000;
+const WORLD_WIDTH = 3000;
+const WORLD_HEIGHT = 3000;
 
 
 
@@ -12,6 +12,11 @@ bgImage.src = "Background_01.png";
 
 const platformImage = new Image();
 platformImage.src = "./medieval-ruins/Platformer/Ground_06.png"; // Cambia el nombre/ruta según tu archivo
+
+const projectileImg = new Image();
+projectileImg.src = "./ninja/Kunai.png"; // ruta a tu imagen
+
+
 
 platformImage.onload = () => {
   platformPattern = ctx.createPattern(platformImage, "repeat");
@@ -76,10 +81,12 @@ function shootProjectile(startX, startY, direction) {
 
 // === PLATAFORMAS ===
 const platforms = [
-  { x: 0,  y: 350, w: 4096,  h: -50 },
-  { x: 800,  y: 300, w: 250, h: 20 },
-  { x: 1200, y: 250, w: 400, h: 20 },
-  { x: 1600, y: 150, w: 600, h: 20 } 
+  { x: 0,   y: 400,  w: 3300,  h: 20 },
+  { x: 3000, y: 400, w: 100, h: 2000 },
+  { x: 1200, y: 275, w: 400, h: 20 },
+  { x: 1700, y: 150, w: 400, h: 20 },
+  { x: 2250, y: 250, w: 200, h: 20 },
+  { x: 2600, y: 150, w: 400, h: 20 }
 ];
 
 // === CÁMARA ===
@@ -185,9 +192,10 @@ if (hitbox.x + hitbox.w > WORLD_WIDTH) {
 }
 
 // Límite superior
-if (hitbox.y < 0) {
-  hitbox.y = 0;
+if (hitbox.y + hitbox.h > WORLD_HEIGHT) {
+  hitbox.y = WORLD_HEIGHT - hitbox.h;
   velocityY = 0;
+  jumping = false;
 }
 
 // Límite inferior
@@ -204,6 +212,7 @@ if (hitbox.y + hitbox.h > WORLD_HEIGHT) {
   // Actualizar cámara (centra al ninja)
   cameraX = hitbox.x - canvas.width / 2;
   if (cameraX < 0) cameraX = 0;
+  
 }
 
 function drawSprite(frames, currentFrame, hitbox, state) {
@@ -274,15 +283,38 @@ function gameLoop() {
   const frames = animations[playerState];
   drawSprite(frames, currentFrame, hitbox, playerState);
 
-  // Proyectiles
-  for (let i=projectiles.length-1;i>=0;i--){
-    const p=projectiles[i];
-    p.x+=p.speed*p.dir;
-    ctx.fillStyle="green";
-    ctx.fillRect(Math.round(p.x - cameraX), Math.round(p.y), 10,10);
-    // Eliminar fuera de pantalla
-    if (p.x<0||p.x>3000) projectiles.splice(i,1);
-  }
+
+// Proyectiles  
+for (let i = projectiles.length - 1; i >= 0; i--) {
+  const p = projectiles[i];
+
+  p.x += p.speed * p.dir;
+
+  const scale = 0.33;
+  const width = projectileImg.width * scale;
+  const height = projectileImg.height * scale;
+
+  const drawX = Math.round(p.x - cameraX);
+  const drawY = Math.round(p.y);
+
+  const angle = p.dir === 1 ? 0 : Math.PI;
+
+  ctx.save();
+  ctx.translate(drawX, drawY);
+  ctx.rotate(angle + Math.PI / 2);
+
+
+  ctx.drawImage(
+    projectileImg,
+    -width / 2,
+    -height / 2,
+    width,
+    height
+  );
+
+  ctx.restore();
+}
+
 
   // Animaciones
   frameCounter++;
