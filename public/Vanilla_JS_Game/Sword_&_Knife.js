@@ -17,7 +17,6 @@ const projectileImg = new Image();
 projectileImg.src = "./ninja/Kunai.png"; // ruta a tu imagen
 
 
-
 platformImage.onload = () => {
   platformPattern = ctx.createPattern(platformImage, "repeat");
 };
@@ -28,6 +27,34 @@ const animations = {
   dead: [], slide: [], jump: [], jump_attack: [], jump_throw: []
 };
   loaded = 0;
+
+const hpBar = document.getElementById("hpBar");
+const energyBar = document.getElementById("energyBar");
+const coinsText = document.getElementById("coins");
+
+const playerStats = {
+  hp: 75,
+  maxHp: 100,
+  energy: 40,
+  maxEnergy: 100,
+  coins: 43
+};
+
+const pickups = [
+  { x: 600, y: 300, w: 30, h: 30, type: "hp", value: 20 },
+  { x: 900, y: 300, w: 30, h: 30, type: "energy", value: 15 },
+  { x: 1200, y: 300, w: 30, h: 30, type: "coin", value: 1 }
+];
+
+function isColliding(a, b) {
+  return (
+    a.x < b.x + b.w &&
+    a.x + a.w > b.x &&
+    a.y < b.y + b.h &&
+    a.y + a.h > b.y
+  );
+}
+
 function preloadImages(folder, array) {
   for (let i = 1; i <= frameCount; i++) {
     const img = new Image();
@@ -232,6 +259,24 @@ function drawSprite(frames, currentFrame, hitbox, state) {
     ctx.drawImage(frames[currentFrame], -drawW/2, drawY, drawW, drawH);
   } else ctx.drawImage(frames[currentFrame], drawX, drawY, drawW, drawH);
   ctx.restore();
+
+  for (const p of pickups) {
+
+  let color = "white";
+
+  if (p.type === "hp") color = "red";
+  if (p.type === "energy") color = "cyan";
+  if (p.type === "coin") color = "gold";
+
+  ctx.fillStyle = color;
+
+  ctx.fillRect(
+    p.x - cameraX,
+    p.y,
+    p.w,
+    p.h
+  );
+  }
 }
 
 function gameLoop() {
@@ -251,7 +296,7 @@ function gameLoop() {
   /* ctx.clearRect(0,0,canvas.width,canvas.height); */
   updatePlayerState();
   updatePosition();
-
+ 
 /*   // Dibujar plataformas
   ctx.fillStyle="grey";
   for (const p of platforms) {
@@ -330,5 +375,35 @@ for (let i = projectiles.length - 1; i >= 0; i--) {
     } else currentFrame%=frameCount;
   }
 
+    for (let i = pickups.length - 1; i >= 0; i--) {
+    const p = pickups[i];
+
+    if (isColliding(hitbox, p)) {
+
+      if (p.type === "hp") {
+        playerStats.hp += p.value;
+        if (playerStats.hp > playerStats.maxHp)
+          playerStats.hp = playerStats.maxHp;
+      }
+
+      if (p.type === "energy") {
+        playerStats.energy += p.value;
+        if (playerStats.energy > playerStats.maxEnergy)
+          playerStats.energy = playerStats.maxEnergy;
+      }
+
+      if (p.type === "coin") {
+        playerStats.coins += p.value;
+      }
+
+      // eliminar pickup
+      pickups.splice(i, 1);
+    }
+  }
+  hpBar.style.width = (playerStats.hp / playerStats.maxHp) * 100 + "%";
+  energyBar.style.width = (playerStats.energy / playerStats.maxEnergy) * 100 + "%";
+  coinsText.textContent = "🪙 " + playerStats.coins;
+  
   requestAnimationFrame(gameLoop);
 }
+

@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<title>Ninja Debug Hitbox Mejorado</title>
+<title>Sword and Knife</title>
 <style>
 body {
   background: #222;
@@ -15,9 +15,62 @@ canvas {
   border: 2px solid white;
   background: #444;
 }
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+#hud {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  font-family: Arial;
+  color: white;
+}
+
+.bar {
+  width: 200px;
+  height: 20px;
+  background: #222;
+  margin-bottom: 10px;
+  border: 2px solid white;
+}
+
+.fill {
+  height: 100%;
+  width: 100%;
+}
+
+.hp {
+  background: #e10600;
+}
+
+.energy {
+  background: #00bfff;
+}
+
+#coins {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
 </style>
 </head>
 <body>
+<div id="hud">
+  <div class="bar">
+    <div id="hpBar" class="fill hp"></div>
+  </div>
+
+  <div class="bar">
+    <div id="energyBar" class="fill energy"></div>
+  </div>
+
+  <div id="coins">🪙 0</div>
+</div>
+
 <canvas id="gameCanvas" width="1024" height="400"></canvas>
 
 <script src="./Sword_&_Knife.js"></script>
