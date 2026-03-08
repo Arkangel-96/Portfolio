@@ -1,15 +1,16 @@
 
 
-https://noctyr-studio.com/  New Web Domain 😎
-
-# Portfolio — Arkangel-96
+# Portfolio — Arkangel-96  
+    👇
+# https://noctyr-studio.com/  
 
 ## Projects
-- Wizard School (HTML/CSS/JS)
+
 - Pixel Hero Survival (Godot)
-- Vanilla JS Game
+- Sword and Knife (Vanilla JavaScript Game)
 
 ## Tech
+
 - SVG
 - GitHub REST API 
 - Local cache
