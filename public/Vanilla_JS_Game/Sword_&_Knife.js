@@ -140,295 +140,417 @@ update(){
 this.updateAnimation();
 }
 
-draw(ctx,cameraX,cameraY){
+// Dentro de Entity
+draw(ctx, cameraX, cameraY) {
 
   const drawX = this.x - cameraX;
   const drawY = this.y - cameraY;
 
   const frames = this.animations[this.currentAnimation];
-  if(!frames) return;
+  if (!frames) return;
 
   const img = frames[this.frameIndex];
 
-  const settings = this.animationSettings[this.currentAnimation] || {};
+  const settings = this.animationSettings?.[this.currentAnimation] || {};
 
   const scaleX = settings.scaleX ?? this.spriteScale;
   const scaleY = settings.scaleY ?? this.spriteScale;
-
-  const offsetX = settings.offsetX ?? this.spriteOffsetX;
-  const offsetY = settings.offsetY ?? this.spriteOffsetY;
+  const offsetX = settings.offsetX ?? 0;
+  const offsetY = settings.offsetY ?? 0;
 
   const renderW = this.w * scaleX;
   const renderH = this.h * scaleY;
 
+  // 🔥 CENTRO DEL HITBOX
+  const centerX = drawX + this.w / 2;
+  const centerY = drawY + this.h / 2;
+
   ctx.save();
 
-  if(this.facing === -1){
+  // mover al centro
+  ctx.translate(centerX, centerY);
 
-    ctx.scale(-1,1);
+  // flip horizontal
+  ctx.scale(this.facing, 1);
 
-    ctx.drawImage(
-      img,
-      -(drawX + renderW + offsetX),
-      drawY + offsetY,
-      renderW,
-      renderH
-    );
-
-  }else{
-
-    ctx.drawImage(
-      img,
-      drawX + offsetX,
-      drawY + offsetY,
-      renderW,
-      renderH
-    );
-
-  }
+  // dibujar centrado (IMPORTANTE)
+  ctx.drawImage(
+    img,
+    -renderW / 2 + offsetX,
+    -renderH / 2 + offsetY,
+    renderW,
+    renderH
+  );
 
   ctx.restore();
-
 }
 
 }
 
+class Projectile extends Entity {
+
+  constructor(x, y, dir) {
+    super(x, y, 40, 40);
+
+    this.speed = 600; // px/s
+    this.dir = dir;   // 1 derecha, -1 izquierda
+
+    this.loadAnimations("ninja", ["kunai"], 1); // imagen única
+    this.scaleX = 0.5;
+    this.scaleY = 1.25;
+    
+  }
+
+  update(dt) {
+    this.x += this.speed * this.dir * dt;
+    super.update();
+  }
+
+  draw(ctx, cameraX, cameraY) {
+
+  const drawX = this.x - cameraX;
+  const drawY = this.y - cameraY;
+
+  const img = this.animations["kunai"][0];
+
+  const baseW = 40;
+  const baseH = 40;
+
+  const renderW = baseW * this.scaleX;
+  const renderH = baseH * this.scaleY;
+
+  ctx.save();
+
+  // centro del proyectil
+  ctx.translate(drawX + renderW / 2, drawY + renderH / 2);
+
+  // rotación según dirección
+  ctx.rotate(this.dir === 1 ? Math.PI / 2 : -Math.PI / 2);
+
+  ctx.drawImage(
+    img,
+    -renderW / 2,
+    -renderH / 2,
+    renderW,
+    renderH
+  );
+
+  ctx.restore();
+}
+
+}
 
 // ==================== PLAYER ====================
 
-class Player extends Entity{
+class Player extends Entity {
 
-  constructor(x,y){
+  constructor(x, y) {
+    super(x, y, 80, 120);
 
-    super(x,y,80,120);
-
+    // Físicas
     this.velocityY = 0;
     this.jumping = false;
 
+    // Offset por defecto del sprite sobre el hitbox
     this.spriteScale = 1;
     this.spriteOffsetY = 0;
 
+    // Dirección
     this.facing = 1;
 
-    // ATAQUE
+    // Estado de ataque
     this.attacking = false;
-    this.attackTimer = 0;
-    this.attackDuration = 60; // 60 frames ≈ 1 segundo
+    // No más timers; usamos fin de animación
+    // this.attackTimer = 0;
+    // this.attackDuration = 60;
 
-    this.loadAnimations(
-      "ninja",
-      ["idle","run","jump","attack"],
-      10
-    );
+    // Carga animaciones
+   this.loadAnimations(
+    "ninja",
+    ["idle","run","jump","attack","throw","jump_attack","jump_throw"],
+    10
+  );
 
-  this.setAnimationSettings("idle",{
-      scaleX:0.75,
-      scaleY:1.0,
-      offsetY:0,
-      offsetX:10
-      
+    // Ejemplo: configurar escala/offset por animación si hace falta
+    // this.setAnimationSettings("idle", { scaleX: 1.2, scaleY: 1.2, offsetY: -35 });
+    // this.setAnimationSettings("run",  { scaleX: 1.0, scaleY: 1.0, offsetY: -30 });
+    // this.setAnimationSettings("jump", { scaleX: 0.9, scaleY: 0.9, offsetY: -20 });
+    // this.setAnimationSettings("attack", { scaleX: 1.3, scaleY: 1.3, offsetY: -40 });
+
+    // Estado actual
+    this.state = "idle";
+
+    this.setAnimationSettings("idle", {
+      scaleX: 0.8,
+      scaleY: 1,
+      offsetY: 0
     });
 
-  this.setAnimationSettings("run", {
-    scale: 1,
-    offsetY: 2
+     this.setAnimationSettings("run", {
+      scaleX: 1.1,
+      scaleY: 1.05,
+      offsetY: 0
+    });
+
+    this.setAnimationSettings("attack", {
+      scaleX: 1.55,
+      scaleY: 1.2,
+      offsetX: 20, // 👉 mover un poco hacia adelante
+      offsetY: 0
+    });
+
+     this.setAnimationSettings("jump_attack", {
+      scaleX: 1.55,
+      scaleY: 1.2,
+      offsetX: 20, // 👉 mover un poco hacia adelante
+      offsetY: 5
+    });
+
+
+    this.setAnimationSettings("jump", {
+      scaleX: 1.1,
+      scaleY: 1.1,
+      offsetY: 0
+    });
+
+     this.setAnimationSettings("throw", {
+      scaleX: 1.2,
+      scaleY: 1,
+      offsetY: 0
+    });
+  }
+
+
+  update(keys, platforms, dt) {
    
-  });
+    // =================
+    // INPUT
+    // =================
 
-  this.setAnimationSettings("jump", {
-    scale: 1,
-    offsetY: 0
-  });
-
-  this.setAnimationSettings("attack", {
-    scaleX:1.5,
-    scaleY:1.1,
-    offsetY: 0
-  });
- }
+    const attackPressed = keys["d"];
+    const throwPressed = keys["f"];
 
 
+    // =================
+    // INICIAR ACCIÓN
+    // =================
+
+    if (!this.attacking) {
+
+      if (attackPressed) {
+
+        this.attacking = true;
+
+        if (this.jumping) {
+          this.play("jump_attack", false);
+        } else {
+          this.play("attack", false);
+        }
+
+        this.frameIndex = 0;
+      }
+
+      if (throwPressed && !this.attacking) {
+
+      this.attacking = true;
+
+      if (this.jumping) {
+        this.play("jump_throw", false);
+      } else {
+        this.play("throw", false);
+      }
+
+      this.frameIndex = 0;
+
+      // 🔥 DISPARO REAL
+      const spawnX = this.x + this.w / 2;
+      const spawnY = this.y + this.h / 2 - 20;
+
+      scene.spawnKunai(spawnX, spawnY, this.facing);
+    }
+
+    }
+
+
+    // =================
+    // ACTUALIZAR ACCIÓN
+    // =================
+
+    if (this.attacking) {
+
+      const frames = this.animations[this.currentAnimation];
+      const isLastFrame = frames && this.frameIndex === frames.length - 1;
+
+      if (isLastFrame) {
+
+        // 🔁 REENCADENAR SI SIGUE PRESIONANDO
+        if (attackPressed) {
+
+          if (this.jumping) {
+            this.play("jump_attack", false);
+          } else {
+            this.play("attack", false);
+          }
+
+          this.frameIndex = 0;
+        }
+
+        else if (throwPressed) {
+
+          if (this.jumping) {
+            this.play("jump_throw", false);
+          } else {
+            this.play("throw", false);
+          }
+
+          this.frameIndex = 0;
+        }
+
+        // 🔚 TERMINA ACCIÓN
+        else {
+
+          this.attacking = false;
+
+          if (this.jumping) this.play("jump");
+          else this.play("idle");
+
+        }
+
+      }
+
+    }
   
-  update(keys,platforms,dt){
+    // =================
+    // MOVIMIENTO HORIZONTAL
+    // =================
 
-  // =================
-  // ATAQUE
-  // =================
+    let dx = 0;
+    const speed = 400; // px/s
 
-  if(keys["d"] && !this.attacking){
-
-    this.attacking = true;
-    this.attackTimer = this.attackDuration;
-
-    this.play("attack", false);
-
-  }
-
-  if(this.attacking){
-
-    this.attackTimer--;
-
-    if(this.attackTimer <= 0){
-
-      this.attacking = false;
-      this.play("idle");
-
-    }
-
-  }
-
-
-  // =================
-  // MOVIMIENTO HORIZONTAL
-  // =================
-
-  let dx = 0;
-  const speed = 400; // pixeles por segundo
-
-  if(!this.attacking){
-
-    if(keys["arrowleft"]){
-    
-      
-      dx = -speed * dt;
-      this.facing = -1;
-    }
-
-    if(keys["arrowright"]){
-    
-      dx = speed * dt;
-      this.facing = 1;
-    }
-
-  }
-
-  this.x += dx;
-
-
-  // colisión horizontal
-  for(let p of platforms){
-
-    if(this.isColliding(p)){
-
-      if(dx > 0) this.x = p.x - this.w;
-      if(dx < 0) this.x = p.x + p.w;
-
-    }
-
-  }
-
-
-  // =================
-  // GRAVEDAD
-  // =================
-
-  const gravity = 900;
-  this.velocityY += gravity * dt;
-
-  let nextY = this.y + this.velocityY * dt;
-
-
-  // =================
-  // COLISION SUELO
-  // =================
-
-  for(let p of platforms){
-
-    const playerBottom = nextY + this.h;
-    const playerTop = nextY;
-
-    const platformTop = p.y;
-    const platformBottom = p.y + p.h;
-
-    const horizontalOverlap =
-      this.x + this.w > p.x &&
-      this.x < p.x + p.w;
-
-    if(horizontalOverlap){
-
-      // caer sobre plataforma
-      if(this.velocityY > 0 &&
-         this.y + this.h <= platformTop &&
-         playerBottom >= platformTop){
-
-        nextY = platformTop - this.h;
-        this.velocityY = 0;
-        this.jumping = false;
-
+    if (!this.attacking) {
+      // Solo moverse si no está atacando
+      if (keys["arrowleft"]) {
+        dx = -speed * dt;
+        this.facing = -1;
       }
+      if (keys["arrowright"]) {
+        dx = speed * dt;
+        this.facing = 1;
+      }
+    }
 
-      // golpear techo
-      if(this.velocityY < 0 &&
-         this.y >= platformBottom &&
-         playerTop <= platformBottom){
+    this.x += dx;
 
-        nextY = platformBottom;
-        this.velocityY = 0;
+    // colisión horizontal
+    for (let p of platforms) {
+      if (this.isColliding(p)) {
+        if (dx > 0) this.x = p.x - this.w;
+        if (dx < 0) this.x = p.x + p.w;
+      }
+    }
 
+
+    // =================
+    // GRAVEDAD
+    // =================
+
+    const gravity = 900;
+    this.velocityY += gravity * dt;
+
+    let nextY = this.y + this.velocityY * dt;
+
+    // =================
+    // COLISION SUELO
+    // =================
+
+    for (let p of platforms) {
+      const playerBottom = nextY + this.h;
+      const playerTop = nextY;
+
+      const platformTop = p.y;
+      const platformBottom = p.y + p.h;
+
+      const horizontalOverlap =
+        this.x + this.w > p.x &&
+        this.x < p.x + p.w;
+
+      if (horizontalOverlap) {
+        // caer sobre plataforma
+        if (
+          this.velocityY > 0 &&
+          this.y + this.h <= platformTop &&
+          playerBottom >= platformTop
+        ) {
+          nextY = platformTop - this.h;
+          this.velocityY = 0;
+          this.jumping = false;
+        }
+
+        // golpear techo
+        if (
+          this.velocityY < 0 &&
+          this.y >= platformBottom &&
+          playerTop <= platformBottom
+        ) {
+          nextY = platformBottom;
+          this.velocityY = 0;
+        }
+      }
+    }
+
+    this.y = nextY;
+
+    // =================
+    // SALTO
+    // =================
+
+    if (!this.jumping && keys["arrowup"] && !this.attacking) {
+      this.jumping = true;
+      this.velocityY = -600;
+    }
+
+    // =================
+    // MOVIMIENTO Y BASE
+    // =================
+
+    if (!this.attacking) {
+
+      // movimiento
+      // salto
+
+      if (this.jumping) {
+        this.play("jump");
+      }
+      else if (keys["arrowleft"] || keys["arrowright"]) {
+        this.play("run");
+      }
+      else {
+        this.play("idle");
       }
 
     }
 
-  }
-
-  this.y = nextY;
-
-
-  // =================
-  // SALTO
-  // =================
-
-  if(!this.jumping && keys["arrowup"] && !this.attacking){
-
-    this.jumping = true;
-    this.velocityY = -600;
-
-  }
-
-
-  // =================
-  // ANIMACIONES
-  // =================
-
-  if(!this.attacking){
-
-    if(this.jumping){
-      this.play("jump");
-    }
-    else if(keys["arrowleft"] || keys["arrowright"]){
-      this.play("run");
-    }
-    else{
-      this.play("idle");
-    }
-
-  }
-
-  super.update();
-
+    // Actualiza animación (incrementa frameIndex, etc.)
+    super.update();
   }
 
 
   // =================
   // DIBUJAR
   // =================
+  draw(ctx, cameraX, cameraY) {
+    // Dibuja el sprite
+    super.draw(ctx, cameraX, cameraY);
 
-  draw(ctx,cameraX,cameraY){
-
-    super.draw(ctx,cameraX,cameraY);
-
-    // HITBOX VERDE
+    // ----- Hitbox verde -----
     const drawX = this.x - cameraX;
     const drawY = this.y - cameraY;
-
     ctx.strokeStyle = "lime";
     ctx.lineWidth = 2;
     ctx.strokeRect(drawX, drawY, this.w, this.h);
-
   }
 
 }
-
 
 // ==================== PLATFORM ====================
 class Platform extends Entity{
@@ -531,6 +653,8 @@ new Pickup(1100,400,30,30,"coin",1)
 this.cameraX=0;
 this.cameraY=0;
 
+this.projectiles = [];
+
 }
 
 update(deltaTime){
@@ -552,6 +676,8 @@ this.pickups.splice(i,1);
 
 this.updateCamera();
 
+this.projectiles.forEach(p => p.update(deltaTime));
+
 }
 
 updateCamera(){
@@ -569,6 +695,10 @@ this.cameraY=Math.max(0,Math.min(this.cameraY,WORLD_HEIGHT-GAME_HEIGHT));
 
 }
 
+spawnKunai(x, y, dir) {
+  this.projectiles.push(new Projectile(x, y, dir));
+}
+
 draw(){
 
 drawBackground(ctx,bgImage,this.cameraX,this.cameraY);
@@ -579,6 +709,13 @@ this.pickups.forEach(p=>p.draw(ctx,this.cameraX,this.cameraY));
 this.player.draw(ctx,this.cameraX,this.cameraY);
 
 this.drawUI(ctx);
+
+this.projectiles.forEach(p => p.draw(ctx, this.cameraX, this.cameraY));
+
+this.projectiles = this.projectiles.filter(p =>
+  p.x > this.cameraX - 100 &&
+  p.x < this.cameraX + GAME_WIDTH + 100
+);
 
 }
 
