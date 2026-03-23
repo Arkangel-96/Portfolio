@@ -20,6 +20,7 @@ export const keys = {};
 window.addEventListener("keydown", e => keys[e.key.toLowerCase()] = true);
 window.addEventListener("keyup", e => keys[e.key.toLowerCase()] = false);
 
+export const playerStats = { hp: 75, maxHp: 100, energy: 40, maxEnergy: 100, coins: 43 };
 
 // ==================== IMPORT ====================
 import { Scene } from "./scene.js";

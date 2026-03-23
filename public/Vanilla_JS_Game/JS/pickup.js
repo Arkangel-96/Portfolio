@@ -1,38 +1,111 @@
-
 import { Entity } from "./entity.js";
 
 export class Pickup extends Entity {
 
-  constructor(x,y,w,h,type,value){
-    super(x,y,w,h);
-    this.type=type;
-    this.value=value;
-  }
+  constructor(x, y, w, h, type, value){
+    super(x, y, w, h);
 
-  draw(ctx,cameraX,cameraY){
+    this.type = type;
+    this.value = value;
+    this.canAttack = false; // desactiva ataque
+    this.collected = false;
 
-    let color="white";
+    // 🔥 flotación base
+    this.baseY = y;
+    this.time = Math.random() * 100;
 
-    if(this.type==="hp") color="red";
-    if(this.type==="energy") color="cyan";
-    if(this.type==="coin") color="gold";
-
-    ctx.fillStyle=color;
-    ctx.fillRect(this.x-cameraX,this.y-cameraY,this.w,this.h);
-  }
-
-  apply(playerStats){
-
-    if(this.type==="hp"){
-      playerStats.hp=Math.min(playerStats.maxHp,playerStats.hp+this.value);
+    // =================
+    // ANIMACIONES
+    // =================
+    if(type === "coin"){
+      this.loadAnimations("pickups", ["coin"], 6);
+      this.play("coin");
+      this.frameDelay = 4; // más fluido
     }
 
-    if(this.type==="energy"){
-      playerStats.energy=Math.min(playerStats.maxEnergy,playerStats.energy+this.value);
+    else if(type === "hp"){
+      this.loadAnimations("pickups", ["hp"], 1);
+      this.play("hp");
     }
 
-    if(this.type==="coin"){
-      playerStats.coins+=this.value;
+    else if(type === "energy"){
+      this.loadAnimations("pickups", ["energy"], 1);
+      this.play("energy");
     }
   }
+
+  // =================
+  // UPDATE
+  // =================
+  update(dt, player){
+
+    // 🔒 seguridad
+    if(!player) {
+      super.update();
+      return;
+    }
+
+    // =================
+    // FLOTACIÓN
+    // =================
+    this.time += dt * 3;
+    this.y = this.baseY + Math.sin(this.time) * 5;
+
+    // =================
+    // EFECTO IMÁN
+    // =================
+    const dx = (player.x + player.w / 2) - (this.x + this.w / 2);
+    const dy = (player.y + player.h / 2) - (this.y + this.h / 2);
+
+    const dist = Math.hypot(dx, dy);
+    const range = 150;
+
+    if(dist < range){
+      // fuerza dinámica (más natural)
+      const strength = Math.min(10, 300 / (dist + 0.01));
+
+      this.x += dx * dt * strength;
+      this.baseY += dy * dt * strength;
+    }
+
+    super.update();
+  }
+
+  // =================
+  // DRAW
+  // =================
+  draw(ctx, cameraX, cameraY){
+    super.draw(ctx, cameraX, cameraY);
+  }
+
+  // =================
+  // APPLY EFFECT
+  // =================
+  apply(entity){
+
+    // 🔒 seguridad anti-crash
+    if(!entity || !entity.stats){
+      console.error("Pickup.apply() entidad inválida:", entity);
+      return;
+    }
+
+    if(this.type === "hp"){
+      entity.stats.hp = Math.min(
+        entity.stats.maxHp,
+        entity.stats.hp + this.value
+      );
+    }
+
+    else if(this.type === "energy"){
+      entity.stats.energy = Math.min(
+        entity.stats.maxEnergy,
+        entity.stats.energy + this.value
+      );
+    }
+
+    else if(this.type === "coin"){
+      entity.stats.coins += this.value;
+    }
+  }
+
 }

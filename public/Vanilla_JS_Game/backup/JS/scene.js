@@ -2,8 +2,7 @@
 import { Player } from "./player.js";
 import { Pickup } from "./pickup.js";
 import { Platform } from "./platform.js";
-import { Enemy } from "./enemy.js";
-import { ctx, bgImage, GAME_WIDTH, GAME_HEIGHT } from "./main.js";
+import { ctx, bgImage, playerStats, GAME_WIDTH, GAME_HEIGHT } from "./main.js";
 import { Projectile } from "./projectile.js";
 import { keys } from "./main.js";
 
@@ -23,17 +22,13 @@ new Platform(3300,200,100,400)
 
 ];
 
-this.enemies = [
-  new Enemy(800, 380)
-];
-
 this.projectiles = [];
 
 this.pickups=[
 
-new Pickup(1100,400,30,30,"hp",20),
+new Pickup(600,400,30,30,"hp",20),
 new Pickup(900,400,30,30,"energy",15),
-new Pickup(600,400,30,30,"coin",1)
+new Pickup(1100,400,30,30,"coin",1)
 
 ];
 
@@ -58,75 +53,40 @@ updateCamera(){
 }
 
 update(deltaTime){
-  
-  this.enemies.forEach(enemy => {
 
-  enemy.update(deltaTime, this.platforms, this.player);
+this.player.update(keys, this.platforms, deltaTime, this);
 
-  // 🔥 COLISIÓN CON PLAYER
-  if (this.player.isColliding(enemy)) {
+this.projectiles.forEach(p => p.update(deltaTime));
 
-  // desde la derecha
-  if (this.player.x < enemy.x) {
-    this.player.x = enemy.x - this.player.w;
-  }
+for(let i=this.pickups.length-1;i>=0;i--){
+if(this.player.isColliding(this.pickups[i])){
+this.pickups[i].apply(playerStats);
+this.pickups.splice(i,1);
+}}
 
-  // desde la izquierda
-  else {
-    this.player.x = enemy.x + enemy.w;
-  }
+this.updateCamera();
 
 }
-
-});
-
-  this.enemies.forEach(e => e.update(deltaTime, this.platforms, this.player));
-  
-
-  this.player.update(keys, this.platforms, deltaTime, this);
-
-  // 🔥 ACTUALIZAR PROYECTILES
-  this.projectiles.forEach(p => p.update(deltaTime));
-
-  // 🔥 ACTUALIZAR PICKUPS (flotación + imán)
-  this.pickups.forEach(p => p.update(deltaTime, this.player));
-
-  // 🔥 COLISION PLAYER vs PICKUPS
-  for(let i = this.pickups.length - 1; i >= 0; i--){
-
-    if(this.player.isColliding(this.pickups[i])){
-
-      this.pickups[i].apply(this.player); // 👈 AHORA usa entity
-      this.pickups.splice(i, 1);
-
-    }
-  }
-
-  this.updateCamera();
-}
-
-
 
 drawBackground(){
 
   const bgW = bgImage.width;
   const bgH = bgImage.height;
-
+  
   if(bgW > 0 && bgH > 0){
 
-    const parallax = 0.3;
-
-    const startX = -Math.floor((this.cameraX * parallax) % bgW);
-
+    const parallax = 0.5;
+    const startX = -((this.cameraX * parallax) % bgW);;
+    const startY = -(this.cameraY % bgH);
+    
     for(let x = startX; x < GAME_WIDTH; x += bgW){
-      ctx.drawImage(bgImage, x, 0, bgW + 1, GAME_HEIGHT);
-      ctx.imageSmoothingEnabled = true;
+      for(let y = startY; y < GAME_HEIGHT; y += bgH){
+        ctx.drawImage(bgImage, x, y, bgW, bgH);
+      }
     }
 
   }
 }
-
-
 draw(){
 
 
@@ -136,8 +96,6 @@ this.platforms.forEach(p=>p.draw(ctx,this.cameraX,this.cameraY));
 this.pickups.forEach(p=>p.draw(ctx,this.cameraX,this.cameraY));
 this.projectiles.forEach(p => p.draw(ctx, this.cameraX, this.cameraY));
 this.player.draw(ctx,this.cameraX,this.cameraY);
-this.enemies.forEach(e => e.draw(ctx, this.cameraX, this.cameraY));
-
 this.drawUI(ctx)
 
 }
@@ -155,22 +113,31 @@ drawUI(ctx){
   const barWidth = 200;
   const barHeight = 20;
 
-  const s = this.player.stats;
-
   ctx.fillStyle = "black";
   ctx.fillRect(margin, margin, barWidth, barHeight);
 
   ctx.fillStyle = "red";
-  ctx.fillRect(margin, margin, (s.hp / s.maxHp) * barWidth, barHeight);
+  ctx.fillRect(
+    margin,
+    margin,
+    (playerStats.hp / playerStats.maxHp) * barWidth,
+    barHeight
+  );
 
   ctx.fillStyle = "black";
   ctx.fillRect(margin, margin*2 + barHeight, barWidth, barHeight);
 
   ctx.fillStyle = "cyan";
-  ctx.fillRect(margin, margin*2 + barHeight, (s.energy / s.maxEnergy) * barWidth, barHeight);
+  ctx.fillRect(
+    margin,
+    margin*2 + barHeight,
+    (playerStats.energy / playerStats.maxEnergy) * barWidth,
+    barHeight
+  );
 
   ctx.fillStyle = "gold";
   ctx.font = "20px Arial";
-  ctx.fillText("🪙 " + s.coins, margin, margin*5 + barHeight*2);
+  ctx.fillText("🪙 " + playerStats.coins, margin, margin*5 + barHeight*2);
 }
+
 }
