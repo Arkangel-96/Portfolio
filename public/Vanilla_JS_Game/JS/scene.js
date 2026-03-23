@@ -1,0 +1,143 @@
+
+import { Player } from "./player.js";
+import { Pickup } from "./pickup.js";
+import { Platform } from "./platform.js";
+import { ctx, bgImage, playerStats, GAME_WIDTH, GAME_HEIGHT } from "./main.js";
+import { Projectile } from "./projectile.js";
+import { keys } from "./main.js";
+
+
+export class Scene {
+
+constructor(){
+this.player = new Player(200,270);
+
+this.platforms=[
+new Platform(0,500,4000,40),
+new Platform(1200,350,400,20),
+new Platform(1700,300,400,20),
+new Platform(2250,300,200,20),
+new Platform(2600,250,400,20),
+new Platform(3300,200,100,400)
+
+];
+
+this.projectiles = [];
+
+this.pickups=[
+
+new Pickup(600,400,30,30,"hp",20),
+new Pickup(900,400,30,30,"energy",15),
+new Pickup(1100,400,30,30,"coin",1)
+
+];
+
+this.cameraX=0;
+this.cameraY=0;
+}
+
+
+updateCamera(){
+
+  const targetX = this.player.x + this.player.w / 2 - GAME_WIDTH / 2;
+  const targetY = this.player.y + this.player.h / 2 - GAME_HEIGHT / 2;
+  
+  const lerp = 0.1;
+
+  this.cameraX += (targetX - this.cameraX) * lerp;
+  this.cameraY += (targetY - this.cameraY) * lerp;
+
+  // límites del mundo (opcional pero PRO)
+  this.cameraX = Math.max(0, Math.min(this.cameraX, 6000 - GAME_WIDTH));
+  this.cameraY = Math.max(0, Math.min(this.cameraY, 2000 - GAME_HEIGHT));
+}
+
+update(deltaTime){
+
+this.player.update(keys, this.platforms, deltaTime, this);
+
+this.projectiles.forEach(p => p.update(deltaTime));
+
+for(let i=this.pickups.length-1;i>=0;i--){
+if(this.player.isColliding(this.pickups[i])){
+this.pickups[i].apply(playerStats);
+this.pickups.splice(i,1);
+}}
+
+this.updateCamera();
+
+}
+
+drawBackground(){
+
+  const bgW = bgImage.width;
+  const bgH = bgImage.height;
+  
+  if(bgW > 0 && bgH > 0){
+
+    const parallax = 0.5;
+    const startX = -((this.cameraX * parallax) % bgW);;
+    const startY = -(this.cameraY % bgH);
+    
+    for(let x = startX; x < GAME_WIDTH; x += bgW){
+      for(let y = startY; y < GAME_HEIGHT; y += bgH){
+        ctx.drawImage(bgImage, x, y, bgW, bgH);
+      }
+    }
+
+  }
+}
+draw(){
+
+
+this.drawBackground();
+
+this.platforms.forEach(p=>p.draw(ctx,this.cameraX,this.cameraY));
+this.pickups.forEach(p=>p.draw(ctx,this.cameraX,this.cameraY));
+this.projectiles.forEach(p => p.draw(ctx, this.cameraX, this.cameraY));
+this.player.draw(ctx,this.cameraX,this.cameraY);
+this.drawUI(ctx)
+
+}
+spawnKunai(x, y, dir) {
+  this.projectiles.push(new Projectile(x, y, dir));
+  
+  
+}
+
+
+
+drawUI(ctx){
+
+  const margin = 10;
+  const barWidth = 200;
+  const barHeight = 20;
+
+  ctx.fillStyle = "black";
+  ctx.fillRect(margin, margin, barWidth, barHeight);
+
+  ctx.fillStyle = "red";
+  ctx.fillRect(
+    margin,
+    margin,
+    (playerStats.hp / playerStats.maxHp) * barWidth,
+    barHeight
+  );
+
+  ctx.fillStyle = "black";
+  ctx.fillRect(margin, margin*2 + barHeight, barWidth, barHeight);
+
+  ctx.fillStyle = "cyan";
+  ctx.fillRect(
+    margin,
+    margin*2 + barHeight,
+    (playerStats.energy / playerStats.maxEnergy) * barWidth,
+    barHeight
+  );
+
+  ctx.fillStyle = "gold";
+  ctx.font = "20px Arial";
+  ctx.fillText("🪙 " + playerStats.coins, margin, margin*5 + barHeight*2);
+}
+
+}
