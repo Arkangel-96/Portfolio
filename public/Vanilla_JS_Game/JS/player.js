@@ -159,19 +159,17 @@ update(keys, platforms, dt, scene) {
 
   // ================= ANIMACIONES BASE =================
   if (!this.attacking) {
-    if (!this.onGround) {
-      if (this.currentAnimation !== "jump") this.play("jump");
-    } 
-    else if (keys["arrowleft"] || keys["arrowright"]) {
-      if (this.currentAnimation !== "run") this.play("run");
-    } 
-    else {
-      if (this.currentAnimation !== "idle") this.play("idle");
-    }
+
+    let nextAnim = "idle";
+
+    if (!this.onGround) nextAnim = "jump";
+    else if (keys["arrowleft"] || keys["arrowright"]) nextAnim = "run";
+
+    this.play(nextAnim);
   }
 
   // ================= UPDATE ENTITY =================
-  super.update();
+  super.update(dt);
 }
 
 // ================= DIBUJO =================

@@ -21,7 +21,10 @@ export class Entity {
     this.facing = 1;
     this.frameIndex = 0;
     this.frameCounter = 0;
-    this.frameDelay = 6;
+    
+    this.loop = true; // default
+    this.animFPS = 16;  // default
+
     this.showHealthBar = false;
 
     // ataque
@@ -108,30 +111,44 @@ export class Entity {
     };
   }
 
-  play(anim, loop=true){
-    if(this.currentAnimation !== anim){
-      this.currentAnimation = anim;
-      this.frameIndex = 0;
-      this.frameCounter = 0;
-      this.loop = loop;
-    }
+  play(name, loop = true){
+  if(this.currentAnimation !== name){
+    this.currentAnimation = name;
+    this.frameIndex = 0;
+    this.frameCounter = 0;
+    this.loop = loop; // 🔥 CLAVE
   }
+}
 
-  updateAnimation(){
-    const frames = this.animations[this.currentAnimation];
-    if(!frames || frames.length === 0) return;  // evita crash
-    this.frameCounter++;
-    if(this.frameCounter >= this.frameDelay){
-      this.frameCounter = 0;
-      this.frameIndex++;
-      if(this.frameIndex >= frames.length){
-        this.loop ? this.frameIndex=0 : this.frameIndex=frames.length-1;
+updateAnimation(dt){
+
+  if(!this.currentAnimation) return;
+
+  const frames = this.animations[this.currentAnimation];
+  if(!frames || frames.length === 0) return;
+
+  this.frameCounter += dt;
+
+  const frameTime = 1 / this.animFPS;
+
+  if(this.frameCounter >= frameTime){
+    this.frameCounter -= frameTime;
+    this.frameIndex++;
+
+    if(this.frameIndex >= frames.length){
+
+      if(this.loop){
+        this.frameIndex = 0; // 🔥 vuelve a empezar
+      } else {
+        this.frameIndex = frames.length - 1; // se queda (attack)
       }
+
     }
   }
+}
 
-  update(){
-    this.updateAnimation();
+  update(dt){
+    this.updateAnimation(dt);
     this.updateAttackBox(); // recalcula attackBox cada frame
   }
 

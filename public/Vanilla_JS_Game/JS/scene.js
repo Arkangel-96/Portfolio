@@ -11,7 +11,7 @@ import { keys } from "./main.js";
 export class Scene {
 
 constructor(){
-this.player = new Player(200,270);
+this.player = new Player(100,0);
 
 this.platforms=[
 new Platform(0,500,4000,40),
@@ -58,49 +58,62 @@ updateCamera(){
 }
 
 update(deltaTime){
-  
-  this.enemies.forEach(enemy => {
 
-  enemy.update(deltaTime, this.platforms, this.player);
-
-  // 🔥 COLISIÓN CON PLAYER
-  if (this.player.isColliding(enemy)) {
-
-  // desde la derecha
-  if (this.player.x < enemy.x) {
-    this.player.x = enemy.x - this.player.w;
-  }
-
-  // desde la izquierda
-  else {
-    this.player.x = enemy.x + enemy.w;
-  }
-
-}
-
-});
-
-  this.enemies.forEach(e => e.update(deltaTime, this.platforms, this.player));
-  
+  // =================
+  // 1. UPDATE ENTIDADES
+  // =================
 
   this.player.update(keys, this.platforms, deltaTime, this);
 
-  // 🔥 ACTUALIZAR PROYECTILES
-  this.projectiles.forEach(p => p.update(deltaTime));
+  this.enemies.forEach(e => 
+    e.update(deltaTime, this.platforms, this.player)
+  );
 
-  // 🔥 ACTUALIZAR PICKUPS (flotación + imán)
-  this.pickups.forEach(p => p.update(deltaTime, this.player));
+  this.projectiles.forEach(p => 
+    p.update(deltaTime)
+  );
 
-  // 🔥 COLISION PLAYER vs PICKUPS
-  for(let i = this.pickups.length - 1; i >= 0; i--){
+  this.pickups.forEach(p => 
+    p.update(deltaTime, this.player)
+  );
 
-    if(this.player.isColliding(this.pickups[i])){
 
-      this.pickups[i].apply(this.player); // 👈 AHORA usa entity
+  // =================
+  // 2. COLISIONES
+  // =================
+
+  // 🔥 PLAYER vs ENEMIES
+  this.enemies.forEach(enemy => {
+
+    if (this.player.isColliding(enemy)) {
+
+      if (this.player.x < enemy.x) {
+        this.player.x = enemy.x - this.player.w;
+      } else {
+        this.player.x = enemy.x + enemy.w;
+      }
+
+    }
+
+  });
+
+
+  // 🔥 PLAYER vs PICKUPS
+  for (let i = this.pickups.length - 1; i >= 0; i--) {
+
+    if (this.player.isColliding(this.pickups[i])) {
+
+      this.pickups[i].apply(this.player);
       this.pickups.splice(i, 1);
 
     }
+
   }
+
+
+  // =================
+  // 3. CÁMARA
+  // =================
 
   this.updateCamera();
 }
@@ -136,6 +149,7 @@ this.platforms.forEach(p=>p.draw(ctx,this.cameraX,this.cameraY));
 this.pickups.forEach(p=>p.draw(ctx,this.cameraX,this.cameraY));
 this.projectiles.forEach(p => p.draw(ctx, this.cameraX, this.cameraY));
 this.player.draw(ctx,this.cameraX,this.cameraY);
+
 this.enemies.forEach(e => e.draw(ctx, this.cameraX, this.cameraY));
 
 this.drawUI(ctx)

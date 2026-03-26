@@ -20,7 +20,8 @@ export class Pickup extends Entity {
     if(type === "coin"){
       this.loadAnimations("pickups", ["coin"], 6);
       this.play("coin");
-      this.frameDelay = 4; // más fluido
+      this.animFPS = 16; 
+      
     }
 
     else if(type === "hp"){
@@ -39,21 +40,17 @@ export class Pickup extends Entity {
   // =================
   update(dt, player){
 
-    // 🔒 seguridad
     if(!player) {
-      super.update();
+      super.update(dt);
+      console.log("coin frame:", this.frameIndex);
       return;
     }
 
-    // =================
-    // FLOTACIÓN
-    // =================
+    // flotación
     this.time += dt * 3;
     this.y = this.baseY + Math.sin(this.time) * 5;
 
-    // =================
-    // EFECTO IMÁN
-    // =================
+    // imán
     const dx = (player.x + player.w / 2) - (this.x + this.w / 2);
     const dy = (player.y + player.h / 2) - (this.y + this.h / 2);
 
@@ -61,14 +58,18 @@ export class Pickup extends Entity {
     const range = 150;
 
     if(dist < range){
-      // fuerza dinámica (más natural)
       const strength = Math.min(10, 300 / (dist + 0.01));
 
       this.x += dx * dt * strength;
       this.baseY += dy * dt * strength;
     }
 
-    super.update();
+    super.update(dt);
+
+    // 🔥 DEBUG ACÁ
+    if(this.type === "coin"){
+      console.log("coin frame:", this.frameIndex);
+    }
   }
 
   // =================

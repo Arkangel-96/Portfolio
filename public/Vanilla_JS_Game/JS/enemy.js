@@ -14,7 +14,7 @@ export class Enemy extends Entity {
 
     this.showHealthBar = true; // 🔥 SOLO enemigos
 
-    this.frameDelay = 18
+    this.animFPS = 16; 
 
     this.velocityY = 0;
     this.jumping = true;
@@ -136,7 +136,8 @@ update(dt, platforms, player){
 
   }
 
-  super.update();
+  super.update(dt);
+
 }
 
   

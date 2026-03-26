@@ -16,29 +16,59 @@ bgImage.src = "Background_01.png";
 
 export const keys = {};
 
-
 window.addEventListener("keydown", e => keys[e.key.toLowerCase()] = true);
 window.addEventListener("keyup", e => keys[e.key.toLowerCase()] = false);
 
 
+
 // ==================== IMPORT ====================
 import { Scene } from "./scene.js";
+import { LoadingScreen } from "./loadingScreen.js";
 
-// ==================== GAME LOOP ====================
-const scene = new Scene();
-
+// ==================== STATE ====================
+let scene = null;
+let gameStarted = false;
 let lastTime = 0;
 
+const loadingScreen = new LoadingScreen();
+
+
+// ==================== LOOP ====================
 function gameLoop(time){
   const dt = (time - lastTime) / 1000;
   lastTime = time;
 
   ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
-  scene.update(dt);
-  scene.draw();
+  if(!gameStarted){
+  loadingScreen.update(dt); // 👈 IMPORTANTE
+  loadingScreen.draw(ctx, GAME_WIDTH, GAME_HEIGHT);
 
+  if(loadingScreen.isDone()){
+    scene = new Scene();
+    gameStarted = true;
+  }
+
+  } else {
+    scene.update(dt);
+    scene.draw();
+  }
+  
   requestAnimationFrame(gameLoop);
 }
 
-bgImage.onload = () => requestAnimationFrame(gameLoop);
+
+// ==================== INIT ====================
+async function init(){
+
+  // ⏳ fake loading (2 seg)
+  await new Promise(r => setTimeout(r, 2000));
+
+  scene = new Scene();
+  gameStarted = true;
+}
+
+
+// ==================== START ====================
+init();
+requestAnimationFrame(gameLoop);
