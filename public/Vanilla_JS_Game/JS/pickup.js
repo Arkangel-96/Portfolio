@@ -1,5 +1,6 @@
 import { Entity } from "./entity.js";
 
+
 export class Pickup extends Entity {
 
   constructor(x, y, w, h, type, value){
@@ -42,9 +43,11 @@ export class Pickup extends Entity {
 
     if(!player) {
       super.update(dt);
-      console.log("coin frame:", this.frameIndex);
+     
       return;
-    }
+    }  
+
+    // console.log("coin frame:", this.frameIndex);
 
     // flotación
     this.time += dt * 3;
@@ -68,7 +71,7 @@ export class Pickup extends Entity {
 
     // 🔥 DEBUG ACÁ
     if(this.type === "coin"){
-      console.log("coin frame:", this.frameIndex);
+      
     }
   }
 
@@ -91,10 +94,7 @@ export class Pickup extends Entity {
     }
 
     if(this.type === "hp"){
-      entity.stats.hp = Math.min(
-        entity.stats.maxHp,
-        entity.stats.hp + this.value
-      );
+      entity.heal(20);
     }
 
     else if(this.type === "energy"){

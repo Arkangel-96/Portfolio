@@ -12,15 +12,39 @@ export class Enemy extends Entity {
 
     });
 
-    this.showHealthBar = true; // 🔥 SOLO enemigos
+    this.showHealthBar = true; 
+
+    this.attackBox = {
+      x: this.x,
+      y: this.y + this.attackBoxOffset.y,
+      w: this.w,
+      h: this.h,
+      damage: this.attackBoxOffset.damage // 🔥 CLAVE
+    };
+
+    
 
     this.animFPS = 16; 
 
     this.velocityY = 0;
     this.jumping = true;
+
+    this.speed = 200;
+
+    this.aggroRange = 300;
+
     this.attackRange = 80;
-    this.attacking = false;
+    this.attackBuffer = 20;
+
     this.attackCooldown = 0;
+
+    this.state = "idle";
+
+    this.recoveryTimer = 0;
+    
+    this.showAttackBox = true;
+   
+  
 
     this.loadAnimations(
       "knight",
@@ -31,14 +55,14 @@ export class Enemy extends Entity {
     this.play("idle");
 
     this.setAnimationSettings("idle", { scaleX: 4, scaleY: 2.75 },);
-    this.setAnimationSettings("run", { scaleX: 4, scaleY: 2.5 });
-    this.setAnimationSettings("attack", { scaleX: 4, scaleY: 2.5 });
-    this.setAnimationSettings("die", { scaleX: 4, scaleY: 2.5 });
-    this.setAnimationSettings("jump", { scaleX: 4, scaleY: 2.5 });
+    this.setAnimationSettings("run", { scaleX: 4, scaleY: 2.75});
+    this.setAnimationSettings("attack", { scaleX: 4, scaleY: 2.75 });
+    this.setAnimationSettings("die", { scaleX: 4, scaleY: 2.75 });
+    this.setAnimationSettings("jump", { scaleX: 4, scaleY: 2.75 });
 
 
     
-    this.aggroRange = 300;
+    
   }
 
 update(dt, platforms, player){
@@ -47,6 +71,7 @@ update(dt, platforms, player){
   // GRAVEDAD
   // =====================
   const gravity = 900;
+
   this.velocityY += gravity * dt;
 
   let nextY = this.y + this.velocityY * dt;
@@ -73,80 +98,134 @@ update(dt, platforms, player){
 
   this.y = nextY;
 
-  // =====================
-  // IA
-  // =====================
+  // ================= IA =================
 
-  const dx = player.x - this.x;
-  const dist = Math.abs(dx);
+  // 🔥 DISTANCIAS
+  const dx = (player.x + player.w/2) - (this.x + this.w/2);
+  const dy = (player.y + player.h/2) - (this.y + this.h/2);
+  const dist = Math.hypot(dx, dy);
 
-  const speed = 100;
+  // 🔥 FACING
+  this.facing = dx > 0 ? 1 : -1;
 
-  // cooldown
+  // 🔥 COOLDOWN
   if(this.attackCooldown > 0){
     this.attackCooldown -= dt;
   }
 
-  // mirar jugador
-  this.facing = dx > 0 ? 1 : -1;
+  // 🔥 ZONA DE ATAQUE (CON BUFFER)
+  const inAttackZone = dist < (this.attackRange + this.attackBuffer);
 
-    // =====================
-    // ATAQUE
-    // =====================
+  // ================= STATE MACHINE =================
 
-    if(dist < this.attackRange && this.attackCooldown <= 0 && !this.attacking){
+  switch(this.state){
 
-    this.attacking = true;
-    this.play("attack", false);
-    this.frameIndex = 0;
+    // ================= IDLE =================
+    case "idle":
+      this.play("idle");
 
-    this.hitDone = false;
-    this.attackCooldown = 1.2;
-    }
+      if(dist < this.aggroRange){
+        this.state = "chase";
+      }
+    break;
 
-  if(this.attacking){
+    // ================= CHASE =================
+    case "chase":
 
-  // frame donde pega
-  if(this.frameIndex === 4 && !this.hitDone){
-    player.stats.hp -= 10;
-    this.hitDone = true;
-  }
+      // 🔥 PRIORIDAD: ATACAR ANTES DE MOVERSE
+      if(inAttackZone && this.attackCooldown <= 0){
+        this.startAttack();
+        this.state = "attack";
+        break;
+      }
 
-  const frames = this.animations[this.currentAnimation];
+      // 🔥 MOVER SOLO SI NO ESTÁ CERCA
+      if(dist > this.attackRange * 0.7){
+        this.x += Math.sign(dx) * this.speed * dt;
+      }
 
-  if(this.frameIndex === frames.length - 1){
-    this.attacking = false;
-  }
+      this.play("run");
 
-}
-  // =====================
-  // MOVIMIENTO
-  // =====================
-  else if(dist < this.aggroRange && !this.attacking){
+      // 🔥 PERDER AGGRO
+      if(dist > this.aggroRange){
+        this.state = "idle";
+      }
 
-  this.x += Math.sign(dx) * speed * dt;
-  this.play("run");
+    break;
 
-}
+    // ================= ATTACK =================
+    case "attack":
 
-  else{
+      // 🔥 IMPORTANTE: no moverse acá
+      this.updateAttack(dt, player);
 
-    this.attacking = false;
-    this.play("idle");
+      if(!this.attacking){
+        this.state = "recovery";
+        this.recoveryTimer = 0.3;
+      }
 
+    break;
+
+    // ================= RECOVERY =================
+    case "recovery":
+
+      this.play("idle");
+      this.recoveryTimer -= dt;
+
+      if(this.recoveryTimer <= 0){
+        this.state = "chase";
+      }
+
+    break;
   }
 
   super.update(dt);
-
 }
-
   
 draw(ctx, cameraX, cameraY){
-    super.draw(ctx, cameraX, cameraY);
+  super.draw(ctx, cameraX, cameraY);
 
-    // Opcional: debug adicional
-    // ctx.strokeStyle = "cyan";
-    // ctx.strokeRect(this.x - cameraX, this.y - cameraY, this.w, this.h);
+  // ================= DEBUG AGGRO RANGE =================
+  const centerX = this.x + this.w / 2 - cameraX;
+  const centerY = this.y + this.h / 2 - cameraY;
+
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, this.aggroRange, 0, Math.PI * 2);
+
+  // color según estado
+  if(this.state === "chase"){
+  ctx.strokeStyle = "red";
+  } else {
+    ctx.strokeStyle = "lime";
   }
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.fillStyle = this.isAggro
+    ? "rgba(255, 0, 0, 0.1)"
+    : "rgba(0, 255, 0, 0.05)";
+  ctx.fill();
+
+    // ================= DEBUG STATE =================
+  ctx.fillStyle = "white";
+  ctx.font = "12px monospace";
+
+  const debugText = [
+    `state: ${this.state.toUpperCase()}`,
+    `anim: ${this.currentAnimation}`,
+    `frame: ${this.frameIndex}`,
+    `timer: ${this.attackTimer?.toFixed(2) || 0}`,
+    `hitDone: ${this.hitDone}`
+  ];
+
+  debugText.forEach((line, i) => {
+    ctx.fillText(
+      line,
+      this.x - cameraX,
+      this.y - cameraY - 80 - (i * 12)
+    );
+  });
+
+}
 
 }

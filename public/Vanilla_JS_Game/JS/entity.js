@@ -11,7 +11,23 @@ export class Entity {
     const defaultStats = { hp:100, maxHp:100, energy:50, maxEnergy:50, coins:0 };
     this.stats = {...defaultStats, ...stats};
     this.alive = true;
-    this.canAttack = true
+  
+
+    // ataque por tiempo (PRO)
+    this.attacking = false;
+    this.attackTimer = 0;
+
+    this.attackData = {
+      hitStart: 0.2,
+      hitEnd: 0.3
+    };
+
+    this.hitDone = false;
+
+    this.attackCooldown = 0;
+    this.attackCooldownTime = 0.8; // ajustá a gusto
+  
+    this.showAttackBox = false;
 
     // animaciones
     this.animations = {};
@@ -40,22 +56,28 @@ export class Entity {
            this.y + this.h > other.y;
   }
 
+  update(dt){
+
+  this.updateAnimation(dt);
+
+  // 🔥 SIEMPRE actualizar para debug visual
+  this.updateAttackBox();
+
+  if(this.attackCooldown > 0){
+    this.attackCooldown -= dt;
+  }
+}
+
   // calcular attackBox automático según facing y posición actual
   updateAttackBox(){
 
-  if(!this.canAttack) {
-    this.attackBox = null;
-    return;
-  }
-  
   const w = this.attackBoxOffset.w;
   const h = this.attackBoxOffset.h;
 
-  // centro del hitbox de la entidad
   const centerX = this.x + this.w/2;
-  
-  // posición X simétrica según facing
-  let attackX = centerX + this.attackBoxOffset.x * this.facing - (this.facing < 0 ? w : 0);
+
+  let attackX = centerX + this.attackBoxOffset.x * this.facing 
+                - (this.facing < 0 ? w : 0);
 
   this.attackBox = {
     x: attackX,
@@ -65,8 +87,7 @@ export class Entity {
     damage: this.attackBoxOffset.damage
   };
 }
-
-  clearAttackBox(){ this.attackBox = null; }
+  
 
   checkHit(target){
     if(!this.attackBox || !target.alive) return false;
@@ -74,6 +95,46 @@ export class Entity {
     const b = target; // target usa x,y,w,h como hitbox de daño
     return a.x < b.x + b.w && a.x + a.w > b.x &&
            a.y < b.y + b.h && a.y + a.h > b.y;
+  }
+
+  startAttack(){
+  this.attacking = true;
+  this.attackTimer = 0;
+  this.hitDone = false;
+
+  this.play("attack", false);
+
+  const frames = this.animations["attack"].length;
+  this.attackDuration = frames / this.animFPS;
+
+  // 🔥 activar cooldown
+  this.attackCooldown = this.attackCooldownTime;
+}
+
+  updateAttack(dt, target){
+
+    if(!this.attacking) return;
+
+    this.attackTimer += dt;
+
+    // 🔥 SIEMPRE actualizar posición
+    this.updateAttackBox();
+
+    const { hitStart, hitEnd } = this.attackData;
+
+    if(
+      this.attackTimer >= hitStart &&
+      this.attackTimer <= hitEnd &&
+      !this.hitDone
+    ){
+      this.dealDamage(target);
+      this.hitDone = true;
+    }
+
+    if(this.attackTimer >= this.attackDuration){
+      this.attacking = false;
+      this.attackBox = null; // limpiar
+    }
   }
 
   dealDamage(target){
@@ -87,6 +148,16 @@ export class Entity {
     }
     return false;
   }
+
+  heal(amount){
+  this.stats.hp += amount;
+
+  if(this.stats.hp > 0){
+    this.alive = true; // 🔥 revive automáticamente
+  }
+
+  this.stats.hp = Math.min(this.stats.hp, this.stats.maxHp);
+ }
 
   // ------------------ ANIMACIONES ------------------
   loadAnimations(baseFolder, animationNames, frameCount){
@@ -112,11 +183,12 @@ export class Entity {
   }
 
   play(name, loop = true){
+ 
   if(this.currentAnimation !== name){
     this.currentAnimation = name;
     this.frameIndex = 0;
     this.frameCounter = 0;
-    this.loop = loop; // 🔥 CLAVE
+    this.loop = loop;
   }
 }
 
@@ -131,65 +203,92 @@ updateAnimation(dt){
 
   const frameTime = 1 / this.animFPS;
 
-  if(this.frameCounter >= frameTime){
+  // 🔥 AVANZA TODOS LOS FRAMES NECESARIOS
+  while(this.frameCounter >= frameTime){
+
     this.frameCounter -= frameTime;
     this.frameIndex++;
 
     if(this.frameIndex >= frames.length){
 
       if(this.loop){
-        this.frameIndex = 0; // 🔥 vuelve a empezar
+        this.frameIndex = 0;
       } else {
-        this.frameIndex = frames.length - 1; // se queda (attack)
+        this.frameIndex = frames.length - 1;
+        break; // 🔥 importante: frena el loop
       }
 
     }
   }
 }
 
-  update(dt){
-    this.updateAnimation(dt);
-    this.updateAttackBox(); // recalcula attackBox cada frame
-  }
+  
 
   // ------------------ DIBUJO ------------------
-  draw(ctx, cameraX, cameraY){
-    const drawX = this.x - cameraX;
-    const drawY = this.y - cameraY;
+draw(ctx, cameraX, cameraY){
+  const drawX = this.x - cameraX;
+  const drawY = this.y - cameraY;
 
-    // sprite
-    const frames = this.animations[this.currentAnimation];
-    if(!frames || frames.length === 0) return;{
-      const img = frames[this.frameIndex];
-      const settings = this.animationSettings?.[this.currentAnimation] || {};
-      const renderW = this.w * (settings.scaleX ?? this.spriteScale);
-      const renderH = this.h * (settings.scaleY ?? this.spriteScale);
-      ctx.save();
-      ctx.translate(drawX + this.w/2, drawY + this.h/2);
-      ctx.scale(this.facing,1);
-      ctx.drawImage(img, -renderW/2, -renderH/2, renderW, renderH);
-      ctx.restore();
-    }
+  // ================= SPRITE =================
+  const frames = this.animations[this.currentAnimation];
 
-    // barra de vida
-    if(this.showHealthBar && this.stats) this.drawHealthBar(ctx, cameraX, cameraY);
+  if(frames && frames.length > 0){
 
-    // ------------------ DEBUG HITBOX ------------------
-    // hitbox de daño = rojo
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(this.x - cameraX, this.y - cameraY, this.w, this.h);
+    const img = frames[this.frameIndex];
+    const settings = this.animationSettings?.[this.currentAnimation] || {};
 
-    // hitbox de ataque = amarillo punteado
+    const scaleX = settings.scaleX ?? this.spriteScale;
+    const scaleY = settings.scaleY ?? this.spriteScale;
+
+    const renderW = this.w * scaleX;
+    const renderH = this.h * scaleY;
+
+    ctx.save();
+
+    // centrar
+    ctx.translate(drawX + this.w/2, drawY + this.h/2);
+
+    // flip horizontal
+    ctx.scale(this.facing, 1);
+
+    ctx.drawImage(
+      img,
+      -renderW/2,
+      -renderH/2,
+      renderW,
+      renderH
+    );
+
+    ctx.restore();
+  }
+
+  // ================= HP BAR =================
+  if(this.showHealthBar && this.stats){
+    this.drawHealthBar(ctx, cameraX, cameraY);
+  }
+
+  // ================= DEBUG =================
+
+  // 🔴 HITBOX CUERPO
+  ctx.strokeStyle = "red";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(drawX, drawY, this.w, this.h);
+
+  // 🟡 HITBOX ATAQUE
+  if(this.showAttackBox && this.attackBox){
     ctx.strokeStyle = "yellow";
     ctx.setLineDash([4,2]);
-    ctx.lineWidth = 2;
-    if(this.attackBox){
-      ctx.strokeRect(this.attackBox.x - cameraX, this.attackBox.y - cameraY,
-                     this.attackBox.w, this.attackBox.h);
-    }
+
+    ctx.strokeRect(
+      this.attackBox.x - cameraX,
+      this.attackBox.y - cameraY,
+      this.attackBox.w,
+      this.attackBox.h
+    );
+
     ctx.setLineDash([]);
   }
+}
 
   drawHealthBar(ctx, cameraX, cameraY){
     const barWidth = this.w;

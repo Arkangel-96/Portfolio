@@ -165,17 +165,33 @@ spawnKunai(x, y, dir) {
 
 drawUI(ctx){
 
-  const margin = 10;
   const barWidth = 200;
   const barHeight = 20;
+  const margin = 10;
+  const x = 20;
+  const y = 20;
 
   const s = this.player.stats;
 
+  // fondo
   ctx.fillStyle = "black";
-  ctx.fillRect(margin, margin, barWidth, barHeight);
+  ctx.fillRect(x, y, barWidth, barHeight);
 
+  // vida
   ctx.fillStyle = "red";
-  ctx.fillRect(margin, margin, (s.hp / s.maxHp) * barWidth, barHeight);
+  const hpPercent = s.hp / s.maxHp;
+
+  ctx.fillRect(x, y, barWidth * hpPercent, barHeight);
+
+  // texto (opcional GOD)
+  ctx.fillStyle = "white";
+  ctx.font = "16px monospace";
+  ctx.fillText(
+    `${Math.floor(s.hp)} / ${s.maxHp}`,
+    x + 10,
+    y + 15
+  );
+
 
   ctx.fillStyle = "black";
   ctx.fillRect(margin, margin*2 + barHeight, barWidth, barHeight);
