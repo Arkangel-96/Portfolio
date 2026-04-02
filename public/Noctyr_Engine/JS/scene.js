@@ -31,14 +31,18 @@ this.projectiles = [];
 
 this.pickups=[
 
-new Pickup(1100,400,30,30,"hp",20),
-new Pickup(900,400,30,30,"energy",15),
+new Pickup(700,400,30,30,"hp",20),
+new Pickup(900,400,30,30,"energy",20),
 new Pickup(600,400,30,30,"coin",1)
 
 ];
 
 this.cameraX=0;
 this.cameraY=0;
+
+this.coinIcon = new Image();
+this.coinIcon.src = "./pickups/coin/frame_1.png";
+
 }
 
 
@@ -157,6 +161,14 @@ this.drawUI(ctx)
 }
 spawnKunai(x, y, dir) {
   this.projectiles.push(new Projectile(x, y, dir));
+
+  if (this.player.stats.energy >0 ){
+    this.player.stats.energy -= 10
+  }
+  else if (this.player.stats.energy <=0 ){
+    this.player.stats.energy =0
+
+  }
   
   
 }
@@ -165,10 +177,10 @@ spawnKunai(x, y, dir) {
 
 drawUI(ctx){
 
-  const barWidth = 200;
-  const barHeight = 20;
-  const margin = 10;
-  const x = 20;
+  const barWidth = 150;
+  const barHeight = 25;
+  const margin = 50;
+  const x = 60;
   const y = 20;
 
   const s = this.player.stats;
@@ -180,27 +192,49 @@ drawUI(ctx){
   // vida
   ctx.fillStyle = "red";
   const hpPercent = s.hp / s.maxHp;
-
   ctx.fillRect(x, y, barWidth * hpPercent, barHeight);
 
-  // texto (opcional GOD)
+  // texto 
   ctx.fillStyle = "white";
-  ctx.font = "16px monospace";
+  ctx.font = "20px Arial";
   ctx.fillText(
     `${Math.floor(s.hp)} / ${s.maxHp}`,
-    x + 10,
+    x +10,
     y + 15
   );
 
-
+    // fondo
   ctx.fillStyle = "black";
-  ctx.fillRect(margin, margin*2 + barHeight, barWidth, barHeight);
+  ctx.fillRect(x, y+25, barWidth, barHeight);
 
-  ctx.fillStyle = "cyan";
-  ctx.fillRect(margin, margin*2 + barHeight, (s.energy / s.maxEnergy) * barWidth, barHeight);
+  // vida
+  ctx.fillStyle = "blue";
+  const energyPercent = s.energy / s.maxEnergy;
+  ctx.fillRect(x, y+ 25, barWidth * energyPercent, barHeight);
 
-  ctx.fillStyle = "gold";
+    // texto 
+  ctx.fillStyle = "white";
   ctx.font = "20px Arial";
-  ctx.fillText("🪙 " + s.coins, margin, margin*5 + barHeight*2);
-}
+  ctx.fillText(
+    `${Math.floor(s.energy)} / ${s.maxEnergy}`,
+    x +10,
+    y + 40
+  );
+
+
+ const size = 24;
+
+  // dibuja la imagen
+  ctx.drawImage(this.coinIcon, x, y+52, size, size);
+
+  ctx.textBaseline = "middle";
+
+  // dibuja el texto
+  ctx.fillText(
+    s.coins,
+    x + 10 +size ,
+    x + size 
+  );
+
+  }
 }
