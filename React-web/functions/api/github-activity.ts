@@ -45,11 +45,18 @@ export async function onRequest(context: {
 
   const json = await res.json();
 
-  if (!res.ok || json.errors) {
+  if (!res.ok) {
+  return new Response(
+    JSON.stringify({ error: "GitHub request failed" }),
+    { status: res.status }
+  );
+  }
+
+  if (json.errors) {
     return new Response(
       JSON.stringify({
         error: "GitHub GraphQL error",
-        details: json.errors ?? null,
+        details: json.errors,
       }),
       { status: 500 }
     );
@@ -58,7 +65,7 @@ export async function onRequest(context: {
   const weeks =
     json?.data?.user?.contributionsCollection?.contributionCalendar?.weeks;
 
-  if (!weeks) {
+  if (!weeks || !Array.isArray(weeks)) {
     return new Response(
       JSON.stringify({ error: "No contribution data" }),
       { status: 500 }
@@ -66,17 +73,19 @@ export async function onRequest(context: {
   }
 
   // 🔥 flatten → [{ date, count }]
-  const days = weeks.flatMap((w: any) =>
-    w.contributionDays.map((d: any) => ({
+  type Day = { date: string; contributionCount: number };
+
+  const days = weeks.flatMap((w: { contributionDays: Day[] }) =>
+    w.contributionDays.map((d) => ({
       date: d.date,
       count: d.contributionCount,
     }))
   );
 
   return new Response(JSON.stringify(days), {
-    headers: {
-      "Content-Type": "application/json",
-      "Cache-Control": "public, max-age=21600",
-    },
-  });
+  headers: {
+    "Content-Type": "application/json",
+    "Cache-Control": "public, max-age=21600, s-maxage=21600",
+  },
+});
 }
