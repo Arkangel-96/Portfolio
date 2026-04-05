@@ -38,6 +38,17 @@ export default function Github() {
     return 4;
   }
 
+  function getColor(level) {
+    switch(level) {
+      case 0: return "bg-neutral-800";
+      case 1: return "bg-green-100";
+      case 2: return "bg-green-300";
+      case 3: return "bg-green-500";
+      case 4: return "bg-green-700";
+      default: return "bg-neutral-800";
+    }
+  }
+
   function buildWeeks(days) {
     const result = [];
     const map = {};
@@ -49,15 +60,12 @@ export default function Github() {
     const start = new Date(days[0].date);
     const end   = new Date(days[days.length - 1].date);
 
-    while (start.getDay() !== 0) {
-      start.setDate(start.getDate() - 1);
-    }
+    while (start.getDay() !== 0) start.setDate(start.getDate() - 1);
 
     let currentWeek = [];
 
     for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
       const iso = d.toISOString().slice(0, 10);
-
       currentWeek.push({
         date: iso,
         contributionCount: map[iso] ?? 0
@@ -69,10 +77,7 @@ export default function Github() {
       }
     }
 
-    if (currentWeek.length) {
-      result.push({ contributionDays: currentWeek });
-    }
-
+    if (currentWeek.length) result.push({ contributionDays: currentWeek });
     return result;
   }
 
@@ -83,10 +88,10 @@ export default function Github() {
     const OFFSET_X = 28;
     const OFFSET_Y = 14;
 
-    let output = `<g class="contrib-grid">`;
+    const elements = [];
 
+    // Dibujar nombres de meses
     let lastMonth = null;
-
     weeks.forEach((week, w) => {
       const firstDay = week.contributionDays.find(d => d?.date);
       if (!firstDay) return;
@@ -95,39 +100,46 @@ export default function Github() {
       const month = date.getMonth();
 
       if (month !== lastMonth) {
-        output += `
-          <text x="${OFFSET_X + w * 14}" y="10" class="month-label">
-            ${months[month]}
+        elements.push(
+          <text
+            key={`month-${w}`}
+            x={OFFSET_X + w * 14}
+            y={10}
+            className="fill-white text-xs font-semibold"
+          >
+            {months[month]}
           </text>
-        `;
+        );
         lastMonth = month;
       }
     });
 
+    // Dibujar cuadrados de contribuciones
     weeks.forEach((week, w) => {
       week.contributionDays.forEach((day, d) => {
         const level = getLevel(day.contributionCount);
-        output += `
+        elements.push(
           <rect
-            x="${OFFSET_X + w * 14}"
-            y="${OFFSET_Y + d * 14}"
-            width="12"
-            height="12"
-            rx="2"
-            class="lvl-${level}">
-            <title>${day.contributionCount} contributions on ${day.date}</title>
+            key={`rect-${w}-${d}`}
+            x={OFFSET_X + w * 14}
+            y={OFFSET_Y + d * 14}
+            width={12}
+            height={12}
+            rx={2}
+            className={`${getColor(level)} hover:brightness-125 transition`}
+          >
+            <title>{`${day.contributionCount} contributions on ${day.date}`}</title>
           </rect>
-        `;
+        );
       });
     });
 
-    output += `</g>`;
-    svg.innerHTML = output;
+    svg.innerHTML = "";
+    elements.forEach(el => svg.appendChild(el));
   }
 
   async function loadGithubActivity() {
     const cached = getCachedData();
-
     if (cached) {
       renderSVG(buildWeeks(cached));
       return;
@@ -150,9 +162,7 @@ export default function Github() {
   return (
     <section id="github" className="border-y border-white/5 bg-neutral-950">
       <div className="mx-auto max-w-6xl px-4 py-14">
-
         <h2 className="text-2xl font-bold">Actividad en GitHub</h2>
-
         <p className="mt-2 text-white/70">
           Constancia y práctica real en proyectos personales.
         </p>
@@ -176,7 +186,6 @@ export default function Github() {
             Ver mi perfil en GitHub
           </a>
         </div>
-
       </div>
     </section>
   );
