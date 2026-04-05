@@ -7,3 +7,16 @@
 body {
   @apply bg-neutral-950 text-neutral-100 selection:bg-indigo-400/30 selection:text-white;
 }
+
+/* src/index.css o donde tengas tus estilos Tailwind */
+.lvl-0 { fill: #1c1c1c; }       /* Gris muy oscuro */
+.lvl-1 { fill: #1d6f42; }       /* Verde más claro */      
+.lvl-2 { fill: #2ea043; }       /* Verde intenso */
+.lvl-3 { fill: #39d353; }       /* Verde más brillante */
+
+.month-label {
+  fill: #a3a3a3; /* color gris para los meses */
+  font-size: 10px;
+  font-family: sans-serif;
+  text-anchor: start;
+}
