@@ -1,8 +1,9 @@
 
-body {
-  @apply bg-neutral-950 text-neutral-100 selection:bg-indigo-400/30 selection:text-white;
-}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-neutral-950 text-neutral-100 selection:bg-indigo-400/30 selection:text-white;
+}

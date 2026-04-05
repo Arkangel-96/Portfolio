@@ -1,18 +1,15 @@
 
-
-
 # ===============================
 # NODE / TOOLING
 # ===============================
 node_modules/
 
-package-lock.json
-postcss.config.js
-tailwind.config.js
+# package-lock.json  <-- opcional, se puede subir
+# postcss y tailwind configs son necesarios
+# postcss.config.js
+# tailwind.config.js
 pnpm-lock.yaml
 yarn.lock
-
-
 
 # ===============================
 # BUILDS / CACHE
@@ -22,12 +19,8 @@ build/
 .wrangler/
 .dev.vars
 
-
-
 # ===============================
 # OS / EDITOR
 # ===============================
 .DS_Store
 .vscode/
-
-
