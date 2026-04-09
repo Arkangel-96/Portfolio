@@ -16,55 +16,8 @@ export default function Projects() {
         <div className="mt-10 space-y-16">
 
           {/* PROYECTO 1 */}
-          <article className="flex flex-col md:flex-row gap-8 rounded-3xl border border-white/10 bg-neutral-900/40 p-6 md:p-10">
-
-            <div className="md:w-1/2">
-              <img
-                src={engineImg}
-                alt="Noctyr Engine"
-                className="h-full w-full rounded-2xl object-cover"
-              />
-            </div>
-
-            <div className="md:w-1/2 flex flex-col justify-between">
-              <div>
-                <a
-                  href="/Noctyr_Engine/demo.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-2xl font-bold hover:underline"
-                >
-                  Noctyr Engine (NE.js)
-                </a>
-
-                <p className="mt-4 text-white/70 leading-relaxed">
-                  Custom 2D Game Engine built from scratch in JavaScript.
-                  Modular entity system, combat timing, animation control
-                  and scalable architecture.
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-2 text-xs text-white/60">
-                  <span className="rounded-lg border border-white/10 px-2 py-1">HTML / CSS</span>
-                  <span className="rounded-lg border border-white/10 px-2 py-1">JavaScript</span>
-                </div>
-              </div>
-
-              <div className="mt-8">
-                <a
-                  href="/Noctyr_Engine/demo.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block rounded-xl border border-white/20 px-5 py-2 text-sm hover:bg-white/10 transition"
-                >
-                  Ver proyecto →
-                </a>
-              </div>
-            </div>
-
-          </article>
-
-          {/* PROYECTO 2 */}
-          <article className="flex flex-col md:flex-row gap-8 rounded-3xl border border-white/10 bg-neutral-900/40 p-6 md:p-10">
+          
+            <article className="flex flex-col md:flex-row gap-8 rounded-3xl border border-white/10 bg-neutral-900/40 p-6 md:p-10">
 
             <div className="md:w-1/2">
               <img
@@ -82,18 +35,23 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   className="text-2xl font-bold hover:underline"
                 >
-                  Legends of the Abyss™ <br /> The Shadow of Steel
+                  Pixel Hero Survival
                 </a>
 
                 <p className="mt-4 text-white/90 text-lg leading-relaxed">
-                  Action Roguelike
+                  A fast-paced 2D action roguelike focused on survival and responsiveness.
+     
                 </p>
 
                 <p className="mt-4 text-white/70 leading-relaxed">
-                  A fast-paced experience where survival is the only thing that matters.
-                  You fight, you adapt, and you keep moving forward — in a world that gives no answers.
+                 Key features:
+                <br />
+                *Real-time combat and damage system <br />
+                *Enemy behavior and wave spawning  <br />
+                *Simple but effective player feedback (health, hits, death)
                 </p>
-
+  
+            
                 <div className="mt-6 flex flex-wrap gap-2 text-xs text-white/60">
                   <span className="rounded-lg border border-white/10 px-2 py-1">Godot</span>
                   <span className="rounded-lg border border-white/10 px-2 py-1">GDScript (Python)</span>
@@ -103,6 +61,63 @@ export default function Projects() {
               <div className="mt-8">
                 <a
                   href="https://arkangel-96.itch.io/pixel-hero-survival"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block rounded-xl border border-white/20 px-5 py-2 text-sm hover:bg-white/10 transition"
+                >
+                  Ver proyecto →
+                </a>
+              </div>
+            </div>
+
+          </article>
+
+          {/* PROYECTO 2 */}
+        
+
+          <article className="flex flex-col md:flex-row gap-8 rounded-3xl border border-white/10 bg-neutral-900/40 p-6 md:p-10">
+
+            <div className="md:w-1/2">
+              <img
+                src={engineImg}
+                alt="2D Systems Demo"
+                className="h-full w-full rounded-2xl object-cover"
+              />
+            </div>
+
+            <div className="md:w-1/2 flex flex-col justify-between">
+              <div>
+                <a
+                  href="/Noctyr_Engine/demo.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-2xl font-bold hover:underline"
+                >
+                  2D Gameplay System Demo (JavaScript)
+                </a>
+
+                <p className="mt-4 text-white/90 text-lg leading-relaxed">
+                  A small experimental project focused on building core gameplay systems from scratch.
+                 
+                </p>
+
+                 <p className="mt-4 text-white/70 leading-relaxed">
+                 Includes:
+                <br />
+                *Entity-based structure <br />
+                *Combat and damage handling  <br />
+                *Animation and update loop logic
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-2 text-xs text-white/60">
+                  <span className="rounded-lg border border-white/10 px-2 py-1">HTML / CSS</span>
+                  <span className="rounded-lg border border-white/10 px-2 py-1">JavaScript</span>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <a
+                  href="/Noctyr_Engine/demo.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block rounded-xl border border-white/20 px-5 py-2 text-sm hover:bg-white/10 transition"
@@ -137,15 +152,24 @@ export default function Projects() {
                 </a>
 
                 <p className="mt-4 text-white/90 text-lg leading-relaxed">
-                  AI-powered SaaS market analysis
+                  Exploratory project focused on analyzing SaaS business models using data science techniques.
+                
                 </p>
 
                 <p className="mt-4 text-white/70 leading-relaxed">
-                  Exploratory platform focused on analyzing SaaS business models using data science and machine learning.
-                  The goal is to identify patterns in pricing, growth and product strategy to understand what makes digital products scalable and profitable.
+                The goal is to identify patterns in pricing, growth and product strategy to better understand scalable digital products.
+                </p>
+                
+                 <p className="mt-4 text-white/70 leading-relaxed">
+                Focus areas:
+                <br />
+                *Pricing models <br />
+                *Growth patterns <br />
+                *Product positioning
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-2 text-xs text-white/60">
+                  <span className="rounded-lg border border-white/10 px-2 py-1">Python</span>
                   <span className="rounded-lg border border-white/10 px-2 py-1">AI</span>
                   <span className="rounded-lg border border-white/10 px-2 py-1">Data Science</span>
                   <span className="rounded-lg border border-white/10 px-2 py-1">Machine Learning</span>
