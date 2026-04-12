@@ -88,7 +88,7 @@ export default function Projects() {
             <div className="md:w-1/2 flex flex-col justify-between">
               <div>
                 <a
-                  href="/Noctyr_Engine/demo.html"
+                  href="/2D_System_Demo/demo.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-2xl font-bold hover:underline"
@@ -117,7 +117,7 @@ export default function Projects() {
 
               <div className="mt-8">
                 <a
-                  href="/Noctyr_Engine/demo.html"
+                  href="/2D_System_Demo/demo.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block rounded-xl border border-white/20 px-5 py-2 text-sm hover:bg-white/10 transition"
