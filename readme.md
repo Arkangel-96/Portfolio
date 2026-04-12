@@ -1,45 +1,93 @@
 
-# Noctyr Studio – Portfolio Personal
 
-[https://noctyr-studio.com](https://noctyr-studio.com)  
+# 🌘 Noctyr Studio – Portfolio Personal
 
-Ecosistema personal que combina **web principal, juegos online y proyectos de data science**, con stack moderno y arquitectura escalable.
+Ecosistema personal donde desarrollo y conecto **aplicaciones web, juegos online y proyectos de data science**, usando un stack moderno y arquitectura escalable.
+
+👉 **Live:** [https://noctyr-studio.com](https://noctyr-studio.com)
 
 ---
 
 ## 🌐 Web Principal
-**Stack:** Django + React  
-- Registro y login de usuarios  
-- Dashboard y noticias  
-- Sección Data Science y CRUD de Excel  
-- PostgreSQL + Redis  
-- Cloudflare para seguridad y distribución
+
+**Stack:** Django + React
+
+* Sistema de autenticación (registro/login)
+* Dashboard dinámico y noticias
+* Sección de Data Science integrada
+* PostgreSQL
+* Seguridad y distribución con Cloudflare
 
 ---
 
-## 🎮 Juegos Online
-**Stack:** Godot (C++) + FastAPI  
-- Juego tipo cartas estratégico (1vs1 y single player)  
-- API de partidas en tiempo real  
-- PostgreSQL + Redis  
-- Backend y APIs escalables
+## 🎮 Proyectos Destacados
+
+### 🕹️ Pixel Hero Survival
+
+Juego 2D estilo roguelike enfocado en **supervivencia, combate en tiempo real y responsividad**.
+
+**Highlights:**
+
+* Sistema de combate en tiempo real
+* Lógica de daño y feedback al jugador
+* IA básica de enemigos y oleadas
+* Sistema de supervivencia progresiva
+
+**Stack:**
+
+* Godot
+* GDScript (Python-like)
+
 
 ---
 
-## 📊 Data Science Projects
-**Stack:** Python (Pandas, Jupyter, PyTorch)  
-- CRUD de Excel y dashboards interactivos  
-- Análisis de datasets  
-- PostgreSQL + Redis (opcional)  
+### ⚙️ 2D Systems Demo
+
+Proyecto experimental centrado en construir **sistemas de gameplay desde cero**.
+
+**Incluye:**
+
+* Arquitectura basada en entidades
+* Sistema de combate y daño
+* Loop de actualización y animaciones
+* Lógica desacoplada y modular
+
+**Stack:**
+
+* HTML / CSS
+* JavaScript
+
 
 ---
 
-## 🚀 Habilidades Clave
-- Django + React + FastAPI (fullstack)  
-- Integración backend/frontend/APIs  
-- Bases de datos y cache (PostgreSQL + Redis)  
-- Arquitectura escalable y modular  
-- Experiencia en proyectos propios y marca personal  
+### 📊 SaaS Intelligence – Noctyr Analytics™
+
+Proyecto exploratorio de data science enfocado en **modelos de negocio SaaS**.
+
+**Objetivo:**
+Analizar cómo escalan productos digitales a través de datos.
+
+**Focus:**
+
+* Modelos de pricing
+* Patrones de crecimiento
+* Posicionamiento de producto
+
+**Stack:**
+
+* Python (Pandas, Jupyter, PyTorch)
+
+
+---
+
+## 🧠 Habilidades Técnicas
+
+* Fullstack: Django + React 
+* Diseño e integración de APIs
+* PostgreSQL 
+* Arquitectura modular y escalable
+* Desarrollo end-to-end
+* Data analysis aplicado a productos
 
 ---
 
