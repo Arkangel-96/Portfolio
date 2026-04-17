@@ -3,6 +3,7 @@
 # NODE / TOOLING
 # ===============================
 node_modules/
+venv
 
 # package-lock.json  <-- opcional, se puede subir
 # postcss y tailwind configs son necesarios

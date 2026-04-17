@@ -20,7 +20,7 @@ export default function Hero() {
           <div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight">
               Hola, soy{" "}
-              <span className="bg-gradient-to-br from-green-500 via-violet-600 via-slate-900 to-orange-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-br from-green-500 via-violet-600 to-orange-500 bg-clip-text text-transparent">
                 Matías
               </span>.
             </h1>
