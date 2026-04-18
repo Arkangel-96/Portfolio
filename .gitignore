@@ -19,6 +19,10 @@ dist/
 build/
 .wrangler/
 .dev.vars
+.env
+__pycache__/
+db.sqlite3
+media/
 
 # ===============================
 # OS / EDITOR
