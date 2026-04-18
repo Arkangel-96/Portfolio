@@ -1,13 +1,13 @@
 
 
 import { useEffect, useState } from "react";
-const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = "https://portfolio-qip1.onrender.com";
 
 export default function Projects() {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-      fetch("http://127.0.0.1:8000/api/projects/")
+      fetch(`${BASE_URL}/api/projects/`)
         .then((res) => res.json())
         .then((data) => setProjects(data))
         .catch((err) => console.error(err));
