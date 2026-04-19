@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Pixel Hero Survival",
     "description": "Fast-paced 2D survival roguelike focused on responsiveness.",
-    "image": "src/assets/cover_image.jpg",
+    "image": "/img/cover_image.jpg",
     
     "keyFeatures": [
     "Real-time combat and damage system",
@@ -23,7 +23,7 @@
     "id": 2,
     "title": "2D Gameplay System Demo (JavaScript)",
     "description": "A small experimental project focused on building core gameplay systems from scratch.",
-    "image": "src/assets/abyssal_maker.png",
+    "image": "/img/abyssal_maker.png",
 
     "keyFeatures": [
     "Entity-based structure",
@@ -43,7 +43,7 @@
     "id": 3,
     "title": "Noctyr Analytics",
     "description": "Exploratory project focused on analyzing SaaS business models using data science techniques.",
-    "image": "src/assets/analytics.png",
+    "image": "/img/analytics.png",
     "keyFeatures": [
     "Pricing models",
     "Growth patterns",
