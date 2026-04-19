@@ -6,7 +6,7 @@ export default function Projects() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch("/projects.json")
+    fetch("/data/projects.json")
       .then((res) => res.json())
       .then((data) => setProjects(data))
       .catch((err) => console.error(err));
