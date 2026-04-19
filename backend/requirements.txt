@@ -1,5 +1,6 @@
 asgiref==3.11.1
 Django==6.0.4
+django-jazzmin==3.0.0
 django-cors-headers==4.9.0
 djangorestframework==3.17.1
 gunicorn==25.3.0

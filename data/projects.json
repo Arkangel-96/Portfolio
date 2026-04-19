@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Pixel Hero Survival",
+    "description": "Fast-paced 2D survival roguelike focused on responsiveness.",
+    "image": "src/assets/cover_image.jpg",
+    
+    "keyFeatures": [
+    "Real-time combat and damage system",
+    "Enemy behavior and wave spawning",
+    "Simple but effective player feedback (health, hits, death)"
+    ],
+
+    "technologies": [
+      "Godot",
+      "GDScript (Python)"
+    ],
+
+    "link": "https://arkangel-96.itch.io/pixel-hero-survival"
+  },
+
+  {
+    "id": 2,
+    "title": "2D Gameplay System Demo (JavaScript)",
+    "description": "A small experimental project focused on building core gameplay systems from scratch.",
+    "image": "src/assets/abyssal_maker.png",
+
+    "keyFeatures": [
+    "Entity-based structure",
+    "Combat and damage handling",
+    "Animation and update loop logic"
+    ],
+
+    "technologies": [
+      "HTML / CSS",
+      "JavaScript (Vanilla)"
+    ],
+
+    "link": "/2D_System_Demo/demo.html"
+  },
+
+  {
+    "id": 3,
+    "title": "Noctyr Analytics",
+    "description": "Exploratory project focused on analyzing SaaS business models using data science techniques.",
+    "image": "src/assets/analytics.png",
+    "keyFeatures": [
+    "Pricing models",
+    "Growth patterns",
+    "Product positioning"
+    ],
+
+    "technologies": [
+      "Python",
+      "Pandas",
+      "Plotly"
+    ],
+
+    "link": "https://trends.google.es/trends/explore?q=%2Fm%2F06_4c_&hl=es"
+  }
+  
+]
