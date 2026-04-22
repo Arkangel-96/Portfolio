@@ -26,10 +26,10 @@ export default function Hero() {
             </h1>
             <br />
             <p className="mt-4 max-w-2xl text-lg text-white/80">
-              <strong>Fullstack Python Developer | Product Developer</strong>
+              <strong>Fullstack JavaScript Developer | Product-Focused</strong>
               <br /><br />
-              Creo experiencias interactivas y videojuegos donde diseño, UX y lógica trabajan juntos.
-              Me enfoco en cómo se sienten y se usan los productos, no solo en que funcionen.
+              Creo experiencias interactivas y productos donde diseño, UX y lógica trabajan en conjunto. 
+              Me enfoco en construir sistemas que no solo funcionen, sino que se sientan bien al usarse.
             </p>
             
             {/* ICONOS */}

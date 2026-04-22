@@ -1,62 +1,51 @@
 [
   {
     "id": 1,
-    "title": "Pixel Hero Survival",
-    "description": "Fast-paced 2D survival roguelike focused on responsiveness.",
-    "image": "/img/cover_image.jpg",
-    
-    "keyFeatures": [
-    "Real-time combat and damage system",
-    "Enemy behavior and wave spawning",
-    "Simple but effective player feedback (health, hits, death)"
-    ],
-
-    "technologies": [
-      "Godot",
-      "GDScript (Python)"
-    ],
-
-    "link": "https://arkangel-96.itch.io/pixel-hero-survival"
-  },
-
-  {
-    "id": 2,
-    "title": "2D Gameplay System Demo (JavaScript)",
-    "description": "A small experimental project focused on building core gameplay systems from scratch.",
+    "title": "Abyssal Maker™ — Gameplay Runtime (JS)",
+    "description": "Experimental web-based gameplay runtime focused on modular, system-driven architecture. Core systems implemented from scratch.",
     "image": "/img/abyssal_maker.png",
-
     "keyFeatures": [
-    "Entity-based structure",
-    "Combat and damage handling",
-    "Animation and update loop logic"
+      "Entity system architecture",
+      "Combat and damage pipeline",
+      "Animation and game loop management"
     ],
-
     "technologies": [
       "HTML / CSS",
       "JavaScript (Vanilla)"
     ],
-
     "link": "/2D_System_Demo/demo.html"
   },
-
+  {
+    "id": 2,
+    "title": "Pixel Hero Survival",
+    "description": "Fast-paced 2D survival roguelike focused on responsiveness and real-time gameplay feedback.",
+    "image": "/img/cover_image.jpg",
+    "keyFeatures": [
+      "Real-time combat and damage system",
+      "Enemy behavior and wave spawning logic",
+      "Player feedback systems (health, hit response, death)"
+    ],
+    "technologies": [
+      "Godot",
+      "GDScript (Python)"
+    ],
+    "link": "https://arkangel-96.itch.io/pixel-hero-survival"
+  },
   {
     "id": 3,
-    "title": "Noctyr Analytics",
-    "description": "Exploratory project focused on analyzing SaaS business models using data science techniques.",
+    "title": "Noctyr Analytics™",
+    "description": "Exploratory analysis of SaaS business models focused on product positioning, growth dynamics and data-driven insights.",
     "image": "/img/analytics.png",
     "keyFeatures": [
-    "Pricing models",
-    "Growth patterns",
-    "Product positioning"
+      "Data exploration and visualization",
+      "Trend analysis using real-world datasets",
+      "Insights on pricing and product positioning"
     ],
-
     "technologies": [
       "Python",
       "Pandas",
       "Plotly"
     ],
-
     "link": "https://trends.google.es/trends/explore?q=%2Fm%2F06_4c_&hl=es"
   }
-  
 ]

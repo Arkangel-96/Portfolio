@@ -4,6 +4,7 @@ const techs = [
   { name: "HTML/CSS/JS", link: "https://developer.mozilla.org/" },
   { name: "Tailwind", link: "https://tailwindcss.com/" },
   { name: "React", link: "https://react.dev/" },
+  { name: "Node.js", link: "https://nodejs.org/es" },
   { name: "Python", link: "https://www.python.org/" },
   { name: "Godot", link: "https://godotengine.org/es/" },
   { name: "Cloudflare", link: "https://www.cloudflare.com/" },
