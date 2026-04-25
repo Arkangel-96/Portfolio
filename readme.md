@@ -10,7 +10,7 @@ Ecosistema personal donde desarrollo y conecto **aplicaciones web, juegos online
 
 ## 🌐 Web Principal
 
-**Stack:** Django + React
+**Stack:** React + Cloudflare Workers (Node.js)
 
 * Sistema de autenticación (registro/login)
 * Dashboard dinámico y noticias
@@ -21,6 +21,26 @@ Ecosistema personal donde desarrollo y conecto **aplicaciones web, juegos online
 ---
 
 ## 🎮 Proyectos Destacados
+
+
+### ⚙️ Abyssal Maker™ — Gameplay Runtime (JS)
+
+Proyecto experimental centrado en construir **sistemas de gameplay desde cero**.
+
+**Incluye:**
+
+* Arquitectura basada en entidades
+* Sistema de combate y daño
+* Loop de actualización y animaciones
+* Lógica desacoplada y modular
+
+**Stack:**
+
+* HTML / CSS
+* JavaScript
+
+
+---
 
 ### 🕹️ Pixel Hero Survival
 
@@ -37,25 +57,6 @@ Juego 2D estilo roguelike enfocado en **supervivencia, combate en tiempo real y 
 
 * Godot
 * GDScript (Python-like)
-
-
----
-
-### ⚙️ 2D Systems Demo
-
-Proyecto experimental centrado en construir **sistemas de gameplay desde cero**.
-
-**Incluye:**
-
-* Arquitectura basada en entidades
-* Sistema de combate y daño
-* Loop de actualización y animaciones
-* Lógica desacoplada y modular
-
-**Stack:**
-
-* HTML / CSS
-* JavaScript
 
 
 ---
@@ -82,7 +83,7 @@ Analizar cómo escalan productos digitales a través de datos.
 
 ## 🧠 Habilidades Técnicas
 
-* Fullstack: Django + React 
+* Fullstack: React + Node.js
 * Diseño e integración de APIs
 * PostgreSQL 
 * Arquitectura modular y escalable
