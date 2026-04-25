@@ -1,5 +1,5 @@
 
-import yoImg from "../assets/yo.png";
+import yoImg from "../assets/yo.jpeg";
 
 export default function Hero() {
   return (
