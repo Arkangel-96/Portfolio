@@ -9,7 +9,7 @@ extends CanvasLayer
 func _process(_delta: float) -> void:
 	
 	
-	%Gold.text =  str(world.gold)
+	%Gold_Label.text =  str(world.gold)
 
 
 	

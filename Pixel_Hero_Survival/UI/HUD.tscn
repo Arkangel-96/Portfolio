@@ -2,12 +2,11 @@
 
 [ext_resource type="Script" uid="uid://eyakmw30gmhj" path="res://UI/hud.gd" id="1_md4fy"]
 [ext_resource type="Texture2D" uid="uid://dmtjglhqqps72" path="res://assets/UI/background_panel.png" id="2_am7sw"]
-[ext_resource type="Texture2D" uid="uid://dw1tcyttx2uea" path="res://assets/UI/STAT.png" id="3_rbci0"]
 [ext_resource type="Texture2D" uid="uid://df67x5631gfvc" path="res://assets/UI/HP.png" id="4_am7sw"]
 [ext_resource type="Texture2D" uid="uid://bdjej3nqjvs8" path="res://assets/UI/ATK.png" id="5_ixkb2"]
 [ext_resource type="Texture2D" uid="uid://pft5xgvhhnpj" path="res://assets/UI/GOLD.png" id="6_mms7u"]
 [ext_resource type="Texture2D" uid="uid://did6xd1xk7hxi" path="res://assets/UI/EXP.png" id="7_281ki"]
-[ext_resource type="Texture2D" uid="uid://boxcs7cjkbbrn" path="res://assets/UI/people.png" id="8_281ki"]
+[ext_resource type="Texture2D" uid="uid://bhd8fvld5tiyi" path="res://assets/UI/enemies.png" id="8_7i7fj"]
 [ext_resource type="Texture2D" uid="uid://gwqwluu1oosj" path="res://assets/UI/WAVE.png" id="8_w37wn"]
 [ext_resource type="Texture2D" uid="uid://bjmd1s2hs3v8s" path="res://art/UI/Pointers/02.png" id="9_rbci0"]
 
@@ -21,22 +20,17 @@ script = ExtResource("1_md4fy")
 
 [node name="Panel" type="Panel" parent="." unique_id=70529640]
 offset_left = 270.0
-offset_top = -107.00004
+offset_top = -111.99993
 offset_right = 1358.1392
-offset_bottom = 48.430016
+offset_bottom = 48.22724
 scale = Vector2(0.642381, 1.04227)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_ixkb2")
 
-[node name="Stat2" type="Sprite2D" parent="." unique_id=31191500]
-position = Vector2(332, -60)
-scale = Vector2(0.1325763, 0.11762679)
-texture = ExtResource("3_rbci0")
-
-[node name="HP" type="Sprite2D" parent="Stat2" unique_id=704063407]
-position = Vector2(-5.7132025, -0.8887248)
-scale = Vector2(0.87677836, 0.8669009)
+[node name="HP" type="Sprite2D" parent="." unique_id=704063407]
+position = Vector2(329, -60)
+scale = Vector2(0.16897443, 0.14453118)
 texture = ExtResource("4_am7sw")
 
 [node name="HP_Label" type="Label" parent="." unique_id=1879419446]
@@ -45,63 +39,52 @@ offset_top = -78.99997
 offset_right = 542.0
 offset_bottom = -19.99997
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.8226427, 0.8226426, 0.8226428, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
 text = "HP: 100/100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Stat" type="Sprite2D" parent="." unique_id=1811168671]
-position = Vector2(593, -59.99997)
-scale = Vector2(0.11890432, 0.10786112)
-texture = ExtResource("3_rbci0")
-
-[node name="ATK" type="Sprite2D" parent="Stat" unique_id=1063827838]
-position = Vector2(-7.6293945e-06, 10.130558)
-scale = Vector2(0.764213, 0.7571686)
+[node name="ATK" type="Sprite2D" parent="." unique_id=1063827838]
+position = Vector2(584.00006, -58)
+scale = Vector2(0.13527787, 0.119140625)
 texture = ExtResource("5_ixkb2")
 
 [node name="ATK_Label" type="Label" parent="." unique_id=1189947217]
-offset_left = 622.0
-offset_top = -82.99997
-offset_right = 741.0
-offset_bottom = -22.999966
+offset_left = 613.0
+offset_top = -80.99997
+offset_right = 732.0
+offset_bottom = -20.999966
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.8226427, 0.8226426, 0.8226428, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
 text = "ATK: 100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Stat1" type="Sprite2D" parent="." unique_id=836305820]
-position = Vector2(594.1698, 5.2854505)
-scale = Vector2(0.12043033, 0.10435375)
-texture = ExtResource("3_rbci0")
-
-[node name="Gold2" type="Sprite2D" parent="Stat1" unique_id=637939831]
-position = Vector2(-4.5239253, -1.5375117)
-scale = Vector2(0.7906221, 0.74397606)
+[node name="GOLD" type="Sprite2D" parent="." unique_id=637939831]
+position = Vector2(598, 3.000022)
+scale = Vector2(0.15112299, 0.12280264)
 texture = ExtResource("6_mms7u")
 
-[node name="Gold" type="Label" parent="." unique_id=732464597]
+[node name="Gold_Label" type="Label" parent="." unique_id=732464597]
 unique_name_in_owner = true
 offset_left = 622.0
 offset_top = -18.0
 offset_right = 702.0
 offset_bottom = 41.00029
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.8226427, 0.8226426, 0.8226428, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
 text = "0"
 horizontal_alignment = 2
 
-[node name="Stat3" type="Sprite2D" parent="." unique_id=1470389356]
-position = Vector2(332.4273, 9.423198)
-scale = Vector2(0.13114338, 0.11944057)
-texture = ExtResource("3_rbci0")
-
-[node name="SCORE" type="Sprite2D" parent="Stat3" unique_id=979849099]
-position = Vector2(-4.384569, 5.7537756)
-scale = Vector2(0.8151844, 0.8463378)
+[node name="SCORE" type="Sprite2D" parent="." unique_id=979849099]
+position = Vector2(323.99997, 6.9999857)
+scale = Vector2(0.16702273, 0.14060293)
 texture = ExtResource("7_281ki")
 
 [node name="Score_Label" type="Label" parent="." unique_id=574631357]
@@ -110,43 +93,35 @@ offset_top = -21.0
 offset_right = 549.0
 offset_bottom = 37.999992
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.8226427, 0.8226426, 0.8226428, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
 text = "SCORE : 1000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Stat4" type="Sprite2D" parent="." unique_id=810619681]
-position = Vector2(781, -45.999973)
-scale = Vector2(0.11807905, 0.10980747)
-texture = ExtResource("3_rbci0")
-
-[node name="wave" type="Sprite2D" parent="Stat4" unique_id=1006716751]
-position = Vector2(-1.335144e-05, -0.00049221516)
-scale = Vector2(0.8435826, 0.8118923)
+[node name="WAVE" type="Sprite2D" parent="." unique_id=1006716751]
+position = Vector2(776, -43.000004)
+scale = Vector2(0.15380847, 0.13068642)
 texture = ExtResource("8_w37wn")
 
 [node name="wave_Label" type="Label" parent="." unique_id=1364945701]
-offset_left = 788.6145
-offset_top = -76.0
-offset_right = 948.6145
-offset_bottom = 2.0
+offset_left = 799.0
+offset_top = -84.0
+offset_right = 959.0
+offset_bottom = -6.0
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.8226427, 0.8226426, 0.8226428, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
 text = "Wave : 10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Stat5" type="Sprite2D" parent="." unique_id=1620554021]
-position = Vector2(781, 16.00002)
-scale = Vector2(0.11124345, 0.1040283)
-texture = ExtResource("3_rbci0")
-
-[node name="enemies" type="Sprite2D" parent="Stat5" unique_id=1722440556]
-position = Vector2(-0.00025177002, -9.612968)
-scale = Vector2(1.6478549, 1.8460517)
-texture = ExtResource("8_281ki")
+[node name="enemies" type="Sprite2D" parent="." unique_id=1722440556]
+position = Vector2(771.00006, 13.000005)
+scale = Vector2(0.9611231, 0.9499196)
+texture = ExtResource("8_7i7fj")
 
 [node name="enemies_Label" type="Label" parent="." unique_id=376018222]
 offset_left = 785.0
@@ -154,7 +129,8 @@ offset_top = -21.0
 offset_right = 992.0
 offset_bottom = 56.999992
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.8226427, 0.8226426, 0.8226428, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
 text = "Enemies: 10"
 horizontal_alignment = 1
@@ -176,7 +152,8 @@ offset_top = -157.0
 offset_right = 378.0
 offset_bottom = -98.0
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.8226427, 0.8226426, 0.8226428, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
 text = "05 :"
 horizontal_alignment = 1
@@ -188,21 +165,24 @@ offset_top = -157.0
 offset_right = 421.00012
 offset_bottom = -98.0
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.8226427, 0.8226426, 0.8226428, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
 text = "58"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Wave_Cooldown" type="Label" parent="." unique_id=785012597]
-offset_left = 770.0
-offset_top = -118.0
-offset_right = 947.0
-offset_bottom = -68.0
+offset_left = 780.0
+offset_top = -117.0
+offset_right = 957.0
+offset_bottom = -67.0
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.8226427, 0.8226426, 0.8226428, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
+text = "next wave: 20s"
 horizontal_alignment = 1
 vertical_alignment = 1
 
