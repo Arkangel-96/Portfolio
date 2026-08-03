@@ -1,6 +1,28 @@
-[
+[ 
   {
     "id": 1,
+    "title": "Magic Academy",
+    "description": "A full-stack fantasy academy platform built with React, Tailwind CSS, and Django. The application includes secure authentication, backend API integration, and a cloud-deployed CRUD system, demonstrating modern frontend and backend development practices.",
+    "image": "/img/castle.jpeg",
+    "keyFeatures": [
+      "Responsive React interface with Tailwind CSS",
+      "Secure authentication with Django",
+      "REST API with full CRUD operations",
+      "Frontend deployed on Vercel and backend on Render"
+    ],
+    "technologies": [
+      "React",
+      "Tailwind CSS",
+      "Django",
+      "REST API",
+      "Render",
+      "Vercel",
+      "Figma"
+    ],
+    "link": "https://magic-academy-alpha.vercel.app/"
+  },
+  {
+    "id": 2,
     "title": "Sword & Knife",
     "description": "A 2D Web Action Game built entirely from scratch",
     "image": "/img/Sword_and_Knife.png",
@@ -18,7 +40,7 @@
     
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Pixel Hero Survival",
     "description": "Fast-paced 2D survival roguelike focused on responsive combat and real-time gameplay feedback",
     "image": "/img/Pixel_Hero_Survival.png",
@@ -29,25 +51,9 @@
     ],
     "technologies": [
       "Godot",
-      "GDScript (Python)"
+      "GDScript"
     ],
     "link": "https://noctyr-studio.itch.io/pixel-hero-survival"
-  },
-  {
-    "id": 3,
-    "title": "Magic Academy",
-    "description": "A fantasy academy web application developed from scratch with vanilla frontend technologies. The project showcases frontend fundamentals and will be expanded with a Python backend for dynamic content management.",
-    "image": "/img/castle.jpeg",
-    "keyFeatures": [
-      "Custom fantasy UI design",
-      "Responsive web experience",
-      "Interactive content powered by JavaScript",
-      "Future Python backend and database integration"
-    ],
-      "technologies": [
-      "HTML / CSS",
-      "JavaScript (Vanilla)"
-    ],
-    "link": "https://magic-academy-eight.vercel.app/"
   }
-]
+
+  ]

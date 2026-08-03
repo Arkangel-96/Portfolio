@@ -6,6 +6,7 @@ const techs = [
   { name: "React", link: "https://react.dev/" },
   { name: "TypeScript", link: "https://www.typescriptlang.org/" },
   { name: "Cloudflare", link: "https://www.cloudflare.com/" },
+  { name: "Vercel", link: "https://vercel.com/" },
   { name: "Python", link: "https://www.python.org/" },
   { name: "Godot", link: "https://godotengine.org/" },
   { name: "Unity", link: "https://unity.com/" },
