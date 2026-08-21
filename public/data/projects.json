@@ -54,6 +54,25 @@
       "GDScript"
     ],
     "link": "https://noctyr-studio.itch.io/pixel-hero-survival"
-  }
-
+  },
+  {
+    "id": 4,
+    "title": "Tic Tac Toe",
+    "description": "A classic Tic Tac Toe game built with Unity and C#, featuring turn-based gameplay, a Minimax-powered AI opponent with occasional mistakes, and complete win, defeat and draw detection.",
+    "image": "/img/Tic-tac-toe.png",
+    "keyFeatures": [
+      "Player vs AI gameplay",
+      "Minimax-based AI",
+      "Turn-based system",
+      "Dynamic 3x3 board generation",
+      "Win, defeat and draw detection",
+      "Game Over UI",
+      "Restart system"
+    ],
+    "technologies": [
+      "Unity",
+      "C#"
+    ],
+    "link": "https://noctyr-studio.itch.io/tic-tac-toe"
+}
   ]
