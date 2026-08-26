@@ -1,5 +1,5 @@
-
 import { useState } from "react";
+
 import logo from "../assets/logo.png";
 
 function Navbar({
@@ -7,13 +7,27 @@ function Navbar({
   setAuthMode,
   user,
   setUser,
+  setCurrentView,
 }) {
   const [open, setOpen] = useState(false);
 
   function handleLogout() {
-  localStorage.removeItem("token");
-  setUser(null);
-}
+    localStorage.removeItem("token");
+    setUser(null);
+    setCurrentView("home");
+  }
+
+  function handleSectionClick(sectionId) {
+    setCurrentView("home");
+    setOpen(false);
+
+    setTimeout(() => {
+      document.getElementById(sectionId)?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 0);
+  }
+
   return (
   <header className="relative">
     <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
@@ -30,11 +44,35 @@ function Navbar({
 
       {/* Menú desktop */}
       <ul className="hidden items-center gap-8 md:flex">
-        <li><a href="#Home">Home</a></li>
-        <li><a href="#Projects">Projects</a></li>
-        <li><a href="#Stack">Stack</a></li>
-        <li><a href="#Activity">Activity</a></li>
-        <li><a href="#Contact">Contact</a></li>
+        <li>
+        <button onClick={() => handleSectionClick("Home")}>
+          Home
+        </button>
+      </li>
+
+      <li>
+        <button onClick={() => handleSectionClick("Projects")}>
+          Projects
+        </button>
+      </li>
+
+      <li>
+        <button onClick={() => handleSectionClick("Stack")}>
+          Stack
+        </button>
+      </li>
+
+      <li>
+        <button onClick={() => handleSectionClick("Activity")}>
+          Activity
+        </button>
+      </li>
+
+      <li>
+        <button onClick={() => handleSectionClick("Contact")}>
+          Contact
+        </button>
+      </li>
       </ul>
 
       {/* Usuario desktop */}
@@ -44,6 +82,12 @@ function Navbar({
             <span className="hidden whitespace-nowrap text-green-400 lg:block">
               {user.email}
             </span>
+
+              <button
+                onClick={() => setCurrentView("profile")}
+                className="text-white/70 hover:text-white">
+                Profile
+              </button>
 
             <button
               onClick={handleLogout}
@@ -87,43 +131,44 @@ function Navbar({
       </button>
     </nav>
 
-    {/* Dropdown mobile */}
-    {open && (
-      <div
-        id="mobile-menu"
-        className="md:hidden border-y border-white/10 bg-black/95 px-6 py-5 backdrop-blur-md"
-      >
-        <ul className="flex flex-col items-center gap-5">
-          <li>
-            <a href="#Home" onClick={() => setOpen(false)}>
-              Home
-            </a>
-          </li>
+  {/* Dropdown mobile */}
+  {open && (
+    <div
+      id="mobile-menu"
+      className="md:hidden border-y border-white/10 bg-black/95 px-6 py-5 backdrop-blur-md"
+    >
+      <ul className="flex flex-col items-center gap-5">
+        <li>
+          <button onClick={() => handleSectionClick("Home")}>
+            Home
+          </button>
+        </li>
 
-          <li>
-            <a href="#Projects" onClick={() => setOpen(false)}>
-              Projects
-            </a>
-          </li>
+        <li>
+          <button onClick={() => handleSectionClick("Projects")}>
+            Projects
+          </button>
+        </li>
 
-          <li>
-            <a href="#Stack" onClick={() => setOpen(false)}>
-              Stack
-            </a>
-          </li>
+        <li>
+          <button onClick={() => handleSectionClick("Stack")}>
+            Stack
+          </button>
+        </li>
 
-          <li>
-            <a href="#Activity" onClick={() => setOpen(false)}>
-              Activity
-            </a>
-          </li>
+        <li>
+          <button onClick={() => handleSectionClick("Activity")}>
+            Activity
+          </button>
+        </li>
 
-          <li>
-            <a href="#Contact" onClick={() => setOpen(false)}>
-              Contact
-            </a>
-          </li>
-        </ul>
+        <li>
+          <button onClick={() => handleSectionClick("Contact")}>
+            Contact
+          </button>
+        </li>
+      </ul>
+
 
         <div className="mt-6 border-t border-white/10 pt-5">
           {user ? (
@@ -134,8 +179,20 @@ function Navbar({
 
               <button
                 onClick={() => {
+                  setCurrentView("profile");
+                  setOpen(false);
+                
+                }}
+                
+                className="text-white/70 hover:text-white">
+                Profile
+              </button>
+
+              <button
+                onClick={() => {
                   handleLogout();
                   setOpen(false);
+                  
                 }}
                 className="text-white/70 hover:text-red-400"
               >

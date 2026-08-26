@@ -9,6 +9,7 @@ import Github from "./components/Github";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Auth from "./components/Auth";
+import Profile from "./components/Profile";
 
 import { useEffect, useState } from "react";
 
@@ -20,6 +21,8 @@ function App() {
   const [authMode, setAuthMode] = useState("login");
   const [user, setUser] = useState(null);
 
+  const [currentView, setCurrentView] = useState("home");
+  
   const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -41,13 +44,14 @@ function App() {
       .catch(console.error);
   }, []);
   
-  return (
+    return (
     <>
       <Navbar
         user={user}
         setUser={setUser}
         setShowAuth={setShowAuth}
         setAuthMode={setAuthMode}
+        setCurrentView={setCurrentView}
       />
 
       {showAuth && (
@@ -57,12 +61,20 @@ function App() {
           setUser={setUser}
         />
       )}
-      <Hero/>
-      <Projects />
-      <Tech />
-      <Github/>
-      <Contact/>
-      <Footer/>
+
+      {currentView === "profile" ? (
+      <Profile user={user} />
+    ) : (
+      <>
+        <Hero />
+        <Projects />
+        <Tech />
+        <Github />
+        <Contact />
+      </>
+    )}
+
+      <Footer />
     </>
   );
 }
