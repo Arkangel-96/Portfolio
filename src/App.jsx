@@ -22,9 +22,12 @@ function App() {
   const [user, setUser] = useState(null);
 
   const [currentView, setCurrentView] = useState("home");
+  const [pendingSection, setPendingSection] = useState(null); 
   
   const API_URL = import.meta.env.VITE_API_URL;
 
+
+  // Verificar sesión
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -43,7 +46,34 @@ function App() {
       })
       .catch(console.error);
   }, []);
-  
+
+  // Navegación desde Profile hacia una sección
+
+useEffect(() => {
+  if (currentView !== "home" || !pendingSection) return;
+
+  const timer = setTimeout(() => {
+    const section = document.getElementById(pendingSection);
+
+    if (section) {
+      const offset = 55;
+
+      const position =
+        section.getBoundingClientRect().top +
+        window.scrollY -
+        offset;
+
+      window.scrollTo({
+        top: position,
+        behavior: "smooth",
+});
+    }
+
+    setPendingSection(null);
+  }, 50);
+
+  return () => clearTimeout(timer);
+}, [currentView, pendingSection]);
     return (
     <>
       <Navbar
@@ -52,6 +82,7 @@ function App() {
         setShowAuth={setShowAuth}
         setAuthMode={setAuthMode}
         setCurrentView={setCurrentView}
+        setPendingSection={setPendingSection}
       />
 
       {showAuth && (

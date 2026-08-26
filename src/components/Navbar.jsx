@@ -7,6 +7,7 @@ function Navbar({
   setAuthMode,
   user,
   setUser,
+  setPendingSection,
   setCurrentView,
 }) {
   const [open, setOpen] = useState(false);
@@ -14,18 +15,14 @@ function Navbar({
   function handleLogout() {
     localStorage.removeItem("token");
     setUser(null);
+    setPendingSection(null);
     setCurrentView("home");
   }
 
   function handleSectionClick(sectionId) {
+    setPendingSection(sectionId);
     setCurrentView("home");
     setOpen(false);
-
-    setTimeout(() => {
-      document.getElementById(sectionId)?.scrollIntoView({
-        behavior: "smooth",
-      });
-    }, 0);
   }
 
   return (
@@ -84,8 +81,12 @@ function Navbar({
             </span>
 
               <button
-                onClick={() => setCurrentView("profile")}
-                className="text-white/70 hover:text-white">
+                onClick={() => {
+                  setPendingSection(null);
+                  setCurrentView("profile");
+                }}
+                className="text-white/70 hover:text-white"
+              >
                 Profile
               </button>
 
@@ -179,12 +180,12 @@ function Navbar({
 
               <button
                 onClick={() => {
+                  setPendingSection(null);
                   setCurrentView("profile");
                   setOpen(false);
-                
                 }}
-                
-                className="text-white/70 hover:text-white">
+                className="text-white/70 hover:text-white"
+              >
                 Profile
               </button>
 
