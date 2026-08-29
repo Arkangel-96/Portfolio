@@ -413,9 +413,12 @@ export default {
 
       try {
         const token = await createJWT(
-          { email: body.email },
-          env.JWT_SECRET
-        )
+        {
+          user_id: user.id,
+          email: user.email,
+        },
+        env.JWT_SECRET
+      )
 
         return new Response(
           JSON.stringify({
@@ -480,7 +483,9 @@ export default {
       }
 
       return new Response(
-        JSON.stringify({         email: payload.email,
+        JSON.stringify({
+          user_id: payload.user_id,
+          email: payload.email,
         }),
         {
           headers: {
