@@ -1,22 +1,26 @@
 
-import db from "../db.js";
+import sql from "../db.js";
 
 const CACHE_TIME = 7 * 24 * 60 * 60 * 1000; // 7 días
 
-
 export async function getSteamGame(appid) {
-  const cached = db.prepare(`
+  const cachedRows = await sql`
     SELECT appid, name, image, cached_at
     FROM steam_games
-    WHERE appid = ?
-  `).get(appid);
+    WHERE appid = ${appid}
+  `;
+
+  const cached = cachedRows[0];
 
   const now = Date.now();
 
   // Usar caché si todavía es válida
-  if (cached && now - cached.cached_at < CACHE_TIME) {
+  if (
+    cached &&
+    now - Number(cached.cached_at) < CACHE_TIME
+  ) {
     return {
-      appid: cached.appid,
+      appid: Number(cached.appid),
       name: cached.name,
       image: cached.image,
     };
@@ -39,7 +43,9 @@ export async function getSteamGame(appid) {
     clearTimeout(timeout);
 
     if (!response.ok) {
-      throw new Error(`Steam API error: ${response.status}`);
+      throw new Error(
+        `Steam API error: ${response.status}`
+      );
     }
 
     const data = await response.json();
@@ -56,22 +62,23 @@ export async function getSteamGame(appid) {
       image: game.data.header_image || null,
     };
 
-    // Guardar/actualizar caché
-    db.prepare(`
+    // Guardar / actualizar caché
+    await sql`
       INSERT INTO steam_games
-      (appid, name, image, cached_at)
-      VALUES (?, ?, ?, ?)
-      ON CONFLICT(appid)
+        (appid, name, image, cached_at)
+      VALUES
+        (
+          ${result.appid},
+          ${result.name},
+          ${result.image},
+          ${now}
+        )
+      ON CONFLICT (appid)
       DO UPDATE SET
-        name = excluded.name,
-        image = excluded.image,
-        cached_at = excluded.cached_at
-    `).run(
-      result.appid,
-      result.name,
-      result.image,
-      now
-    );
+        name = EXCLUDED.name,
+        image = EXCLUDED.image,
+        cached_at = EXCLUDED.cached_at
+    `;
 
     return result;
 
@@ -85,7 +92,7 @@ export async function getSteamGame(appid) {
     // usamos igualmente esa información.
     if (cached) {
       return {
-        appid: cached.appid,
+        appid: Number(cached.appid),
         name: cached.name,
         image: cached.image,
       };

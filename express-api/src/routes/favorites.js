@@ -1,6 +1,6 @@
 
 import express from "express";
-import db from "../db.js";
+import sql from "../db.js";
 import { authenticate } from "../middleware/auth.js";
 import { getSteamGame } from "../services/steam.js";
 
@@ -12,12 +12,12 @@ router.get("/", authenticate, async (req, res) => {
   try {
     const userId = req.user.user_id;
 
-    const favorites = db.prepare(`
+    const favorites = await sql`
       SELECT id, appid, position
       FROM favorite_games
-      WHERE user_id = ?
+      WHERE user_id = ${userId}
       ORDER BY position ASC
-    `).all(userId);
+    `;
 
     const games = await Promise.all(
       favorites.map(async (favorite) => {
@@ -46,7 +46,7 @@ router.get("/", authenticate, async (req, res) => {
 
 
 // POST /api/favorites
-router.post("/", authenticate, (req, res) => {
+router.post("/", authenticate, async (req, res) => {
   try {
     const userId = req.user.user_id;
     const { appid } = req.body;
@@ -57,49 +57,50 @@ router.post("/", authenticate, (req, res) => {
       });
     }
 
-    const count = db.prepare(`
+    const [countResult] = await sql`
       SELECT COUNT(*) AS count
       FROM favorite_games
-      WHERE user_id = ?
-    `).get(userId);
+      WHERE user_id = ${userId}
+    `;
 
-    if (count.count >= 12) {
+    const count = Number(countResult.count);
+
+    if (count >= 12) {
       return res.status(400).json({
         error: "Maximum of 12 favorite games",
       });
     }
 
-    const lastPosition = db.prepare(`
+    const [positionResult] = await sql`
       SELECT MAX(position) AS position
       FROM favorite_games
-      WHERE user_id = ?
-    `).get(userId);
+      WHERE user_id = ${userId}
+    `;
 
     const nextPosition =
-      (lastPosition.position ?? 0) + 1;
+      Number(positionResult.position ?? 0) + 1;
 
-    const result = db.prepare(`
+    const [result] = await sql`
       INSERT INTO favorite_games
-      (user_id, appid, position)
-      VALUES (?, ?, ?)
-    `).run(
-      userId,
-      appid,
-      nextPosition
-    );
+        (user_id, appid, position)
+      VALUES
+        (${userId}, ${appid}, ${nextPosition})
+      RETURNING id, user_id, appid, position
+    `;
 
     res.status(201).json({
       success: true,
-      id: result.lastInsertRowid,
-      user_id: userId,
-      appid,
-      position: nextPosition,
+      id: result.id,
+      user_id: result.user_id,
+      appid: result.appid,
+      position: result.position,
     });
 
   } catch (error) {
     console.error("POST FAVORITES ERROR:", error);
 
-    if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
+    // PostgreSQL unique violation
+    if (error.code === "23505") {
       return res.status(409).json({
         error: "Game already in favorites",
       });
@@ -111,8 +112,9 @@ router.post("/", authenticate, (req, res) => {
   }
 });
 
+
 // DELETE /api/favorites/:appid
-router.delete("/:appid", authenticate, (req, res) => {
+router.delete("/:appid", authenticate, async (req, res) => {
   try {
     const userId = req.user.user_id;
     const appid = Number(req.params.appid);
@@ -123,22 +125,18 @@ router.delete("/:appid", authenticate, (req, res) => {
       });
     }
 
-    const favorite = db.prepare(`
-      SELECT id, position
-      FROM favorite_games
-      WHERE user_id = ? AND appid = ?
-    `).get(userId, appid);
+    const result = await sql`
+      DELETE FROM favorite_games
+      WHERE user_id = ${userId}
+        AND appid = ${appid}
+      RETURNING id, appid
+    `;
 
-    if (!favorite) {
+    if (result.length === 0) {
       return res.status(404).json({
         error: "Game not found in favorites",
       });
     }
-
-    db.prepare(`
-      DELETE FROM favorite_games
-      WHERE user_id = ? AND appid = ?
-    `).run(userId, appid);
 
     res.json({
       success: true,
@@ -154,8 +152,9 @@ router.delete("/:appid", authenticate, (req, res) => {
   }
 });
 
+
 // PATCH /api/favorites/reorder
-router.patch("/reorder", authenticate, (req, res) => {
+router.patch("/reorder", authenticate, async (req, res) => {
   try {
     const userId = req.user.user_id;
     const { games } = req.body;
@@ -172,18 +171,15 @@ router.patch("/reorder", authenticate, (req, res) => {
       });
     }
 
-    // Obtener favoritos reales del usuario
-    const currentGames = db.prepare(`
+    const currentGames = await sql`
       SELECT id, appid
       FROM favorite_games
-      WHERE user_id = ?
+      WHERE user_id = ${userId}
       ORDER BY position ASC
-    `).all(userId);
+    `;
 
-    // Comprobar que la lista enviada contiene exactamente
-    // los mismos juegos que tiene actualmente el usuario.
     const currentAppIds = currentGames
-      .map((game) => game.appid)
+      .map((game) => Number(game.appid))
       .sort((a, b) => a - b);
 
     const newAppIds = games
@@ -201,40 +197,36 @@ router.patch("/reorder", authenticate, (req, res) => {
       });
     }
 
-    const reorder = db.transaction(() => {
-      // Primero usamos posiciones temporales negativas.
-      // Evita chocar con UNIQUE(user_id, position).
-      const setTemporaryPosition = db.prepare(`
-        UPDATE favorite_games
-        SET position = ?
-        WHERE user_id = ? AND appid = ?
-      `);
+    // Transacción PostgreSQL
+    await sql.begin(async (tx) => {
 
-      games.forEach((game, index) => {
-        setTemporaryPosition.run(
-          -(index + 1),
-          userId,
-          Number(game.appid)
-        );
-      });
+      // Posiciones temporales para evitar conflictos
+      // con UNIQUE(user_id, position)
+      for (let index = 0; index < games.length; index++) {
+        const appid = Number(games[index].appid);
+        const temporaryPosition = -(index + 1);
 
-      // Ahora asignamos las posiciones definitivas.
-      const setFinalPosition = db.prepare(`
-        UPDATE favorite_games
-        SET position = ?
-        WHERE user_id = ? AND appid = ?
-      `);
+        await tx`
+          UPDATE favorite_games
+          SET position = ${temporaryPosition}
+          WHERE user_id = ${userId}
+            AND appid = ${appid}
+        `;
+      }
 
-      games.forEach((game, index) => {
-        setFinalPosition.run(
-          index + 1,
-          userId,
-          Number(game.appid)
-        );
-      });
+      // Posiciones definitivas
+      for (let index = 0; index < games.length; index++) {
+        const appid = Number(games[index].appid);
+        const finalPosition = index + 1;
+
+        await tx`
+          UPDATE favorite_games
+          SET position = ${finalPosition}
+          WHERE user_id = ${userId}
+            AND appid = ${appid}
+        `;
+      }
     });
-
-    reorder();
 
     res.json({
       success: true,
@@ -252,5 +244,6 @@ router.patch("/reorder", authenticate, (req, res) => {
     });
   }
 });
+
 
 export default router;
