@@ -335,6 +335,8 @@ export default {
 
       const verifyData = await verifyResponse.json() as {
         success: boolean
+        hostname?: string
+        "error-codes"?: string[]
       }
 
       console.log("Turnstile response:", verifyData);
