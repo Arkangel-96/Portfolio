@@ -33,6 +33,6 @@ app.get("/api/me", authenticate, (req, res) => {
 app.use("/api/favorites", favoritesRouter);
 app.use("/api/steam", steamRouter);
 
-app.listen(PORT, () => {
-  console.log(`Express running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Express running on port ${PORT}`);
 });

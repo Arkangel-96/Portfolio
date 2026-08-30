@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { Trash2, GripVertical } from "lucide-react";
 
-const API_URL = "http://localhost:3000";
+
+const API_URL = import.meta.env.VITE_GAMES_API_URL;
 
 function Profile({ user }) {
   const [games, setGames] = useState([]);
@@ -21,45 +22,56 @@ function Profile({ user }) {
   // Juego que estamos arrastrando
   const [draggedGame, setDraggedGame] = useState(null);
 
+  const [wakingBackend, setWakingBackend] = useState(false);
+
   // --------------------------------------------------
   // GET FAVORITES
   // --------------------------------------------------
 
-  async function loadFavorites() {
-    const token = localStorage.getItem("token");
+ async function loadFavorites() {
+  const token = localStorage.getItem("token");
 
-    if (!token) {
-      setLoading(false);
-      return;
-    }
-
-    try {
-      setLoading(true);
-      setError(null);
-
-      const response = await fetch(
-        `${API_URL}/api/favorites`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to load favorite games");
-      }
-
-      const data = await response.json();
-
-      setGames(data);
-    } catch (error) {
-      console.error("PROFILE ERROR:", error);
-      setError("Could not load favorite games.");
-    } finally {
-      setLoading(false);
-    }
+  if (!token) {
+    setLoading(false);
+    return;
   }
+
+  let wakeTimer;
+
+  try {
+    setLoading(true);
+    setError(null);
+
+    wakeTimer = setTimeout(() => {
+      setWakingBackend(true);
+    }, 3000);
+
+    const response = await fetch(
+      `${API_URL}/api/favorites`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to load favorite games");
+    }
+
+    const data = await response.json();
+
+    setGames(data);
+
+  } catch (error) {
+    console.error("PROFILE ERROR:", error);
+    setError("Could not load favorite games.");
+  } finally {
+    clearTimeout(wakeTimer);
+    setWakingBackend(false);
+    setLoading(false);
+  }
+}
 
   useEffect(() => {
     loadFavorites();
@@ -322,10 +334,18 @@ function Profile({ user }) {
           </div>
 
           {loading && (
+          <div className="space-y-2">
             <p className="text-gray-400">
               Loading favorite games...
             </p>
-          )}
+
+            {wakingBackend && (
+              <p className="text-sm text-yellow-400/70">
+                Connecting to API... This may take a moment.
+              </p>
+            )}
+          </div>
+        )}
 
           {error && (
             <p className="text-red-400">
