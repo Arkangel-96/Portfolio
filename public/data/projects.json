@@ -1,6 +1,30 @@
+
 [ 
-  {
+    {
     "id": 1,
+    "title": "Steam Favorites",
+    "description": "A full-stack application that allows users to manage their favorite Steam games through a personalized profile.",
+    "image": "/img/Steam-favorites.png",
+    "keyFeatures": [
+      "User authentication",
+      "Personalized Steam game favorites",
+      "CRUD operations for favorite games",
+      "Up to 12 favorite games per user",
+      "REST API built with Node.js and Express",
+      "Steam API integration"
+    ],
+    "technologies": [
+      "Node.js",
+      "Express.js",
+      "React",
+      "Steam API",
+      "REST API"
+      
+    ],
+    "link": "profile"
+  },
+  {
+    "id": 2,
     "title": "Magic Academy",
     "description": "A full-stack fantasy academy platform built with React, Tailwind CSS, and Django. The application includes secure authentication, backend API integration, and a cloud-deployed CRUD system, demonstrating modern frontend and backend development practices.",
     "image": "/img/castle.jpeg",
@@ -22,7 +46,7 @@
     "link": "https://magic-academy-alpha.vercel.app/"
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Sword & Knife",
     "description": "A 2D Web Action Game built entirely from scratch",
     "image": "/img/Sword_and_Knife.png",
@@ -37,10 +61,9 @@
       "JavaScript (Vanilla)"
     ],
     "link": "https://noctyr-studio.itch.io/sword-knife-2d-web-action-game"
-    
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "Pixel Hero Survival",
     "description": "Fast-paced 2D survival roguelike focused on responsive combat and real-time gameplay feedback",
     "image": "/img/Pixel_Hero_Survival.png",
@@ -56,7 +79,7 @@
     "link": "https://noctyr-studio.itch.io/pixel-hero-survival"
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "Tic Tac Toe",
     "description": "A classic Tic Tac Toe game built with Unity and C#, featuring turn-based gameplay, a Minimax-powered AI opponent with occasional mistakes, and complete win, defeat and draw detection.",
     "image": "/img/Tic-tac-toe.png",
@@ -74,5 +97,6 @@
       "C#"
     ],
     "link": "https://noctyr-studio.itch.io/tic-tac-toe"
-}
-  ]
+  }
+
+]

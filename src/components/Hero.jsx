@@ -30,7 +30,7 @@ export default function Hero() {
         </h1>
 
        <p className="mt-4 text-xl font-bold tracking-wide text-white/60 sm:text-2xl md:text-2xl">
-          TypeScript · React · Unity · Godot · Python <br /> REST APIs · Serverless 
+          React · Express · Django · Godot · Unity <br /> REST APIs · Serverless 
         </p>
             {/* ICONOS */}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-8">

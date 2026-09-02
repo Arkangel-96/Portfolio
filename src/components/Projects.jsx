@@ -1,8 +1,13 @@
 
-
 import { useEffect, useState } from "react";
 
-export default function Projects() {
+export default function Projects({
+  user,
+  setCurrentView,
+  setShowAuth,
+  setAuthMode,
+  setPendingView,
+}) {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
@@ -12,12 +17,31 @@ export default function Projects() {
       .catch((err) => console.error(err));
   }, []);
 
+  const handleProjectClick = (project) => {
+  if (project.link === "profile") {
+    if (!user) {
+      setPendingView("profile");
+      setAuthMode("login");
+      setShowAuth(true);
+      return;
+    }
+
+    setCurrentView("profile");
+    return;
+  }
+
+  window.open(project.link, "_blank");
+};
+
   return (
-    <section id="Projects" className=" scroll-mt-3 border-y border-white/5 bg-neutral-950">
+    <section
+      id="Projects"
+      className="scroll-mt-3 border-y border-white/5 bg-neutral-950"
+    >
       <div className="mx-auto max-w-6xl px-4 py-14">
 
         <div className="flex items-end justify-between gap-4">
-          <h2 className="text-2xl font-bold">Proyects</h2>
+          <h2 className="text-2xl font-bold">Projects</h2>
         </div>
 
         <div className="mt-10 space-y-16">
@@ -39,21 +63,33 @@ export default function Projects() {
                 </div>
 
                 <div className="md:w-1/2 flex flex-col justify-between">
+
                   <div>
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-2xl font-bold hover:underline"
-                    >
-                      {project.title}
-                    </a>
+                    {project.link === "profile" ? (
+                      <button
+                        onClick={() => handleProjectClick(project)}
+                        className="text-2xl font-bold hover:underline text-left"
+                      >
+                        {project.title}
+                      </button>
+                    ) : (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-2xl font-bold hover:underline"
+                      >
+                        {project.title}
+                      </a>
+                    )}
 
                     <p className="mt-4 text-white/90 italic text-lg leading-relaxed">
                       {project.description}
                     </p>
+
                     <br />
-                    <p className="text-2xl font-bold ">
+
+                    <p className="text-2xl font-bold">
                       Key Features
                     </p>
                   </div>
@@ -63,26 +99,38 @@ export default function Projects() {
                       <li key={i}>{feature}</li>
                     ))}
                   </ul>
+
                   <div className="mt-4 flex flex-wrap gap-2">
-                  {project.technologies?.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 rounded-lg border border-white/10 bg-white/5 text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                  <div className="mt-8">
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block rounded-xl border border-white/20 px-5 py-2 text-sm hover:bg-white/10 transition"
-                    >
-                      View Project →
-                    </a>
+                    {project.technologies?.map((tech, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1 rounded-lg border border-white/10 bg-white/5 text-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
+
+                  <div className="mt-8">
+                    {project.link === "profile" ? (
+                      <button
+                        onClick={() => handleProjectClick(project)}
+                        className="inline-block rounded-xl border border-white/20 px-5 py-2 text-sm hover:bg-white/10 transition"
+                      >
+                        View Project →
+                      </button>
+                    ) : (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block rounded-xl border border-white/20 px-5 py-2 text-sm hover:bg-white/10 transition"
+                      >
+                        View Project →
+                      </a>
+                    )}
+                  </div>
+
                 </div>
               </article>
             ))

@@ -24,6 +24,8 @@ function App() {
   const [currentView, setCurrentView] = useState("home");
   const [pendingSection, setPendingSection] = useState(null); 
   
+  const [pendingView, setPendingView] = useState(null);
+  
   const API_URL = import.meta.env.VITE_API_URL;
 
 
@@ -74,6 +76,14 @@ useEffect(() => {
 
   return () => clearTimeout(timer);
 }, [currentView, pendingSection]);
+
+useEffect(() => {
+  if (user && pendingView) {
+    setCurrentView(pendingView);
+    setPendingView(null);
+  }
+}, [user, pendingView]);
+
     return (
     <>
       <Navbar
@@ -93,12 +103,18 @@ useEffect(() => {
         />
       )}
 
-      {currentView === "profile" ? (
+      {currentView === "profile" && user ? (
       <Profile user={user} />
     ) : (
       <>
         <Hero />
-        <Projects />
+        <Projects
+          user={user}
+          setCurrentView={setCurrentView}
+          setShowAuth={setShowAuth}
+          setAuthMode={setAuthMode}
+          setPendingView={setPendingView}
+        />
         <Tech />
         <Github />
         <Contact />

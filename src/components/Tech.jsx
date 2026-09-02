@@ -10,8 +10,12 @@ const techs = [
   { name: "Python", link: "https://www.python.org/" },
   { name: "Godot", link: "https://godotengine.org/" },
   { name: "Unity", link: "https://unity.com/" },
-   // { name: "PostgreSQL", link: "https://www.postgresql.org/" },
-   // { name: "Node.js", link: "https://nodejs.org/" },
+  { name: "Express.js", link: "https://expressjs.com/" },
+  { name: "Django", link: "https://www.djangoproject.com/" },
+  { name: "SQLite", link: "https://sqlite.org/" },
+  { name: "PostgreSQL", link: "https://www.postgresql.org/" },
+  { name: "Supabase", link: "https://supabase.com/" },
+  
 ];
 
 export default function Tech() {
