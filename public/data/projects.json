@@ -64,9 +64,9 @@
   },
   {
     "id": 4,
-    "title": "Pixel Hero Survival",
+    "title": "Test of Might",
     "description": "Fast-paced 2D survival roguelike focused on responsive combat and real-time gameplay feedback",
-    "image": "/img/Pixel_Hero_Survival.png",
+    "image": "/img/Test_of_Might.png",
     "keyFeatures": [
       "Real-time combat & damage system",
       "Enemy AI and wave spawning logic",
@@ -76,7 +76,7 @@
       "Godot",
       "GDScript"
     ],
-    "link": "https://noctyr-studio.itch.io/pixel-hero-survival"
+    "link": "https://noctyr-studio.itch.io/test-of-might"
   },
   {
     "id": 5,
