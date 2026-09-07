@@ -1,66 +1,143 @@
 
+# 🌘 Noctyr Studio – Personal Portfolio
 
-# 🌘 Noctyr Studio – Portfolio Personal
+A personal portfolio showcasing **web applications and games** built with modern technologies and scalable architectures.
 
-Ecosistema personal donde desarrollo y conecto **aplicaciones web, juegos online y proyectos de data science**, usando un stack moderno y arquitectura escalable.
+The portfolio website itself, **noctyr-studio.com**, is built with **React + Vite** and uses **Cloudflare Workers** for backend and serverless functionality.
 
-👉 **Live:** [https://noctyr-studio.com](https://noctyr-studio.com)
+👉 **Live:** https://noctyr-studio.com
+
+**Portfolio Stack:**
+
+- React
+- Vite
+- Cloudflare
+- Cloudflare Workers
+- Serverless architecture
 
 ---
 
+## ✨ Featured Projects
 
-## 🎮 Proyectos Destacados
+### 🎮 Steam Favorites
 
+A full-stack application that allows users to manage their favorite Steam games through a personalized profile.
 
-### ⚔️ Sword & Knife — 2D Web Action Game
+**Key Features:**
 
-A 2D Web Action Game built entirely from scratch.
-
-**Incluye:**
-
-* Arquitectura basada en entidades
-* Sistema de combate y daño
-* Loop de actualización y animaciones
-* Lógica desacoplada y modular
+- User authentication
+- Personalized Steam game favorites
+- CRUD operations for favorite games
+- Up to 12 favorite games per user
+- REST API built with Node.js and Express
+- Steam API integration
 
 **Stack:**
 
-* HTML / CSS
-* JavaScript
-
+- Node.js
+- Express.js
+- React
+- Steam API
+- REST API
+- PostgreSQL
 
 ---
 
-### 👾 Pixel Hero Survival
+### 🧙 Magic Academy
 
-Juego 2D estilo roguelike enfocado en **supervivencia, combate en tiempo real y responsividad**.
+A full-stack fantasy academy platform built with React, Tailwind CSS, and Django. The project demonstrates frontend/backend integration, authentication, REST API development, and cloud deployment.
 
-**Highlights:**
+**Key Features:**
 
-* Sistema de combate en tiempo real
-* Lógica de daño y feedback al jugador
-* IA básica de enemigos y oleadas
-* Sistema de supervivencia progresiva
+- Responsive React interface with Tailwind CSS
+- Secure authentication with Django
+- REST API with full CRUD operations
+- Separate frontend and backend architecture
+- Frontend deployed on Vercel
+- Backend deployed on Render
 
 **Stack:**
 
-* Godot
-* GDScript (Python-like)
-
-
----
-
-
----
-
-## 🧠 Habilidades Técnicas
-
-* Fullstack: React + Node.js
-* Diseño e integración de APIs
-* PostgreSQL 
-* Arquitectura modular y escalable
-* Desarrollo end-to-end
+- React
+- Vite
+- Tailwind CSS
+- Django
+- REST API
+- SQLite
+- Vercel
+- Render
+- Figma
 
 ---
 
-> 💼 Este proyecto es mi **portfolio profesional** para demostrar competencias de **junior fullstack JavaScript** ante reclutadores y empresas de software.
+### ⚔️ Sword & Knife
+
+A 2D web action game built entirely from scratch using vanilla JavaScript.
+
+**Key Features:**
+
+- Modular gameplay architecture
+- Combat and damage systems
+- Animation state management
+- Custom game loop
+- Browser-based gameplay
+
+**Stack:**
+
+- HTML
+- CSS
+- JavaScript
+
+---
+
+### 👾 Test of Might
+
+A fast-paced 2D survival roguelike focused on responsive combat and real-time gameplay feedback.
+
+**Key Features:**
+
+- Real-time combat and damage systems
+- Enemy AI
+- Wave spawning logic
+- Health, damage, and death feedback
+- Real-time gameplay systems
+
+**Stack:**
+
+- Godot
+- GDScript
+
+---
+
+### ⚫⚪ Tic Tac Toe
+
+A classic Tic Tac Toe game built with Unity and C#, featuring turn-based gameplay and a Minimax-powered AI opponent with occasional mistakes.
+
+**Key Features:**
+
+- Player vs AI gameplay
+- Minimax-based AI
+- Turn-based system
+- Dynamic 3×3 board generation
+- Win, defeat, and draw detection
+- Game Over UI
+- Restart system
+
+**Stack:**
+
+- Unity
+- C#
+
+---
+
+## 🧠 Technical Skills
+
+- Full-stack development
+- End-to-end application development
+- Modular and scalable architecture
+- Frontend & backend integration
+- React + Express / Django
+- REST API development
+- PostgreSQL
+- SQLite
+- Game development with Vanilla JavaScript, HTML5 & Canvas, Godot, and Unity

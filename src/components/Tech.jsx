@@ -4,6 +4,7 @@ const techs = [
   { name: "HTML/CSS/JS", link: "https://developer.mozilla.org/" },
   { name: "Tailwind", link: "https://tailwindcss.com/" },
   { name: "React", link: "https://react.dev/" },
+  { name: "Vite", link: "https://vite.dev/" },
   { name: "TypeScript", link: "https://www.typescriptlang.org/" },
   { name: "Cloudflare", link: "https://www.cloudflare.com/" },
   { name: "Vercel", link: "https://vercel.com/" },

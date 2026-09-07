@@ -36,6 +36,7 @@
     ],
     "technologies": [
       "React",
+      "Vite",
       "Tailwind CSS",
       "Django",
       "REST API",
